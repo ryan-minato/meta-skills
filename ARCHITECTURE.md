@@ -54,7 +54,8 @@ them; this bootstrap intentionally has no empty catalog or marketplace.
 │       └── <skill-name>/
 │           ├── SKILL.md            # installed public skill contract
 │           ├── references/          # optional, conditionally loaded
-│           └── scripts/             # optional, non-interactive helpers
+│           ├── scripts/             # optional, non-interactive helpers
+│           └── assets/              # optional templates and static material to copy
 ├── .claude-plugin/                  # future: only for non-empty catalogs
 │   └── marketplace.json            # generated non-empty catalog distribution metadata
 ├── .editorconfig                   # cross-editor formatting baseline
@@ -76,8 +77,8 @@ them; this bootstrap intentionally has no empty catalog or marketplace.
 `<catalog>` is a capability boundary, not a generic folder. Each catalog has
 the same mandatory scaffold: English and Chinese catalog guides plus one
 `CONTEXT.md`; skills are its direct child directories. A skill root contains
-only its `SKILL.md` and any genuinely needed optional `references/` or
-`scripts/` folders. It never contains a separate README.
+only its `SKILL.md` and any genuinely needed optional `references/`,
+`scripts/`, or `assets/` folders. It never contains a separate README.
 
 `CONTEXT.md` is not an installation guide. It is the progressively loaded
 source for rules, boundaries, vocabulary, shared tool conventions, and
