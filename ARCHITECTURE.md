@@ -8,67 +8,69 @@ them; this bootstrap intentionally has no empty catalog or marketplace.
 
 ```text
 .
-├── .agents/
-│   ├── knowledge/
-│   │   ├── meta-skill-lifecycle.md
-│   │   ├── product-specification.md
-│   │   ├── references.md
-│   │   └── skill-quality.md
-│   ├── skills/
+├── .agents/                       # agent-owned knowledge, workflows, and MCP source
+│   ├── knowledge/                  # durable repository knowledge base
+│   │   ├── meta-skill-lifecycle.md # marker and cleanup protocol
+│   │   ├── product-specification.md # product scope, profiles, and non-goals
+│   │   ├── references.md           # authoritative external-source index
+│   │   └── skill-quality.md        # skill authoring and test standard
+│   ├── skills/                     # internal project workflow skills
 │   │   ├── issue-workflow/
-│   │   │   └── SKILL.md
+│   │   │   └── SKILL.md            # Linear-to-PR delivery procedure
 │   │   ├── knowledge-sync/
-│   │   │   └── SKILL.md
+│   │   │   └── SKILL.md            # post-merge Git-to-Linear sync
 │   │   └── skill-authoring/
-│   │       └── SKILL.md
-│   └── mcp-servers.json
+│   │       └── SKILL.md            # skill writing and validation procedure
+│   └── mcp-servers.json            # credential-free MCP declaration source
 ├── .claude/
-│   └── skills -> ../.agents/skills
+│   └── skills -> ../.agents/skills # Claude discovery alias
 ├── .codex/
-│   └── config.toml
+│   └── config.toml                 # generated Codex MCP adapter
 ├── .devcontainer/
-│   └── devcontainer.json
+│   └── devcontainer.json           # reproducible development environment
 ├── .github/
-│   ├── PULL_REQUEST_TEMPLATE.md
+│   ├── PULL_REQUEST_TEMPLATE.md    # required review handoff format
 │   └── workflows/
-│       ├── quality.yml
-│       └── secrets.yml
+│       ├── quality.yml             # CI quality gate
+│       └── secrets.yml             # CI secret-history scan
 ├── .vscode/
-│   └── mcp.json
-├── scripts/
-│   ├── check_commit_safety.py
-│   ├── check_links.py
-│   ├── check_skill.py
-│   ├── gen_marketplace.py
-│   ├── render_mcp_configs.py
-│   ├── validate_commit_message.py
-│   └── validate_skills.py
+│   └── mcp.json                    # generated VS Code MCP adapter
+├── scripts/                        # deterministic validators and generators
+│   ├── check_commit_safety.py      # staged secret/PII and identity gate
+│   ├── check_links.py              # local Markdown-link validation
+│   ├── check_skill.py              # focused skill and marker validation
+│   ├── gen_marketplace.py          # future marketplace generator/checker
+│   ├── render_mcp_configs.py       # MCP adapter renderer/drift check
+│   ├── validate_commit_message.py  # scoped Conventional Commit validation
+│   └── validate_skills.py          # repository-wide skill-layout validation
 ├── tests/
-│   ├── fixtures/
-│   └── test_*.py
+│   ├── fixtures/                   # valid and invalid contract examples
+│   └── test_*.py                   # validator and renderer regression tests
 ├── skills/                         # future: public catalogs only
 │   └── <catalog>/
 │       ├── README.md                # catalog purpose and skill inventory
 │       ├── README.zh.md             # content-equivalent Chinese guide
 │       ├── CONTEXT.md               # catalog-scoped rules and source index
 │       └── <skill-name>/
-│           ├── SKILL.md
+│           ├── SKILL.md            # installed public skill contract
 │           ├── references/          # optional, conditionally loaded
 │           └── scripts/             # optional, non-interactive helpers
 ├── .claude-plugin/                  # future: only for non-empty catalogs
-│   └── marketplace.json
-├── .editorconfig
-├── .gitleaks.toml
-├── .gitmessage
-├── .mcp.json
-├── .pre-commit-config.yaml
-├── AGENTS.md
-├── ARCHITECTURE.md
-├── CLAUDE.md
-├── LICENSE
-├── README.md
-├── README.zh.md
-└── justfile
+│   └── marketplace.json            # generated non-empty catalog distribution metadata
+├── .editorconfig                   # cross-editor formatting baseline
+├── .gitleaks.toml                  # secret and non-anonymous-email policy
+├── .gitignore                      # untracked local/generated artifact policy
+├── .gitmessage                     # scoped commit template
+├── .mcp.json                       # generated Claude MCP adapter
+├── .pre-commit-config.yaml         # local quality and safety hooks
+├── .secrets.baseline               # accepted detect-secrets baseline
+├── AGENTS.md                       # agent discovery root and operating rules
+├── ARCHITECTURE.md                  # this layout and ownership contract
+├── CLAUDE.md                        # pointer to AGENTS.md
+├── LICENSE                          # repository license
+├── README.md                        # English public project guide
+├── README.zh.md                     # equivalent Chinese project guide
+└── justfile                         # canonical setup and validation commands
 ```
 
 `<catalog>` is a capability boundary, not a generic folder. Each catalog has
