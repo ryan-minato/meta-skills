@@ -17,6 +17,9 @@ skill or catalog.
    changing markers, or using an external integration.
 5. Run `just check` before proposing a handoff or commit.
 
+`ARCHITECTURE.md` is the path-to-responsibility map for every harness artifact
+and the canonical contract for future catalog and skill directory contents.
+
 `CLAUDE.md` intentionally points here. `.claude/skills` is a relative symlink
 to `.agents/skills`; do not duplicate skills for another client.
 
