@@ -13,7 +13,7 @@ them; this bootstrap intentionally has no empty catalog or marketplace.
 │   │   ├── meta-skill-lifecycle.md # marker and cleanup protocol
 │   │   ├── product-specification.md # product scope, profiles, and non-goals
 │   │   ├── references.md           # authoritative external-source index
-│   │   └── skill-quality.md        # skill authoring and test standard
+│   │   └── skill-quality.md        # skill authoring and verification standard
 │   ├── skills/                     # internal project workflow skills
 │   │   ├── issue-workflow/
 │   │   │   └── SKILL.md            # Linear-to-PR delivery procedure
@@ -43,9 +43,6 @@ them; this bootstrap intentionally has no empty catalog or marketplace.
 │   ├── render_mcp_configs.py       # MCP adapter renderer/drift check
 │   ├── validate_commit_message.py  # scoped Conventional Commit validation
 │   └── validate_skills.py          # repository-wide skill-layout validation
-├── tests/
-│   ├── fixtures/                   # valid and invalid contract examples
-│   └── test_*.py                   # validator and renderer regression tests
 ├── skills/                         # future: public catalogs only
 │   └── <catalog>/
 │       ├── README.md                # catalog purpose and skill inventory
@@ -100,7 +97,7 @@ are reached from it.
 | Internal workflows | `.agents/skills/` | Git |
 | MCP declaration | `.agents/mcp-servers.json` | Git |
 | Client adapters | `.mcp.json`, `.codex/config.toml`, `.vscode/mcp.json` | Generated from declaration |
-| Quality | `scripts/`, `tests/`, hooks, CI | Git |
+| Quality | `scripts/`, hooks, CI | Git |
 | Delivery tracking | Linear project and issues | Linear |
 
 ## Skills

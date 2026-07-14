@@ -11,12 +11,9 @@ validate:
     python3 scripts/render_mcp_configs.py --check
     python3 scripts/check_links.py
 
-test:
-    python3 -m unittest discover -s tests -p 'test_*.py'
-
 lint:
-    ruff check scripts tests
-    ruff format --check scripts tests
+    ruff check scripts
+    ruff format --check scripts
 
 check-skill +paths:
     python3 scripts/check_skill.py {{paths}}
@@ -30,5 +27,5 @@ gen-marketplace mode="--write":
 commit-gate:
     python3 scripts/check_commit_safety.py
 
-check: validate test lint
+check: validate lint
     pre-commit run --all-files

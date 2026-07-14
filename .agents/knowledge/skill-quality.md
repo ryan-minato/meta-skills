@@ -26,11 +26,12 @@ Prefer small non-interactive stdlib-first scripts. Each script provides `--help`
 validates arguments before work, returns 0 on success, 1 on validation failure,
 and 2 on usage or configuration errors. Never print or persist credentials.
 
-Before publishing a skill, define behavioral acceptance tests: at least three
+Before publishing a skill, define behavioral acceptance checks: at least three
 trigger prompts, three near-misses, and two outcome cases. Use a clean-context
 evaluation where available, target at least 90% success, and treat incorrect
 external writes, reverse knowledge sync, missing commit scope, or deletion of a
-durable skill as critical failures. Record any unavailable clean-context test as
+durable skill as critical failures. These are delivery evaluations, not an
+automated repository test layer. Record any unavailable clean-context evaluation as
 an observability limitation rather than claiming it passed.
 
 Run `just check-skill <path>` during authoring and `just check` before handoff.

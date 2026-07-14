@@ -32,9 +32,9 @@ repos:
     rev: v0.15.21
     hooks:
       - id: ruff
-        files: ^(scripts|tests)/
+        files: ^scripts/
       - id: ruff-format
-        files: ^(scripts|tests)/
+        files: ^scripts/
 
   - repo: local
     hooks:

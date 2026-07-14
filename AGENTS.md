@@ -31,7 +31,6 @@ to `.agents/skills`; do not duplicate skills for another client.
 | `.agents/skills/` | Internal project workflows only |
 | `.agents/mcp-servers.json` | Credential-free MCP declaration source |
 | `scripts/` | Stdlib-first validators and deterministic generators |
-| `tests/` | Unit fixtures for repository contracts |
 | `.github/workflows/` | Required CI and history safety gates |
 
 ## Working rules
@@ -78,7 +77,6 @@ move the parent to In Review without a user-confirmed PR URL.
 | --- | --- |
 | `just setup` | Install local Git hooks and commit template |
 | `just validate` | Validate skills, MCP adapters, and local links |
-| `just test` | Run stdlib unit tests |
 | `just lint` | Check Python style and formatting |
 | `just check-skill <path>...` | Validate one or more skill directories |
 | `just sync-mcp --check` | Detect generated MCP adapter drift |
