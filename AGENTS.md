@@ -10,7 +10,8 @@ skill or catalog.
 ## Start here
 
 1. Read this file first. It is the only discovery root.
-2. Read [DESIGN.md](DESIGN.md) for product scope, profiles, and lifecycle.
+2. Read [the product specification](.agents/knowledge/product-specification.md)
+   for product scope, profiles, and lifecycle.
 3. Read [ARCHITECTURE.md](ARCHITECTURE.md) before changing layout or tooling.
 4. Read the relevant file in `.agents/knowledge/` before authoring skills,
    changing markers, or using an external integration.
@@ -23,7 +24,7 @@ to `.agents/skills`; do not duplicate skills for another client.
 
 | Path | Responsibility |
 | --- | --- |
-| `DESIGN.md` | Product contract and user-facing lifecycle |
+| `.agents/knowledge/product-specification.md` | Product contract and lifecycle |
 | `ARCHITECTURE.md` | Directory, adapter, and source-of-truth contract |
 | `.agents/knowledge/` | Durable authoring, lifecycle, and source guidance |
 | `.agents/skills/` | Internal project workflows only |

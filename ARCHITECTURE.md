@@ -10,7 +10,7 @@ are reached from it.
 | Layer | Location | Authority |
 | --- | --- | --- |
 | Agent entrypoint | `AGENTS.md`, `CLAUDE.md` | Git |
-| Product and structure | `DESIGN.md`, this file | Git |
+| Product and structure | `.agents/knowledge/product-specification.md`, this file | Git |
 | Knowledge | `.agents/knowledge/` | Git default branch |
 | Internal workflows | `.agents/skills/` | Git |
 | MCP declaration | `.agents/mcp-servers.json` | Git |

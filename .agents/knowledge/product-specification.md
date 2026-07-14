@@ -1,4 +1,4 @@
-# Product Design
+# Product Specification
 
 ## Goal
 

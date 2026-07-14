@@ -5,7 +5,7 @@
 
 > Disposable meta-skills that generate durable, project-specific agent harnesses.
 
-[中文](README.zh.md) · [Design](DESIGN.md) · [Architecture](ARCHITECTURE.md) · [Agent guide](AGENTS.md)
+[中文](README.zh.md) · [Product specification](.agents/knowledge/product-specification.md) · [Architecture](ARCHITECTURE.md) · [Agent guide](AGENTS.md)
 
 Meta Skills will help an agent turn a selected set of one-time scaffolding
 skills into a maintainable harness: clear agent entrypoints, project knowledge,

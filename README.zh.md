@@ -5,7 +5,7 @@
 
 > 用于生成持久化、项目专属 agent harness 的一次性 meta-skill。
 
-[English](README.md) · [设计](DESIGN.md) · [架构](ARCHITECTURE.md) · [Agent 指南](AGENTS.md)
+[English](README.md) · [产品规格](.agents/knowledge/product-specification.md) · [架构](ARCHITECTURE.md) · [Agent 指南](AGENTS.md)
 
 Meta Skills 将帮助 agent 把一组一次性脚手架 skill 转化为可维护的 harness：清晰的 agent 入口、项目知识库、设计和架构契约、工作流 skill、MCP 适配器、CI、Git hook 与仓库规范。
 
