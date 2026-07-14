@@ -27,6 +27,7 @@ to `.agents/skills`; do not duplicate skills for another client.
 | `.agents/knowledge/product-specification.md` | Product contract and lifecycle |
 | `ARCHITECTURE.md` | Directory, adapter, and source-of-truth contract |
 | `.agents/knowledge/` | Durable authoring, lifecycle, and source guidance |
+| `skills/<catalog>/CONTEXT.md` | Future catalog-only rules, boundaries, and authoritative sources |
 | `.agents/skills/` | Internal project workflows only |
 | `.agents/mcp-servers.json` | Credential-free MCP declaration source |
 | `scripts/` | Stdlib-first validators and deterministic generators |
@@ -90,10 +91,17 @@ move the parent to In Review without a user-confirmed PR URL.
 | Task | Required reading |
 | --- | --- |
 | Add or revise a skill | `.agents/knowledge/skill-quality.md` and `skill-authoring` |
+| Add or revise a catalog skill | Its `skills/<catalog>/CONTEXT.md`, then `skill-authoring` |
 | Add public scaffolding | `meta-skill-lifecycle.md` and `ARCHITECTURE.md` |
 | Change MCP config | `ARCHITECTURE.md`, then run `just sync-mcp --check` |
 | Change knowledge docs | `knowledge-sync` before mirroring to Linear |
 | Change CI or hooks | `ARCHITECTURE.md`, then `just check` |
+
+`CONTEXT.md` is created with a catalog's first real public skill. It is the
+progressively loaded catalog contract: shared rules, vocabulary, boundaries,
+tool conventions, and authoritative reference URLs for that catalog only. Do
+not duplicate repository-wide knowledge there, and do not create it before a
+catalog exists.
 
 ## Human boundaries
 
