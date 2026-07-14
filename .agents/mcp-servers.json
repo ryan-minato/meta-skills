@@ -1,0 +1,16 @@
+{
+  "servers": {
+    "agentskills": {
+      "auth": "none",
+      "url": "https://agentskills.io/mcp"
+    },
+    "github": {
+      "auth": "github-pat",
+      "url": "https://api.githubcopilot.com/mcp/"
+    },
+    "linear": {
+      "auth": "oauth",
+      "url": "https://mcp.linear.app/mcp"
+    }
+  }
+}
