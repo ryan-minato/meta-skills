@@ -1,0 +1,63 @@
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: requirements-txt-fixer
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ['--maxkb=2000']
+      - id: mixed-line-ending
+        args: [ "--fix=auto" ]
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        name: secret scanning with detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.0
+    hooks:
+      - id: gitleaks
+        name: secret and PII scanning with gitleaks (.gitleaks.toml)
+        args: ['--config', '.gitleaks.toml']
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.21
+    hooks:
+      - id: ruff
+        files: ^(scripts|tests)/
+      - id: ruff-format
+        files: ^(scripts|tests)/
+
+  - repo: local
+    hooks:
+      - id: validate-skills
+        name: validate skill layout and harness consistency
+        entry: python3 scripts/validate_skills.py
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: check-mcp-configs
+        name: check generated MCP configuration
+        entry: python3 scripts/render_mcp_configs.py --check
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: check-local-links
+        name: check local Markdown links
+        entry: python3 scripts/check_links.py
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: validate-commit-message
+        name: validate scoped Conventional Commit message
+        entry: python3 scripts/validate_commit_message.py --file
+        language: system
+        stages: [commit-msg]

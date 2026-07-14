@@ -1,0 +1,6 @@
+# <type>(<scope>): <imperative summary, 50 characters or fewer>
+#
+# Required scopes: harness, environment, knowledge, quality, ci, readme,
+# catalogs, meta-lifecycle, or an existing public skill name.
+#
+# Body: explain why when useful. Do not include credentials or personal data.
