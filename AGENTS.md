@@ -46,12 +46,15 @@ ship to targets. The project map lives in [ARCHITECTURE.md](ARCHITECTURE.md).
 |---|---|
 | `just setup` | install hooks and the commit template; once after cloning |
 | `just check` | every gate — run it before proposing changes |
-| `just validate` | structure and marker contract only (fast iteration) |
-| `just fmt` | format and autofix the validator script |
+| `just validate-repo` | repository structure: catalogs, docs, contract |
+| `just check-skill <path>` | one skill: structure, SKILL.md, links |
+| `just check-skills` | every published and internal skill |
+| `just validate` | both validators (fast iteration) |
+| `just fmt` | format and autofix the validator scripts |
 
-The validator self-tests on every run, and its messages say what failed, why
-it matters, and the fix. Fix the cause, never the check — unless the
-contract itself changed.
+Both validators self-test on every run, and their messages say what failed,
+why it matters, and the fix. Errors block; warnings advise. Fix the cause,
+never the check — unless the contract itself changed.
 
 ## Commit Gates
 

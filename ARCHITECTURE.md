@@ -15,8 +15,9 @@ README.md / README.zh.md   <- public front door (English authoritative)
 .agents/skills/            <- this repo's own durable skills (never published)
 .claude/skills             <- symlink to ../.agents/skills for Claude Code
 skills/<catalog>/          <- published catalogs: CONTEXT.md + README pair
-skills/<catalog>/<skill>/  <- a published skill: SKILL.md [+ references/ assets/]
-scripts/validate_repo.py   <- the repository validator
+skills/<catalog>/<skill>/  <- a published skill: SKILL.md [+ references/ scripts/ assets/]
+scripts/validate_repo.py   <- repository validator: catalogs, docs, contract
+scripts/check_skill.py     <- per-skill validator: structure, SKILL.md, links
 justfile                   <- command surface (thin wrappers over pre-commit)
 ```
 
@@ -39,9 +40,10 @@ is the `sync-catalog` skill's procedure.
 
 | Gate | Runs | Covers |
 |---|---|---|
-| pre-commit registry | `just check`, every commit, CI `checks` job | hygiene, ruff, gitleaks on the working tree, the validator |
-| `scripts/validate_repo.py` | inside the registry; `just validate` alone | A1–A6 published skills, B1–B3 catalogs, C1–C3 docs/links/translations, D1–D3 marker contract |
-| validator self-test | first, on every validator run | that all checks fire — the catalogs may be empty, so with zero subjects a green run would otherwise prove nothing |
+| pre-commit registry | `just check`, every commit, CI `checks` job | hygiene, ruff, gitleaks on the working tree, both validators |
+| `scripts/validate_repo.py` | inside the registry; `just validate-repo` alone | B1–B3 catalogs, C1–C3 docs/links/translations, D1–D3 marker contract |
+| `scripts/check_skill.py` | inside the registry; `just check-skill <path>`, `just check-skills` | one skill: S1–S3 structure (warnings), M1–M5 SKILL.md content, L1 links; errors block, warnings advise |
+| validator self-tests | first, on every run of either validator | that all checks fire — the catalogs may be empty, so with zero subjects a green run would otherwise prove nothing |
 | CI `secrets` job | pull requests and pushes to main | full-history gitleaks with the same repository ruleset |
 
 Check logic lives once, in `.pre-commit-config.yaml`; `just check` and CI
@@ -63,11 +65,11 @@ trigger fires — not before.
 
 ## Gotchas
 
-- The marker literal is duplicated on purpose: the `MARKER` constant in
-  `scripts/validate_repo.py`, every fence tagged `text meta-skill-marker`,
-  the YAML authoring form in the contract, and every published description.
-  Check D1 blocks fence and near-miss drift; the `sync-contract` skill owns
-  changes.
+- The marker literal is duplicated on purpose: the `MARKER` constants in
+  `scripts/validate_repo.py` and `scripts/check_skill.py`, every fence
+  tagged `text meta-skill-marker`, the YAML authoring form in the contract,
+  and every published description. Check D1 blocks fence and near-miss
+  drift; the `sync-contract` skill owns changes.
 - Published skills are deliberately never symlinked into this repository's
   own skill directories: a meta-skill active *here* would announce itself as
   disposable inside the one repository that must keep it. Do not "fix" the

@@ -29,11 +29,19 @@ repos:
 
   - repo: local
     hooks:
-      # Runs its own self-test first on every invocation, so the skill checks
-      # are proven to fire even while the published catalogs are empty.
+      # Both validators run their own self-test first on every invocation, so
+      # the checks are proven to fire even while the published catalogs are
+      # empty.
       - id: validate-repo
         name: validate repository structure and the marker contract
         entry: uv run --quiet scripts/validate_repo.py
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: check-skills
+        name: check every skill's structure, SKILL.md, and links
+        entry: uv run --quiet scripts/check_skill.py --all
         language: system
         pass_filenames: false
         always_run: true

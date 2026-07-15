@@ -3,17 +3,18 @@
 # requires-python = ">=3.12"
 # dependencies = ["pyyaml"]
 # ///
-"""Repository validator: structure, translations, links, and the marker contract.
+"""Repository validator: catalogs, docs, translations, and the marker contract.
 
-Check IDs (each has a self-test fixture proving it fires):
+Covers what belongs to the repository as a whole; a single skill's structure
+and SKILL.md content are check_skill.py's job. Check IDs (each has a
+self-test fixture proving it fires):
 
-    A1-A6  published skills under skills/<catalog>/<skill>/
     B1-B3  catalog scaffolds and inventory listings
     C1-C3  repository docs: translation pairs, links, knowledge reachability
     D1-D3  marker-contract integrity
 
 The self-test runs first on every invocation because the published catalogs
-may be empty: with zero subjects the skill checks pass vacuously and could
+may be empty: with zero subjects several checks pass vacuously and could
 rot unnoticed. `--self-test` runs the fixtures alone; `--no-self-test`
 skips them.
 
@@ -42,8 +43,6 @@ TEMPLATE_PATH = ".agents/skills/meta-skill-authoring/assets/skill-template.md"
 KNOWLEDGE_DIR = ".agents/knowledge"
 ROOT_DOCS = ("AGENTS.md", "ARCHITECTURE.md", "README.md", "README.zh.md")
 CATALOG_FILES = ("CONTEXT.md", "README.md", "README.zh.md")
-REPO_ONLY_TOKENS = ("README.zh", "validate_repo", "meta-skill-contract")
-NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 LINK_RE = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
 
 
@@ -116,121 +115,6 @@ def markdown_files(root: Path) -> list[Path]:
     return [p for p in root.rglob("*.md") if ".git" not in p.parts]
 
 
-def check_published_skills(root: Path) -> list[Issue]:
-    """A1-A6: every skill under skills/<catalog>/<skill>/."""
-    issues: list[Issue] = []
-    skills_dir = root / "skills"
-    if not skills_dir.is_dir():
-        return issues
-    for catalog in sorted(p for p in skills_dir.iterdir() if p.is_dir()):
-        for skill in sorted(p for p in catalog.iterdir() if p.is_dir()):
-            skill_md = skill / "SKILL.md"
-            if not skill_md.is_file():
-                continue  # B2 reports the malformed catalog entry
-            rel = str(skill_md.relative_to(root))
-            data, err = read_frontmatter(skill_md)
-            name = data.get("name") if data else None
-            description = data.get("description") if data else None
-            if err or not isinstance(name, str) or not isinstance(description, str):
-                issues.append(
-                    Issue(
-                        "A1",
-                        rel,
-                        f"{err or 'frontmatter is missing `name` or `description`'}. "
-                        "Published skills are installed and identified by their "
-                        "frontmatter; without it the skill cannot ship. Add a "
-                        "`---` YAML block with string `name` and `description`.",
-                    )
-                )
-            else:
-                if (
-                    name != skill.name
-                    or not NAME_RE.match(name)
-                    or len(name) > 64
-                    or not name.startswith("meta-")
-                ):
-                    issues.append(
-                        Issue(
-                            "A2",
-                            rel,
-                            f"name `{name}` must equal its directory "
-                            f"`{skill.name}`, be lowercase kebab-case of at "
-                            "most 64 chars, and start with `meta-`. The Agent "
-                            "Skills spec ties the name to the directory, and "
-                            "the meta- prefix groups published skills in the "
-                            "tree. Rename the directory or fix the name field.",
-                        )
-                    )
-                if not description.startswith(MARKER + " "):
-                    issues.append(
-                        Issue(
-                            "A3",
-                            rel,
-                            "description must start with the marker followed "
-                            "by one space. The marker is how target-project "
-                            "agents find and delete installed meta-skills; "
-                            "without it this skill would survive cleanup. "
-                            f"Begin the description with: `{MARKER} `",
-                        )
-                    )
-                if len(description) > 1024:
-                    issues.append(
-                        Issue(
-                            "A3",
-                            rel,
-                            f"description is {len(description)} chars; the "
-                            "Agent Skills spec caps it at 1024, and every "
-                            "excess char loads into each target session. "
-                            "Shorten it.",
-                        )
-                    )
-            for readme in skill.rglob("README*.md"):
-                issues.append(
-                    Issue(
-                        "A4",
-                        str(readme.relative_to(root)),
-                        "published skills may not contain README files. "
-                        "Catalog and repository READMEs stay in this repo; a "
-                        "README inside the skill would ship to targets as "
-                        "clutter. Move the content into SKILL.md or "
-                        "references/.",
-                    )
-                )
-            for md_file in sorted(skill.rglob("*.md")):
-                md_rel = str(md_file.relative_to(root))
-                for target in markdown_links(md_file.read_text(encoding="utf-8")):
-                    resolved = (md_file.parent / target).resolve()
-                    if not resolved.exists() or not resolved.is_relative_to(
-                        skill.resolve()
-                    ):
-                        issues.append(
-                            Issue(
-                                "A5",
-                                md_rel,
-                                f"link `{target}` escapes the skill directory "
-                                "or does not exist. Installed skills lose "
-                                "everything outside their own directory. "
-                                "Point the link inside the skill or inline "
-                                "the content.",
-                            )
-                        )
-                text = md_file.read_text(encoding="utf-8")
-                for token in REPO_ONLY_TOKENS:
-                    if token in text:
-                        issues.append(
-                            Issue(
-                                "A6",
-                                md_rel,
-                                f"mentions `{token}`, which exists only in "
-                                "this repository. Published skills run in "
-                                "target projects, where the reference would "
-                                "misdirect the agent. Describe the "
-                                "requirement without repo-only names.",
-                            )
-                        )
-    return issues
-
-
 def check_catalogs(root: Path) -> list[Issue]:
     """B1-B3: catalog scaffolds and inventory listings."""
     issues: list[Issue] = []
@@ -293,7 +177,7 @@ def check_repo_docs(root: Path) -> list[Issue]:
     for md in markdown_files(root):
         parts = md.relative_to(root).parts
         if parts[0] == "skills" and len(parts) > 3:
-            continue  # inside a skill directory; A4 owns READMEs there
+            continue  # inside a skill directory; check_skill.py owns those
         if md.name == "README.md" and not (md.parent / "README.zh.md").is_file():
             issues.append(
                 Issue(
@@ -419,12 +303,7 @@ def check_contract(root: Path) -> list[Issue]:
 
 
 def run_checks(root: Path) -> list[Issue]:
-    return (
-        check_published_skills(root)
-        + check_catalogs(root)
-        + check_repo_docs(root)
-        + check_contract(root)
-    )
+    return check_catalogs(root) + check_repo_docs(root) + check_contract(root)
 
 
 # --- self-test ---------------------------------------------------------------
@@ -470,36 +349,6 @@ def _with(path: str, content: str | None) -> dict[str, str]:
 
 
 SELF_TEST_CASES: list[tuple[str, dict[str, str]]] = [
-    ("A1", _with("skills/core/meta-good/SKILL.md", "no frontmatter\n")),
-    (
-        "A2",
-        _with(
-            "skills/core/meta-good/SKILL.md",
-            VALID_SKILL.replace("name: meta-good", "name: meta-other"),
-        ),
-    ),
-    (
-        "A3",
-        _with(
-            "skills/core/meta-good/SKILL.md",
-            "---\nname: meta-good\ndescription: No marker here.\n---\n\nBody.\n",
-        ),
-    ),
-    ("A4", _with("skills/core/meta-good/README.md", "stray\n")),
-    (
-        "A5",
-        _with(
-            "skills/core/meta-good/SKILL.md",
-            VALID_SKILL.replace("references/notes.md", "../../../AGENTS.md"),
-        ),
-    ),
-    (
-        "A6",
-        _with(
-            "skills/core/meta-good/references/notes.md",
-            "run validate_repo before shipping\n",
-        ),
-    ),
     ("B1", _with("skills/core/CONTEXT.md", None)),
     ("B2", _with("skills/core/stray.md", "stray\n")),
     ("B3", _with("ARCHITECTURE.md", "# Architecture\n\nCatalogs: none\n")),

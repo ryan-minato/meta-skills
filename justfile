@@ -15,12 +15,23 @@ setup:
 check:
     pre-commit run --all-files
 
-# Validate structure and the marker contract only (fast iteration).
-# The validator self-tests on every run; --self-test runs fixtures alone.
-validate:
+# Validate repository structure: catalogs, docs, translations, contract.
+# Both validators self-test on every run; --self-test runs fixtures alone.
+validate-repo:
     @uv run --quiet scripts/validate_repo.py
 
-# Format and autofix the validator script.
+# Check one or more skills: file structure, SKILL.md content, and links.
+check-skill +PATHS:
+    @uv run --quiet scripts/check_skill.py {{ PATHS }}
+
+# Check every published and internal skill.
+check-skills:
+    @uv run --quiet scripts/check_skill.py --all
+
+# Everything structural (fast iteration; `just check` runs the full registry).
+validate: validate-repo check-skills
+
+# Format and autofix the validator scripts.
 fmt:
     ruff format scripts/
     ruff check --fix scripts/

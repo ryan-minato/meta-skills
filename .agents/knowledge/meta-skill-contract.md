@@ -12,10 +12,11 @@ the target agent never sees this repository. Consequences:
 
 - Assume the target project's conventions, never this repository's: no
   bilingual READMEs, no Linear workflow, no `just check` inside a published
-  skill's instructions (the validator rejects repo-only names, check A6).
+  skill's instructions (the skill validator rejects repo-only names, check
+  M5).
 - **Self-containment.** Installed skills lose everything outside their own
-  directory. No relative link may escape the skill root (check A5), no
-  README may sit in a skill root (check A4), and no skill may assume another
+  directory. No relative link may escape the skill root (check L1), no
+  README may sit in a skill root (check S2), and no skill may assume another
   skill is installed — to build on one, instruct the user to install it.
 - Catalog-level files (`CONTEXT.md` and the README pair) never ship;
   installers copy whole skill directories only.
@@ -23,7 +24,7 @@ the target agent never sees this repository. Consequences:
 ## The Marker
 
 Every published skill's resolved `description` begins with the marker,
-followed by one space (check A3):
+followed by one space (check M3):
 
 ```text meta-skill-marker
 Disposable meta-skill (delete after the harness is built):
@@ -61,8 +62,8 @@ The destination test: the marker belongs on exactly the files that will be
 
 | File | Marker |
 |---|---|
-| every `skills/<catalog>/<skill>/SKILL.md` | required (check A3) |
-| any SKILL.md outside `skills/` — this repository's own skills | forbidden (check D2) |
+| every `skills/<catalog>/<skill>/SKILL.md` | required (check M3) |
+| any SKILL.md outside `skills/` — this repository's own skills | forbidden (checks M3 and D2) |
 | templates a meta-skill copies into the target's harness | forbidden — they must survive the cleanup |
 | the authoring template's own frontmatter | required (check D3) — published skills are copied from it |
 
@@ -84,10 +85,11 @@ The specification any removal implementation must satisfy:
 
 ## Embedding The Literal
 
-The marker appears verbatim only in: the `MARKER` constant in the validator,
-fences tagged `text meta-skill-marker` (byte-checked against the constant,
-check D1), the YAML authoring form above (near-miss-checked, also D1), and
-published descriptions (check A3). Everywhere else, write "the marker" and
+The marker appears verbatim only in: the `MARKER` constants in both
+validators (`scripts/validate_repo.py` and `scripts/check_skill.py`), fences
+tagged `text meta-skill-marker` (byte-checked against the constant, check
+D1), the YAML authoring form above (near-miss-checked, also D1), and
+published descriptions (check M3). Everywhere else, write "the marker" and
 link here.
 
 Changing the marker is the `sync-contract` skill's procedure — do not

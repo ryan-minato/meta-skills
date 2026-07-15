@@ -38,8 +38,9 @@ description: >-
      the user to install it.
    - Any template the skill copies into the target's harness must NOT carry
      the marker — it has to survive the cleanup (the destination test).
-4. Run `just validate` and fix what it names; run `just check` before
-   committing.
+4. Run `just check-skill skills/<catalog>/<name>` and fix what it names —
+   errors are contract violations, warnings are advice worth taking. Run
+   `just check` before committing.
 
 ## Gotchas
 
