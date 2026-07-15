@@ -8,8 +8,8 @@ Load this when authoring, reviewing, renaming, or removing any skill under
 This file is the source of truth for the marker contract. Two other places
 repeat the marker literal and must be updated with it: the Core Conventions
 line in [AGENTS.md](../../AGENTS.md) and the `MARKER` constant in
-[check_skill.py](../../scripts/check_skill.py). The `contract-sync` skill owns
-that alignment.
+[validate_repo.py](../../scripts/validate_repo.py). The `contract-sync` skill
+owns that alignment.
 
 ## What A Meta-Skill Is
 

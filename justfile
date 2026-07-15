@@ -1,6 +1,6 @@
-# Command surface for this repository.
-# When a recipe changes, update the Validation table in AGENTS.md and the
-# Quality Gates table in ARCHITECTURE.md.
+# Command surface. Check logic lives once, in .pre-commit-config.yaml;
+# recipes here only wrap it. When a recipe changes, update the Validation
+# section in AGENTS.md and the Quality Gates table in ARCHITECTURE.md.
 
 _default:
     @just --list
@@ -9,33 +9,18 @@ _default:
 setup:
     pre-commit install
     git config commit.template .gitmessage
-    @echo "Setup complete. Run 'just check' before committing."
+    @echo "Setup complete. Run 'just check' before proposing changes."
 
-# Validate the repository's file structure.
-validate-repo:
+# Run every gate: hygiene, lint, secrets, and the repository validator.
+check:
+    pre-commit run --all-files
+
+# Validate structure and the marker contract only (fast iteration).
+# The validator self-tests on every run; --self-test runs fixtures alone.
+validate:
     @uv run --quiet scripts/validate_repo.py
 
-# Check one or more skills: file structure, SKILL.md, and links.
-check-skill +PATHS:
-    @uv run --quiet scripts/check_skill.py {{ PATHS }}
-
-# Check every published skill.
-check-skills:
-    @uv run --quiet scripts/check_skill.py --all
-
-# Prove the marker and link checks still fire. They have no real subject until
-# the first skill lands, so without this a green run would prove nothing.
-selftest:
-    @uv run --quiet scripts/check_skill.py --selftest
-
-# Everything structural.
-validate: validate-repo check-skills
-
-# Lint the validators.
-lint:
-    @ruff check scripts/
-    @ruff format --check scripts/
-
-# Run this before proposing changes.
-check: selftest validate lint
-    @pre-commit run --all-files
+# Format and autofix the validator script.
+fmt:
+    ruff format scripts/
+    ruff check --fix scripts/

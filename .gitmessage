@@ -1,28 +1,24 @@
-# <type>(<catalog>): <subject>
+# <type>(<catalog>): <imperative subject, ~72 chars>
 #
 # Conventional Commits, in English.
 #
-# SCOPE is the catalog the change touches, e.g. feat(core): ...
-# OMIT the scope when the change belongs to no catalog — the harness, CI,
-# docs, or tooling: docs: ...
-# Legal scopes are the catalogs listed in ARCHITECTURE.md.
+# SCOPE is the catalog the change touches (legal scopes are the catalogs
+# listed in ARCHITECTURE.md), e.g. feat(core): ...
+# OMIT the scope when the change touches no catalog — harness, CI, docs,
+# tooling: docs: ...
 #
 # TYPE is chosen by effect on installed behavior, not by file format:
 #   feat     adds a capability a target project gets
-#   fix      corrects wrong, misleading, over-restrictive, or over-permissive
-#            installed behavior
+#   fix      corrects wrong or misleading installed behavior
 #   refactor restructures without changing installed behavior
 #   docs     supporting docs only; changes no installed skill
-#   test     validators and their self-tests
+#   test     the validator and its self-test fixtures
 #   ci       workflows and automation
 #   chore    tooling and housekeeping
 #
-# Markdown is a file format, not a reason to use `docs`.
-# Fix before feat: correcting existing behavior wins over the fact that the
-# result is also an improvement.
+# BODY: explain why, not what. Wrap at 72 characters. No trailers.
 #
-# BODY: explain why, not what. Wrap at 72 characters.
-#
-# Before committing: run `just check`, and read the staged diff yourself for
-# secrets and personal data. A secret committed is leaked even if a later
-# commit removes it. Never use --no-verify.
+# Before committing: run `just check`, and read the staged diff yourself
+# for secrets and personal data — a secret committed is leaked even if a
+# later commit removes it. One logical change per commit.
+# Never use --no-verify.
