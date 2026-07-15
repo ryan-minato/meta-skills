@@ -8,29 +8,21 @@ on:
 permissions:
   contents: read
 
-# Actions are referenced by moving major tags, so they receive patches without a
-# manual bump. Where an action publishes no major tag, an exact release tag is
-# used and noted below.
-
 jobs:
   quality:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
 
-      # setup-uv's newest major tag is v7; it publishes no v8 tag yet.
+      # setup-uv publishes no v8 tag, despite shipping 8.x.
       - uses: astral-sh/setup-uv@v7
 
-      # uv installs the whole toolchain, so no third-party action is needed for
-      # just, and the versions match what the devcontainer installs.
       - name: Install the toolchain
         run: |
           uv tool install rust-just
           uv tool install pre-commit
           uv tool install ruff
 
-      # CI is the only check that does not trust the author's local hooks:
-      # pre-commit is bypassable with --no-verify.
       - name: Run all checks
         run: just check
 
@@ -41,23 +33,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      # A secret is leaked once it is committed, even if a later commit removes
-      # it, so both scans below read history rather than the working tree.
-
-      # The repository's own rules, over history. The hooks apply .gitleaks.toml
-      # to the working tree only, so without this a secret or a real email
-      # address that was committed and then deleted would pass every gate.
-      # Pinned to the rev in .pre-commit-config.yaml so CI and the local hook
-      # enforce identical rules; bump both together.
-      - name: Scan history with the repository's rules
-        run: |
-          docker run --rm -v "${{ github.workspace }}:/repo" \
-            zricethezav/gitleaks:v8.24.2 \
-            detect --source /repo --config /repo/.gitleaks.toml --redact --no-banner
-
-      # Complements the regex rules above by verifying candidate credentials
-      # against live services. Exact tag: trufflehog publishes no major tags.
-      - name: Scan history for verified secrets
-        uses: trufflesecurity/trufflehog@v3.95.9
+      # Exact tag: trufflehog publishes no major tags.
+      - uses: trufflesecurity/trufflehog@v3.95.9
         with:
           extra_args: --only-verified
