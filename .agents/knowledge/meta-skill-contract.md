@@ -55,6 +55,21 @@ The name may still serve as an *advisory* hint: a cleanup dry-run may surface
 missing — confirm?". Name is a hint for a human; description is authority for
 the machine.
 
+#### The name is usable install-side, not find-side
+
+The rule above is about *finding an installed skill*, and it is easy to
+over-read as "a name is never usable". It is: an **install command** names a
+skill in its source repository, where the name is stable and authoritative —
+`npx skills add ryan-minato/skills --skill some-skill`. Renaming happens on
+arrival, in the target.
+
+So the two directions differ, and both are needed to write correct guidance:
+
+| Direction | Channel | Why |
+|---|---|---|
+| Installing a skill | **name**, in the source repo | The source name is fixed; the skill does not exist locally yet |
+| Finding a skill already installed | **description** | The installer may have renamed it on arrival |
+
 ### The YAML form is mandatory, not stylistic
 
 `[` opens a YAML flow sequence, so the natural-looking plain scalar is **invalid
@@ -131,6 +146,36 @@ Three distinct failures, worth keeping separate:
   behavior. To build on another skill, instruct the user to install it rather
   than linking to it.
 - Keep `README.md` out of a skill root; it ships to targets and earns nothing.
+
+### Never assume another skill is installed
+
+Referencing another skill is allowed. **Assuming it is there is not.**
+
+A skill may build on another skill in this repository, and may ask for one from
+a sibling library such as `ryan-minato/skills`. What it may never do is take
+either for granted. A user installs one skill out of a catalog; a target project
+has never heard of the library you had installed while authoring; a catalog gets
+split. Every one of those leaves your skill running alone.
+
+So absence is a case you handle, not an error you report:
+
+- **Degrade gracefully.** The skill's core deliverable must be produced with
+  **zero** other skills installed. Another skill may add depth; it may never be
+  the price of admission.
+- **Say how to install it**, not merely that it is needed. "Install X first" is
+  a dead end for an agent that does not know where X lives. Give the command,
+  and name the skill as its **source repository** knows it — see *The name is
+  usable install-side, not find-side* above.
+- **Register the dependency.** Any reliance on a skill outside this repository
+  is recorded, with its install command, in that catalog's `CONTEXT.md`. The
+  rule is repository-wide; the external surface is per-catalog, so the catalog
+  is where the list belongs.
+
+This does not loosen the bullet above it. Depending on a sibling's *behavior*
+stays forbidden: that is reaching into what another skill does and breaking when
+it is gone. Reading project *state*, degrading, and offering an install command
+is not depending — it is the sanctioned way to build on another skill, spelled
+out.
 
 ## Writing The Description
 
