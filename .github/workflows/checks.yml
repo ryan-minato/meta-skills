@@ -8,36 +8,56 @@ on:
 permissions:
   contents: read
 
+# Actions are referenced by moving major tags, so they receive patches without a
+# manual bump. Where an action publishes no major tag, an exact release tag is
+# used and noted below.
+
 jobs:
   quality:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@v7
 
-      - uses: astral-sh/setup-uv@e92bafb6253dcd438e0484186d7669ea7a8ca1cc # v6.4.3
-        with:
-          version: "0.11.28"
+      # setup-uv's newest major tag is v7; it publishes no v8 tag yet.
+      - uses: astral-sh/setup-uv@v7
 
-      - uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3.0.0
-
-      - name: Install pre-commit and ruff
-        run: uv tool install pre-commit==4.6.0 && uv tool install ruff==0.15.21
+      # uv installs the whole toolchain, so no third-party action is needed for
+      # just, and the versions match what the devcontainer installs.
+      - name: Install the toolchain
+        run: |
+          uv tool install rust-just
+          uv tool install pre-commit
+          uv tool install ruff
 
       # CI is the only check that does not trust the author's local hooks:
-      # pre-commit can be bypassed with --no-verify.
+      # pre-commit is bypassable with --no-verify.
       - name: Run all checks
         run: just check
 
   secrets:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       # A secret is leaked once it is committed, even if a later commit removes
-      # it, so this scans history rather than the working tree.
-      - name: Scan for verified secrets
-        uses: trufflesecurity/trufflehog@d5f30e64c0d63e5d0eb3e0a12bbc7be9c6de6b93 # v3.90.9
+      # it, so both scans below read history rather than the working tree.
+
+      # The repository's own rules, over history. The hooks apply .gitleaks.toml
+      # to the working tree only, so without this a secret or a real email
+      # address that was committed and then deleted would pass every gate.
+      # Pinned to the rev in .pre-commit-config.yaml so CI and the local hook
+      # enforce identical rules; bump both together.
+      - name: Scan history with the repository's rules
+        run: |
+          docker run --rm -v "${{ github.workspace }}:/repo" \
+            zricethezav/gitleaks:v8.24.2 \
+            detect --source /repo --config /repo/.gitleaks.toml --redact --no-banner
+
+      # Complements the regex rules above by verifying candidate credentials
+      # against live services. Exact tag: trufflehog publishes no major tags.
+      - name: Scan history for verified secrets
+        uses: trufflesecurity/trufflehog@v3.95.9
         with:
           extra_args: --only-verified
