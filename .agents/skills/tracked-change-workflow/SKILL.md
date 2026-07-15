@@ -24,7 +24,11 @@ delivery only.
    Report progress as you go: move sub-issues through their states, and
    comment on the root issue when direction changes or a chunk lands.
 4. **Draft PR** as soon as the skeleton exists — for the root issue only.
-   Link the issue in the body.
+   Write the body in the format of
+   [PULL_REQUEST_TEMPLATE.md](../../../.github/PULL_REQUEST_TEMPLATE.md) —
+   GitHub only pre-fills it in the web UI, so fill it in yourself when
+   creating the PR any other way — and link the root issue in its Linear
+   section.
 5. **Ready for review** only when every check passes locally and in CI. A
    human reviews and merges; never merge your own PR, and never mark a
    failing PR ready.
@@ -35,8 +39,8 @@ delivery only.
   an internal developer. Skip every Linear step; the Git and PR flow above
   still applies.
 - **PR creation impossible** (GitHub auth) → finish the work, push the
-  branch, then hand the user the intended PR title, the full PR body text,
-  and the compare URL
+  branch, then hand the user the intended PR title, the full PR body text
+  (also in the template's format), and the compare URL
   `https://github.com/ryan-minato/meta-skills/compare/main...<branch>?expand=1`
   so they can create the PR themselves.
 
