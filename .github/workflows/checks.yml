@@ -1,0 +1,39 @@
+name: checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      # setup-uv publishes no v8 tag, despite shipping 8.x.
+      - uses: astral-sh/setup-uv@v7
+
+      - name: Install the toolchain
+        run: |
+          uv tool install rust-just
+          uv tool install pre-commit
+          uv tool install ruff
+
+      - name: Run all checks
+        run: just check
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      # Exact tag: trufflehog publishes no major tags.
+      - uses: trufflesecurity/trufflehog@v3.95.9
+        with:
+          extra_args: --only-verified

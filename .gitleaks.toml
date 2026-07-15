@@ -1,0 +1,22 @@
+title = "Meta Skills secret and PII rules"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "restrict-non-anonymous-emails"
+description = "Non-anonymous email detected. Use a noreply or example address."
+regex = '''(?i)([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})'''
+tags = ["email", "PII"]
+
+[rules.allowlist]
+regexes = [
+  '''(?i).+@users\.noreply\.github\.com''',
+  '''(?i).+@(users\.)?noreply\.gitlab\.com''',
+  '''(?i)^[A-Za-z0-9._%+-]+@example\.(com|org|net)$''',
+]
+
+paths = [
+  '''\.secrets\.baseline$''',
+  '''\.gitleaks\.toml$''',
+]
