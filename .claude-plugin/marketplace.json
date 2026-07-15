@@ -1,0 +1,28 @@
+{
+  "name": "meta-skills",
+  "owner": {
+    "name": "ryan-minato"
+  },
+  "description": "Disposable meta-skills that help an agent build a durable harness in a project, then delete themselves.",
+  "plugins": [
+    {
+      "name": "core",
+      "displayName": "Meta Skills: core",
+      "description": "The required set: enough to take any project from no harness to a working one. Install per project, before a harness build, and remove once the harness is built and verified.",
+      "source": ".",
+      "strict": false,
+      "skills": "./skills/core",
+      "homepage": "https://github.com/ryan-minato/meta-skills",
+      "repository": "https://github.com/ryan-minato/meta-skills",
+      "license": "Apache-2.0",
+      "category": "development",
+      "keywords": [
+        "harness",
+        "agents-md",
+        "knowledge-base",
+        "scaffolding",
+        "disposable"
+      ]
+    }
+  ]
+}
