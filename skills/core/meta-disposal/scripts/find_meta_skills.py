@@ -27,6 +27,7 @@ not be read, 2 bad arguments.
 from __future__ import annotations
 
 import argparse
+import difflib
 import json
 import sys
 from pathlib import Path
@@ -36,6 +37,12 @@ import yaml
 # The marker is the contract. A skill is a meta-skill when its *parsed*
 # description starts with this exact string — never when its name looks like one.
 MARKER = "[META-SKILL: remove after harness setup] "
+
+# How close an opening must be to the marker before it is called a near-miss.
+# Real near-misses (a U+00A0, a changed case, a missing trailing space) score
+# above 0.82; a description that merely talks about meta-skills scores below
+# 0.64. The gap is wide, so this threshold is not delicate.
+NEAR_MISS_RATIO = 0.80
 
 # Advisory only, carries no contract: installers rename skills, so this prefix
 # proves nothing. It exists to flag "possible meta-skill, marker missing" for a
@@ -80,10 +87,19 @@ def near_miss(description: str) -> str:
     difference is usually a U+00A0, a smart quote, or a changed case — all
     invisible on screen, which is exactly why this reports codepoints rather
     than showing the string and letting a human "look" at it.
+
+    The test is whether the *opening* is almost the marker, measured by
+    similarity — not whether the description mentions meta-skills somewhere.
+    Merely looking for the words flags any skill whose job is to talk about
+    meta-skills, and a listing that cries wolf over a skill nobody was going to
+    delete is how cleanup starts being frightening. Real near-misses score well
+    above this threshold; descriptions that merely discuss the subject score far
+    below it.
     """
     if description.startswith(MARKER):
         return ""
-    if "meta-skill" not in description[:60].lower():
+    opening = description[: len(MARKER)]
+    if difflib.SequenceMatcher(None, MARKER, opening).ratio() < NEAR_MISS_RATIO:
         return ""
     for i, (want, got) in enumerate(zip(MARKER, description)):
         if want != got:
