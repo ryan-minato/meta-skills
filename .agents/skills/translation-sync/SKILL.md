@@ -26,8 +26,9 @@ the English wins and the Chinese is corrected — never the reverse.
    the same order with the same meaning.
 3. Update the Chinese file. Translate prose; keep commands, paths, code blocks,
    table structure, and the marker literal byte-identical.
-4. Check the language-swap link at the top: `README.md` links to
-   [中文](README.zh.md), and `README.zh.md` links back to English.
+4. Check the language-swap link at the top: `README.md` opens with a
+   `[中文](README.zh.md)` link, and `README.zh.md` links back with
+   `[English](README.md)`.
 5. Run `just validate-repo`, which enforces that the pair exists.
 
 ## Gotchas

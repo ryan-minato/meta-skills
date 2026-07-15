@@ -1,0 +1,43 @@
+name: checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - uses: astral-sh/setup-uv@e92bafb6253dcd438e0484186d7669ea7a8ca1cc # v6.4.3
+        with:
+          version: "0.11.28"
+
+      - uses: extractions/setup-just@e33e0265a09d6d736e2ee1e0eb685ef1de4669ff # v3.0.0
+
+      - name: Install pre-commit and ruff
+        run: uv tool install pre-commit==4.6.0 && uv tool install ruff==0.15.21
+
+      # CI is the only check that does not trust the author's local hooks:
+      # pre-commit can be bypassed with --no-verify.
+      - name: Run all checks
+        run: just check
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      # A secret is leaked once it is committed, even if a later commit removes
+      # it, so this scans history rather than the working tree.
+      - name: Scan for verified secrets
+        uses: trufflesecurity/trufflehog@d5f30e64c0d63e5d0eb3e0a12bbc7be9c6de6b93 # v3.90.9
+        with:
+          extra_args: --only-verified
