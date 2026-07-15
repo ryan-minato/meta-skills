@@ -93,6 +93,11 @@ Most of these are readable from history — read first, then confirm. "I see
 Conventional Commits in the last 40 commits, so I will follow that" is worth one
 sentence and no question.
 
+**Then write it into the entrypoint anyway.** Reading a convention out of the
+history settles it for *you*, in this session. It does nothing for the next
+agent, which will have to go looking and generalising all over again — and may
+not. Skipping the question is the saving here; skipping the written rule is not.
+
 ## Batch 6 — Verification, which the cleanup step depends on
 
 | Question | Default if skipped |

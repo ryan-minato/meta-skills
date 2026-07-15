@@ -28,8 +28,8 @@ The test is not "is this true?" — it is **"would an agent get this wrong?"**
 Belongs:
 
 - **What the project is**, in a sentence or two.
-- **Conventions the code does not already show.** The ones that live in
-  someone's head, or that look arbitrary until explained.
+- **Every rule you want followed** — *including* the ones the code already
+  demonstrates. See below; this is the one people get backwards.
 - **Boundaries** — what needs asking first, especially anything irreversible or
   outward-facing.
 - **The check that proves a change is sound**, and when to run it.
@@ -38,9 +38,9 @@ Belongs:
 
 Does not belong:
 
-- **Anything the code already demonstrates.** If the last forty commits are
-  visibly Conventional Commits, saying so spends budget to tell an agent what it
-  can see. Spend it on what it cannot.
+- **Facts an agent meets on its own.** "This is a Django project", "tests live in
+  `tests/`" — one file open and it knows. Discovery is free; spend the budget on
+  what discovery cannot reach.
 - **General programming advice.** "Write tests", "handle errors", "keep
   functions small" — the model already knows. Every such line dilutes the lines
   that are actually about *this* project.
@@ -52,6 +52,39 @@ Does not belong:
 **Start with what agents actually get wrong here.** If someone has typed the
 same correction into a chat twice, that is the highest-value line in the file,
 and it beats any principle.
+
+### Write the rule down even when the history shows it
+
+The tempting economy is to leave out what an agent could work out for itself —
+"the last forty commits are visibly Conventional Commits, so why say so?"
+
+**Do not do this for anything you want followed.** A fact and a rule are not the
+same kind of thing:
+
+| | Example | Entrypoint? |
+|---|---|---|
+| A **fact** an agent will run into | "this project is TypeScript" | No — it finds out by opening a file |
+| A **rule** you expect obeyed | "use Conventional Commits" | **Yes, always** |
+
+Four reasons, and the second is the one that decides it:
+
+- **Inferring a rule takes two optional steps.** The agent has to *choose to go
+  look* at the history, and then *choose to generalise a rule from it*. Neither
+  is guaranteed, both fail silently, and the failure looks exactly like an agent
+  ignoring your convention. The entrypoint is the guaranteed-load position: zero
+  steps.
+- **History is evidence of what was *done*, not of what *should* be.** A team
+  that adopted a convention last week has a history that mostly contradicts it.
+  Inference does not just fail there — it produces the opposite of the intent.
+- **History is usually ambiguous.** Thirty-eight of forty commits follow the
+  convention and two do not. Is the rule "always" or "usually"? Inference cannot
+  tell. A written rule can.
+- **The costs are lopsided.** Restating a fact wastes a few tokens, once.
+  Omitting a rule costs a correction typed by hand, every session, forever.
+
+**The test: would you correct an agent for breaking it?** Then write it down —
+however obvious the codebase makes it. Consistency in the history is *why* the
+rule is worth stating, not a reason to leave it out.
 
 ## What stays, and what moves behind a pointer
 

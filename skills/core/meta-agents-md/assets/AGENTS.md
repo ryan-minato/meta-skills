@@ -12,9 +12,13 @@ the top of this file.>
 
 ## Conventions
 
-<Only what the code does not already show. A convention visible in the last
-forty commits does not need restating; a convention that lives in someone's head
-does.>
+<Every rule you want followed, including the ones the code already demonstrates.
+A convention visible in the last forty commits still belongs here: inferring it
+would take an agent two optional steps — go look, then generalise — and both
+fail silently. If you would correct an agent for breaking it, it goes here.
+
+What to leave out is facts an agent meets anyway ("this is a Django project"),
+not rules it could in principle deduce.>
 
 - **<Rule>.** <What to do, and the reason it exists. A rule whose reason is
   absent gets followed until it is inconvenient, then dropped.>

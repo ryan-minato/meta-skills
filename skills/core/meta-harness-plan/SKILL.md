@@ -165,6 +165,9 @@ having decided them.
 - **A rule nobody asked for is a rule nobody follows.** The strongest material
   in any harness comes from the answer to "what has an agent already got wrong
   here?" — one concrete correction beats a page of principles.
-- **Do not write a rule the project already demonstrates.** Conventions visible
-  in the code or history do not need restating; the entrypoint's budget is
-  better spent on what cannot be seen.
+- **A rule the project already demonstrates still gets written down.** The
+  entrypoint is the only guaranteed-load position; inferring the same rule from
+  the history needs the agent to go looking and then to generalise, and either
+  step can silently not happen. Consistency in the history is the reason a rule
+  is worth stating, not a reason to omit it. What to leave out is *facts* an
+  agent meets on its own, never *rules* you would correct it for breaking.
