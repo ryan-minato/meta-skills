@@ -88,11 +88,14 @@ trigger fires — not before.
 
 ## Gotchas
 
-- The marker literal lives in three places on purpose: the always-loaded
-  conventions in `AGENTS.md`, the contract at
-  [meta-skill-contract.md](.agents/knowledge/meta-skill-contract.md), and the
-  `MARKER` constant in `scripts/check_skill.py`. The `sync-contract` skill pays
-  for that duplication.
+- The marker literal is duplicated on purpose: the always-loaded conventions in
+  `AGENTS.md`, the contract at
+  [meta-skill-contract.md](.agents/knowledge/meta-skill-contract.md), the
+  `MARKER` constant in both validators, each catalog's `CONTEXT.md`, and the
+  public READMEs. No single copy is enough — the rule must be visible without
+  loading a pointer and enforceable without reading prose. The `sync-contract`
+  skill pays for that duplication and owns the inventory; it is deliberately
+  not restated here as a count, because a count in prose drifts.
 - The authoring validator here and the disposal procedure that runs in a target
   project cannot share code — different machines, different trees. They agree
   only because both assume `<root>/<name>/SKILL.md`. Keep that invariant.

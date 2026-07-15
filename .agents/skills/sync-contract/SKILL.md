@@ -12,23 +12,30 @@ description: >
 ## Source Of Truth
 
 `.agents/knowledge/meta-skill-contract.md` is the source of truth for the marker
-contract. The other two copies exist because the rule must be visible without
+contract. The other copies exist because the rule must be visible without
 loading a pointer, and enforceable without reading prose.
 
 ## Dependent Artifacts
 
-| Artifact | Carries |
-|---|---|
-| `.agents/knowledge/meta-skill-contract.md` | the literal plus full rationale — **source of truth** |
-| `AGENTS.md`, Core Conventions | the literal, one line, always loaded |
-| `scripts/check_skill.py`, `MARKER` | the literal as an enforced constant |
-| `skills/<catalog>/CONTEXT.md` | the authoring form authors copy from |
+**This table is the inventory.** Nothing else states how many copies there are.
+A count written in prose drifts the moment a copy is added — which is exactly
+how `validate_repo.py` stayed unlisted while three separate sentences insisted
+there were three copies.
+
+| Artifact | Carries | Byte-exact |
+|---|---|---|
+| `.agents/knowledge/meta-skill-contract.md` | the literal plus full rationale — **source of truth** | display form, uses a visible placeholder for the trailing space |
+| `AGENTS.md`, Core Conventions | the literal, one line, always loaded | yes |
+| `scripts/check_skill.py`, `MARKER` | the enforced constant | yes |
+| `scripts/validate_repo.py`, `MARKER` | the enforced constant, for misplaced-marker detection | yes |
+| `skills/<catalog>/CONTEXT.md` | the authoring form authors copy from, one per catalog | yes, as a folded scalar |
+| `README.md` and its `README.zh.md` mirror | the literal, quoted in the public explanation | states the same literal |
 
 ## Workflow
 
 1. Change the contract file first; it is the source of truth.
-2. Propagate the literal to the `AGENTS.md` Core Conventions line and the `MARKER`
-   constant in `scripts/check_skill.py`. All three must agree byte for byte.
+2. Propagate the literal to every artifact in the table above. The ones marked
+   byte-exact must agree byte for byte; the rest must state the same literal.
 3. Update the fenced authoring form in every catalog's `CONTEXT.md`.
 4. Update `check_skill.py --selftest` cases so they still assert the new literal,
    including the near-miss case.
@@ -45,6 +52,9 @@ loading a pointer, and enforceable without reading prose.
 - Copy the literal from the fenced block, never from rendered documentation.
   Rendered text introduces U+00A0 and smart quotes, which are invisible on screen
   and fatal to a byte-exact match.
-- The three copies are deliberate duplication, not an accident to be refactored
-  away. Pointer-loaded content only loads when its condition fires, so the
+- The copies are deliberate duplication, not an accident to be refactored away.
+  Pointer-loaded content only loads when its condition fires, so the
   always-loaded copy in `AGENTS.md` stays.
+- Nothing enforces this inventory. `just check` passes with a copy missing from
+  the table, because a validator cannot know a literal it never learned about.
+  Adding a new copy of the marker means adding a row here in the same change.

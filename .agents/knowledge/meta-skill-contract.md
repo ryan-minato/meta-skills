@@ -5,11 +5,15 @@ Load this when authoring, reviewing, renaming, or removing any skill under
 
 ## Source Of Truth
 
-This file is the source of truth for the marker contract. Two other places
-repeat the marker literal and must be updated with it: the Core Conventions
-line in [AGENTS.md](../../AGENTS.md) and the `MARKER` constant in
-[check_skill.py](../../scripts/check_skill.py). The `sync-contract` skill owns
-that alignment.
+This file is the source of truth for the marker contract. Other places repeat
+the marker literal and must be updated with it: the Core Conventions line in
+[AGENTS.md](../../AGENTS.md), the `MARKER` constant in
+[check_skill.py](../../scripts/check_skill.py) and
+[validate_repo.py](../../scripts/validate_repo.py), each catalog's `CONTEXT.md`,
+and the public READMEs. The `sync-contract` skill owns that alignment and
+carries the authoritative inventory. Do not restate that inventory as a count
+here: a number drifts the moment a copy is added, which is how `validate_repo.py`
+went unlisted for as long as it did.
 
 ## What A Meta-Skill Is
 
