@@ -31,7 +31,14 @@ harness to a working one.
 - **Self-contained.** Installed skills lose everything outside their own
   directory. No relative link may escape the skill root, and no skill may depend
   on a sibling's behavior. To build on another skill, instruct the user to
-  install it rather than linking to it.
+  install it rather than linking to it — and never assume it is there. The
+  repository-wide rule is in
+  [meta-skill-contract.md](../../.agents/knowledge/meta-skill-contract.md).
+- **Assets carry no marker.** A template a skill copies into a target project is
+  a harness artifact and must survive; the marker would delete it at cleanup.
+  Apply the destination test to every file in `assets/`, not just to `SKILL.md`.
+  Only `assets/SKILL.md` is caught automatically — `validate_repo.py` matches on
+  that filename — so every other template is on you.
 
 ## The Marker
 
@@ -52,6 +59,22 @@ The YAML fold turns the line break into the required trailing space. Never type
 that space, and never leave a blank line after the marker. A plain scalar
 (`description: [META-SKILL: ...`) is invalid YAML, because `[` opens a flow
 sequence.
+
+## External Skill Dependencies
+
+_(none)_
+
+Every `core` skill produces its deliverable with no other skill installed. If one
+ever comes to rely on a skill from outside this repository, record it here with
+the command that installs it — the rule is repository-wide, but the external
+surface is per-catalog, so this table is where a maintainer can see the whole of
+it at once.
+
+| Skill | Depends on | Install |
+|---|---|---|
+
+Relying on one is allowed; assuming it is present is not. See
+[meta-skill-contract.md](../../.agents/knowledge/meta-skill-contract.md).
 
 ## References
 
