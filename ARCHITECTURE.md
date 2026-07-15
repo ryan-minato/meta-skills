@@ -14,6 +14,7 @@ README.md / README.zh.md   <- public front door (English authoritative)
 .claude/skills             <- symlink to ../.agents/skills
 skills/<catalog>/          <- published catalogs: CONTEXT.md + README.md + README.zh.md
 skills/<catalog>/<skill>/  <- a published skill: SKILL.md [+ references/ scripts/ assets/]
+.claude-plugin/            <- marketplace manifest; one plugin per catalog
 scripts/                   <- validators
 justfile                   <- the command surface
 ```
@@ -65,26 +66,38 @@ The two validators are split by concern so each can run independently. Checking 
 skill's file structure and its `SKILL.md` text structure is one job, so one script
 does both.
 
-`--selftest` exists because the marker and link checks have **zero subjects**
-until the first skill lands. Without it they are untested code that would pass
-silently forever and then fail to catch the very first violation. It asserts the
-conformance and link functions against inline strings, so the logic is exercised
-on every run despite the empty catalog.
+`--selftest` was written when the marker and link checks had **zero subjects**:
+without it they were untested code that would pass silently forever, then fail to
+catch the very first violation. The catalog now has skills, so the checks have
+real subjects — but the self-test stays. It asserts the conformance and link
+functions against inline strings, including cases no real skill should ever
+contain: a plain scalar that is invalid YAML, a blank line after the marker, a
+`U+00A0` near-miss. A green run over conformant skills proves the checks pass
+things; only the self-test proves they still **reject** things.
 
 ## Deferred Mechanisms
 
 Each of these is a decision with a trigger, not an oversight. Build it when its
 trigger fires — not before.
 
-| Mechanism | Trigger | Why not now |
+| Mechanism | Trigger | Status |
 |---|---|---|
-| `.claude-plugin/marketplace.json` | the first published skill | Every catalog is empty; the manifest would advertise nothing |
-| Self-containment link checking across a whole catalog | the first skill | `check_skill.py` already enforces it per skill; a catalog-wide sweep has nothing to sweep |
-| Per-skill spec linting beyond `check_skill.py` | the first skill, and only if an external skill-authoring linter does not already cover it | Zero subjects; likely duplicates an existing capability |
+| `.claude-plugin/marketplace.json` | the first published skill | **Built.** The trigger fired with the `core` catalog |
+| Self-containment link checking across a whole catalog | the first skill | **Declined.** `check_skill.py` enforces it per skill, on every skill, every run. A catalog-wide sweep would re-check the same links from a different loop |
+| Per-skill spec linting beyond `check_skill.py` | the first skill, and only if an external skill-authoring linter does not already cover it | **Declined.** `check_skill.py` covers name, description, marker, links, and body size. What is left is style, and style advice a validator cannot judge is noise it would emit on every run |
 | Commit-message validation of the scope rule | scopes drift in practice | `.gitmessage` plus the rule in `AGENTS.md` is the cheaper gate first |
 | `pyproject.toml` | a validator grows a dependency beyond PyYAML | Ruff's defaults already sit inside the `.editorconfig` width |
 | Unit tests for the validators | their logic branches enough to need fixtures | `--selftest` plus a real run covers the flat scripts |
 | Dogfooding public skills | **never** — see Skill Visibility | It would instruct agents to delete this repo's product |
+
+The two declined rows stay in this table rather than being deleted. A trigger
+that fired and was answered "no" is a decision worth keeping; delete the row and
+the question gets reopened by the next person to notice the gap.
+
+**`just lint` does not cover a skill's own `scripts/`.** It lints `scripts/` at
+the repository root — the validators. A script bundled inside a published skill
+ships to target projects and is checked by nothing here. Run `ruff` over it by
+hand when you touch one.
 
 ## Gotchas
 
