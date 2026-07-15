@@ -29,7 +29,12 @@ there were three copies.
 | `scripts/check_skill.py`, `MARKER` | the enforced constant | yes |
 | `scripts/validate_repo.py`, `MARKER` | the enforced constant, for misplaced-marker detection | yes |
 | `skills/<catalog>/CONTEXT.md` | the authoring form authors copy from, one per catalog | yes, as a folded scalar |
+| `skills/core/meta-disposal/scripts/find_meta_skills.py`, `MARKER` | the matching constant that **ships to target projects** | yes |
 | `README.md` and its `README.zh.md` mirror | the literal, quoted in the public explanation | states the same literal |
+
+Every published skill's `description` also carries the literal, but those are
+step 6's business rather than rows here — there is one per skill and the list
+would go stale on its own.
 
 ## Workflow
 
@@ -49,6 +54,11 @@ there were three copies.
   meta-skill sitting in someone's project keeps the old literal, and a new
   disposal skill will not find it. Prefer never changing it; if you must, say so
   in the release notes.
+- That break runs both ways, because `meta-disposal` ships its own `MARKER`
+  constant. An installation is self-consistent — old skills and the old disposal
+  tool that came with them agree — but a project that installs a *newly* marked
+  skill beside an *older* disposal skill has a tool looking for the wrong
+  literal, in a copy this repository cannot reach to update.
 - Copy the literal from the fenced block, never from rendered documentation.
   Rendered text introduces U+00A0 and smart quotes, which are invisible on screen
   and fatal to a byte-exact match.
