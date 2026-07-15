@@ -10,20 +10,27 @@ delivery only; it never becomes the source of truth for anything in the repo.
 ## Steps
 
 1. **Create a Linear issue** in project *Meta Skills* (team `Aoi`). Split a
-   complex change into sub-issues under one root issue.
-2. **Branch from the root issue.** Use the root issue's `gitBranchName`, even when
+   complex change into sub-issues under one root issue. Give every issue an
+   assignee and a milestone — an issue with neither is filtered out of most
+   views, so it may as well not exist.
+2. **Move an issue to In Progress when you start implementing it**, not when you
+   finish. An issue sitting in Backlog while its code is being written is
+   invisible to anyone reading the board, including the person who asked for it.
+3. **Branch from the root issue.** Use the root issue's `gitBranchName`, even when
    sub-issues exist. **Only the root issue gets a pull request** — sub-issues
    track work, not branches.
-3. **Commit atomically** as each piece lands. Conventional Commits, English.
+4. **Commit atomically** as each piece lands. Conventional Commits, English.
    Scope is the catalog changed (`feat(core): …`); omit it when the change belongs
    to no catalog (`docs: …`).
-4. **Report progress on the sub-issue** it belongs to: a comment saying what
+5. **Report progress on the sub-issue** it belongs to: a comment saying what
    landed, the commit, and anything that changed the plan. Then move that
    sub-issue to Done. The root issue stays In Progress until the pull request
    merges.
-5. **Open a draft pull request** once the skeleton is in place, then keep working.
-   Mark it ready for review only after every check passes. A human reviews after
-   that.
+6. **Open a draft pull request** once the skeleton is in place, then keep working.
+   The body follows [PULL_REQUEST_TEMPLATE.md](../../.github/PULL_REQUEST_TEMPLATE.md)
+   — every section, and the checklist worked through rather than ticked on
+   sight. Mark it ready for review only after every check passes. A human reviews
+   after that.
 
 ## Labels
 
@@ -57,11 +64,24 @@ logged in). Do not attempt a draft pull request. Finish the work, commit it, pus
 the branch, then hand the user:
 
 - the intended pull request title,
-- the full pull request body, and
+- the full pull request body, **in the template's format** — the compare link
+  opens with the template pre-filled, so a body in any other shape has to be
+  deleted before yours can be pasted in, and
 - the creation link: `https://github.com/ryan-minato/meta-skills/compare/main...<branch>?expand=1`
 
 so they can open it themselves. If the push also fails, say so plainly and leave
 the commits local rather than guessing at another route.
+
+## Gotchas
+
+- **`gh pr create --body "…"` bypasses the pull request template.** Opening a
+  pull request through the GitHub UI fills the template in automatically, so it
+  is easy to assume it always applies. It does not: an agent doing the natural
+  thing on the command line is precisely the one that ships a body in the wrong
+  shape. Pass the filled-in template with `--body-file`.
+- **Nothing enforces the template, the issue status, or the assignee.**
+  `just check` is green either way. These are conventions a person notices are
+  missing, usually by failing to find the work at all.
 
 ## Human Handoff
 
