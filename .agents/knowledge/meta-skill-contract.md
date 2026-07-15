@@ -1,188 +1,95 @@
-# Meta-Skill Contract
+# The Meta-Skill Contract
 
-Load this when authoring, reviewing, renaming, or removing any skill under
-`skills/`, or when changing how meta-skills are identified or removed.
+Read this before authoring, reviewing, renaming, or removing anything under
+`skills/`, and before touching the marker. This file is the source of truth
+for what a published meta-skill is and how it is identified and removed.
 
-## Source Of Truth
+## Audience Model
 
-This file is the source of truth for the marker contract. Two other places
-repeat the marker literal and must be updated with it: the Core Conventions
-line in [AGENTS.md](../../AGENTS.md) and the `MARKER` constant in
-[validate_repo.py](../../scripts/validate_repo.py). The `contract-sync` skill
-owns that alignment.
+A published skill is written for agents in **target projects**. Its only
+channels to that audience are its frontmatter `description` and its body —
+the target agent never sees this repository. Consequences:
 
-## What A Meta-Skill Is
-
-A meta-skill is **one-time scaffolding**. Its lifecycle:
-
-1. A user copies a catalog into a target project's skill directory.
-2. The user hands the target project's requirements to an agent.
-3. The agent invokes the meta-skills to build that project's harness.
-4. Once the harness is verified, the agent **deletes the meta-skills**.
-
-This inverts the usual assumption that a skill is durable. Everything below
-follows from step 4: a meta-skill must be findable in order to be removed, and
-must leave nothing behind that depends on it.
+- Assume the target project's conventions, never this repository's: no
+  bilingual READMEs, no Linear workflow, no `just check` inside a published
+  skill's instructions (the validator rejects repo-only names, check A6).
+- **Self-containment.** Installed skills lose everything outside their own
+  directory. No relative link may escape the skill root (check A5), no
+  README may sit in a skill root (check A4), and no skill may assume another
+  skill is installed — to build on one, instruct the user to install it.
+- Catalog-level files (`CONTEXT.md` and the README pair) never ship;
+  installers copy whole skill directories only.
 
 ## The Marker
 
-Every published skill's resolved `description` begins with exactly this
-41-character, pure-ASCII string — note the **trailing space**:
+Every published skill's resolved `description` begins with the marker,
+followed by one space (check A3):
 
-```text
-[META-SKILL: remove after harness setup]·
+```text meta-skill-marker
+Disposable meta-skill (delete after the harness is built):
 ```
 
-The `·` above stands for that trailing space; it is written as a visible
-placeholder because a real trailing space cannot survive in this file (the
-`trailing-whitespace` hook strips it). Authors never type the space anyway — see
-the YAML form below, where the fold supplies it. Copy the **authoring form**,
-not this line.
+The marker is the one deliberate cross-audience channel: it tells the
+target-project agent what these skills are, and it is simultaneously the
+machine key the removal procedure matches on.
 
-### Identification is by description, never by name
+Identification is by **description, never by name or directory**. Installers
+rename skills to avoid collisions, and the Agent Skills spec ties the `name`
+field to the directory name, so both channels are unstable; the description
+survives. The `meta-` directory prefix in this repository only groups the
+file tree — it carries no contract.
 
-Installers rename skills to avoid collisions in target projects, so the name
-channel cannot be trusted. The `description` is what agents always see in the
-skill listing, and it survives installation. The `meta-` name prefix only groups
-skills in the file tree and carries **no contract**.
+## YAML Authoring Form
 
-The name may still serve as an *advisory* hint: a cleanup dry-run may surface
-`meta-*` directories that lack the marker as "possible meta-skill, marker
-missing — confirm?". Name is a hint for a human; description is authority for
-the machine.
-
-### The YAML form is mandatory, not stylistic
-
-`[` opens a YAML flow sequence, so the natural-looking plain scalar is **invalid
-YAML**:
+The marker starts with a letter, so it is a valid YAML plain scalar in every
+style — no quoting or folding tricks are required. The recommended form:
 
 ```yaml
-description: [META-SKILL: remove after harness setup] Designs ...
+description: >-
+  Disposable meta-skill (delete after the harness is built): scaffolds X
+  for the new harness. Use when the user asks for Y. Not for Z.
 ```
 
-That raises `ParserError: while parsing a block mapping`, which does not mention
-the real cause. Use a folded scalar:
+Keep the marker on one physical line. Conformance is checked by parsing the
+YAML and testing the **resolved** value, never by regex over raw frontmatter
+text — folded scalars, quoting, and indentation would defeat raw matching.
 
-```yaml
-description: >
-  [META-SKILL: remove after harness setup]
-  Designs ... Use when ... Not for ...
-```
+## Who Carries It
 
-Three rules that follow, each verified against the YAML parser:
+The destination test: the marker belongs on exactly the files that will be
+**installed artifacts in a target project** and must be found and deleted.
 
-- **Never type the trailing space.** The fold turns the line break into exactly
-  one space. A literal trailing space is also unstable here: the
-  `trailing-whitespace` hook strips it.
-- **Never leave a blank line after the marker.** It folds to `\n`, not a space,
-  and the value no longer starts with the marker.
-- **A folded scalar re-wraps lines**, so the marker may legally span a line
-  break and still resolve correctly. Conformance is therefore **parse the YAML,
-  then test the resolved value** — never a regex over raw file text.
+| File | Marker |
+|---|---|
+| every `skills/<catalog>/<skill>/SKILL.md` | required (check A3) |
+| any SKILL.md outside `skills/` — this repository's own skills | forbidden (check D2) |
+| templates a meta-skill copies into the target's harness | forbidden — they must survive the cleanup |
+| the authoring template's own frontmatter | required (check D3) — published skills are copied from it |
 
-### Copy the marker from a fenced block
+## Removal (Target Side)
 
-Copy it from the fenced block in the catalog's `CONTEXT.md`, never from rendered
-documentation. Rendered text is how U+00A0, smart quotes, and en-dashes get in.
-They are invisible on screen, fatal to a byte-exact match, and leave the author
-believing the skill is marked.
+The specification any removal implementation must satisfy:
 
-## Who Carries The Marker
+1. Enumerate `<skill-root>/<name>/SKILL.md` at depth 2, parse each file's
+   YAML frontmatter, and select those whose **resolved** description starts
+   with the marker. Prose has no `description` field, so it cannot match.
+2. Dry-run first: print the resolved path, name, and first description line
+   of every match. That listing is what the human approves.
+3. Require fresh, explicit confirmation. An earlier "build me a harness"
+   request is not consent to delete.
+4. Delete the matched skill directories; the removal skill deletes itself
+   last.
+5. Report what was deleted. Skip and report any unparsable frontmatter —
+   never guess.
 
-The test is **destination, not location**: will this description ship into a
-target project as a disposable meta-skill?
+## Embedding The Literal
 
-| Path | Marker | Why |
-|---|---|---|
-| `skills/<catalog>/<skill>/SKILL.md` | **Required** | Published; must be findable for removal |
-| `.agents/skills/**` | **Forbidden** | This repo's own durable skills |
-| Harness files a meta-skill generates into a target | **Forbidden** | The deliverable must survive |
-| `assets/` templates for generated artifacts | **Forbidden** | See failure 2 below |
-| Prose docs quoting the marker | N/A | No `description` field; structurally exempt |
+The marker appears verbatim only in: the `MARKER` constant in the validator,
+fences tagged `text meta-skill-marker` (byte-checked against the constant,
+check D1), the YAML authoring form above (near-miss-checked, also D1), and
+published descriptions (check A3). Everywhere else, write "the marker" and
+link here.
 
-An `assets/` template for authoring *a new meta-skill in this repo* should carry
-it. Apply the destination test.
-
-### Why wrong inheritance is dangerous
-
-Three distinct failures, worth keeping separate:
-
-1. **Self-destruct.** If this repo's `.agents/skills/` carried the marker, a
-   cleanup pass run inside this repo would delete this repo's own harness.
-2. **Harness erasure.** A meta-skill's job is to emit durable project files. If
-   a template inside it carries a live marker and an agent copies it verbatim,
-   the *generated harness inherits the marker and deletes itself at cleanup* —
-   silently, right after the build reports success.
-3. **Trust collapse.** One over-broad deletion and users stop running cleanup
-   at all. Meta-skills then persist forever, which is exactly the context bloat
-   this repo exists to remove. The disposal contract only works if it is never
-   scary.
-
-## Disposability Consequences
-
-- Whatever a meta-skill produces must stand on its own. Nothing durable in the
-  target may reference the meta-skill, its files, or its name.
-- Installed skills lose everything outside their own directory. No relative link
-  may escape the skill root, and no skill may depend on a sibling skill's
-  behavior. To build on another skill, instruct the user to install it rather
-  than linking to it.
-- Keep `README.md` out of a skill root; it ships to targets and earns nothing.
-
-## Writing The Description
-
-Every meta-skill shares an identical 41-character opening, which costs
-discriminative power exactly where it is scarcest — meta-skills are mutually
-similar by construction. Compensate:
-
-- The first word after the marker is the distinctive action verb or domain noun.
-  Never `This`, `A`, or `Helps`.
-- Front-load what no *other meta-skill* does, in the first ~15 words. Assume
-  everything before it was clipped by a truncating listing.
-- Add `Use when ...` with concrete phrases a user would really say.
-- Add a negative boundary (`Not for ...`).
-- The budget is 1024 characters on the resolved value, of which the marker takes
-  41. Length warnings compare against the marker-stripped value.
-
-## Removal
-
-Removal is a target-side procedure and therefore travels inside the shipped
-disposal meta-skill, not in this repo: target agents cannot read
-`.agents/knowledge/`. This section fixes the requirements that procedure must
-meet.
-
-- **Discovery is never a recursive grep.** This repo's own docs contain the
-  marker literal. Enumerate only `<skill-root>/<name>/SKILL.md` at depth 2, then
-  match the parsed `description` field. Prose has no `description`, so it cannot
-  match.
-- **Gate on the harness's own verification**, not on an agent's judgment that it
-  is done.
-- **Dry-run first**, listing resolved paths and each skill's first description
-  line. That listing is what the human approves.
-- **Require fresh confirmation.** An earlier "build me a harness" request is not
-  consent to delete.
-- **Reject symlinks and path escapes.** Resolve each candidate and require it to
-  stay under the skill root. If a candidate is itself a symlink, unlink it only
-  — never recurse through it into a shared or global install.
-- **Check for dangling pointers** before deleting: scan surviving harness files
-  for references to the skill. A harness pointing into a deleted directory is
-  worse than no cleanup.
-- **Delete the skill directory**, not just `SKILL.md`; orphaned `scripts/` is
-  garbage.
-- **Scope to the project skill root only** — never a global or user-level root.
-- **Verify afterwards** that no marker remains, and be idempotent: zero markers
-  found is "nothing to do", not an error.
-- The disposal skill is itself marked and deletes itself **last**. This is safe
-  because its `SKILL.md` is already in context by then; removing the file does
-  not abort the run.
-
-## Gotchas
-
-- A near-miss marker is worse than no marker: cleanup will not find the skill,
-  but the author believes it is marked. The validator's codepoint diff exists
-  for this.
-- The description channel is best-effort, not guaranteed. An installer that
-  rewrites descriptions breaks it the same way renaming broke the name channel.
-  State this honestly rather than implying the contract is airtight.
-- A skill that should not carry the marker does not belong in this repo. The
-  marker is the admission test; durable design aids belong in
-  `ryan-minato/skills` instead.
+Changing the marker is the `sync-contract` skill's procedure — do not
+improvise it from this file. It is a breaking change for already-installed
+copies and needs explicit user sign-off.

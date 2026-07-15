@@ -1,116 +1,99 @@
 # meta-skills
 
-A library of **disposable meta-skills**: an agent installs them into a target
-project, uses them to build that project's harness, then deletes them.
+A public library of **disposable meta-skills**: one-time scaffolding a target
+project installs, uses to build that project's agent harness, then deletes to
+reclaim context. Sibling of `ryan-minato/skills`, which ships durable skills;
+this repository's products are designed to vanish.
 
 ## Two Audiences — Read This First
 
-Material from this repository is read by two disjoint groups. Each must ignore
+Two disjoint groups read material from this repository, and each must ignore
 the other's rules.
 
-| | Agents working **in this repo** | Agents in a **target project** |
-|---|---|---|
-| Read | this file, `ARCHITECTURE.md`, `.agents/`, catalog `CONTEXT.md` | only the installed `SKILL.md` files |
-| Job | author and review meta-skills | build *that* project's harness, then delete the meta-skills |
-| Harness | already built — **do not build one here** | does not exist yet; that is the job |
+- **`skills/**` is the product.** It is written for agents in *target*
+  projects. Everything inside it — including the words "disposable" and
+  "delete" — addresses that audience, in that project, after their harness
+  is built. It is never a description of this repository.
+- **Everything else is this repository's durable harness**: this file,
+  `ARCHITECTURE.md`, `.agents/`, `scripts/`, `justfile`, CI. Never delete or
+  "clean up" repository files because a skill description says it is
+  disposable — and never carry this repository's conventions (bilingual
+  READMEs, Linear, `just check`) into a published skill's instructions.
 
-- **Product rules never leak inward.** The marker, self-containment, and disposal
-  apply to `skills/**` only. This repo's `.agents/skills/` are durable; marking
-  one would let a cleanup pass delete this repo's own harness.
-- **Repo rules never leak outward.** Catalogs, bilingual READMEs, the Linear
-  workflow, and `just check` are this repository's conventions. A meta-skill must
-  never impose them on a target project.
+The full product contract, including the marker that identifies a published
+skill, is [meta-skill-contract.md](.agents/knowledge/meta-skill-contract.md).
 
-You are almost certainly in the first column. This repo's *subject* is
-harness-building; that does not mean your task is to build one here.
+## Layout
 
-## Purpose
+`skills/<catalog>/<skill>/SKILL.md` is the product; only skill directories
+ship to targets. The project map lives in [ARCHITECTURE.md](ARCHITECTURE.md).
 
-A meta-skill is one-time scaffolding, not a durable project skill. A user copies
-a catalog into a target project, hands that project's requirements to an agent
-and asks for a harness, the agent invokes the meta-skills to build it, and once
-the harness is verified the agent **deletes them** to reclaim context.
+## Conventions
 
-Everything else follows from that last step: a meta-skill must be findable in
-order to be removed, and must leave nothing behind that depends on it.
+- English everywhere; every `README.md` has a mirrored `README.zh.md`, with
+  English authoritative.
+- Published skill directories are named `meta-*`. The prefix only groups the
+  file tree — identification is by the description marker, never by name,
+  because installers rename skills.
+- Commits: Conventional Commits, English. Scope is the catalog changed
+  (`feat(core): …`); omit the scope when no catalog is touched (`docs: …`).
+- Commit under a noreply identity; personal email addresses never enter the
+  history (the hooks enforce this).
 
-## Catalogs
+## Validation
 
-`core` is the only catalog today. The authoritative list, and the repository
-layout, live in [ARCHITECTURE.md](ARCHITECTURE.md) — the validator parses that
-list, and it defines the legal commit scopes.
+| Command | Does |
+|---|---|
+| `just setup` | install hooks and the commit template; once after cloning |
+| `just check` | every gate — run it before proposing changes |
+| `just validate` | structure and marker contract only (fast iteration) |
+| `just fmt` | format and autofix the validator script |
 
-## Core Conventions
+The validator self-tests on every run, and its messages say what failed, why
+it matters, and the fix. Fix the cause, never the check — unless the
+contract itself changed.
 
-- **The marker.** Every published skill's resolved `description` begins with
-  `[META-SKILL: remove after harness setup] ` (41 chars, trailing space).
-  Identification is by **description, never by name** — installers rename skills
-  to avoid collisions, so the name channel cannot be trusted; the `meta-` name
-  prefix only groups the file tree. `[` opens a YAML flow sequence, so a plain
-  scalar is invalid YAML: use `description: >` and let the fold supply the
-  trailing space. Never type that space; never leave a blank line after the
-  marker.
-- **Self-containment.** Installed skills lose everything outside their own
-  directory. No relative link may escape the skill root; no skill may depend on a
-  sibling's behavior. Keep `README.md` out of a skill root.
-- **Layout.** `skills/<catalog>/<skill>/SKILL.md`. Every catalog carries
-  `CONTEXT.md`, `README.md`, and `README.zh.md`. Read a catalog's `CONTEXT.md`
-  before changing anything in it.
-- **Language.** English is authoritative; every `README.md` has a mirrored
-  `README.zh.md`.
-- **Commits.** Conventional Commits, English. **Scope is the catalog changed**
-  (`feat(core): …`); omit the scope when the change belongs to no catalog, such
-  as the harness itself (`docs: …`).
-- **Gates.** Run `just check` before proposing changes. Never `--no-verify`: the
-  hooks are the secret and PII gate, and a secret committed is leaked even if a
-  later commit removes it.
+## Commit Gates
+
+Before every commit: `just check` is green, the commit is one logical
+change, and you have read the staged diff yourself for secrets and personal
+data. A secret ever committed is leaked even if a later commit removes it —
+stop and tell the user. Never use `--no-verify`.
+
+## Workflow
+
+Every tracked change starts from a Linear root issue and ends in a
+human-reviewed pull request; the ordered procedure — sub-issues, branch
+naming, draft-to-ready gating, and the fallbacks when Linear or GitHub is
+unavailable — is the `tracked-change-workflow` skill. Invoke it when
+starting tracked work. Agents never merge.
 
 ## When To Read What
 
 | Situation | Read |
 |---|---|
-| Authoring, reviewing, renaming, or removing anything under `skills/` | [meta-skill-contract.md](.agents/knowledge/meta-skill-contract.md) |
-| Starting or landing a tracked change | [contribution-workflow.md](.agents/knowledge/contribution-workflow.md) |
-| Repo layout, the catalog list, or why a mechanism is absent | [ARCHITECTURE.md](ARCHITECTURE.md) |
-| Deciding whether a skill belongs in a catalog | that catalog's `CONTEXT.md` |
-| Agent Skills spec questions | the `agentskills` MCP server |
-
-## Development Environment
-
-- The devcontainer is the expected environment and is fully isolated, so commands
-  inside it need no per-command approval. Run `just setup` once after cloning.
-- Toolchain: `just`, `uv`, `ruff`, `pre-commit`, `node`, `gh`.
-- The GitHub MCP server reads `GH_TOKEN` from the host environment. Unset, it
-  fails; Linear and `agentskills` still work.
-
-## Validation
-
-| Check | Command |
-|---|---|
-| Everything (use this before proposing changes) | `just check` |
-| Project file structure | `just validate-repo` |
-| Every skill | `just check-skills` |
-| One skill | `just check-skill <path>` |
-| Prove the marker and link checks fire | `just selftest` |
-| Lint `scripts/` | `just lint` |
-
-When a `just` recipe changes, update this table and the Quality Gates table in
-`ARCHITECTURE.md`.
-
-## Workflow
-
-Linear issue → branch from the **root** issue → atomic commits → pull request.
-Only the root issue gets a pull request. Read
-[contribution-workflow.md](.agents/knowledge/contribution-workflow.md) for issue
-structure, labels, progress reporting, and the fallbacks when Linear or GitHub
-auth is unavailable.
-
-Agents may create and update Linear issues, push branches, and open pull
-requests. Humans own merging, releases, and what enters a catalog.
+| Repo layout, quality gates, why a mechanism is absent, proposing tooling | [ARCHITECTURE.md](ARCHITECTURE.md) |
+| Authoring, reviewing, renaming, or removing anything under `skills/`; touching the marker | [meta-skill-contract.md](.agents/knowledge/meta-skill-contract.md) |
+| Working inside a specific catalog | that catalog's `CONTEXT.md` |
+| Agent Skills spec facts (frontmatter fields, limits) | the `agentskills` MCP server |
 
 ## Keeping The Harness Current
 
-Sync is owned by skills, one per concern: `catalog-sync` (a catalog or skill is
-added, renamed, or removed), `translation-sync` (a `README.md` changed), and
-`contract-sync` (the marker contract changed). They announce themselves; invoke
-the one whose trigger fired, and do not duplicate their rules here.
+Sync is owned by skills, one per concern: `sync-catalog` (a catalog or
+published skill is added, renamed, or removed), `sync-contract` (the marker
+or its rules change), and `sync-translation` (a `README.md` changed). Invoke
+the one whose trigger fired; their procedures are not duplicated here.
+
+For the concerns no skill owns: a justfile recipe change updates the
+Validation table above and the gates table in `ARCHITECTURE.md`; a layout
+change updates `ARCHITECTURE.md`'s map; a new or changed validator check
+ships its self-test fixture in the same change; a changed team workflow
+decision updates the `tracked-change-workflow` skill.
+
+## Environment
+
+The devcontainer is fully isolated, so commands inside it need no
+per-command approval. Run `just setup` once after cloning. Toolchain:
+`just`, `uv`, `ruff`, `pre-commit`, `node`, `gh`. MCP servers:
+`linear-server`, `agentskills`, and `github` (needs `GH_TOKEN` from the host
+environment).
