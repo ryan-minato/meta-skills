@@ -31,7 +31,7 @@ INTERNAL_SKILLS = REPO / ".agents" / "skills"
 
 # Keep in sync with .agents/knowledge/meta-skill-contract.md (source of truth),
 # the Core Conventions line in AGENTS.md, and MARKER in validate_repo.py.
-# The contract-sync skill owns that alignment.
+# The sync-contract skill owns that alignment.
 MARKER = "[META-SKILL: remove after harness setup] "
 
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")

@@ -27,7 +27,7 @@ ARCHITECTURE = REPO / "ARCHITECTURE.md"
 
 # Keep in sync with .agents/knowledge/meta-skill-contract.md (source of truth),
 # the Core Conventions line in AGENTS.md, and MARKER in check_skill.py.
-# The contract-sync skill owns that alignment.
+# The sync-contract skill owns that alignment.
 MARKER = "[META-SKILL: remove after harness setup] "
 
 CATALOG_FILES = ("CONTEXT.md", "README.md", "README.zh.md")
@@ -114,7 +114,7 @@ def check_architecture_list(disk: list[str]) -> None:
             "The list drives catalog validation and the legal commit scopes, so an "
             "unlisted catalog is invisible to both.",
             f"Add '- `{name}` — <purpose>' to the '## Catalogs' section, or remove "
-            f"the directory. The catalog-sync skill covers this.",
+            f"the directory. The sync-catalog skill covers this.",
         )
 
     for name in sorted(set(listed) - set(disk)):
@@ -124,7 +124,7 @@ def check_architecture_list(disk: list[str]) -> None:
             "A listed catalog that does not exist advertises a scope nobody can "
             "use and sends readers to a missing path.",
             f"Create skills/{name}/ with its scaffold, or remove '{name}' from the "
-            f"'## Catalogs' section. The catalog-sync skill covers this.",
+            f"'## Catalogs' section. The sync-catalog skill covers this.",
         )
 
 
@@ -142,7 +142,7 @@ def check_translation_pairs() -> None:
             f"{rel(readme)} has no README.zh.md mirror.",
             "Every README is published in both languages, with English "
             "authoritative. A missing mirror silently drops Chinese readers.",
-            f"Create {rel(mirror)} mirroring {rel(readme)}. The translation-sync "
+            f"Create {rel(mirror)} mirroring {rel(readme)}. The sync-translation "
             f"skill covers this.",
         )
 

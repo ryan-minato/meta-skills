@@ -110,7 +110,7 @@ requests. Humans own merging, releases, and what enters a catalog.
 
 ## Keeping The Harness Current
 
-Sync is owned by skills, one per concern: `catalog-sync` (a catalog or skill is
-added, renamed, or removed), `translation-sync` (a `README.md` changed), and
-`contract-sync` (the marker contract changed). They announce themselves; invoke
+Sync is owned by skills, one per concern: `sync-catalog` (a catalog or skill is
+added, renamed, or removed), `sync-translation` (a `README.md` changed), and
+`sync-contract` (the marker contract changed). They announce themselves; invoke
 the one whose trigger fired, and do not duplicate their rules here.

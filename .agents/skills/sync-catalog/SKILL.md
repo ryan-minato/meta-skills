@@ -1,5 +1,5 @@
 ---
-name: catalog-sync
+name: sync-catalog
 description: >
   Realigns the catalog inventory across the architecture document, catalog
   scaffolds, and both catalog README tables. Use when a catalog or a published

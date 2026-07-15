@@ -32,7 +32,7 @@ scopes: a commit touching a catalog uses that catalog as its scope
 (`feat(core): …`); a commit touching no catalog omits the scope (`docs: …`).
 
 Adding a catalog means adding it here **and** creating its `CONTEXT.md`,
-`README.md`, and `README.zh.md`. The `catalog-sync` skill owns that procedure.
+`README.md`, and `README.zh.md`. The `sync-catalog` skill owns that procedure.
 
 ## Skill Visibility
 
@@ -91,7 +91,7 @@ trigger fires — not before.
 - The marker literal lives in three places on purpose: the always-loaded
   conventions in `AGENTS.md`, the contract at
   [meta-skill-contract.md](.agents/knowledge/meta-skill-contract.md), and the
-  `MARKER` constant in `scripts/check_skill.py`. The `contract-sync` skill pays
+  `MARKER` constant in `scripts/check_skill.py`. The `sync-contract` skill pays
   for that duplication.
 - The authoring validator here and the disposal procedure that runs in a target
   project cannot share code — different machines, different trees. They agree

@@ -1,5 +1,5 @@
 ---
-name: translation-sync
+name: sync-translation
 description: >
   Mirrors an English README into its Chinese README.zh.md counterpart, keeping
   the pair content-identical. Use when any README.md changes, when a new README.md

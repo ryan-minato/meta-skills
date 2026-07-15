@@ -1,5 +1,5 @@
 ---
-name: contract-sync
+name: sync-contract
 description: >
   Realigns the meta-skill marker contract across the knowledge base, the agent
   entrypoint, and the validator constant. Use when the marker string, its YAML
