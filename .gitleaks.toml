@@ -1,11 +1,13 @@
-title = "Meta Skills secret and PII rules"
+title = "meta-skills secret and PII rules"
 
 [extend]
 useDefault = true
 
+# PII gate: no personal email address may enter the history. Committer
+# identities use noreply addresses; docs use example.* addresses.
 [[rules]]
 id = "restrict-non-anonymous-emails"
-description = "Non-anonymous email detected. Use a noreply or example address."
+description = "Personal email address detected. Use a noreply or example address."
 regex = '''(?i)([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})'''
 tags = ["email", "PII"]
 
@@ -13,10 +15,8 @@ tags = ["email", "PII"]
 regexes = [
   '''(?i).+@users\.noreply\.github\.com''',
   '''(?i).+@(users\.)?noreply\.gitlab\.com''',
-  '''(?i)^[A-Za-z0-9._%+-]+@example\.(com|org|net)$''',
+  '''(?i)[A-Za-z0-9._%+-]+@example\.(com|org|net)''',
 ]
-
 paths = [
-  '''\.secrets\.baseline$''',
   '''\.gitleaks\.toml$''',
 ]

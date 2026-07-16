@@ -2,29 +2,43 @@
 
 [English](README.md)
 
-一次性的 meta-skill，帮助 agent 在你的项目中搭建持久的 **harness**，随后主动退场。
+一次性的 meta-skill，帮助 agent 在你的项目中搭建持久的 **harness**，随后主动
+退场。
 
-harness 指一切对 agent 可见、并帮助 agent 达成你预期的东西：agent 运行所处的环境、
-对其产出的约束、可调用的工具，以及可获取的知识。搭建一个好的 harness 本身就是一门
-技艺，而这些技能承载的正是这门技艺。
-
-它们与常规技能库相反：它们被设计为会删除自己。
+harness 指一切对 agent 可见、并帮助 agent 达成你预期的东西：agent 运行所处的
+环境、对其产出的约束、可调用的工具，以及可获取的知识。搭建一个好的 harness 本身
+就是一门技艺，而这些技能承载的正是这门技艺。它们是普通技能库的反面：生来就是为了
+删除自己。
 
 ## 工作方式
 
-1. **安装** —— 将 `core` 分类安装到项目中，并按技术栈追加相关主题分类。
+1. **安装** —— 把 `core` 目录装进项目的技能目录（例如 `./.agents/skills/`），
+   再按技术栈补充所需的主题目录。
 2. **提出需求** —— 把项目的需求与规范交给 agent，请它搭建 harness。
-3. **搭建** —— agent 调用这些 meta-skill，其中沉淀了相应的最佳实践。
-4. **移除** —— harness 搭建完成并经你验证后，请 agent 移除这些 meta-skill。它们已
-   完成使命；任何留下的技能都会在此后每一次会话中持续消耗上下文。
+3. **搭建** —— agent 调用这些 meta-skill，它们承载着最佳实践。
+4. **移除** —— harness 建成并验证后，agent 依据标记找到所有 meta-skill 并全部
+   删除。它们的使命已经完成，每个留下的技能都会在之后的每个会话中消耗上下文。
 
-移除环节刻意需要确认：先前"搭建 harness"的请求，永远不等同于同意删除任何内容。
+移除操作在设计上必须经过确认：先前"搭建 harness"的请求绝不被视为删除任何东西的
+授权。
 
-## 分类
+## meta-skill 如何自我标识
 
-| 分类 | 内容 | 安装范围 |
+每个发布技能的 description 都以标记开头：
+
+```text meta-skill-marker
+Disposable meta-skill (delete after the harness is built):
+```
+
+agent 正是靠这个标记重新找到这些技能并删除它们。识别依据是 **description 而非
+名称**，因为安装器会为避免冲突而重命名技能——`meta-` 名称前缀只用于在文件树中
+归组。
+
+## 目录
+
+| 目录 | 内容 | 安装范围 |
 |---|---|---|
-| [core](skills/core/) | 必需集合：足以让任意项目从没有 harness 到拥有可用的 harness | 按项目安装，在搭建 harness 前 |
+| [core](skills/core/) | 必装集合：足以让任何项目从没有 harness 到拥有可用的 harness | 按项目安装，在搭建 harness 之前 |
 
 ## 安装
 
@@ -33,30 +47,20 @@ npx skills add ryan-minato/meta-skills                      # 交互式
 npx skills add ryan-minato/meta-skills --skill <skill-name>
 ```
 
-请**按项目**安装，而非全局安装。它们是为某个项目的某项工作准备的脚手架；全局安装会
-让它们跟进那些已经拥有 harness 的项目。
-
-## meta-skill 如何标识自身
-
-每个已发布技能的 description 都以标记开头：
-
-```text
-[META-SKILL: remove after harness setup]
-```
-
-该标记是 agent 再次找到这些技能并将其移除的依据。标识依据是 **description，而非名称**
-—— 因为安装器会为避免冲突而重命名技能；`meta-` 名称前缀仅用于在文件树中将它们归拢。
+也可以把技能目录（`skills/<catalog>/<skill>/`）直接复制进项目的技能目录。请
+**按项目安装**，不要全局安装：它们是为单个项目的单次任务准备的脚手架，全局安装
+会跟着你进入已经拥有 harness 的项目。
 
 ## 相关项目
 
-姊妹库 [ryan-minato/skills](https://github.com/ryan-minato/skills) 提供**持久**技能，
-其中包括 `meta-harness`：一个常驻安装的通用设计辅助。本仓库提供的则是一次性的、按
-项目使用的搭建者。两者可以配合使用。
+姊妹库 [ryan-minato/skills](https://github.com/ryan-minato/skills) 提供
+**持久的**技能，其中包括常驻安装的通用设计辅助 `meta-harness`。本仓库提供的则是
+一次性的、按项目使用的搭建者。两者可以配合使用。
 
 ## 参与贡献
 
-请从 [AGENTS.md](AGENTS.md) 开始，然后阅读 [ARCHITECTURE.md](ARCHITECTURE.md)。执行
-一次 `just setup`，并在提交前运行 `just check`。
+从 [AGENTS.md](AGENTS.md) 开始，然后阅读 [ARCHITECTURE.md](ARCHITECTURE.md)。
+克隆后运行一次 `just setup`，提交更改前运行 `just check`。
 
 ## 许可证
 

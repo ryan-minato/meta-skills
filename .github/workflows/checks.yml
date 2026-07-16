@@ -9,7 +9,9 @@ permissions:
   contents: read
 
 jobs:
-  quality:
+  # Runs the identical registry the local `just check` runs, so CI and the
+  # working environment cannot drift.
+  checks:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -17,15 +19,11 @@ jobs:
       # setup-uv publishes no v8 tag, despite shipping 8.x.
       - uses: astral-sh/setup-uv@v7
 
-      - name: Install the toolchain
-        run: |
-          uv tool install rust-just
-          uv tool install pre-commit
-          uv tool install ruff
+      - name: Run the check registry
+        run: uvx pre-commit run --all-files
 
-      - name: Run all checks
-        run: just check
-
+  # Full-history scan with the same scanner and ruleset as the commit hook:
+  # a secret committed and later removed is still leaked and must be found.
   secrets:
     runs-on: ubuntu-latest
     steps:
@@ -33,7 +31,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Exact tag: trufflehog publishes no major tags.
-      - uses: trufflesecurity/trufflehog@v3.95.9
-        with:
-          extra_args: --only-verified
+      - name: Scan the full history with gitleaks
+        run: |
+          curl -sSfL https://github.com/gitleaks/gitleaks/releases/download/v8.24.2/gitleaks_8.24.2_linux_x64.tar.gz \
+            | tar -xz gitleaks
+          ./gitleaks git --config .gitleaks.toml --redact --verbose .
