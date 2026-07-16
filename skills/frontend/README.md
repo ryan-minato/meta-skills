@@ -1,0 +1,21 @@
+# frontend
+
+[中文](README.zh.md)
+
+Meta-skills for projects with a user-facing visual surface: design
+description and visual language. Install on top of `core`, per project, and
+only when the target actually has a frontend — this catalog is not part of
+the default install.
+
+These skills are **disposable**: once the harness is built and verified,
+the `core` removal skill deletes them together with the rest.
+
+```bash
+npx skills add ryan-minato/meta-skills --skill <skill-name>
+```
+
+## Skills
+
+| Skill | Description |
+|---|---|
+| _(none yet)_ | |

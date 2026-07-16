@@ -30,6 +30,8 @@ catalogs.
 
 - `core` — required for every harness build; useful regardless of the
   target's stack.
+- `frontend` — design description and visual language; only for targets
+  with a user-facing visual surface, installed on top of `core`.
 
 The validator reconciles this list against the directories under `skills/`
 (check B3), and it defines the legal commit scopes: `feat(core): …` for a

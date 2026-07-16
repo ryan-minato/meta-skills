@@ -47,6 +47,7 @@ them in the file tree.
 | Catalog | Contents | Install scope |
 |---|---|---|
 | [core](skills/core/) | The required set: enough to take any project from no harness to a working one | Per project, before a harness build |
+| [frontend](skills/frontend/) | Design description and visual language for projects with a user-facing frontend | Per project, on top of `core`, only when the target has a visual surface |
 
 ## Installation
 
