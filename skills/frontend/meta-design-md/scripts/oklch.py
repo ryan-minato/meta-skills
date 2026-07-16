@@ -19,9 +19,10 @@ import math
 import re
 import sys
 
+_NUM = r"(?:\d+(?:\.\d+)?|\.\d+)"
 OKLCH_RE = re.compile(
     r"^\s*(?:oklch\(\s*)?"
-    r"([0-9.]+%?)\s+([0-9.]+)\s+([0-9.]+(?:deg)?)"
+    rf"({_NUM}%?)\s+({_NUM})\s+({_NUM}(?:deg)?)"
     r"\s*(?:\))?\s*$",
     re.IGNORECASE,
 )
@@ -30,27 +31,57 @@ OKLCH_RE = re.compile(
 def parse_oklch(text: str) -> tuple[float, float, float]:
     m = OKLCH_RE.match(text)
     if not m:
-        sys.exit(f'error: cannot parse OKLCH value: {text!r} (expected like "oklch(62% 0.18 250)")')
+        sys.exit(
+            f'error: cannot parse OKLCH value: {text!r} (expected like "oklch(62% 0.18 250)")'
+        )
     lit, c_lit, h_lit = m.groups()
-    lightness = float(lit[:-1]) / 100 if lit.endswith("%") else float(lit)
+    if lit.endswith("%"):
+        percent = float(lit[:-1])
+        if percent > 100:
+            sys.exit(f"error: lightness {lit} is out of range (0%-100%)")
+        lightness = percent / 100
+    else:
+        lightness = float(lit)
+        if lightness > 1:
+            sys.exit(
+                f"error: bare lightness {lit} is out of range (0-1) — did you mean {lit}%?"
+            )
     hue = float(h_lit[:-3]) if h_lit.lower().endswith("deg") else float(h_lit)
     return lightness, float(c_lit), hue % 360
 
 
 def parse_hex(text: str) -> tuple[float, float, float]:
     t = text.strip().lstrip("#")
-    if len(t) == 3:
+    if len(t) in (3, 4):
         t = "".join(ch * 2 for ch in t)
-    if len(t) != 6 or any(ch not in "0123456789abcdefABCDEF" for ch in t):
+    if len(t) not in (6, 8) or any(ch not in "0123456789abcdefABCDEF" for ch in t):
         sys.exit(f"error: cannot parse hex color: {text!r}")
+    if len(t) == 8:
+        if t[6:8].lower() != "ff":
+            sys.exit(
+                f"error: {text!r} is translucent (alpha {t[6:8]}) — "
+                "composite it over its background first; this calculator "
+                "only handles opaque colors"
+            )
+        t = t[:6]
     return tuple(int(t[i : i + 2], 16) / 255 for i in (0, 2, 4))  # type: ignore[return-value]
+
+
+_HEX_BODY_RE = re.compile(
+    r"[0-9a-fA-F]{3}|[0-9a-fA-F]{4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8}"
+)
 
 
 def parse_color(text: str) -> tuple[float, float, float]:
     """Return linear-light sRGB (possibly out of [0,1]) from hex or oklch."""
     t = text.strip()
-    if t.startswith("#") or re.fullmatch(r"[0-9a-fA-F]{3}|[0-9a-fA-F]{6}", t):
+    if t.startswith("#") or _HEX_BODY_RE.fullmatch(t):
         return tuple(srgb_to_linear(v) for v in parse_hex(t))  # type: ignore[return-value]
+    if not OKLCH_RE.match(t):
+        sys.exit(
+            f"error: cannot parse color {text!r} — expected a hex color "
+            'like "#1a2b3c" or an OKLCH value like "oklch(62% 0.18 250)"'
+        )
     return oklch_to_linear_srgb(*parse_oklch(t))
 
 
@@ -165,8 +196,17 @@ def main() -> None:
             )
             sys.exit(1)
     elif args.cmd == "contrast":
-        la = relative_luminance(parse_color(args.color_a))
-        lb = relative_luminance(parse_color(args.color_b))
+        rgb_a = parse_color(args.color_a)
+        rgb_b = parse_color(args.color_b)
+        for label, rgb in (("first", rgb_a), ("second", rgb_b)):
+            if not in_gamut(rgb):
+                print(
+                    f"warning: the {label} color is outside sRGB — the "
+                    "ratio below is computed on the clipped color",
+                    file=sys.stderr,
+                )
+        la = relative_luminance(rgb_a)
+        lb = relative_luminance(rgb_b)
         ratio = (max(la, lb) + 0.05) / (min(la, lb) + 0.05)
         verdict = (
             f"{ratio:.2f}:1 — "
