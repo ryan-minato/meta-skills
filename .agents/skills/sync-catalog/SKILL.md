@@ -38,5 +38,12 @@ The directories under `skills/` are the truth; every listing follows them.
 
 - The catalog list defines the legal commit scopes; adding a catalog adds a
   scope.
+- `skills: ["./"]` in each plugin entry is load-bearing, not redundant: the
+  default scan only looks in `<source>/skills/`, which a catalog does not
+  have, so dropping the field loads zero skills. The listed path is scanned
+  one level deep for `<name>/SKILL.md` — the same shape the disposal
+  procedure assumes — so nothing under `references/` or `assets/` can be
+  picked up. Verified with `plugin details`, which prints the loaded
+  inventory and is the fastest way to re-check after a manifest edit.
 - Catalog depth is exactly two — never nest catalogs. The target-side
   disposal procedure assumes `<skill-root>/<name>/SKILL.md`.
