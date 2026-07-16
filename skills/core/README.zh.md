@@ -9,6 +9,9 @@
 它们全部删除。
 
 ```bash
+claude plugin marketplace add ryan-minato/meta-skills   # 每台机器一次
+claude plugin install core@meta-skills --scope project
+# 或通过 skills CLI 按技能安装：
 npx skills add ryan-minato/meta-skills --skill <skill-name>
 ```
 

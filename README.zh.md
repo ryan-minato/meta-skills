@@ -43,6 +43,19 @@ agent 正是靠这个标记重新找到这些技能并删除它们。识别依�
 
 ## 安装
 
+作为 Claude Code 插件安装——每个目录（catalog）就是本仓库市场中的一个插件：
+
+```bash
+claude plugin marketplace add ryan-minato/meta-skills
+claude plugin install core@meta-skills --scope project
+claude plugin install frontend@meta-skills --scope project   # 仅当项目有视觉界面
+```
+
+以插件方式安装的技能用 `claude plugin uninstall` 移除，而不是由移除技能删除
+文件。
+
+或使用 skills CLI：
+
 ```bash
 npx skills add ryan-minato/meta-skills                      # 交互式
 npx skills add ryan-minato/meta-skills --skill <skill-name>

@@ -10,6 +10,9 @@ These skills are **disposable**: once the harness is built and verified,
 their own removal skill deletes them all.
 
 ```bash
+claude plugin marketplace add ryan-minato/meta-skills   # once per machine
+claude plugin install core@meta-skills --scope project
+# or per skill via the skills CLI:
 npx skills add ryan-minato/meta-skills --skill <skill-name>
 ```
 

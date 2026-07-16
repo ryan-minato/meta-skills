@@ -1,0 +1,23 @@
+{
+  "name": "meta-skills",
+  "owner": {
+    "name": "ryan-minato"
+  },
+  "description": "Disposable meta-skills that build a project's agent harness, then get removed.",
+  "plugins": [
+    {
+      "name": "core",
+      "source": "./skills/core",
+      "description": "The required set: enough to take any project from no harness to a working one, including the removal skill.",
+      "skills": ["./"],
+      "strict": false
+    },
+    {
+      "name": "frontend",
+      "source": "./skills/frontend",
+      "description": "Design description and visual language for projects with a user-facing frontend. Install on top of core.",
+      "skills": ["./"],
+      "strict": false
+    }
+  ]
+}
