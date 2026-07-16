@@ -25,6 +25,17 @@
       "description": "Design description and visual language for projects with a user-facing frontend. Install on top of core.",
       "skills": ["./meta-design-md"],
       "strict": false
+    },
+    {
+      "name": "python",
+      "source": "./skills/python",
+      "description": "Trusted defaults and doc URLs for Python targets: docstring and comment conventions, testing setup, and toolchain choices. Install on top of core.",
+      "skills": [
+        "./meta-python-docstyle",
+        "./meta-python-testing",
+        "./meta-python-toolchain"
+      ],
+      "strict": false
     }
   ]
 }

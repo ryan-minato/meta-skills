@@ -33,6 +33,10 @@ catalogs.
   target's stack.
 - `frontend` — design description and visual language; only for targets
   with a user-facing visual surface, installed on top of `core`.
+- `python` — trusted defaults and authoritative doc URLs for Python
+  targets: docstring and comment conventions, testing setup, and
+  toolchain choices; installed on top of `core`, only for Python
+  projects.
 
 The validator reconciles this list against the directories under `skills/`
 (check B3), and it defines the legal commit scopes: `feat(core): …` for a

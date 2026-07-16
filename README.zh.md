@@ -40,6 +40,7 @@ agent 正是靠这个标记重新找到这些技能并删除它们。识别依�
 |---|---|---|
 | [core](skills/core/) | 必装集合：足以让任何项目从没有 harness 到拥有可用的 harness | 按项目安装，在搭建 harness 之前 |
 | [frontend](skills/frontend/) | 面向具有用户可见前端的项目的设计描述与视觉语言 | 按项目安装，在 `core` 之上，仅当目标有视觉界面时 |
+| [python](skills/python/) | 面向 Python 项目的可信默认值与文档 URL：docstring 与注释约定、测试设置、工具链选择 | 按项目安装，在 `core` 之上，仅当目标是 Python 项目时 |
 
 ## 安装
 
@@ -49,6 +50,7 @@ agent 正是靠这个标记重新找到这些技能并删除它们。识别依�
 claude plugin marketplace add ryan-minato/meta-skills
 claude plugin install core@meta-skills --scope project
 claude plugin install frontend@meta-skills --scope project   # 仅当项目有视觉界面
+claude plugin install python@meta-skills --scope project     # 仅当是 Python 项目
 ```
 
 以插件方式安装的技能用 `claude plugin uninstall` 移除，而不是由移除技能删除
@@ -59,6 +61,7 @@ claude plugin install frontend@meta-skills --scope project   # 仅当项目有�
 ```bash
 npx skills add ryan-minato/meta-skills/skills/core
 npx skills add ryan-minato/meta-skills/skills/frontend      # 仅当项目有视觉界面
+npx skills add ryan-minato/meta-skills/skills/python        # 仅当是 Python 项目
 npx skills add ryan-minato/meta-skills/skills               # 全部已发布技能
 ```
 
