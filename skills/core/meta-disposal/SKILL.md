@@ -58,3 +58,8 @@ and the report was shown.
   unparsable.
 - Frameworks sometimes mirror skills through symlinks: delete the real
   directory, then remove any dangling links the deletion leaves behind.
+- Skills installed through a plugin manager (a plugin marketplace, a
+  package manager) live in manager-owned caches: uninstall them through
+  that manager instead of deleting files, or the manager will restore or
+  mis-track them. File deletion is only for skills copied into the
+  project's own skill directories.
