@@ -20,3 +20,4 @@ npx skills add ryan-minato/meta-skills --skill <skill-name>
 | [meta-harness-plan](meta-harness-plan/) | Plans, audits, or improves the project's agent harness on independent decision axes; produces the user-approved plan the other builders follow |
 | [meta-agents-md](meta-agents-md/) | Creates or improves the AGENTS.md entrypoint and framework pointer files, offloading long architecture material behind section-locating pointers |
 | [meta-knowledge-base](meta-knowledge-base/) | Builds the agent knowledge base: one consistent structure, per-type document seeds, and authoring rules deposited in skill or entrypoint form |
+| [meta-project-skill](meta-project-skill/) | Creates or retrofits durable project skills from shaped skeletons, and deposits the project's skill-authoring rules for the agents that come after |

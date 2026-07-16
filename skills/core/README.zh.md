@@ -19,3 +19,4 @@ npx skills add ryan-minato/meta-skills --skill <skill-name>
 | [meta-harness-plan](meta-harness-plan/) | 在相互独立的决策轴上规划、审计或改进项目的 agent harness；产出经用户批准、供其余搭建技能遵循的计划 |
 | [meta-agents-md](meta-agents-md/) | 创建或改进 AGENTS.md 入口与框架指针文件，把过长的架构材料卸载到章节定位指针之后 |
 | [meta-knowledge-base](meta-knowledge-base/) | 搭建 agent 知识库：唯一一致的结构、按类型的文档骨架，并以技能或入口形态沉淀 authoring 规则 |
+| [meta-project-skill](meta-project-skill/) | 用按情形分类的骨架创建或翻修耐久项目技能，并为后来的 agent 沉淀本项目的技能设计规则 |
