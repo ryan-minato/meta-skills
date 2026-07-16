@@ -44,7 +44,12 @@ from pathlib import Path
 import yaml
 
 MARKER = "Disposable meta-skill (delete after the harness is built):"
-ALLOWED_ENTRIES = ("SKILL.md", "references", "scripts", "assets")
+ALLOWED_ENTRIES = {
+    "SKILL.md": "file",
+    "references": "directory",
+    "scripts": "directory",
+    "assets": "directory",
+}
 REFERENCED_DIRS = ("references", "scripts")
 REPO_ONLY_TOKENS = ("README.zh", "validate_repo", "check_skill", "meta-skill-contract")
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
@@ -99,6 +104,27 @@ def markdown_links(text: str) -> list[str]:
     return targets
 
 
+def skill_mentions(text: str) -> set[str]:
+    """Paths SKILL.md explicitly points at: link targets and inline code.
+
+    Inline-code spans also count word by word, so `uv run scripts/x.py`
+    mentions scripts/x.py. Bare prose must not count — a substring test let
+    `references/config` pass whenever `references/config.md` was linked.
+    """
+    mentions = set(markdown_links(text))
+    in_fence = False
+    for line in text.splitlines():
+        if line.lstrip().startswith("```"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        for span in re.findall(r"`([^`]+)`", line):
+            mentions.add(span)
+            mentions.update(span.split())
+    return mentions
+
+
 def check_structure(skill: Path, rel_base: Path) -> list[Issue]:
     """S1-S3: canonical entries only, no READMEs, no unreferenced files."""
     issues: list[Issue] = []
@@ -107,21 +133,29 @@ def check_structure(skill: Path, rel_base: Path) -> list[Issue]:
         return str(path.relative_to(rel_base))
 
     for entry in sorted(skill.iterdir()):
-        if entry.name in ALLOWED_ENTRIES:
+        expected = ALLOWED_ENTRIES.get(entry.name)
+        actual = (
+            "file"
+            if entry.is_file()
+            else "directory"
+            if entry.is_dir()
+            else "special entry"
+        )
+        if expected == actual:
             continue
         if entry.name.startswith("README"):
             continue  # S2 reports READMEs with the sharper message
-        issues.append(
-            Issue(
-                "S1",
-                "warning",
-                rel(entry),
-                "unexpected entry in a skill directory. A skill holds only "
-                "SKILL.md plus references/, scripts/, and assets/; anything "
-                "else ships to targets as unexplained clutter. Move it into "
-                "one of the canonical folders or remove it.",
-            )
+        message = (
+            f"is a {actual}, but `{entry.name}` in a skill must be a "
+            f"{expected}. A mistyped entry dodges every later check and "
+            "ships to targets unvalidated. Fix its type or remove it."
+            if expected
+            else "unexpected entry in a skill directory. A skill holds only "
+            "SKILL.md plus references/, scripts/, and assets/; anything "
+            "else ships to targets as unexplained clutter. Move it into "
+            "one of the canonical folders or remove it."
         )
+        issues.append(Issue("S1", "warning", rel(entry), message))
     for readme in sorted(skill.rglob("README*")):
         issues.append(
             Issue(
@@ -136,22 +170,25 @@ def check_structure(skill: Path, rel_base: Path) -> list[Issue]:
         )
     skill_md = skill / "SKILL.md"
     body = skill_md.read_text(encoding="utf-8") if skill_md.is_file() else ""
+    mentions = skill_mentions(body)
     for folder in REFERENCED_DIRS:
         base = skill / folder
         if not base.is_dir():
             continue
         for file in sorted(p for p in base.rglob("*") if p.is_file()):
             mention = file.relative_to(skill).as_posix()
-            if mention not in body:
+            if mention not in mentions:
                 issues.append(
                     Issue(
                         "S3",
                         "warning",
                         rel(file),
-                        f"`{mention}` is never mentioned in SKILL.md. A "
-                        "reference or script nothing points to is invisible "
-                        "to the agent and dead weight in every install. Link "
-                        "it with a load condition, or remove it.",
+                        f"`{mention}` is never referenced in SKILL.md as a "
+                        "link target or inline-code path; a bare prose "
+                        "mention does not count. A file nothing points to "
+                        "is invisible to the agent and dead weight in every "
+                        "install. Link it with a load condition, or remove "
+                        "it.",
                     )
                 )
     return issues
@@ -220,7 +257,7 @@ def check_skill_md(skill: Path, rel_base: Path, published: bool) -> list[Issue]:
                 f"survive cleanup. Begin the description with: `{MARKER} `",
             )
         )
-    if not published and description.startswith(MARKER):
+    if not published and MARKER in description:
         issues.append(
             Issue(
                 "M3",
@@ -368,87 +405,215 @@ PUBLISHED = "skills/core/meta-good"
 INTERNAL = ".agents/skills/helper"
 
 
-def _with(path: str, content: str | None) -> dict[str, str]:
+def _with(edits: dict[str, str | None]) -> dict[str, str]:
+    """BASE_FIXTURE with files replaced, or removed when the value is None."""
     fixture = copy.deepcopy(BASE_FIXTURE)
-    if content is None:
-        fixture.pop(path, None)
-    else:
-        fixture[path] = content
+    for path, content in edits.items():
+        if content is None:
+            fixture.pop(path, None)
+        else:
+            fixture[path] = content
     return fixture
 
 
-SELF_TEST_CASES: list[tuple[str, str, str, dict[str, str]]] = [
-    ("S1", "warning", PUBLISHED, _with(f"{PUBLISHED}/notes.txt", "stray\n")),
-    ("S2", "warning", PUBLISHED, _with(f"{PUBLISHED}/README.md", "stray\n")),
-    ("S3", "warning", PUBLISHED, _with(f"{PUBLISHED}/references/unused.md", "x\n")),
-    ("M1", "error", PUBLISHED, _with(f"{PUBLISHED}/SKILL.md", "no frontmatter\n")),
+NO_REFS_SKILL = VALID_SKILL.replace(
+    "A valid body linking [notes](references/notes.md) and running\n"
+    "`scripts/run.sh` when needed.",
+    "A valid body running `scripts/run.sh` when needed.",
+)
+
+# (check id, severity, expected issue path, skill dir, fixture). Pinning the
+# path keeps a fixture from passing by firing its check on an unrelated
+# subject.
+SELF_TEST_CASES: list[tuple[str, str, str, str, dict[str, str]]] = [
+    (
+        "S1",
+        "warning",
+        f"{PUBLISHED}/notes.txt",
+        PUBLISHED,
+        _with({f"{PUBLISHED}/notes.txt": "stray\n"}),
+    ),
+    # A regular file named after a canonical directory must not slip
+    # through on its name.
+    (
+        "S1",
+        "warning",
+        f"{PUBLISHED}/references",
+        PUBLISHED,
+        _with(
+            {
+                f"{PUBLISHED}/SKILL.md": NO_REFS_SKILL,
+                f"{PUBLISHED}/references/notes.md": None,
+                f"{PUBLISHED}/references": "a file where a directory belongs\n",
+            }
+        ),
+    ),
+    (
+        "S2",
+        "warning",
+        f"{PUBLISHED}/README.md",
+        PUBLISHED,
+        _with({f"{PUBLISHED}/README.md": "stray\n"}),
+    ),
+    (
+        "S3",
+        "warning",
+        f"{PUBLISHED}/references/unused.md",
+        PUBLISHED,
+        _with({f"{PUBLISHED}/references/unused.md": "x\n"}),
+    ),
+    # `references/config` is a substring of the linked config.md; that must
+    # not count as a mention.
+    (
+        "S3",
+        "warning",
+        f"{PUBLISHED}/references/config",
+        PUBLISHED,
+        _with(
+            {
+                f"{PUBLISHED}/SKILL.md": VALID_SKILL.replace(
+                    "[notes](references/notes.md)",
+                    "[notes](references/notes.md) and [config](references/config.md)",
+                ),
+                f"{PUBLISHED}/references/config.md": "config doc\n",
+                f"{PUBLISHED}/references/config": "extensionless twin\n",
+            }
+        ),
+    ),
+    # A bare prose mention is not a reference either.
+    (
+        "S3",
+        "warning",
+        f"{PUBLISHED}/references/prose.md",
+        PUBLISHED,
+        _with(
+            {
+                f"{PUBLISHED}/SKILL.md": VALID_SKILL.replace(
+                    "when needed.",
+                    "when needed. Background sits in references/prose.md nearby.",
+                ),
+                f"{PUBLISHED}/references/prose.md": "prose\n",
+            }
+        ),
+    ),
+    (
+        "M1",
+        "error",
+        f"{PUBLISHED}/SKILL.md",
+        PUBLISHED,
+        _with({f"{PUBLISHED}/SKILL.md": "no frontmatter\n"}),
+    ),
+    ("M1", "error", PUBLISHED, PUBLISHED, _with({f"{PUBLISHED}/SKILL.md": None})),
     (
         "M2",
         "error",
+        f"{PUBLISHED}/SKILL.md",
         PUBLISHED,
         _with(
-            f"{PUBLISHED}/SKILL.md",
-            VALID_SKILL.replace("name: meta-good", "name: meta-other"),
+            {
+                f"{PUBLISHED}/SKILL.md": VALID_SKILL.replace(
+                    "name: meta-good", "name: meta-other"
+                )
+            }
         ),
     ),
     (
         "M3",
         "error",
+        f"{PUBLISHED}/SKILL.md",
         PUBLISHED,
         _with(
-            f"{PUBLISHED}/SKILL.md",
-            "---\nname: meta-good\ndescription: No marker here.\n---\n\nBody.\n",
+            {
+                f"{PUBLISHED}/SKILL.md": (
+                    "---\nname: meta-good\ndescription: No marker here.\n---\n\nBody.\n"
+                )
+            }
         ),
     ),
     (
         "M3",
         "error",
+        f"{INTERNAL}/SKILL.md",
         INTERNAL,
         _with(
-            f"{INTERNAL}/SKILL.md",
-            f'---\nname: helper\ndescription: "{MARKER} Oops."\n---\n\nBody.\n',
+            {
+                f"{INTERNAL}/SKILL.md": (
+                    f'---\nname: helper\ndescription: "{MARKER} Oops."\n---\n\nBody.\n'
+                )
+            }
+        ),
+    ),
+    # The marker hidden mid-description must fire too.
+    (
+        "M3",
+        "error",
+        f"{INTERNAL}/SKILL.md",
+        INTERNAL,
+        _with(
+            {
+                f"{INTERNAL}/SKILL.md": (
+                    f'---\nname: helper\ndescription: "Helps. {MARKER} Oops."\n---\n\nBody.\n'
+                )
+            }
         ),
     ),
     (
         "M4",
         "error",
+        f"{PUBLISHED}/SKILL.md",
         PUBLISHED,
         _with(
-            f"{PUBLISHED}/SKILL.md",
-            f'---\nname: meta-good\ndescription: "{MARKER} {"x" * 1024}"\n---\n\nBody.\n',
+            {
+                f"{PUBLISHED}/SKILL.md": (
+                    f'---\nname: meta-good\ndescription: "{MARKER} {"x" * 1024}"\n---\n\nBody.\n'
+                )
+            }
         ),
     ),
     (
         "M4",
         "warning",
+        f"{PUBLISHED}/SKILL.md",
         PUBLISHED,
         _with(
-            f"{PUBLISHED}/SKILL.md",
-            f'---\nname: meta-good\ndescription: "{MARKER} {"x" * 860}"\n---\n\nBody.\n',
+            {
+                f"{PUBLISHED}/SKILL.md": (
+                    f'---\nname: meta-good\ndescription: "{MARKER} {"x" * 860}"\n---\n\nBody.\n'
+                )
+            }
         ),
     ),
     (
         "M5",
         "error",
+        f"{PUBLISHED}/references/notes.md",
         PUBLISHED,
-        _with(f"{PUBLISHED}/references/notes.md", "run validate_repo first\n"),
+        _with({f"{PUBLISHED}/references/notes.md": "run validate_repo first\n"}),
     ),
     (
         "L1",
         "error",
+        f"{PUBLISHED}/SKILL.md",
         PUBLISHED,
         _with(
-            f"{PUBLISHED}/SKILL.md",
-            VALID_SKILL.replace("references/notes.md", "references/missing.md"),
+            {
+                f"{PUBLISHED}/SKILL.md": VALID_SKILL.replace(
+                    "references/notes.md", "references/missing.md"
+                )
+            }
         ),
     ),
     (
         "L1",
         "error",
+        f"{PUBLISHED}/SKILL.md",
         PUBLISHED,
         _with(
-            f"{PUBLISHED}/SKILL.md",
-            VALID_SKILL.replace("references/notes.md", "../../../AGENTS.md"),
+            {
+                f"{PUBLISHED}/SKILL.md": VALID_SKILL.replace(
+                    "references/notes.md", "../../../AGENTS.md"
+                )
+            }
         ),
     ),
 ]
@@ -473,23 +638,24 @@ def run_self_test(verbose: bool) -> bool:
                 print(f"self-test: the valid fixture `{skill_rel}` raised issues:")
                 for issue in unexpected:
                     print(f"  {issue}")
-        for index, (check_id, severity, skill_rel, fixture) in enumerate(
+        for index, (check_id, severity, expected_path, skill_rel, fixture) in enumerate(
             SELF_TEST_CASES
         ):
             case_root = Path(tmp) / f"case{index}"
             materialize(fixture, case_root)
             fired = {
-                (issue.check, issue.severity)
+                (issue.check, issue.severity, issue.path)
                 for issue in check_skill(case_root / skill_rel, case_root)
             }
-            if (check_id, severity) not in fired:
+            if (check_id, severity, expected_path) not in fired:
                 ok = False
                 print(
-                    f"self-test: fixture {index} for {check_id}/{severity} did "
-                    f"not trip it (fired: {sorted(fired) or 'none'})"
+                    f"self-test: fixture {index} for {check_id}/{severity} at "
+                    f"{expected_path} did not trip it "
+                    f"(fired: {sorted(fired) or 'none'})"
                 )
             elif verbose:
-                print(f"self-test: {check_id} ({severity}) fires")
+                print(f"self-test: {check_id} ({severity}) fires on {expected_path}")
     if ok and verbose:
         print(
             f"self-test: all {len(SELF_TEST_CASES)} negative fixtures fire; "
