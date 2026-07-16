@@ -36,7 +36,9 @@ The shape of the target decides the mode before any tool preference does:
 | mamba / micromamba | Conda-ecosystem package manager for compiled scientific stacks | <https://mamba.readthedocs.io/> |
 
 Fetch current install commands and lockfile workflows from the docs above
-before writing them into the target.
+before writing them into the target. uv's docs publish a plain-text index
+at <https://docs.astral.sh/uv/llms.txt> — fetch that first to locate the
+right page.
 
 ## When an Alternative Wins
 

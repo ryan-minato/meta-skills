@@ -51,9 +51,10 @@ from memory — and every default yields to an existing working choice.
    it will, read [doc-generators.md](references/doc-generators.md);
    default **Zensical**.
 6. For every chosen tool, fetch the current install command and minimal
-   configuration from its doc URL, then record the tool, its one-line
-   role, the command that runs it, and the URL wherever the harness keeps
-   conventions.
+   configuration from its doc URL — when the docs site publishes an
+   `llms.txt` plain-text index, fetch that first to locate the right
+   page — then record the tool, its one-line role, the command that runs
+   it, and the URL wherever the harness keeps conventions.
 
 Done when: every category — dependencies, lint, format, types, tasks,
 hooks, docs — has either a recorded choice with its doc URL or an explicit

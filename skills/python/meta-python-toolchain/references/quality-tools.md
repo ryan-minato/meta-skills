@@ -38,7 +38,10 @@ mypy or Pyright instead.
 | docformatter | Formats docstrings to PEP 257 | <https://docformatter.readthedocs.io/> |
 
 Fetch current install commands and rule configuration from the docs above
-before writing them into the target.
+before writing them into the target. The Astral sites publish plain-text
+indexes — <https://docs.astral.sh/ruff/llms.txt> and
+<https://docs.astral.sh/ty/llms.txt> — fetch those first to locate the
+right page.
 
 ## Selection Rules
 
