@@ -9,6 +9,7 @@ so the entrypoint stays a thin router.
 ```text
 AGENTS.md                  <- entrypoint; every rule reachable from it
 CLAUDE.md                  <- @AGENTS.md
+.claude-plugin/marketplace.json <- Claude Code marketplace: one plugin per catalog
 ARCHITECTURE.md            <- this file
 README.md / README.zh.md   <- public front door (English authoritative)
 .agents/knowledge/         <- agent-facing knowledge, loaded on demand
@@ -30,11 +31,16 @@ catalogs.
 
 - `core` — required for every harness build; useful regardless of the
   target's stack.
+- `frontend` — design description and visual language; only for targets
+  with a user-facing visual surface, installed on top of `core`.
 
 The validator reconciles this list against the directories under `skills/`
 (check B3), and it defines the legal commit scopes: `feat(core): …` for a
-catalog change, no scope otherwise. Adding, renaming, or removing a catalog
-is the `sync-catalog` skill's procedure.
+catalog change, no scope otherwise. Each catalog is also exposed as one
+plugin in `.claude-plugin/marketplace.json` (plugin name = catalog name,
+`skills: ["./"]` so new skills need no manifest edit). Adding, renaming,
+or removing a catalog is the `sync-catalog` skill's procedure, which owns
+the marketplace manifest too.
 
 ## Quality Gates
 
@@ -59,7 +65,7 @@ trigger fires — not before.
 | `just new-skill` scaffolder | the authoring template still yields frontmatter mistakes by the third published skill |
 | Commit-message linting | non-conforming messages recur in PRs; `.gitmessage` plus the AGENTS.md rule is the cheaper gate first |
 | Markdown or translation-parity linting | reviews keep catching drift that the existence check (C1) misses |
-| Marketplace or installer tooling | users ask to install without manually copying skill directories |
+| Marketplace ↔ catalog validator check | built as a sync-catalog step first; add the check (with its self-test fixture) if manifest drift recurs in review |
 | Unit tests for the validator | its logic outgrows the fixture self-test |
 | L3+ autonomy (self-maintenance, persistent memory) | explicit user request only |
 
@@ -75,6 +81,6 @@ trigger fires — not before.
   disposable inside the one repository that must keep it. Do not "fix" the
   missing wiring.
 - This harness is a public reference implementation of the thing it sells,
-  which creates pressure to over-build it as a showcase. It is a thin L2 on
-  purpose: one validator, a thin justfile, no marketplace. The restraint is
-  the exemplar.
+  which creates pressure to over-build it as a showcase. It is thin on
+  purpose: one validator, a thin justfile, a one-file marketplace manifest.
+  The restraint is the exemplar.

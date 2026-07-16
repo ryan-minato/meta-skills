@@ -47,8 +47,23 @@ them in the file tree.
 | Catalog | Contents | Install scope |
 |---|---|---|
 | [core](skills/core/) | The required set: enough to take any project from no harness to a working one | Per project, before a harness build |
+| [frontend](skills/frontend/) | Design description and visual language for projects with a user-facing frontend | Per project, on top of `core`, only when the target has a visual surface |
 
 ## Installation
+
+As Claude Code plugins — each catalog is one plugin in this repository's
+marketplace:
+
+```bash
+claude plugin marketplace add ryan-minato/meta-skills
+claude plugin install core@meta-skills --scope project
+claude plugin install frontend@meta-skills --scope project   # only with a visual surface
+```
+
+Plugin-managed installs are removed with `claude plugin uninstall`, not by
+the disposal skill's file deletion.
+
+Or with the skills CLI:
 
 ```bash
 npx skills add ryan-minato/meta-skills                      # interactive

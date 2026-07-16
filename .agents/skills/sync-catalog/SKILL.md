@@ -2,9 +2,10 @@
 name: sync-catalog
 description: >-
   Realigns the catalog inventory across the architecture document, catalog
-  scaffolds, and the README tables. Use when a catalog or a published skill
-  is added, renamed, or removed under skills/, or when the validator reports
-  B1-B3 issues. Not for editing a skill's own content.
+  scaffolds, the README tables, and the marketplace manifest. Use when a
+  catalog or a published skill is added, renamed, or removed under skills/,
+  or when the validator reports B1-B3 issues. Not for editing a skill's own
+  content.
 ---
 
 # Sync: Catalog Inventory
@@ -22,13 +23,27 @@ The directories under `skills/` are the truth; every listing follows them.
    catalog's README pair. Keep the "none yet" row while a catalog is empty.
    Table descriptions are maintainer prose — never paste the marker into
    them.
-4. Mirror every README change into its `README.zh.md`; the sync-translation
+4. Reconcile `.claude-plugin/marketplace.json`: one plugin entry per
+   catalog, `name` equal to the catalog directory, `source`
+   `./skills/<catalog>`, `skills: ["./"]`, `strict: false`. Adding or
+   removing a skill needs no manifest edit — `skills: ["./"]` scans the
+   whole catalog. Then run
+   `npx -y @anthropic-ai/claude-code@latest plugin validate .` (or
+   `claude plugin validate .` where the CLI is installed).
+5. Mirror every README change into its `README.zh.md`; the sync-translation
    skill owns that procedure.
-5. Run `just validate`; checks B1–B3 and C1 confirm the alignment.
+6. Run `just validate`; checks B1–B3 and C1 confirm the alignment.
 
 ## Gotchas
 
 - The catalog list defines the legal commit scopes; adding a catalog adds a
   scope.
+- `skills: ["./"]` in each plugin entry is load-bearing, not redundant: the
+  default scan only looks in `<source>/skills/`, which a catalog does not
+  have, so dropping the field loads zero skills. The listed path is scanned
+  one level deep for `<name>/SKILL.md` — the same shape the disposal
+  procedure assumes — so nothing under `references/` or `assets/` can be
+  picked up. Verified with `plugin details`, which prints the loaded
+  inventory and is the fastest way to re-check after a manifest edit.
 - Catalog depth is exactly two — never nest catalogs. The target-side
   disposal procedure assumes `<skill-root>/<name>/SKILL.md`.

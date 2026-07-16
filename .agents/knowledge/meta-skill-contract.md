@@ -18,8 +18,12 @@ the target agent never sees this repository. Consequences:
   directory. No relative link may escape the skill root (check L1), no
   README may sit in a skill root (check S2), and no skill may assume another
   skill is installed — to build on one, instruct the user to install it.
-- Catalog-level files (`CONTEXT.md` and the README pair) never ship;
-  installers copy whole skill directories only.
+- Catalog-level files (`CONTEXT.md` and the README pair) are never loaded
+  in a target: skill-directory installers copy skill directories only, and
+  the marketplace plugins ship the catalog directory but load only its
+  `<name>/SKILL.md` directories. Write them for this repository's
+  maintainers regardless — but never put anything there a target must act
+  on, because nothing will read it.
 
 ## The Marker
 
