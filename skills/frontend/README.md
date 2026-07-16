@@ -18,4 +18,4 @@ npx skills add ryan-minato/meta-skills --skill <skill-name>
 
 | Skill | Description |
 |---|---|
-| _(none yet)_ | |
+| [meta-design-md](meta-design-md/) | Authors or edits DESIGN.md per the public visual-design description format, with an OKLCH calculator for conversion, gamut checks, and WCAG contrast |

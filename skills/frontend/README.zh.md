@@ -16,4 +16,4 @@ npx skills add ryan-minato/meta-skills --skill <skill-name>
 
 | 技能 | 说明 |
 |---|---|
-| _(暂无)_ | |
+| [meta-design-md](meta-design-md/) | 按公开的视觉设计描述格式撰写或编辑 DESIGN.md，附带用于转换、gamut 检查与 WCAG 对比度的 OKLCH 计算器 |
