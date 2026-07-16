@@ -16,4 +16,4 @@ npx skills add ryan-minato/meta-skills --skill <skill-name>
 
 | 技能 | 说明 |
 |---|---|
-| _(暂无)_ | |
+| [meta-harness-plan](meta-harness-plan/) | 在相互独立的决策轴上规划、审计或改进项目的 agent harness；产出经用户批准、供其余搭建技能遵循的计划 |
