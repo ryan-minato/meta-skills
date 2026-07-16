@@ -22,3 +22,4 @@ npx skills add ryan-minato/meta-skills --skill <skill-name>
 | [meta-knowledge-base](meta-knowledge-base/) | Builds the agent knowledge base: one consistent structure, per-type document seeds, and authoring rules deposited in skill or entrypoint form |
 | [meta-project-skill](meta-project-skill/) | Creates or retrofits durable project skills from shaped skeletons, and deposits the project's skill-authoring rules for the agents that come after |
 | [meta-harness-sync](meta-harness-sync/) | Installs bidirectional keep-current mechanisms — one per concern, in skill or entrypoint form — plus periodic entropy reclamation and the compromise-mode proposal rule |
+| [meta-disposal](meta-disposal/) | Removes every installed meta-skill by its description marker: dry-run listing, fresh explicit confirmation, then deletion with itself last |
