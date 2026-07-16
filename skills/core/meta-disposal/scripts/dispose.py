@@ -23,6 +23,11 @@ from pathlib import Path
 SELF_DIR = Path(__file__).resolve().parents[1]
 DEFAULT_ROOT = SELF_DIR.parent
 MARKER_END = "):"
+# The real marker is a 59-character sentence prefix; anything much shorter
+# is a dangerously broad startswith() net. Deliberately NOT validating a
+# "):"" suffix: --marker exists to recover across marker generations, and a
+# future generation may not share the current shape.
+MIN_MARKER_LEN = 16
 
 
 class FrontmatterError(ValueError):
@@ -98,7 +103,7 @@ def marker_from_self() -> str:
     skill_md = SELF_DIR / "SKILL.md"
     try:
         fields = parse_frontmatter(skill_md.read_text(encoding="utf-8"))
-    except (OSError, FrontmatterError) as exc:
+    except (OSError, UnicodeDecodeError, FrontmatterError) as exc:
         sys.exit(
             f"error: cannot read the marker from {skill_md}: {exc}\n"
             "Pass --marker with the exact marker text to recover."
@@ -111,6 +116,20 @@ def marker_from_self() -> str:
             "Pass --marker with the exact marker text to recover."
         )
     return description[: end + len(MARKER_END)]
+
+
+def in_plugin_cache(path: Path) -> bool:
+    """True when the path sits inside a plugin manager's cache.
+
+    Plugin-managed installs (e.g. a plugin marketplace) keep their payload
+    under <config>/plugins/cache/...; deleting files there leaves the
+    manager restoring or mis-tracking the plugin. Those installs are
+    removed by uninstalling through the manager, never by this script.
+    """
+    parts = path.parts
+    return any(
+        parts[i] == "plugins" and parts[i + 1] == "cache" for i in range(len(parts) - 1)
+    )
 
 
 def scan(roots: list[Path], marker: str):
@@ -167,8 +186,27 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    roots = [r.resolve() for r in (args.root or [DEFAULT_ROOT])]
+    roots = list(dict.fromkeys(r.resolve() for r in (args.root or [DEFAULT_ROOT])))
     marker = args.marker if args.marker is not None else marker_from_self()
+    if len(marker.strip()) < MIN_MARKER_LEN:
+        sys.exit(
+            f"error: refusing marker {marker!r} — shorter than "
+            f"{MIN_MARKER_LEN} characters, which would match far more than "
+            "the disposable meta-skills. Pass the full marker text."
+        )
+
+    cache_paths = [p for p in [*roots, SELF_DIR] if in_plugin_cache(p)]
+    if cache_paths:
+        note = (
+            "plugin-manager cache detected "
+            f"({', '.join(str(p) for p in dict.fromkeys(cache_paths))}): "
+            "plugin-managed installs are removed by uninstalling through "
+            "the plugin manager, not by deleting files."
+        )
+        if args.delete:
+            sys.exit(f"error: {note}")
+        print(f"warning: {note}")
+
     matches, skipped = scan(roots, marker)
 
     mode = "DELETING" if args.delete else "DRY RUN (nothing deleted)"
