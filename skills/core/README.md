@@ -12,8 +12,9 @@ their own removal skill deletes them all.
 ```bash
 claude plugin marketplace add ryan-minato/meta-skills   # once per machine
 claude plugin install core@meta-skills --scope project
-# or per skill via the skills CLI:
-npx skills add ryan-minato/meta-skills --skill <skill-name>
+# or via the skills CLI (the catalog path scopes discovery):
+npx skills add ryan-minato/meta-skills/skills/core
+npx skills add ryan-minato/meta-skills/skills/core --skill <skill-name>
 ```
 
 ## Skills

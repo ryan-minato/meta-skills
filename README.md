@@ -63,11 +63,13 @@ claude plugin install frontend@meta-skills --scope project   # only with a visua
 Plugin-managed installs are removed with `claude plugin uninstall`, not by
 the disposal skill's file deletion.
 
-Or with the skills CLI:
+Or with the skills CLI — point it at a catalog path, which scopes
+discovery to exactly that catalog:
 
 ```bash
-npx skills add ryan-minato/meta-skills                      # interactive
-npx skills add ryan-minato/meta-skills --skill <skill-name>
+npx skills add ryan-minato/meta-skills/skills/core
+npx skills add ryan-minato/meta-skills/skills/frontend      # only with a visual surface
+npx skills add ryan-minato/meta-skills/skills               # every published skill
 ```
 
 Or copy skill directories (`skills/<catalog>/<skill>/`) straight into your

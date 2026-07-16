@@ -5,6 +5,8 @@ description: >-
   commits, draft PR, ready for review. Use when starting non-trivial work in
   this repository, opening a pull request, or reporting progress. Includes
   the fallbacks when Linear or GitHub is unavailable.
+metadata:
+  internal: true
 ---
 
 # Tracked-Change Workflow

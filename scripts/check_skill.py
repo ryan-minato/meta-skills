@@ -16,7 +16,8 @@ Check IDs (each has a self-test fixture proving it fires):
 
     S1-S3  structure (warnings): non-canonical entries, READMEs,
            unreferenced files under references/ and scripts/
-    M1-M5  SKILL.md content (errors; M4 warns near the description cap)
+    M1-M6  SKILL.md content (errors; M4 warns near the description cap;
+           M6 gates the `metadata.internal` flag skill installers honor)
     L1     markdown links (errors): must resolve; published skills' links
            must not escape the skill root. Inline-code mentions are not
            links and are not checked.
@@ -195,7 +196,7 @@ def check_structure(skill: Path, rel_base: Path) -> list[Issue]:
 
 
 def check_skill_md(skill: Path, rel_base: Path, published: bool) -> list[Issue]:
-    """M1-M5: frontmatter, name, marker, description size, portability."""
+    """M1-M6: frontmatter, name, marker, size, portability, internal flag."""
     issues: list[Issue] = []
     skill_md = skill / "SKILL.md"
     rel = str(skill_md.relative_to(rel_base))
@@ -308,6 +309,33 @@ def check_skill_md(skill: Path, rel_base: Path, published: bool) -> list[Issue]:
                             "repo-only names.",
                         )
                     )
+    metadata = data.get("metadata")
+    internal_flag = metadata.get("internal") if isinstance(metadata, dict) else None
+    has_internal = isinstance(metadata, dict) and "internal" in metadata
+    if published and has_internal:
+        issues.append(
+            Issue(
+                "M6",
+                "error",
+                rel,
+                "carries `metadata.internal`, which skill installers honor "
+                "by hiding flagged skills. On a published skill the key's "
+                "presence is the hazard — one edit flips it and the skill "
+                "disappears from installs. Remove the key entirely.",
+            )
+        )
+    if not published and internal_flag is not True:
+        issues.append(
+            Issue(
+                "M6",
+                "error",
+                rel,
+                "is missing `metadata.internal: true`. Skill installers "
+                "hard-scan `.agents/skills/` and `.claude/skills/`, so an "
+                "unflagged internal skill is offered to target projects. "
+                "Add the flag to the frontmatter.",
+            )
+        )
     return issues
 
 
@@ -357,13 +385,29 @@ def check_skill(skill: Path, repo_root: Path) -> list[Issue]:
 
 def discover_all(repo_root: Path) -> list[Path]:
     skills: list[Path] = []
+    seen: set[Path] = set()
+
+    def add(candidates: list[Path]) -> None:
+        for candidate in candidates:
+            resolved = candidate.resolve()
+            if resolved not in seen:
+                seen.add(resolved)
+                skills.append(candidate)
+
     published_root = repo_root / "skills"
     if published_root.is_dir():
         for catalog in sorted(p for p in published_root.iterdir() if p.is_dir()):
-            skills.extend(sorted(p for p in catalog.iterdir() if p.is_dir()))
-    internal_root = repo_root / ".agents" / "skills"
-    if internal_root.is_dir():
-        skills.extend(sorted(p for p in internal_root.iterdir() if p.is_dir()))
+            add(sorted(p for p in catalog.iterdir() if p.is_dir()))
+    # Skill installers hard-scan both internal roots, so the validator must
+    # cover whichever exist. `.claude/skills` is usually a symlink to
+    # `.agents/skills`; deduplicating on resolved paths keeps that case to
+    # one check per skill while a real directory still gets covered.
+    for internal_root in (
+        repo_root / ".agents" / "skills",
+        repo_root / ".claude" / "skills",
+    ):
+        if internal_root.is_dir():
+            add(sorted(p for p in internal_root.iterdir() if p.is_dir()))
     return skills
 
 
@@ -384,6 +428,8 @@ A valid body linking [notes](references/notes.md) and running
 VALID_INTERNAL = """---
 name: helper
 description: Helps with repository chores. Use when testing.
+metadata:
+  internal: true
 ---
 
 # Helper
@@ -616,6 +662,52 @@ SELF_TEST_CASES: list[tuple[str, str, str, str, dict[str, str]]] = [
             }
         ),
     ),
+    # An internal skill without the flag leaks into skill installers, which
+    # hard-scan the internal skill directories.
+    (
+        "M6",
+        "error",
+        f"{INTERNAL}/SKILL.md",
+        INTERNAL,
+        _with(
+            {
+                f"{INTERNAL}/SKILL.md": VALID_INTERNAL.replace(
+                    "metadata:\n  internal: true\n", ""
+                )
+            }
+        ),
+    ),
+    # A published skill carrying the flag vanishes from installs.
+    (
+        "M6",
+        "error",
+        f"{PUBLISHED}/SKILL.md",
+        PUBLISHED,
+        _with(
+            {
+                f"{PUBLISHED}/SKILL.md": VALID_SKILL.replace(
+                    "---\n\n# Meta Good",
+                    "metadata:\n  internal: true\n---\n\n# Meta Good",
+                )
+            }
+        ),
+    ),
+    # The key's presence is the hazard: `internal: false` on a published
+    # skill must not slip through the truthiness gap.
+    (
+        "M6",
+        "error",
+        f"{PUBLISHED}/SKILL.md",
+        PUBLISHED,
+        _with(
+            {
+                f"{PUBLISHED}/SKILL.md": VALID_SKILL.replace(
+                    "---\n\n# Meta Good",
+                    "metadata:\n  internal: false\n---\n\n# Meta Good",
+                )
+            }
+        ),
+    ),
 ]
 
 
@@ -638,6 +730,28 @@ def run_self_test(verbose: bool) -> bool:
                 print(f"self-test: the valid fixture `{skill_rel}` raised issues:")
                 for issue in unexpected:
                     print(f"  {issue}")
+        # Discovery must cover a real `.claude/skills` directory (installers
+        # hard-scan it) yet count the usual symlink layout only once.
+        real_root = Path(tmp) / "discover-real"
+        materialize(BASE_FIXTURE, real_root)
+        materialize(
+            {
+                ".claude/skills/helper2/SKILL.md": VALID_INTERNAL.replace(
+                    "helper", "helper2"
+                )
+            },
+            real_root,
+        )
+        if len(discover_all(real_root)) != 3:
+            ok = False
+            print("self-test: discovery missed a real .claude/skills directory")
+        link_root = Path(tmp) / "discover-link"
+        materialize(BASE_FIXTURE, link_root)
+        (link_root / ".claude").mkdir()
+        (link_root / ".claude" / "skills").symlink_to(link_root / ".agents" / "skills")
+        if len(discover_all(link_root)) != 2:
+            ok = False
+            print("self-test: discovery double-counted the .claude/skills symlink")
         for index, (check_id, severity, expected_path, skill_rel, fixture) in enumerate(
             SELF_TEST_CASES
         ):

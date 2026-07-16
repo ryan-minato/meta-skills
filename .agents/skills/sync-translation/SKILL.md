@@ -5,6 +5,8 @@ description: >-
   keeping the pair content-identical. Use when any README.md is created or
   edited, or when the validator reports a missing README.zh.md. Not for
   skill content, which ships in English only.
+metadata:
+  internal: true
 ---
 
 # Sync: README Translation

@@ -11,8 +11,9 @@
 ```bash
 claude plugin marketplace add ryan-minato/meta-skills   # 每台机器一次
 claude plugin install core@meta-skills --scope project
-# 或通过 skills CLI 按技能安装：
-npx skills add ryan-minato/meta-skills --skill <skill-name>
+# 或通过 skills CLI（catalog 路径即发现范围）：
+npx skills add ryan-minato/meta-skills/skills/core
+npx skills add ryan-minato/meta-skills/skills/core --skill <skill-name>
 ```
 
 ## 技能列表

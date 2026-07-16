@@ -9,14 +9,21 @@
       "name": "core",
       "source": "./skills/core",
       "description": "The required set: enough to take any project from no harness to a working one, including the removal skill.",
-      "skills": ["./"],
+      "skills": [
+        "./meta-harness-plan",
+        "./meta-agents-md",
+        "./meta-knowledge-base",
+        "./meta-project-skill",
+        "./meta-harness-sync",
+        "./meta-disposal"
+      ],
       "strict": false
     },
     {
       "name": "frontend",
       "source": "./skills/frontend",
       "description": "Design description and visual language for projects with a user-facing frontend. Install on top of core.",
-      "skills": ["./"],
+      "skills": ["./meta-design-md"],
       "strict": false
     }
   ]
