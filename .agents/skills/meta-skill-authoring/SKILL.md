@@ -5,6 +5,8 @@ description: >-
   editing, or reviewing a skill in any catalog, or when a published skill
   fails validation on marker, naming, structure, or portability. Not for this
   repository's own durable skills.
+metadata:
+  internal: true
 ---
 
 # Meta-Skill Authoring
@@ -48,5 +50,7 @@ description: >-
   tested on the YAML-resolved value.
 - READMEs never go inside a skill directory — catalog READMEs document the
   skill instead.
+- Never set `metadata.internal` on a published skill: skill installers
+  honor it by hiding the skill from installs (check M6 blocks it).
 - Renaming a skill means renaming the directory and the `name` field
   together, then running the sync-catalog skill for the README tables.

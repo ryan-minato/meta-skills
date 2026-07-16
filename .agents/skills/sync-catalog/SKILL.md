@@ -6,6 +6,8 @@ description: >-
   catalog or a published skill is added, renamed, or removed under skills/,
   or when the validator reports B1-B3 issues. Not for editing a skill's own
   content.
+metadata:
+  internal: true
 ---
 
 # Sync: Catalog Inventory
@@ -24,12 +26,15 @@ The directories under `skills/` are the truth; every listing follows them.
    Table descriptions are maintainer prose — never paste the marker into
    them.
 4. Reconcile `.claude-plugin/marketplace.json`: one plugin entry per
-   catalog, `name` equal to the catalog directory, `source`
-   `./skills/<catalog>`, `skills: ["./"]`, `strict: false`. Adding or
-   removing a skill needs no manifest edit — `skills: ["./"]` scans the
-   whole catalog. Then run
+   catalog — `name` equal to the catalog directory, `source`
+   `./skills/<catalog>`, `strict: false`, and `skills` listing **every
+   skill directory explicitly** (`"./meta-…"`, one entry per skill).
+   Adding, renaming, or removing a skill therefore edits the manifest in
+   the same change. Then verify both consumers:
    `npx -y @anthropic-ai/claude-code@latest plugin validate .` (or
-   `claude plugin validate .` where the CLI is installed).
+   `claude plugin validate .`), and
+   `npx -y skills@latest add <repo-root-path> --list` — the listing must
+   show one group header per catalog and exactly the published skills.
 5. Mirror every README change into its `README.zh.md`; the sync-translation
    skill owns that procedure.
 6. Run `just validate`; checks B1–B3 and C1 confirm the alignment.
@@ -38,12 +43,14 @@ The directories under `skills/` are the truth; every listing follows them.
 
 - The catalog list defines the legal commit scopes; adding a catalog adds a
   scope.
-- `skills: ["./"]` in each plugin entry is load-bearing, not redundant: the
+- The explicit `skills` lists are load-bearing twice over: the plugin
   default scan only looks in `<source>/skills/`, which a catalog does not
-  have, so dropping the field loads zero skills. The listed path is scanned
-  one level deep for `<name>/SKILL.md` — the same shape the disposal
-  procedure assumes — so nothing under `references/` or `assets/` can be
-  picked up. Verified with `plugin details`, which prints the loaded
-  inventory and is the fastest way to re-check after a manifest edit.
+  have (dropping the field loads zero skills), and the skills-CLI
+  installer can only group the listing by catalog when each skill path is
+  listed explicitly — a bare `["./"]` collapses it to an ungrouped flat
+  list. A skill added or removed without its manifest edit silently
+  disappears from (or lingers in) the plugin. Re-check after any manifest
+  edit with `plugin details` and the `skills add … --list` run from
+  step 4.
 - Catalog depth is exactly two — never nest catalogs. The target-side
   disposal procedure assumes `<skill-root>/<name>/SKILL.md`.

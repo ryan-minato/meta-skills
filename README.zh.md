@@ -54,11 +54,12 @@ claude plugin install frontend@meta-skills --scope project   # 仅当项目有�
 以插件方式安装的技能用 `claude plugin uninstall` 移除，而不是由移除技能删除
 文件。
 
-或使用 skills CLI：
+或使用 skills CLI——指向 catalog 路径，发现范围即精确限定在该 catalog：
 
 ```bash
-npx skills add ryan-minato/meta-skills                      # 交互式
-npx skills add ryan-minato/meta-skills --skill <skill-name>
+npx skills add ryan-minato/meta-skills/skills/core
+npx skills add ryan-minato/meta-skills/skills/frontend      # 仅当项目有视觉界面
+npx skills add ryan-minato/meta-skills/skills               # 全部已发布技能
 ```
 
 也可以把技能目录（`skills/<catalog>/<skill>/`）直接复制进项目的技能目录。请

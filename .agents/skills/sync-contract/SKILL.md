@@ -5,6 +5,8 @@ description: >-
   aligned copy. Use when the marker string, its YAML form, or the
   who-carries-it rules change, or when the validator reports D1-D3 issues.
   Not for routine skill authoring, which only reads the contract.
+metadata:
+  internal: true
 ---
 
 # Sync: Marker Contract

@@ -38,9 +38,11 @@ The validator reconciles this list against the directories under `skills/`
 (check B3), and it defines the legal commit scopes: `feat(core): …` for a
 catalog change, no scope otherwise. Each catalog is also exposed as one
 plugin in `.claude-plugin/marketplace.json` (plugin name = catalog name,
-`skills: ["./"]` so new skills need no manifest edit). Adding, renaming,
-or removing a catalog is the `sync-catalog` skill's procedure, which owns
-the marketplace manifest too.
+`skills` listing every skill directory explicitly — the skills-CLI
+installer needs the explicit list to group its listing by catalog, so
+adding or removing a skill edits the manifest in the same change).
+Adding, renaming, or removing a catalog is the `sync-catalog` skill's
+procedure, which owns the marketplace manifest too.
 
 ## Quality Gates
 
@@ -80,6 +82,11 @@ trigger fires — not before.
   own skill directories: a meta-skill active *here* would announce itself as
   disposable inside the one repository that must keep it. Do not "fix" the
   missing wiring.
+- `.agents/skills/` and `.claude/skills/` are hard-coded scan roots of the
+  skills-CLI installer, with no path-exclusion mechanism. Every internal
+  skill therefore carries `metadata.internal: true` (check M6 enforces both
+  directions), and install instructions always use `skills/…` subpath
+  sources, never the bare repository.
 - This harness is a public reference implementation of the thing it sells,
   which creates pressure to over-build it as a showcase. It is thin on
   purpose: one validator, a thin justfile, a one-file marketplace manifest.
