@@ -10,7 +10,8 @@ and SKILL.md content are check_skill.py's job. Check IDs (each has a
 self-test fixture proving it fires):
 
     B1-B3  catalog scaffolds and inventory listings
-    C1-C3  repository docs: translation pairs, links, knowledge reachability
+    C1-C3  repository docs: translation pairs, root docs and their links,
+           knowledge reachability
     D1-D3  marker-contract integrity
 
 The self-test runs first on every invocation because the published catalogs
@@ -44,6 +45,7 @@ KNOWLEDGE_DIR = ".agents/knowledge"
 ROOT_DOCS = ("AGENTS.md", "ARCHITECTURE.md", "README.md", "README.zh.md")
 CATALOG_FILES = ("CONTEXT.md", "README.md", "README.zh.md")
 LINK_RE = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
+CATALOG_ENTRY_RE = re.compile(r"^- `([a-z0-9][a-z0-9-]*)`", re.MULTILINE)
 
 
 @dataclass
@@ -115,6 +117,29 @@ def markdown_files(root: Path) -> list[Path]:
     return [p for p in root.rglob("*.md") if ".git" not in p.parts]
 
 
+def listed_catalogs(doc_name: str, text: str) -> set[str]:
+    """Catalog names the doc lists in its canonical form.
+
+    A prose mention must not count (it would let the inventory rot while the
+    check stays green), so ARCHITECTURE.md counts only backtick list entries
+    in its ## Catalogs section, and the READMEs count only links into
+    skills/<name>/.
+    """
+    if doc_name == "ARCHITECTURE.md":
+        section = re.search(
+            r"^## Catalogs$(.*?)(?=^## |\Z)", text, re.MULTILINE | re.DOTALL
+        )
+        return set(CATALOG_ENTRY_RE.findall(section.group(1))) if section else set()
+    names: set[str] = set()
+    for target in markdown_links(text):
+        if not target.startswith("skills/"):
+            continue
+        name = target.removeprefix("skills/").rstrip("/")
+        if name and "/" not in name:
+            names.add(name)
+    return names
+
+
 def check_catalogs(root: Path) -> list[Issue]:
     """B1-B3: catalog scaffolds and inventory listings."""
     issues: list[Issue] = []
@@ -157,12 +182,18 @@ def check_catalogs(root: Path) -> list[Issue]:
                     )
                 )
         for doc, text in listings.items():
-            if catalog.name not in text:
+            if catalog.name not in listed_catalogs(doc, text):
+                form = (
+                    f"a ``- `{catalog.name}` …`` entry in the ## Catalogs section"
+                    if doc == "ARCHITECTURE.md"
+                    else f"a `skills/{catalog.name}/` link in the catalog table"
+                )
                 issues.append(
                     Issue(
                         "B3",
                         rel,
-                        f"catalog `{catalog.name}` is not listed in {doc}. "
+                        f"catalog `{catalog.name}` is not listed in {doc}; "
+                        f"expected {form} — a prose mention does not count. "
                         "The architecture catalog list and the README tables "
                         "must cover every catalog or it is undiscoverable. "
                         "Run the sync-catalog skill.",
@@ -204,6 +235,15 @@ def check_repo_docs(root: Path) -> list[Issue]:
         doc_paths.extend(sorted(knowledge.glob("*.md")))
     for doc in doc_paths:
         if not doc.is_file():
+            issues.append(
+                Issue(
+                    "C2",
+                    str(doc.relative_to(root)),
+                    "required root document is missing. Agents enter the "
+                    "repository through these files; a missing one strands "
+                    "them before any other check can help. Restore it.",
+                )
+            )
             continue
         for target in markdown_links(doc.read_text(encoding="utf-8")):
             if not (doc.parent / target).exists():
@@ -217,18 +257,22 @@ def check_repo_docs(root: Path) -> list[Issue]:
                     )
                 )
     agents_md = root / "AGENTS.md"
-    if agents_md.is_file() and knowledge.is_dir():
-        agents_text = agents_md.read_text(encoding="utf-8")
+    if knowledge.is_dir():
+        agents_text = (
+            agents_md.read_text(encoding="utf-8") if agents_md.is_file() else ""
+        )
+        linked = {(root / target).resolve() for target in markdown_links(agents_text)}
         for kfile in sorted(knowledge.glob("*.md")):
-            if kfile.name not in agents_text:
+            if kfile.resolve() not in linked:
                 issues.append(
                     Issue(
                         "C3",
                         str(kfile.relative_to(root)),
-                        "is not mentioned in AGENTS.md. Knowledge files have "
-                        "no self-announcement; without a when-to-read pointer "
-                        "the file is invisible to agents. Add it to the "
-                        "AGENTS.md when-to-read table.",
+                        "is not linked from AGENTS.md. Knowledge files have "
+                        "no self-announcement; without a when-to-read link "
+                        "the file is invisible to agents — a bare prose "
+                        "mention does not count. Link it from the AGENTS.md "
+                        "when-to-read table.",
                     )
                 )
     return issues
@@ -273,7 +317,7 @@ def check_contract(root: Path) -> list[Issue]:
             continue
         data, _ = read_frontmatter(skill_md)
         description = data.get("description") if data else None
-        if isinstance(description, str) and description.startswith(MARKER):
+        if isinstance(description, str) and MARKER in description:
             issues.append(
                 Issue(
                     "D2",
@@ -285,7 +329,18 @@ def check_contract(root: Path) -> list[Issue]:
                 )
             )
     template = root / TEMPLATE_PATH
-    if template.is_file():
+    if not template.is_file():
+        issues.append(
+            Issue(
+                "D3",
+                TEMPLATE_PATH,
+                "the authoring template is missing. Every published skill "
+                "starts as a copy of it; without the template authors "
+                "improvise and the marker contract drifts. Restore it (the "
+                "meta-skill-authoring skill owns the template).",
+            )
+        )
+    else:
         data, _ = read_frontmatter(template)
         description = data.get("description") if data else None
         if not isinstance(description, str) or not description.startswith(MARKER):
@@ -319,14 +374,29 @@ description: >-
 A valid body with a [local link](references/notes.md).
 """
 
+# Mirrors the canonical listing forms B3 and C3 accept; the stray prose
+# mentions of `core` prove the valid fixture passes through those forms,
+# not through loose matching.
 BASE_FIXTURE: dict[str, str] = {
     "AGENTS.md": (
         "# Agents\n\nRead [guide.md](.agents/knowledge/guide.md) "
         "and [ARCHITECTURE.md](ARCHITECTURE.md).\n"
     ),
-    "ARCHITECTURE.md": "# Architecture\n\nCatalogs: core\n",
-    "README.md": f"# Repo\n\ncore catalog.\n\n```{FENCE_TAG}\n{MARKER}\n```\n",
-    "README.zh.md": f"# 仓库\n\ncore 目录。\n\n```{FENCE_TAG}\n{MARKER}\n```\n",
+    "ARCHITECTURE.md": (
+        "# Architecture\n\n## Catalogs\n\n- `core` — the required set.\n\n"
+        "## Conventions\n\nCommit scopes come from the list above: "
+        "`feat(core): …`.\n"
+    ),
+    "README.md": (
+        "# Repo\n\n| Catalog | Why |\n|---|---|\n"
+        "| [core](skills/core/) | the core of every build |\n\n"
+        f"```{FENCE_TAG}\n{MARKER}\n```\n"
+    ),
+    "README.zh.md": (
+        "# 仓库\n\n| 目录 | 用途 |\n|---|---|\n"
+        "| [core](skills/core/) | 每次构建的核心 |\n\n"
+        f"```{FENCE_TAG}\n{MARKER}\n```\n"
+    ),
     ".agents/knowledge/guide.md": "# Guide\n",
     "skills/core/CONTEXT.md": "# core\n",
     "skills/core/README.md": "# core\n",
@@ -339,58 +409,147 @@ BASE_FIXTURE: dict[str, str] = {
 }
 
 
-def _with(path: str, content: str | None) -> dict[str, str]:
+def _with(edits: dict[str, str | None]) -> dict[str, str]:
+    """BASE_FIXTURE with files replaced, or removed when the value is None."""
     fixture = copy.deepcopy(BASE_FIXTURE)
-    if content is None:
-        fixture.pop(path, None)
-    else:
-        fixture[path] = content
+    for path, content in edits.items():
+        if content is None:
+            fixture.pop(path, None)
+        else:
+            fixture[path] = content
     return fixture
 
 
-SELF_TEST_CASES: list[tuple[str, dict[str, str]]] = [
-    ("B1", _with("skills/core/CONTEXT.md", None)),
-    ("B2", _with("skills/core/stray.md", "stray\n")),
-    ("B3", _with("ARCHITECTURE.md", "# Architecture\n\nCatalogs: none\n")),
-    ("C1", _with("skills/core/README.zh.md", None)),
+# (check id, expected issue path, fixture). Pinning the path keeps a
+# fixture from passing by firing its check on an unrelated subject; paths
+# match exactly or up to a `:` suffix (D1 near-miss carries a line number).
+SELF_TEST_CASES: list[tuple[str, str, dict[str, str]]] = [
+    ("B1", "skills/core", _with({"skills/core/CONTEXT.md": None})),
+    ("B2", "skills/core/stray.md", _with({"skills/core/stray.md": "stray\n"})),
+    # Prose and the commit-scope example still say `core`; only the
+    # canonical listing is gone. Bare-substring B3 missed exactly this.
+    (
+        "B3",
+        "skills/core",
+        _with(
+            {
+                "ARCHITECTURE.md": (
+                    "# Architecture\n\n## Catalogs\n\n(none listed yet)\n\n"
+                    "## Conventions\n\nProse still mentions core and "
+                    "`feat(core): …` anyway.\n"
+                )
+            }
+        ),
+    ),
+    (
+        "B3",
+        "skills/core",
+        _with(
+            {
+                "README.md": (
+                    "# Repo\n\nThe core catalog is described in prose only.\n\n"
+                    f"```{FENCE_TAG}\n{MARKER}\n```\n"
+                )
+            }
+        ),
+    ),
+    ("C1", "skills/core/README.md", _with({"skills/core/README.zh.md": None})),
     (
         "C2",
+        "AGENTS.md",
         _with(
-            "AGENTS.md",
-            "# Agents\n\nRead [guide.md](.agents/knowledge/guide.md) "
-            "and [missing.md](missing.md).\n",
+            {
+                "AGENTS.md": (
+                    "# Agents\n\nRead [guide.md](.agents/knowledge/guide.md) "
+                    "and [missing.md](missing.md).\n"
+                )
+            }
         ),
     ),
-    ("C3", _with(".agents/knowledge/unlisted.md", "# Unlisted\n")),
+    ("C2", "AGENTS.md", _with({"AGENTS.md": None})),
     (
-        "D1",
+        "C3",
+        ".agents/knowledge/unlisted.md",
+        _with({".agents/knowledge/unlisted.md": "# Unlisted\n"}),
+    ),
+    # `contract.md` is a substring of the linked `meta-skill-contract.md`;
+    # that must not satisfy C3.
+    (
+        "C3",
+        ".agents/knowledge/contract.md",
         _with(
-            "README.md",
-            f"# Repo\n\ncore catalog.\n\n```{FENCE_TAG}\nWrong marker\n```\n",
+            {
+                ".agents/knowledge/contract.md": "# Addendum\n",
+                ".agents/knowledge/meta-skill-contract.md": "# Contract\n",
+                "AGENTS.md": (
+                    "# Agents\n\nRead [guide.md](.agents/knowledge/guide.md), "
+                    "[the contract](.agents/knowledge/meta-skill-contract.md) "
+                    "and [ARCHITECTURE.md](ARCHITECTURE.md). The contract.md "
+                    "addendum matters too.\n"
+                ),
+            }
         ),
     ),
     (
         "D1",
+        "README.md",
         _with(
-            "ARCHITECTURE.md",
-            "# Architecture\n\nCatalogs: core\n\n"
-            "Disposable meta-skill (delete after harness setup): drifted.\n",
+            {
+                "README.md": (
+                    f"# Repo\n\n| Catalog | Why |\n|---|---|\n"
+                    "| [core](skills/core/) | the core of every build |\n\n"
+                    f"```{FENCE_TAG}\nWrong marker\n```\n"
+                )
+            }
+        ),
+    ),
+    (
+        "D1",
+        "ARCHITECTURE.md",
+        _with(
+            {
+                "ARCHITECTURE.md": (
+                    "# Architecture\n\n## Catalogs\n\n- `core` — the required "
+                    "set.\n\nDisposable meta-skill (delete after harness "
+                    "setup): drifted.\n"
+                )
+            }
         ),
     ),
     (
         "D2",
+        ".agents/skills/helper/SKILL.md",
         _with(
-            ".agents/skills/helper/SKILL.md",
-            f'---\nname: helper\ndescription: "{MARKER} Oops."\n---\n\nBody.\n',
+            {
+                ".agents/skills/helper/SKILL.md": (
+                    f'---\nname: helper\ndescription: "{MARKER} Oops."\n---\n\nBody.\n'
+                )
+            }
+        ),
+    ),
+    (
+        "D2",
+        ".agents/skills/helper/SKILL.md",
+        _with(
+            {
+                ".agents/skills/helper/SKILL.md": (
+                    f'---\nname: helper\ndescription: "Helps. {MARKER} Oops."\n---\n\nBody.\n'
+                )
+            }
         ),
     ),
     (
         "D3",
+        TEMPLATE_PATH,
         _with(
-            TEMPLATE_PATH,
-            "---\nname: meta-template\ndescription: No marker.\n---\n\nBody.\n",
+            {
+                TEMPLATE_PATH: (
+                    "---\nname: meta-template\ndescription: No marker.\n---\n\nBody.\n"
+                )
+            }
         ),
     ),
+    ("D3", TEMPLATE_PATH, _with({TEMPLATE_PATH: None})),
 ]
 
 
@@ -412,18 +571,24 @@ def run_self_test(verbose: bool) -> bool:
             print("self-test: the fully valid fixture raised issues:")
             for issue in unexpected:
                 print(f"  {issue}")
-        for check_id, fixture in SELF_TEST_CASES:
-            case_root = Path(tmp) / check_id
+        for index, (check_id, expected_path, fixture) in enumerate(SELF_TEST_CASES):
+            case_root = Path(tmp) / f"case{index}"
             materialize(fixture, case_root)
-            fired = {issue.check for issue in run_checks(case_root)}
-            if check_id not in fired:
+            fired = {(issue.check, issue.path) for issue in run_checks(case_root)}
+            hit = any(
+                check == check_id
+                and (path == expected_path or path.startswith(expected_path + ":"))
+                for check, path in fired
+            )
+            if not hit:
                 ok = False
                 print(
-                    f"self-test: fixture for {check_id} did not trip it "
+                    f"self-test: fixture {index} for {check_id} at "
+                    f"{expected_path} did not trip it "
                     f"(fired: {sorted(fired) or 'none'})"
                 )
             elif verbose:
-                print(f"self-test: {check_id} fires")
+                print(f"self-test: {check_id} fires on {expected_path}")
     if ok and verbose:
         print(
             f"self-test: all {len(SELF_TEST_CASES)} negative fixtures fire; "
