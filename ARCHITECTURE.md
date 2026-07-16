@@ -50,7 +50,7 @@ procedure, which owns the marketplace manifest too.
 |---|---|---|
 | pre-commit registry | `just check`, every commit, CI `checks` job | hygiene, ruff, gitleaks on the working tree, both validators |
 | `scripts/validate_repo.py` | inside the registry; `just validate-repo` alone | B1–B3 catalogs, C1–C3 docs/links/translations, D1–D3 marker contract |
-| `scripts/check_skill.py` | inside the registry; `just check-skill <path>`, `just check-skills` | one skill: S1–S3 structure (warnings), M1–M5 SKILL.md content, L1 links; errors block, warnings advise |
+| `scripts/check_skill.py` | inside the registry; `just check-skill <path>`, `just check-skills` | one skill: S1–S3 structure (warnings), M1–M6 SKILL.md content, L1 links; errors block, warnings advise |
 | validator self-tests | first, on every run of either validator | that all checks fire — the catalogs may be empty, so with zero subjects a green run would otherwise prove nothing |
 | CI `secrets` job | pull requests and pushes to main | full-history gitleaks with the same repository ruleset |
 

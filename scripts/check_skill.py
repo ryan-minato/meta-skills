@@ -16,7 +16,8 @@ Check IDs (each has a self-test fixture proving it fires):
 
     S1-S3  structure (warnings): non-canonical entries, READMEs,
            unreferenced files under references/ and scripts/
-    M1-M5  SKILL.md content (errors; M4 warns near the description cap)
+    M1-M6  SKILL.md content (errors; M4 warns near the description cap;
+           M6 gates the `metadata.internal` flag skill installers honor)
     L1     markdown links (errors): must resolve; published skills' links
            must not escape the skill root. Inline-code mentions are not
            links and are not checked.
@@ -195,7 +196,7 @@ def check_structure(skill: Path, rel_base: Path) -> list[Issue]:
 
 
 def check_skill_md(skill: Path, rel_base: Path, published: bool) -> list[Issue]:
-    """M1-M5: frontmatter, name, marker, description size, portability."""
+    """M1-M6: frontmatter, name, marker, size, portability, internal flag."""
     issues: list[Issue] = []
     skill_md = skill / "SKILL.md"
     rel = str(skill_md.relative_to(rel_base))
@@ -308,6 +309,31 @@ def check_skill_md(skill: Path, rel_base: Path, published: bool) -> list[Issue]:
                             "repo-only names.",
                         )
                     )
+    metadata = data.get("metadata")
+    internal_flag = metadata.get("internal") if isinstance(metadata, dict) else None
+    if published and internal_flag:
+        issues.append(
+            Issue(
+                "M6",
+                "error",
+                rel,
+                "sets `metadata.internal`, which skill installers honor by "
+                "hiding the skill — a published skill flagged internal "
+                "disappears from installs. Remove the flag.",
+            )
+        )
+    if not published and internal_flag is not True:
+        issues.append(
+            Issue(
+                "M6",
+                "error",
+                rel,
+                "is missing `metadata.internal: true`. Skill installers "
+                "hard-scan `.agents/skills/` and `.claude/skills/`, so an "
+                "unflagged internal skill is offered to target projects. "
+                "Add the flag to the frontmatter.",
+            )
+        )
     return issues
 
 
@@ -384,6 +410,8 @@ A valid body linking [notes](references/notes.md) and running
 VALID_INTERNAL = """---
 name: helper
 description: Helps with repository chores. Use when testing.
+metadata:
+  internal: true
 ---
 
 # Helper
@@ -612,6 +640,36 @@ SELF_TEST_CASES: list[tuple[str, str, str, str, dict[str, str]]] = [
             {
                 f"{PUBLISHED}/SKILL.md": VALID_SKILL.replace(
                     "references/notes.md", "../../../AGENTS.md"
+                )
+            }
+        ),
+    ),
+    # An internal skill without the flag leaks into skill installers, which
+    # hard-scan the internal skill directories.
+    (
+        "M6",
+        "error",
+        f"{INTERNAL}/SKILL.md",
+        INTERNAL,
+        _with(
+            {
+                f"{INTERNAL}/SKILL.md": VALID_INTERNAL.replace(
+                    "metadata:\n  internal: true\n", ""
+                )
+            }
+        ),
+    ),
+    # A published skill carrying the flag vanishes from installs.
+    (
+        "M6",
+        "error",
+        f"{PUBLISHED}/SKILL.md",
+        PUBLISHED,
+        _with(
+            {
+                f"{PUBLISHED}/SKILL.md": VALID_SKILL.replace(
+                    "---\n\n# Meta Good",
+                    "metadata:\n  internal: true\n---\n\n# Meta Good",
                 )
             }
         ),
