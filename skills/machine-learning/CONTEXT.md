@@ -213,3 +213,68 @@ order; each skill's rows land in the same change that adds the skill.
 |---|---|
 | KubeRay | <https://github.com/ray-project/kuberay> |
 | Anyscale | <https://docs.anyscale.com/> — llms.txt: <https://docs.anyscale.com/llms.txt> |
+
+### meta-ml-inference-docs
+
+#### llm-inference-engines.md
+
+| Tool | Docs |
+|---|---|
+| vLLM | <https://docs.vllm.ai/> |
+| SGLang | <https://docs.sglang.io/> — llms.txt: <https://docs.sglang.io/llms.txt> |
+| NVIDIA TensorRT-LLM | <https://nvidia.github.io/TensorRT-LLM/> |
+| llama.cpp | <https://github.com/ggml-org/llama.cpp> |
+| Ollama | <https://docs.ollama.com/> — llms.txt: <https://docs.ollama.com/llms.txt> |
+| MLX-LM | <https://github.com/ml-explore/mlx-lm> |
+| ONNX Runtime GenAI | <https://onnxruntime.ai/docs/genai/> |
+| OpenVINO GenAI | <https://docs.openvino.ai/> |
+| MLC LLM | <https://llm.mlc.ai/docs/> |
+
+#### quantization-compression.md
+
+| Tool | Docs |
+|---|---|
+| PyTorch torchao | <https://github.com/pytorch/ao> |
+| TensorFlow Model Optimization | <https://www.tensorflow.org/model_optimization> |
+| NVIDIA Model Optimizer | <https://nvidia.github.io/Model-Optimizer/> |
+| Intel Neural Compressor | <https://intel.github.io/neural-compressor/> |
+| OpenVINO NNCF | <https://github.com/openvinotoolkit/nncf> |
+| bitsandbytes | <https://huggingface.co/docs/bitsandbytes> |
+| GPTQModel | <https://github.com/ModelCloud/GPTQModel> |
+| AutoAWQ | <https://github.com/casper-hansen/AutoAWQ> |
+| SparseML | <https://github.com/neuralmagic/sparseml> |
+
+#### compilers-and-runtimes.md
+
+| Tool | Docs |
+|---|---|
+| ONNX | <https://onnx.ai/> |
+| ONNX Runtime | <https://onnxruntime.ai/> |
+| NVIDIA TensorRT | <https://docs.nvidia.com/deeplearning/tensorrt/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| OpenVINO | <https://docs.openvino.ai/> |
+| Apache TVM | <https://tvm.apache.org/> |
+| OpenXLA | <https://openxla.org/> |
+| IREE | <https://iree.dev/> |
+| MLIR | <https://mlir.llvm.org/> |
+| LiteRT | <https://developers.google.com/edge/litert> |
+| ExecuTorch | <https://docs.pytorch.org/executorch/> |
+| Core ML Tools | <https://apple.github.io/coremltools/> |
+| NCNN | <https://github.com/Tencent/ncnn> |
+| MNN | <https://github.com/alibaba/MNN> |
+| Paddle Lite | <https://github.com/PaddlePaddle/Paddle-Lite> |
+| DirectML | <https://github.com/microsoft/DirectML> |
+
+#### model-serving.md
+
+| Tool | Docs |
+|---|---|
+| NVIDIA Triton Inference Server | <https://docs.nvidia.com/deeplearning/triton-inference-server/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| KServe | <https://kserve.github.io/website/> |
+| BentoML | <https://docs.bentoml.com/> |
+| Seldon Core | <https://docs.seldon.ai/> — llms.txt: <https://docs.seldon.ai/home/llms.txt> |
+| TensorFlow Serving | <https://github.com/tensorflow/serving> |
+| TorchServe | <https://docs.pytorch.org/serve/> |
+| MLServer | <https://docs.seldon.ai/mlserver> — llms.txt: <https://docs.seldon.ai/mlserver/llms.txt> |
+| FastAPI | <https://fastapi.tiangolo.com/> |
+| Gradio | <https://gradio.app/docs> — llms.txt: <https://gradio.app/llms.txt> |
+| Streamlit | <https://docs.streamlit.io/> — llms.txt: <https://docs.streamlit.io/llms.txt> |
