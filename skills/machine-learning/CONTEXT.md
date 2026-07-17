@@ -441,3 +441,19 @@ order; each skill's rows land in the same change that adds the skill.
 | OpenPCDet | <https://github.com/open-mmlab/OpenPCDet> |
 | Trimesh | <https://trimesh.org/> |
 | PyVista | <https://docs.pyvista.org/> |
+
+### meta-ml-image-gen-docs
+
+#### generation-tools.md
+
+| Tool | Docs |
+|---|---|
+| ComfyUI | <https://docs.comfy.org/> — llms.txt: <https://docs.comfy.org/llms.txt> |
+| Stable Diffusion WebUI Forge | <https://github.com/lllyasviel/stable-diffusion-webui-forge> |
+| InvokeAI | <https://github.com/invoke-ai/InvokeAI> |
+| kohya_ss | <https://github.com/bmaltais/kohya_ss> |
+| ControlNet | <https://github.com/lllyasviel/ControlNet> |
+| IP-Adapter | <https://github.com/tencent-ailab/IP-Adapter> |
+| LyCORIS | <https://github.com/KohakuBlueleaf/LyCORIS> |
+| Open-Sora | <https://github.com/hpcaitech/Open-Sora> |
+| LTX-Video | <https://github.com/Lightricks/LTX-Video> |

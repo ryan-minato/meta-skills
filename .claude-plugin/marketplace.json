@@ -50,7 +50,8 @@
         "./meta-ml-mlops-docs",
         "./meta-ml-llm-apps-docs",
         "./meta-ml-llm-eval-docs",
-        "./meta-ml-vision-docs"
+        "./meta-ml-vision-docs",
+        "./meta-ml-image-gen-docs"
       ],
       "strict": false
     }

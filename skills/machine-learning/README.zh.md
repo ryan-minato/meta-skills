@@ -32,3 +32,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 | [meta-ml-llm-apps-docs](meta-ml-llm-apps-docs/) | RAG 与 Agent 框架、LLM 网关与护栏、从本地 ANN 库到向量数据库的向量检索的文档入口 |
 | [meta-ml-llm-eval-docs](meta-ml-llm-eval-docs/) | LLM 基准与评测框架及 LLM 可观测平台的文档入口 |
 | [meta-ml-vision-docs](meta-ml-vision-docs/) | 基础视觉库、检测/分割/跟踪、OCR 与文档智能、3D 视觉与神经渲染的文档入口 |
+| [meta-ml-image-gen-docs](meta-ml-image-gen-docs/) | 图像/视频生成 UI、LoRA 训练器、条件控制适配器与开源视频生成项目的文档入口 |
