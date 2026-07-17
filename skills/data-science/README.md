@@ -27,4 +27,4 @@ npx skills add ryan-minato/meta-skills/skills/data-science --skill <skill-name>
 
 | Skill | Description |
 |---|---|
-| none yet | |
+| [meta-ds-analysis-docs](meta-ds-analysis-docs/) | Documentation entry points for numerics and statistics, dataframes and SQL, storage formats, multidimensional data, graph analysis, visualization, data quality, and notebooks |

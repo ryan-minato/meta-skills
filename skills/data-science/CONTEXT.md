@@ -91,3 +91,92 @@ reference table, with details always fetched from the doc URL.
 
 Sections mirror the catalog's skills and their reference tables, in
 order; each skill's rows land in the same change that adds the skill.
+
+### meta-ds-analysis-docs
+
+#### numerics-and-stats.md
+
+| Tool | Docs |
+|---|---|
+| NumPy | <https://numpy.org/doc/> |
+| SciPy | <https://docs.scipy.org/doc/scipy/> |
+| Numba | <https://numba.readthedocs.io/> |
+| CuPy | <https://docs.cupy.dev/> |
+| statsmodels | <https://www.statsmodels.org/> |
+| scikit-learn | <https://scikit-learn.org/> |
+| PyMC | <https://www.pymc.io/> |
+| ArviZ | <https://python.arviz.org/> |
+| lifelines | <https://lifelines.readthedocs.io/> |
+
+#### dataframes-and-sql.md
+
+| Tool | Docs |
+|---|---|
+| pandas | <https://pandas.pydata.org/docs/> |
+| Polars | <https://docs.pola.rs/> |
+| DuckDB | <https://duckdb.org/docs/> — llms.txt: <https://duckdb.org/llms.txt> |
+| Ibis | <https://ibis-project.org/> |
+
+#### storage-and-formats.md
+
+| Tool | Docs |
+|---|---|
+| Apache Arrow | <https://arrow.apache.org/docs/> |
+| Zarr | <https://zarr.readthedocs.io/> |
+| h5py | <https://docs.h5py.org/> |
+| HDF5 | <https://support.hdfgroup.org/documentation/> |
+| fsspec | <https://filesystem-spec.readthedocs.io/> |
+
+#### multidim-data.md
+
+| Tool | Docs |
+|---|---|
+| xarray | <https://docs.xarray.dev/> — llms.txt: <https://docs.xarray.dev/llms.txt> |
+| rioxarray | <https://corteva.github.io/rioxarray/> |
+| Rasterio | <https://rasterio.readthedocs.io/> |
+| netCDF4 | <https://unidata.github.io/netcdf4-python/> |
+
+#### graph-analysis.md
+
+| Tool | Docs |
+|---|---|
+| NetworkX | <https://networkx.org/> |
+| igraph | <https://python.igraph.org/> |
+| NVIDIA RAPIDS cuGraph | <https://docs.rapids.ai/api/cugraph/stable/> |
+| GraphFrames | <https://graphframes.io/> — llms.txt: <https://graphframes.io/llms.txt> |
+
+#### visualization.md
+
+| Tool | Docs |
+|---|---|
+| Matplotlib | <https://matplotlib.org/> |
+| Seaborn | <https://seaborn.pydata.org/> |
+| Plotly | <https://plotly.com/python/> — llms.txt: <https://plotly.com/llms.txt> |
+| Altair | <https://altair-viz.github.io/> |
+| HoloViews | <https://holoviews.org/> |
+| hvPlot | <https://hvplot.holoviz.org/> |
+| Datashader | <https://datashader.org/> |
+| Panel | <https://panel.holoviz.org/> |
+| Streamlit | <https://docs.streamlit.io/> — llms.txt: <https://docs.streamlit.io/llms.txt> |
+| Plotly Dash | <https://dash.plotly.com/> |
+| Gradio | <https://gradio.app/docs> — llms.txt: <https://gradio.app/llms.txt> |
+
+#### data-quality.md
+
+| Tool | Docs |
+|---|---|
+| Pandera | <https://pandera.readthedocs.io/> |
+| Great Expectations | <https://docs.greatexpectations.io/> |
+| Evidently | <https://docs.evidentlyai.com/> — llms.txt: <https://docs.evidentlyai.com/llms.txt> |
+| Cleanlab | <https://docs.cleanlab.ai/> |
+| Pydantic | <https://pydantic.dev/docs/> — llms.txt: <https://pydantic.dev/llms.txt> |
+
+#### notebooks-and-publishing.md
+
+| Tool | Docs |
+|---|---|
+| IPython | <https://ipython.readthedocs.io/> |
+| Jupyter | <https://docs.jupyter.org/> |
+| JupyterLab | <https://jupyterlab.readthedocs.io/> |
+| Jupyter Server | <https://jupyter-server.readthedocs.io/> |
+| Quarto | <https://quarto.org/> — llms.txt: <https://quarto.org/llms.txt> |
