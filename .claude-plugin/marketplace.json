@@ -46,7 +46,8 @@
         "./meta-ml-training-docs",
         "./meta-ml-huggingface-docs",
         "./meta-ml-ray-docs",
-        "./meta-ml-inference-docs"
+        "./meta-ml-inference-docs",
+        "./meta-ml-mlops-docs"
       ],
       "strict": false
     }

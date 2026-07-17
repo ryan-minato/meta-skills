@@ -278,3 +278,33 @@ order; each skill's rows land in the same change that adds the skill.
 | FastAPI | <https://fastapi.tiangolo.com/> |
 | Gradio | <https://gradio.app/docs> — llms.txt: <https://gradio.app/llms.txt> |
 | Streamlit | <https://docs.streamlit.io/> — llms.txt: <https://docs.streamlit.io/llms.txt> |
+
+### meta-ml-mlops-docs
+
+#### experiment-tracking.md
+
+| Tool | Docs |
+|---|---|
+| MLflow | <https://mlflow.org/docs/> |
+| Weights & Biases | <https://docs.wandb.ai/> — llms.txt: <https://docs.wandb.ai/llms.txt> |
+| TensorBoard | <https://www.tensorflow.org/tensorboard> |
+| ClearML | <https://clear.ml/docs/> — llms.txt: <https://clear.ml/llms.txt> |
+| Neptune | <https://docs.neptune.ai/> |
+| Comet | <https://www.comet.com/docs/> — llms.txt: <https://www.comet.com/docs/opik/llms.txt> |
+| DVC | <https://doc.dvc.org/> |
+
+#### pipelines-and-monitoring.md
+
+| Tool | Docs |
+|---|---|
+| Kubeflow | <https://www.kubeflow.org/docs/> |
+| Apache Airflow | <https://airflow.apache.org/docs/> |
+| Prefect | <https://docs.prefect.io/> — llms.txt: <https://docs.prefect.io/llms.txt> |
+| Dagster | <https://docs.dagster.io/> — llms.txt: <https://docs.dagster.io/llms.txt> |
+| Flyte | <https://docs.flyte.org/> — llms.txt: <https://www.union.ai/llms.txt> |
+| Metaflow | <https://docs.metaflow.org/> |
+| ZenML | <https://docs.zenml.io/> — llms.txt: <https://docs.zenml.io/llms.txt> |
+| Evidently | <https://docs.evidentlyai.com/> — llms.txt: <https://docs.evidentlyai.com/llms.txt> |
+| Prometheus | <https://prometheus.io/docs/> |
+| Grafana | <https://grafana.com/docs/> — llms.txt: <https://grafana.com/llms.txt> |
+| OpenTelemetry | <https://opentelemetry.io/docs/> — llms.txt: <https://opentelemetry.io/llms.txt> |
