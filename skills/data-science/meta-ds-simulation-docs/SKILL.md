@@ -7,13 +7,12 @@ description: >-
   JuMP, Ipopt, OR-Tools, Gurobi), differential equations (SUNDIALS,
   DifferentialEquations.jl, Diffrax), PDE and FEM frameworks (FEniCSx,
   Firedrake, deal.II, MFEM, OpenFOAM, Gmsh), and scientific
-  visualization (VTK, PyVista, ParaView, Makie) — plus the discovery
-  procedure (llms.txt probing, PyPI metadata, official org repos) for
-  tools not listed. Use when a harness build must record where the docs
-  live for a project that solves optimization problems, integrates
-  differential equations, or runs PDE/FEM simulations. Not for choosing
-  between tools or recommending one, and not for base numerics, HPC
-  scheduling, or physics-informed ML.
+  visualization (VTK, PyVista, ParaView, Makie) — plus a discovery
+  procedure for tools not listed. Use when a harness build must record
+  where the docs live for a project that solves optimization problems,
+  integrates differential equations, or runs PDE/FEM simulations. Not
+  for choosing between tools or recommending one, and not for base
+  numerics, HPC scheduling, or physics-informed ML.
 ---
 
 # Simulation & Optimization Documentation Map

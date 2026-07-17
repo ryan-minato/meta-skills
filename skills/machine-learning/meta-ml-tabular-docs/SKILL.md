@@ -5,14 +5,13 @@ description: >-
   tabular or classic machine-learning project to authoritative
   documentation entry points — traditional ML and gradient boosting
   (scikit-learn, XGBoost, LightGBM, CatBoost, cuML), interpretability
-  (SHAP, LIME, InterpretML), and AutoML and hyperparameter optimization
-  (Optuna, AutoGluon, FLAML, Ax/BoTorch) — plus the discovery procedure
-  (llms.txt probing, PyPI metadata, official org repos) for tools not
-  listed. Use when a harness build must record where the docs live for a
-  project that models tabular data or tunes model hyperparameters. Not
-  for choosing between tools or recommending one, and not for deep
-  learning frameworks, time-series forecasting, or general data
-  analysis.
+  (SHAP, LIME, InterpretML), and AutoML and hyperparameter
+  optimization (Optuna, AutoGluon, FLAML, Ax/BoTorch) — plus a
+  discovery procedure for tools not listed. Use when a harness build
+  must record where the docs live for a project that models tabular
+  data or tunes model hyperparameters. Not for choosing between tools
+  or recommending one, and not for deep learning frameworks,
+  time-series forecasting, or general data analysis.
 ---
 
 # Tabular ML & AutoML Documentation Map

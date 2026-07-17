@@ -2,17 +2,16 @@
 name: meta-ml-inference-docs
 description: >-
   Disposable meta-skill (delete after the harness is built): maps a
-  model-deployment project to authoritative documentation entry points —
-  LLM inference engines (vLLM, SGLang, TensorRT-LLM, llama.cpp, Ollama),
-  quantization and compression, model compilers and cross-platform
-  runtimes (ONNX, TensorRT, OpenVINO, TVM, ExecuTorch), and serving
-  platforms (Triton Inference Server, KServe, BentoML, TorchServe) —
-  plus the discovery procedure (llms.txt probing, PyPI metadata,
-  official org repos) for tools not listed. Use when a harness build
-  must record where the docs live for a project that serves, ships,
-  quantizes, or compiles models. Not for choosing between tools or
-  recommending one, and not for training stacks, LLM application
-  frameworks, or experiment tracking.
+  model-deployment project to authoritative documentation entry points
+  — LLM inference engines (vLLM, SGLang, TensorRT-LLM, llama.cpp,
+  Ollama), quantization and compression, model compilers and
+  cross-platform runtimes (ONNX, TensorRT, OpenVINO, TVM, ExecuTorch),
+  and serving platforms (Triton Inference Server, KServe, BentoML,
+  TorchServe) — plus a discovery procedure for tools not listed. Use
+  when a harness build must record where the docs live for a project
+  that serves, ships, quantizes, or compiles models. Not for choosing
+  between tools or recommending one, and not for training stacks, LLM
+  application frameworks, or experiment tracking.
 ---
 
 # Inference & Deployment Documentation Map

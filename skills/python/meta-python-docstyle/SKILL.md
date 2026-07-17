@@ -3,13 +3,12 @@ name: meta-python-docstyle
 description: >-
   Disposable meta-skill (delete after the harness is built): supplies
   trustworthy defaults for a Python project's documentation conventions —
-  docstring style (Google by default; NumPy or reST when the ecosystem
-  calls for them), docstring completeness per object kind, a
-  self-documenting-code comment philosophy, and a marker-comment policy
-  (TODO, FIXME, NOTE by default) — recorded in the harness with upstream
-  doc URLs. Use when a harness build needs Python docstring or comment
-  conventions and the user has not fully specified them. Not for writing
-  the docstrings themselves, and not for non-Python projects.
+  docstring style (Google, NumPy, reST) and completeness, a
+  self-documenting-code comment philosophy, and a marker-comment policy —
+  recorded in the harness with upstream doc URLs. Use when a harness
+  build needs Python docstring or comment conventions and the user has
+  not fully specified them. Not for writing the docstrings themselves,
+  and not for non-Python projects.
 ---
 
 # Python Docstring & Comment Conventions

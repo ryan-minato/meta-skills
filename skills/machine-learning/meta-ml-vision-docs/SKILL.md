@@ -2,17 +2,17 @@
 name: meta-ml-vision-docs
 description: >-
   Disposable meta-skill (delete after the harness is built): maps a
-  computer-vision project to authoritative documentation entry points —
-  core vision libraries and pretrained models (OpenCV, torchvision,
+  computer-vision project to authoritative documentation entry points
+  — core vision libraries and pretrained models (OpenCV, torchvision,
   timm, OpenMMLab, Ultralytics), detection/segmentation/tracking (SAM,
-  Grounding DINO, supervision tooling), OCR and document AI (PaddleOCR,
-  Tesseract, Docling, Unstructured), and 3D vision and neural rendering
-  (Open3D, PyTorch3D, Nerfstudio) — plus the discovery procedure
-  (llms.txt probing, PyPI metadata, official org repos) for tools not
-  listed. Use when a harness build must record where the docs live for a
-  project that processes images, video, point clouds, or documents as
-  images. Not for choosing between tools or recommending one, and not
-  for image/video generation or non-vision modalities.
+  Grounding DINO, supervision tooling), OCR and document AI
+  (PaddleOCR, Tesseract, Docling, Unstructured), and 3D vision and
+  neural rendering (Open3D, PyTorch3D, Nerfstudio) — plus a discovery
+  procedure for tools not listed. Use when a harness build must record
+  where the docs live for a project that processes images, video,
+  point clouds, or documents as images. Not for choosing between tools
+  or recommending one, and not for image/video generation or
+  non-vision modalities.
 ---
 
 # Computer Vision Documentation Map

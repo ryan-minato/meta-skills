@@ -2,16 +2,16 @@
 name: meta-ml-huggingface-docs
 description: >-
   Disposable meta-skill (delete after the harness is built): maps a
-  Hugging Face-based project to authoritative documentation entry points
-  across the ecosystem — model and data libraries (Transformers,
-  Diffusers, Datasets, Tokenizers), training and optimization
-  (Accelerate, PEFT, TRL, Optimum), and Hub serving and apps (TGI, TEI,
-  Inference Endpoints, Spaces, Gradio, smolagents) — plus the discovery
-  procedure (llms.txt probing, PyPI metadata, official org repos) for
-  tools not listed. Use when a harness build must record where the docs
-  live for a project that depends on any Hugging Face library or loads
-  models from the Hub. Not for choosing between tools or recommending
-  one, and not for non-Hugging-Face training or inference stacks.
+  Hugging Face-based project to authoritative documentation entry
+  points across the ecosystem — model and data libraries
+  (Transformers, Diffusers, Datasets, Tokenizers), training and
+  optimization (Accelerate, PEFT, TRL, Optimum), and Hub serving and
+  apps (TGI, TEI, Inference Endpoints, Spaces, Gradio, smolagents) —
+  plus a discovery procedure for tools not listed. Use when a harness
+  build must record where the docs live for a project that depends on
+  any Hugging Face library or loads models from the Hub. Not for
+  choosing between tools or recommending one, and not for
+  non-Hugging-Face training or inference stacks.
 ---
 
 # Hugging Face Ecosystem Documentation Map

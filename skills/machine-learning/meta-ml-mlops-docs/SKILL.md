@@ -6,12 +6,11 @@ description: >-
   experiment tracking and model registries (MLflow, Weights & Biases,
   TensorBoard, DVC) and ML pipelines and monitoring (Kubeflow, Flyte,
   Metaflow, ZenML, Evidently, Prometheus/Grafana/OpenTelemetry) — plus
-  the discovery procedure (llms.txt probing, PyPI metadata, official org
-  repos) for tools not listed. Use when a harness build must record
-  where the docs live for a project that tracks experiments, versions
-  models and data, runs ML pipelines, or monitors models. Not for
-  choosing between tools or recommending one, and not for training
-  frameworks or model-serving platforms.
+  a discovery procedure for tools not listed. Use when a harness build
+  must record where the docs live for a project that tracks
+  experiments, versions models and data, runs ML pipelines, or
+  monitors models. Not for choosing between tools or recommending one,
+  and not for training frameworks or model-serving platforms.
 ---
 
 # MLOps Documentation Map

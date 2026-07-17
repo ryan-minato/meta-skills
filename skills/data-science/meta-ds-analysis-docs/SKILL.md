@@ -7,13 +7,12 @@ description: >-
   SQL (pandas, Polars, DuckDB, Ibis), columnar and array storage
   (Arrow, Zarr, HDF5), multidimensional data (xarray), graph analysis,
   visualization (Matplotlib through Panel and Streamlit), data quality
-  (Pandera, Great Expectations), and notebooks and publishing (Jupyter,
-  Quarto) — plus the discovery procedure (llms.txt probing, PyPI
-  metadata, official org repos) for tools not listed. Use when a
-  harness build must record where the docs live for a project that
-  analyzes data interactively or in scripts. Not for choosing between
-  tools or recommending one, and not for distributed engines,
-  orchestration, or model training.
+  (Pandera, Great Expectations), and notebooks and publishing
+  (Jupyter, Quarto) — plus a discovery procedure for tools not listed.
+  Use when a harness build must record where the docs live for a
+  project that analyzes data interactively or in scripts. Not for
+  choosing between tools or recommending one, and not for distributed
+  engines, orchestration, or model training.
 ---
 
 # Data Analysis Documentation Map

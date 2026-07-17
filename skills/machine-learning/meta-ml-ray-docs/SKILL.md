@@ -4,12 +4,11 @@ description: >-
   Disposable meta-skill (delete after the harness is built): maps a
   Ray-based project to authoritative documentation entry points — the
   Ray libraries under one docs root (Core, Data, Train, Tune, Serve,
-  Serve LLM, RLlib) and the cluster layer (KubeRay, Anyscale) — plus the
-  discovery procedure (llms.txt probing, PyPI metadata, official org
-  repos) for tools not listed. Use when a harness build must record
-  where the docs live for a project that depends on ray or deploys Ray
-  clusters. Not for choosing between tools or recommending one, and not
-  for non-Ray distributed training or serving stacks.
+  Serve LLM, RLlib) and the cluster layer (KubeRay, Anyscale) — plus a
+  discovery procedure for tools not listed. Use when a harness build
+  must record where the docs live for a project that depends on ray or
+  deploys Ray clusters. Not for choosing between tools or recommending
+  one, and not for non-Ray distributed training or serving stacks.
 ---
 
 # Ray Ecosystem Documentation Map

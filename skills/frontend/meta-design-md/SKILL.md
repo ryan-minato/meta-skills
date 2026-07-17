@@ -4,11 +4,11 @@ description: >-
   Disposable meta-skill (delete after the harness is built): authors or
   edits DESIGN.md, the strict visual-design description format — YAML
   front-matter design tokens plus a prose body — that makes a project's
-  visual language readable to agents, with a bundled OKLCH calculator for
-  color conversion, gamut checks, and WCAG contrast. Use when a project's
-  visual design must be encoded for agents, or a DESIGN.md needs
-  creating, linting, or updating. Not for any other document — the
-  DESIGN.md name is reserved for this format and never repurposed.
+  visual language readable to agents, with a bundled OKLCH color
+  calculator. Use when a project's visual design must be encoded for
+  agents, or a DESIGN.md needs creating, linting, or updating. Not for
+  any other document — the DESIGN.md name is reserved for this format
+  and never repurposed.
 ---
 
 # DESIGN.md

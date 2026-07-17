@@ -4,12 +4,12 @@ description: >-
   Disposable meta-skill (delete after the harness is built): maps a
   data-pipeline project to authoritative documentation entry points —
   workflow orchestration and analytics engineering (Apache Airflow,
-  dbt, Dagster, Prefect) — plus the discovery procedure (llms.txt
-  probing, PyPI metadata, official org repos) for tools not listed. Use
-  when a harness build must record where the docs live for a project
-  that schedules data workflows or builds dbt-style transformation
-  pipelines. Not for choosing between tools or recommending one, and not
-  for compute engines, ML pipelines, or scientific workflow managers.
+  dbt, Dagster, Prefect) — plus a discovery procedure for tools not
+  listed. Use when a harness build must record where the docs live for
+  a project that schedules data workflows or builds dbt-style
+  transformation pipelines. Not for choosing between tools or
+  recommending one, and not for compute engines, ML pipelines, or
+  scientific workflow managers.
 ---
 
 # Data Pipeline Documentation Map

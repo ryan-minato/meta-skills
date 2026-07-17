@@ -2,17 +2,16 @@
 name: meta-ml-llm-apps-docs
 description: >-
   Disposable meta-skill (delete after the harness is built): maps an
-  LLM-application project to authoritative documentation entry points —
-  RAG and agent frameworks (LangChain, LlamaIndex, Haystack, DSPy,
+  LLM-application project to authoritative documentation entry points
+  — RAG and agent frameworks (LangChain, LlamaIndex, Haystack, DSPy,
   AutoGen, CrewAI, PydanticAI), LLM gateways and guardrails (LiteLLM,
   Instructor, Guardrails, MCP), and vector search from local ANN
   libraries to vector databases (Faiss, Milvus, Qdrant, pgvector) —
-  plus the discovery procedure (llms.txt probing, PyPI metadata,
-  official org repos) for tools not listed. Use when a harness build
-  must record where the docs live for a project that builds applications
-  on LLM APIs or local models. Not for choosing between tools or
-  recommending one, and not for model training, inference engines, or
-  LLM evaluation harnesses.
+  plus a discovery procedure for tools not listed. Use when a harness
+  build must record where the docs live for a project that builds
+  applications on LLM APIs or local models. Not for choosing between
+  tools or recommending one, and not for model training, inference
+  engines, or LLM evaluation harnesses.
 ---
 
 # LLM Application Documentation Map

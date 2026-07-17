@@ -7,12 +7,11 @@ description: >-
   Wolfram), math kernels and sparse solvers (BLAS/LAPACK, FFTW, CUDA
   and ROCm math libraries, PETSc, Trilinos), and compilers and
   automatic differentiation (LLVM/MLIR, Numba, JAX, Kokkos, Enzyme,
-  Julia AD) — plus the discovery procedure (llms.txt probing, PyPI
-  metadata, official org repos) for tools not listed. Use when a
-  harness build must record where the docs live for a project doing
-  numerical, symbolic, or GPU-accelerated computation. Not for choosing
-  between tools or recommending one, and not for dataframe analysis,
-  simulation frameworks, or cluster scheduling.
+  Julia AD) — plus a discovery procedure for tools not listed. Use
+  when a harness build must record where the docs live for a project
+  doing numerical, symbolic, or GPU-accelerated computation. Not for
+  choosing between tools or recommending one, and not for dataframe
+  analysis, simulation frameworks, or cluster scheduling.
 ---
 
 # Numerical Computing Documentation Map

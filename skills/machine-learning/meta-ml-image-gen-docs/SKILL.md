@@ -3,15 +3,14 @@ name: meta-ml-image-gen-docs
 description: >-
   Disposable meta-skill (delete after the harness is built): maps an
   image- or video-generation project to authoritative documentation
-  entry points — generation UIs and pipelines (ComfyUI, SD WebUI Forge,
-  InvokeAI), LoRA training (kohya_ss, LyCORIS), conditioning adapters
-  (ControlNet, IP-Adapter), and open video generation (Open-Sora,
-  LTX-Video) — plus the discovery procedure (llms.txt probing, PyPI
-  metadata, official org repos) for tools not listed. Use when a harness
-  build must record where the docs live for a project that generates
-  images or video with diffusion-model tooling. Not for choosing between
-  tools or recommending one, and not for discriminative computer vision
-  or the Diffusers library itself.
+  entry points — generation UIs and pipelines (ComfyUI, SD WebUI
+  Forge, InvokeAI), LoRA training (kohya_ss, LyCORIS), conditioning
+  adapters (ControlNet, IP-Adapter), and open video generation
+  (Open-Sora, LTX-Video) — plus a discovery procedure for tools not
+  listed. Use when a harness build must record where the docs live for
+  a project that generates images or video with diffusion-model
+  tooling. Not for choosing between tools or recommending one, and not
+  for discriminative computer vision or the Diffusers library itself.
 ---
 
 # Image & Video Generation Documentation Map

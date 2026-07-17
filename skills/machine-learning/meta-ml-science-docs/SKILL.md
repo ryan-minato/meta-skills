@@ -7,9 +7,8 @@ description: >-
   discovery (RDKit, DeepChem), biology and omics (Biopython, Scanpy,
   scvi-tools), molecular simulation and materials (OpenMM, ASE,
   pymatgen), and physics-informed ML (PhysicsNeMo, DeepXDE, e3nn) —
-  plus the discovery procedure (llms.txt probing, PyPI metadata,
-  official org repos) for tools not listed. Use when a harness build
-  must record where the docs live for a project applying ML in
+  plus a discovery procedure for tools not listed. Use when a harness
+  build must record where the docs live for a project applying ML in
   medicine, biology, chemistry, or the physical sciences. Not for
   choosing between tools or recommending one, and not for general
   scientific computing without ML.

@@ -5,13 +5,12 @@ description: >-
   scaled data-processing project to authoritative documentation entry
   points — GPU data science (NVIDIA RAPIDS: cuDF, cuML, cuGraph,
   Dask-CUDA), the Dask distributed-computing family, and cluster
-  analytics engines (Apache Spark, Flink, Trino, Sedona) — plus the
-  discovery procedure (llms.txt probing, PyPI metadata, official org
-  repos) for tools not listed. Use when a harness build must record
-  where the docs live for a project that accelerates data processing on
-  GPUs or scales it across a cluster. Not for choosing between tools or
-  recommending one, and not for single-machine analysis, orchestration
-  schedulers, or model training.
+  analytics engines (Apache Spark, Flink, Trino, Sedona) — plus a
+  discovery procedure for tools not listed. Use when a harness build
+  must record where the docs live for a project that accelerates data
+  processing on GPUs or scales it across a cluster. Not for choosing
+  between tools or recommending one, and not for single-machine
+  analysis, orchestration schedulers, or model training.
 ---
 
 # Scaled Data Processing Documentation Map

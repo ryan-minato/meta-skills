@@ -2,13 +2,12 @@
 name: meta-knowledge-base
 description: >-
   Disposable meta-skill (delete after the harness is built): creates,
-  improves, or reorganizes the project's agent knowledge base — chooses
-  the location, fixes one consistent structure, seeds the documents a
-  current need justifies, and deposits the authoring rules where agents
-  can find them. Use when the harness plan or the user calls for a
-  knowledge base, or when project knowledge is scattered, inconsistent, or
-  unreachable from the entrypoint. Not for the entrypoint itself or for
-  public README-class files.
+  improves, or reorganizes the project's agent knowledge base, and
+  deposits the authoring rules where agents can find them. Use when the
+  harness plan or the user calls for a knowledge base, or when project
+  knowledge is scattered, inconsistent, or unreachable from the
+  entrypoint. Not for the entrypoint itself or for public README-class
+  files.
 ---
 
 # Knowledge Base

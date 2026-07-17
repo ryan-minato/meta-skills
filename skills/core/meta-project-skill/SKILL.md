@@ -2,14 +2,12 @@
 name: meta-project-skill
 description: >-
   Disposable meta-skill (delete after the harness is built): creates,
-  improves, or edits durable project-level skills — tests whether a
-  procedure deserves a skill, writes a trigger-tight description and short
-  body with conditional references, and deposits the project's
-  skill-authoring rules so future agents can design skills without it.
-  Use when the harness plan calls for project skills, or when a recurring
-  procedure is fragile, order-sensitive, or keeps being re-explained. Not
-  for one-off tasks, stable background knowledge, or these disposable
-  meta-skills themselves.
+  improves, or edits durable project-level skills, and deposits the
+  project's skill-authoring rules so future agents can design skills
+  without it. Use when the harness plan calls for project skills, or when
+  a recurring procedure is fragile, order-sensitive, or keeps being
+  re-explained. Not for one-off tasks, stable background knowledge, or
+  these disposable meta-skills themselves.
 ---
 
 # Project Skills

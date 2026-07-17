@@ -3,14 +3,14 @@ name: meta-ml-probabilistic-docs
 description: >-
   Disposable meta-skill (delete after the harness is built): maps a
   probabilistic-modeling project to authoritative documentation entry
-  points — probabilistic programming and Bayesian inference (PyMC, Stan,
-  Pyro, NumPyro, TensorFlow Probability, BlackJAX, ArviZ) and causal
-  inference (DoWhy, causal-learn, EconML, CausalML, DoubleML,
-  Tigramite) — plus the discovery procedure (llms.txt probing, PyPI
-  metadata, official org repos) for tools not listed. Use when a harness
-  build must record where the docs live for a project that does Bayesian
-  modeling, MCMC, or causal inference. Not for choosing between tools or
-  recommending one, and not for frequentist statistics or general ML.
+  points — probabilistic programming and Bayesian inference (PyMC,
+  Stan, Pyro, NumPyro, TensorFlow Probability, BlackJAX, ArviZ) and
+  causal inference (DoWhy, causal-learn, EconML, CausalML, DoubleML,
+  Tigramite) — plus a discovery procedure for tools not listed. Use
+  when a harness build must record where the docs live for a project
+  that does Bayesian modeling, MCMC, or causal inference. Not for
+  choosing between tools or recommending one, and not for frequentist
+  statistics or general ML.
 ---
 
 # Probabilistic & Causal Documentation Map
