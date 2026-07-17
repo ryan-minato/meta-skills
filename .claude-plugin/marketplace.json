@@ -52,7 +52,8 @@
         "./meta-ml-llm-eval-docs",
         "./meta-ml-vision-docs",
         "./meta-ml-image-gen-docs",
-        "./meta-ml-audio-docs"
+        "./meta-ml-audio-docs",
+        "./meta-ml-rl-docs"
       ],
       "strict": false
     }

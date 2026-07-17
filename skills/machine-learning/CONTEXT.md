@@ -524,3 +524,34 @@ order; each skill's rows land in the same change that adds the skill.
 | Magenta | <https://magenta.tensorflow.org/> |
 | pretty_midi | <https://craffel.github.io/pretty-midi/> |
 | Music21 | <https://music21.org/music21docs/> |
+
+### meta-ml-rl-docs
+
+#### algorithms.md
+
+| Tool | Docs |
+|---|---|
+| Stable-Baselines3 | <https://stable-baselines3.readthedocs.io/> |
+| TorchRL | <https://docs.pytorch.org/rl/> |
+| CleanRL | <https://docs.cleanrl.dev/> |
+| Tianshou | <https://tianshou.org/> |
+| Acme | <https://github.com/google-deepmind/acme> |
+| Sample Factory | <https://www.samplefactory.dev/> |
+| d3rlpy | <https://d3rlpy.readthedocs.io/> |
+
+#### environments.md
+
+| Tool | Docs |
+|---|---|
+| Gymnasium | <https://gymnasium.farama.org/> |
+| PettingZoo | <https://pettingzoo.farama.org/> |
+| Minari | <https://minari.farama.org/> |
+| MuJoCo | <https://mujoco.readthedocs.io/> |
+| NVIDIA Isaac Lab | <https://isaac-sim.github.io/IsaacLab/> |
+| Brax | <https://github.com/google/brax> |
+| DeepMind Control Suite | <https://github.com/google-deepmind/dm_control> |
+| PyBullet | <https://pybullet.org/> |
+| Habitat-Lab | <https://aihabitat.org/> |
+| CARLA | <https://carla.readthedocs.io/> |
+| Unity ML-Agents | <https://github.com/Unity-Technologies/ml-agents> |
+| ManiSkill | <https://maniskill.readthedocs.io/> |
