@@ -164,7 +164,7 @@ order; each skill's rows land in the same change that adds the skill.
 | timm | <https://huggingface.co/docs/timm> |
 | Transformers.js | <https://huggingface.co/docs/transformers.js> |
 | Datasets | <https://huggingface.co/docs/datasets> |
-| Tokenizers | <https://huggingface.co/docs/tokenizers> |
+| Tokenizers | <https://github.com/huggingface/tokenizers> |
 | Safetensors | <https://huggingface.co/docs/safetensors> |
 | huggingface_hub | <https://huggingface.co/docs/huggingface_hub> |
 | Hugging Face Hub (Xet storage) | <https://huggingface.co/docs/hub> |
