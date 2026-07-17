@@ -9,16 +9,19 @@ directories only.
 
 ## Goal
 
-`machine-learning` holds information skills for ML target projects:
-authoritative documentation entry points for the frameworks, libraries,
-and tools an ML project uses or is likely to need, plus the discovery
-procedure for anything not listed. A harness-building agent detects which
-domains the target belongs to (from manifests, imports, and configs),
-loads only the matching skills, and records where the docs live. It
-installs per project, on top of `core`, and only when the target trains,
-finetunes, serves, or builds on machine-learning models — it is not part
-of the default install. Recommendations and guidance are future, separate
-skills in this catalog; the skills here only inform.
+`machine-learning` holds two skill types for ML target projects. The
+**information skills** (`-docs` suffix) map a project to authoritative
+documentation entry points for the frameworks, libraries, and tools an ML
+project uses or is likely to need, plus the discovery procedure for
+anything not listed; a harness-building agent detects which domains the
+target belongs to (from manifests, imports, and configs), loads only the
+matching skills, and records where the docs live. The **scaffolding and
+discovery skills** (no suffix) build an ML project's harness or enumerate
+live external inventories, and may carry opinionated defaults — each one
+declares that in its own description. Every skill installs per project,
+on top of `core`, and only when the target trains, finetunes, serves, or
+builds on machine-learning models — it is not part of the default
+install.
 
 ## Constraints On What May Enter
 
@@ -28,24 +31,31 @@ skills in this catalog; the skills here only inform.
   belong in `data-science`.
 - **Disposable only.** The marker admission test applies unchanged: if a
   skill should not carry it, it does not belong in this repository.
-- **Information, not recommendation.** Unlike `python`, which records
-  trusted defaults, no skill in this catalog may record a default, a
-  ranking, or a "prefer X". Skills report what exists and where its docs
-  live; every choice between tools stays with the user. A future
-  recommendation skill that breaks this rule must say so in its own
-  description, not hide inside a docs skill.
-- **One domain per skill.** A skill's boundary is a project domain with a
-  detectable trigger (dependencies, imports, config files), so an agent
-  loads exactly the domains the target belongs to. Finer splits live
-  behind per-reference load conditions; a skill that mixes unrelated
-  domains gets split, not grown.
+- **Information, not recommendation — for `-docs` skills.** No `-docs`
+  skill may record a default, a ranking, or a "prefer X". It reports what
+  exists and where its docs live; every choice between tools stays with
+  the user. Opinions live only in skills that declare them (next bullet),
+  never inside a docs skill.
+- **Scaffolding declares itself.** A skill that carries opinionated
+  defaults — a project scaffold or a recommendation skill — says so in
+  its own description. Its defaults apply only where the user expressed
+  no preference and the target shows no working convention, and it never
+  migrates a working setup unbidden.
+- **One domain per skill.** A `-docs` skill's boundary is a project
+  domain with a detectable trigger (dependencies, imports, config files),
+  so an agent loads exactly the domains the target belongs to; a
+  scaffolding skill's boundary is one project situation (a quick
+  experiment and a long-lived training codebase are two skills). Finer
+  splits live behind per-reference load conditions; a skill that mixes
+  unrelated domains or situations gets split, not grown.
 - **Doc-root fidelity.** Only stable entry points: a docs root, an org
   root, or a repository root. Volatile facts (versions, install commands,
   API pages, deep links) always defer to a fetch from the entry point. A
   dead or moved URL is a bug, fixed in the same change that finds it.
-- **Registry completeness.** Every URL any reference cites appears in
-  this file's Upstream Registry, in the section mirroring its reference
-  table. A URL in a skill but not the registry is a bug.
+- **Registry completeness.** Every URL any reference cites — in `-docs`
+  and scaffolding skills alike — appears in this file's Upstream
+  Registry, in the section mirroring its reference table. A URL in a
+  skill but not the registry is a bug.
 - **Sibling-catalog overlap is intentional.** Tools shared with
   `data-science` (NumPy, scikit-learn, statsmodels, Dask, Faiss, …) are
   recorded independently in both catalogs, because skills are
@@ -57,10 +67,11 @@ Start from the authoring skill's template
 (`.agents/skills/meta-skill-authoring/assets/skill-template.md`), which
 ships with the marker pre-filled. The marker's exact bytes and YAML form
 are defined in the contract; copy them from there, never from rendered
-documentation. Skill names use the `meta-ml-<domain>-docs` pattern — the
-`-docs` suffix reserves the domain name for future scaffolding or
-recommendation skills. Every skill carries `references/doc-discovery.md`,
-byte-identical across the catalog (and across `data-science`); the
+documentation. Skill names use two patterns: `meta-ml-<domain>-docs` is
+exclusive to information skills, and every other skill — scaffolding,
+discovery — takes the unsuffixed `meta-ml-<name>`. Every `-docs` skill
+(and only those) carries `references/doc-discovery.md`, byte-identical
+across the catalog's `-docs` skills (and across `data-science`); the
 canonical copy is
 `skills/machine-learning/meta-ml-frameworks-docs/references/doc-discovery.md`,
 and any change to it is copied to every sibling in the same change
@@ -724,3 +735,93 @@ order; each skill's rows land in the same change that adds the skill.
 | e3nn | <https://docs.e3nn.org/> |
 | ASE | <https://ase-lib.org/> |
 | pymatgen | <https://pymatgen.org/> |
+
+### meta-ml-containers
+
+#### gpu-image-catalog.md
+
+| Source | Docs |
+|---|---|
+| NGC catalog | <https://catalog.ngc.nvidia.com/> |
+| NGC PyTorch container | <https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch> |
+| NVIDIA framework containers (support matrix) | <https://docs.nvidia.com/deeplearning/frameworks/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| pytorch/pytorch (Docker Hub) | <https://hub.docker.com/r/pytorch/pytorch> |
+| nvidia/cuda (Docker Hub) | <https://hub.docker.com/r/nvidia/cuda> |
+| rocm/pytorch (Docker Hub) | <https://hub.docker.com/r/rocm/pytorch> |
+| tensorflow/tensorflow (Docker Hub) | <https://hub.docker.com/r/tensorflow/tensorflow> |
+| ROCm documentation | <https://rocm.docs.amd.com/> |
+
+#### image-discovery.md
+
+| Source | Docs |
+|---|---|
+| NGC catalog | <https://catalog.ngc.nvidia.com/> |
+| NGC CLI | <https://docs.ngc.nvidia.com/cli/> |
+| Docker Hub API | <https://docs.docker.com/reference/api/hub/latest/> |
+| pytorch/pytorch (Docker Hub) | <https://hub.docker.com/r/pytorch/pytorch> |
+| OCI/Docker Registry v2 (distribution) | <https://distribution.github.io/distribution/> |
+
+### meta-ml-experiment
+
+#### pinned-deps.md
+
+| Tool | Docs |
+|---|---|
+| uv | <https://docs.astral.sh/uv/> — llms.txt: <https://docs.astral.sh/uv/llms.txt> |
+| uv PyTorch guide | <https://docs.astral.sh/uv/guides/integration/pytorch/> |
+
+#### containers.md
+
+| Source | Docs |
+|---|---|
+| nvidia/cuda (Docker Hub) | <https://hub.docker.com/r/nvidia/cuda> |
+| NGC PyTorch container | <https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch> |
+| pytorch/pytorch (Docker Hub) | <https://hub.docker.com/r/pytorch/pytorch> |
+| rocm/pytorch (Docker Hub) | <https://hub.docker.com/r/rocm/pytorch> |
+| NVIDIA Container Toolkit | <https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| Docker Compose | <https://docs.docker.com/compose/> |
+| Dev Container spec | <https://containers.dev/> |
+
+#### assets (train-loop-accelerate.md, devcontainer.md)
+
+| Tool | Docs |
+|---|---|
+| Hugging Face Accelerate | <https://huggingface.co/docs/accelerate> — llms.txt: <https://huggingface.co/docs/accelerate/llms.txt> |
+| Pydantic (Settings) | <https://docs.pydantic.dev/> — llms.txt: <https://docs.pydantic.dev/llms.txt> |
+| Dev Container spec | <https://containers.dev/> |
+
+### meta-ml-training-project
+
+#### uv-hardware-deps.md
+
+| Tool | Docs |
+|---|---|
+| uv | <https://docs.astral.sh/uv/> — llms.txt: <https://docs.astral.sh/uv/llms.txt> |
+| uv PyTorch guide | <https://docs.astral.sh/uv/guides/integration/pytorch/> |
+| PyTorch wheel index (example) | <https://download.pytorch.org/whl/cu130> |
+
+#### hydra-config.md
+
+| Tool | Docs |
+|---|---|
+| Hydra | <https://hydra.cc/> |
+
+#### containers.md
+
+| Source | Docs |
+|---|---|
+| nvidia/cuda (Docker Hub) | <https://hub.docker.com/r/nvidia/cuda> |
+| NGC PyTorch container | <https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch> |
+| pytorch/pytorch (Docker Hub) | <https://hub.docker.com/r/pytorch/pytorch> |
+| rocm/pytorch (Docker Hub) | <https://hub.docker.com/r/rocm/pytorch> |
+| NVIDIA Container Toolkit | <https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| Docker Compose | <https://docs.docker.com/compose/> |
+| Dev Container spec | <https://containers.dev/> |
+
+#### assets (train-loop-accelerate.md, devcontainer.md)
+
+| Tool | Docs |
+|---|---|
+| Hugging Face Accelerate | <https://huggingface.co/docs/accelerate> — llms.txt: <https://huggingface.co/docs/accelerate/llms.txt> |
+| Hydra | <https://hydra.cc/> |
+| Dev Container spec | <https://containers.dev/> |

@@ -41,7 +41,7 @@ agent 正是靠这个标记重新找到这些技能并删除它们。识别依�
 | [core](skills/core/) | 必装集合：足以让任何项目从没有 harness 到拥有可用的 harness | 按项目安装，在搭建 harness 之前 |
 | [frontend](skills/frontend/) | 面向具有用户可见前端的项目的设计描述与视觉语言 | 按项目安装，在 `core` 之上，仅当目标有视觉界面时 |
 | [python](skills/python/) | 面向 Python 项目的可信默认值与文档 URL：docstring 与注释约定、测试设置、工具链选择 | 按项目安装，在 `core` 之上，仅当目标是 Python 项目时 |
-| [machine-learning](skills/machine-learning/) | 面向 ML 项目的权威文档入口，每个领域一个技能（框架、训练、推理、视觉、音频……）；只提供信息，绝不做推荐 | 按项目安装，在 `core` 之上，仅当目标训练、微调、部署或构建于 ML 模型之上时 |
+| [machine-learning](skills/machine-learning/) | 面向 ML 项目的文档入口，每个领域一个技能（框架、训练、推理、视觉、音频……）——只提供信息——另有项目脚手架（快速实验、可维护训练）与 GPU 镜像发现技能，各自声明其观点默认值 | 按项目安装，在 `core` 之上，仅当目标训练、微调、部署或构建于 ML 模型之上时 |
 | [data-science](skills/data-science/) | 面向数据分析与科学计算项目的权威文档入口，每个领域一个技能（分析、规模化、流水线、地理空间、数值、仿真、HPC）；只提供信息，绝不做推荐 | 按项目安装，在 `core` 之上，仅当目标做数据分析或科学计算时 |
 
 ## 安装

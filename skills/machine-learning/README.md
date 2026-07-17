@@ -2,14 +2,17 @@
 
 [中文](README.zh.md)
 
-Meta-skills for machine-learning target projects: authoritative
-documentation entry points, split by project domain, for the frameworks,
-libraries, and tools an ML project uses or is likely to need — plus the
-discovery procedure for anything not listed. Each skill covers one
-domain, so an agent loads only the domains the target belongs to. These
-skills inform; they never recommend. Install on top of `core`, per
-project, and only when the target trains, finetunes, serves, or builds on
-ML models — this catalog is not part of the default install.
+Meta-skills for machine-learning target projects, in two kinds. The
+`-docs` skills map a project to authoritative documentation entry points,
+split by project domain, for the frameworks, libraries, and tools an ML
+project uses or is likely to need — plus the discovery procedure for
+anything not listed; they inform and never recommend. The unsuffixed
+skills scaffold ML project harnesses and enumerate live registries; they
+carry opinionated defaults, each declared in its own description. An
+agent loads only the skills matching the target. Install on top of
+`core`, per project, and only when the target trains, finetunes, serves,
+or builds on ML models — this catalog is not part of the default
+install.
 
 These skills are **disposable**: once the harness is built and verified,
 the `core` removal skill deletes them together with the rest.
@@ -45,3 +48,6 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 | [meta-ml-probabilistic-docs](meta-ml-probabilistic-docs/) | Documentation entry points for probabilistic programming and Bayesian inference and for causal inference |
 | [meta-ml-trustworthy-docs](meta-ml-trustworthy-docs/) | Documentation entry points for privacy, adversarial robustness, fairness, and interpretability, and for federated learning |
 | [meta-ml-science-docs](meta-ml-science-docs/) | Documentation entry points for ML in medicine, biology, chemistry, molecular simulation, and physics-informed modeling |
+| [meta-ml-containers](meta-ml-containers/) | Scripts that list and filter the currently available NVIDIA NGC and Docker Hub GPU images and tags, plus a guide to each image family's characteristics and fit |
+| [meta-ml-experiment](meta-ml-experiment/) | Scaffolds a quick ML experiment repository (opinionated defaults): uv-compiled pinned requirements, root-level entry scripts, Pydantic Settings config, justfile, Ruff/pytest/Gitleaks, an Accelerate training-loop template, and a concise AGENTS.md |
+| [meta-ml-training-project](meta-ml-training-project/) | Scaffolds a maintainable train/eval project (opinionated defaults): uv + pyproject with hardware-matched torch indexes, Hydra configs, raw/interim/processed data split, an Accelerate training-loop template, and a directory-map AGENTS.md with a knowledge base |
