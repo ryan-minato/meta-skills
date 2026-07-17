@@ -671,3 +671,35 @@ order; each skill's rows land in the same change that adds the skill.
 | CausalML | <https://causalml.readthedocs.io/> |
 | DoubleML | <https://docs.doubleml.org/> |
 | Tigramite | <https://github.com/jakobrunge/tigramite> |
+
+### meta-ml-trustworthy-docs
+
+#### privacy-and-robustness.md
+
+| Tool | Docs |
+|---|---|
+| Opacus | <https://opacus.ai/> |
+| TensorFlow Privacy | <https://github.com/tensorflow/privacy> |
+| Adversarial Robustness Toolbox | <https://adversarial-robustness-toolbox.readthedocs.io/> |
+| CleverHans | <https://github.com/cleverhans-lab/cleverhans> |
+| Foolbox | <https://foolbox.readthedocs.io/> |
+| TextAttack | <https://textattack.readthedocs.io/> |
+| Fairlearn | <https://fairlearn.org/> |
+| AIF360 | <https://github.com/Trusted-AI/AIF360> |
+| Microsoft Presidio | <https://microsoft.github.io/presidio/> |
+| Garak | <https://github.com/NVIDIA/garak> |
+| Captum | <https://captum.ai/> |
+| SHAP | <https://shap.readthedocs.io/> |
+
+#### federated-learning.md
+
+| Tool | Docs |
+|---|---|
+| Flower | <https://flower.ai/docs/> |
+| TensorFlow Federated | <https://www.tensorflow.org/federated> |
+| NVIDIA FLARE | <https://nvflare.readthedocs.io/> — llms.txt: <https://nvflare.readthedocs.io/llms.txt> |
+| FATE | <https://github.com/FederatedAI/FATE> |
+| FedML | <https://github.com/FedML-AI/FedML> |
+| OpenFL | <https://openfl.readthedocs.io/> |
+| PySyft | <https://github.com/OpenMined/PySyft> |
+| SecretFlow | <https://www.secretflow.org.cn/> |
