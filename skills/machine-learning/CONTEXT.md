@@ -760,3 +760,32 @@ order; each skill's rows land in the same change that adds the skill.
 | Docker Hub API | <https://docs.docker.com/reference/api/hub/latest/> |
 | pytorch/pytorch (Docker Hub) | <https://hub.docker.com/r/pytorch/pytorch> |
 | OCI/Docker Registry v2 (distribution) | <https://distribution.github.io/distribution/> |
+
+### meta-ml-experiment
+
+#### pinned-deps.md
+
+| Tool | Docs |
+|---|---|
+| uv | <https://docs.astral.sh/uv/> — llms.txt: <https://docs.astral.sh/uv/llms.txt> |
+| uv PyTorch guide | <https://docs.astral.sh/uv/guides/integration/pytorch/> |
+
+#### containers.md
+
+| Source | Docs |
+|---|---|
+| nvidia/cuda (Docker Hub) | <https://hub.docker.com/r/nvidia/cuda> |
+| NGC PyTorch container | <https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch> |
+| pytorch/pytorch (Docker Hub) | <https://hub.docker.com/r/pytorch/pytorch> |
+| rocm/pytorch (Docker Hub) | <https://hub.docker.com/r/rocm/pytorch> |
+| NVIDIA Container Toolkit | <https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| Docker Compose | <https://docs.docker.com/compose/> |
+| Dev Container spec | <https://containers.dev/> |
+
+#### assets (train-loop-accelerate.md, devcontainer.md)
+
+| Tool | Docs |
+|---|---|
+| Hugging Face Accelerate | <https://huggingface.co/docs/accelerate> — llms.txt: <https://huggingface.co/docs/accelerate/llms.txt> |
+| Pydantic (Settings) | <https://docs.pydantic.dev/> — llms.txt: <https://docs.pydantic.dev/llms.txt> |
+| Dev Container spec | <https://containers.dev/> |
