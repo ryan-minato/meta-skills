@@ -52,6 +52,12 @@ catalogs.
   planning and releases), each fetching current platform capabilities
   live from the GitHub docs rather than prescribing versioned syntax;
   installed on top of `core`, only for GitHub-hosted projects.
+- `gitlab` — procedure skills for targets hosted on GitLab (gitlab.com
+  or self-managed), mirroring the `github` catalog's five concerns while
+  respecting the instance's version and tier, each fetching current
+  platform capabilities live from the GitLab docs rather than
+  prescribing versioned syntax; installed on top of `core`, only for
+  GitLab-hosted projects.
 
 The validator reconciles this list against the directories under `skills/`
 (check B3), and it defines the legal commit scopes: `feat(core): …` for a
