@@ -57,7 +57,8 @@
         "./meta-ml-recsys-docs",
         "./meta-ml-tabular-docs",
         "./meta-ml-timeseries-docs",
-        "./meta-ml-graph-docs"
+        "./meta-ml-graph-docs",
+        "./meta-ml-probabilistic-docs"
       ],
       "strict": false
     }

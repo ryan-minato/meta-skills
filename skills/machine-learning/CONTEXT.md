@@ -645,3 +645,29 @@ order; each skill's rows land in the same change that adds the skill.
 | igraph | <https://python.igraph.org/> |
 | PyKEEN | <https://pykeen.readthedocs.io/> |
 | pgmpy | <https://pgmpy.org/> — llms.txt: <https://pgmpy.org/llms.txt> |
+
+### meta-ml-probabilistic-docs
+
+#### probabilistic-programming.md
+
+| Tool | Docs |
+|---|---|
+| PyMC | <https://www.pymc.io/> |
+| ArviZ | <https://python.arviz.org/> |
+| Stan | <https://mc-stan.org/> |
+| CmdStanPy | <https://mc-stan.org/cmdstanpy/> |
+| Pyro | <https://pyro.ai/> |
+| NumPyro | <https://num.pyro.ai/> |
+| TensorFlow Probability | <https://www.tensorflow.org/probability> |
+| BlackJAX | <https://blackjax-devs.github.io/blackjax/> |
+
+#### causal-inference.md
+
+| Tool | Docs |
+|---|---|
+| DoWhy | <https://www.pywhy.org/dowhy/> |
+| causal-learn | <https://causal-learn.readthedocs.io/> |
+| EconML | <https://github.com/py-why/EconML> |
+| CausalML | <https://causalml.readthedocs.io/> |
+| DoubleML | <https://docs.doubleml.org/> |
+| Tigramite | <https://github.com/jakobrunge/tigramite> |

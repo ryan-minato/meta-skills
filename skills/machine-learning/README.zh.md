@@ -39,3 +39,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 | [meta-ml-tabular-docs](meta-ml-tabular-docs/) | 传统机器学习与梯度提升、可解释性、AutoML 与超参数优化的文档入口 |
 | [meta-ml-timeseries-docs](meta-ml-timeseries-docs/) | 时间序列预测、特征提取、变点与异常检测的文档入口 |
 | [meta-ml-graph-docs](meta-ml-graph-docs/) | 图神经网络及图分析与知识图谱的文档入口 |
+| [meta-ml-probabilistic-docs](meta-ml-probabilistic-docs/) | 概率编程与贝叶斯推断及因果推断的文档入口 |
