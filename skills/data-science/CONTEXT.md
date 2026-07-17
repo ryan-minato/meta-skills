@@ -226,3 +226,19 @@ order; each skill's rows land in the same change that adds the skill.
 | dbt | <https://docs.getdbt.com/> — llms.txt: <https://docs.getdbt.com/llms.txt> |
 | Dagster | <https://docs.dagster.io/> — llms.txt: <https://docs.dagster.io/llms.txt> |
 | Prefect | <https://docs.prefect.io/> — llms.txt: <https://docs.prefect.io/llms.txt> |
+
+### meta-ds-geospatial-docs
+
+#### geospatial.md
+
+| Tool | Docs |
+|---|---|
+| GeoPandas | <https://geopandas.org/> |
+| Shapely | <https://shapely.readthedocs.io/> |
+| pyproj | <https://pyproj4.github.io/pyproj/> |
+| GDAL | <https://gdal.org/> |
+| Rasterio | <https://rasterio.readthedocs.io/> |
+| rioxarray | <https://corteva.github.io/rioxarray/> |
+| DuckDB Spatial | <https://duckdb.org/docs/> — llms.txt: <https://duckdb.org/llms.txt> |
+| Apache Sedona | <https://sedona.apache.org/> |
+| NVIDIA RAPIDS cuSpatial | <https://docs.rapids.ai/api/cuspatial/stable/> |

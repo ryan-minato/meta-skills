@@ -71,7 +71,8 @@
       "skills": [
         "./meta-ds-analysis-docs",
         "./meta-ds-scale-docs",
-        "./meta-ds-pipelines-docs"
+        "./meta-ds-pipelines-docs",
+        "./meta-ds-geospatial-docs"
       ],
       "strict": false
     }
