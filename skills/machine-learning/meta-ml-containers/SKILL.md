@@ -5,10 +5,11 @@ description: >-
   currently available GPU container images — bundled credential-free
   scripts list and filter NVIDIA NGC catalog images and NGC or Docker Hub
   tags, and a reference maps each image family's characteristics to the
-  situations it fits. Use when a containerized ML project must pick or
-  update its base image, or check which CUDA or ROCm builds currently
-  exist. Not for writing Dockerfiles or compose files, and not for
-  CPU-only projects.
+  situations it fits. Use when a Dockerfile, compose file, or dev
+  container needs its GPU base image chosen or its tag refreshed, or when
+  checking which CUDA or ROCm builds currently exist. It supplies the
+  verified image and tag; the container setup around that FROM line is
+  the caller's. Not for CPU-only projects.
 ---
 
 # GPU Container Image Discovery
