@@ -54,7 +54,8 @@
         "./meta-ml-image-gen-docs",
         "./meta-ml-audio-docs",
         "./meta-ml-rl-docs",
-        "./meta-ml-recsys-docs"
+        "./meta-ml-recsys-docs",
+        "./meta-ml-tabular-docs"
       ],
       "strict": false
     }

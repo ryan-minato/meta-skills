@@ -36,3 +36,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 | [meta-ml-audio-docs](meta-ml-audio-docs/) | 语音识别与说话人处理、语音合成与声音克隆、声音转换与分离、音乐与生成音频的文档入口 |
 | [meta-ml-rl-docs](meta-ml-rl-docs/) | 强化学习算法框架与环境/仿真器的文档入口 |
 | [meta-ml-recsys-docs](meta-ml-recsys-docs/) | 推荐、排序与召回框架的文档入口 |
+| [meta-ml-tabular-docs](meta-ml-tabular-docs/) | 传统机器学习与梯度提升、可解释性、AutoML 与超参数优化的文档入口 |

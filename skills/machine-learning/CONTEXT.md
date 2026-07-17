@@ -573,3 +573,36 @@ order; each skill's rows land in the same change that adds the skill.
 | LightFM | <https://github.com/lyst/lightfm> |
 | Faiss | <https://github.com/facebookresearch/faiss> |
 | ScaNN | <https://github.com/google-research/google-research/tree/master/scann> |
+
+### meta-ml-tabular-docs
+
+#### tabular-ml.md
+
+| Tool | Docs |
+|---|---|
+| scikit-learn | <https://scikit-learn.org/> |
+| XGBoost | <https://xgboost.readthedocs.io/> |
+| LightGBM | <https://lightgbm.readthedocs.io/> |
+| CatBoost | <https://catboost.ai/docs/> |
+| NVIDIA RAPIDS cuML | <https://docs.rapids.ai/api/cuml/stable/> |
+| River | <https://riverml.xyz/> |
+| Vowpal Wabbit | <https://vowpalwabbit.org/> |
+| imbalanced-learn | <https://imbalanced-learn.org/> |
+| skrub | <https://skrub-data.org/> |
+| PyOD | <https://pyod.readthedocs.io/> |
+| SHAP | <https://shap.readthedocs.io/> |
+| LIME | <https://github.com/marcotcr/lime> |
+| InterpretML | <https://interpret.ml/> |
+
+#### automl-and-tuning.md
+
+| Tool | Docs |
+|---|---|
+| Optuna | <https://optuna.readthedocs.io/> |
+| AutoGluon | <https://auto.gluon.ai/> |
+| FLAML | <https://microsoft.github.io/FLAML/> |
+| H2O AutoML | <https://docs.h2o.ai/> |
+| Ax | <https://ax.dev/> |
+| BoTorch | <https://botorch.org/> |
+| Hyperopt | <https://hyperopt.github.io/hyperopt/> |
+| Microsoft NNI | <https://nni.readthedocs.io/> |
