@@ -351,3 +351,26 @@ order; each skill's rows land in the same change that adds the skill.
 | OpenSearch | <https://docs.opensearch.org/> |
 | Redis | <https://redis.io/docs/> — llms.txt: <https://redis.io/llms.txt> |
 | Pinecone | <https://docs.pinecone.io/> — llms.txt: <https://docs.pinecone.io/llms.txt> |
+
+### meta-ml-llm-eval-docs
+
+#### llm-evaluation.md
+
+| Tool | Docs |
+|---|---|
+| lm-evaluation-harness | <https://github.com/EleutherAI/lm-evaluation-harness> |
+| HELM | <https://crfm-helm.readthedocs.io/> |
+| OpenCompass | <https://opencompass.readthedocs.io/> |
+| VLMEvalKit | <https://github.com/open-compass/VLMEvalKit> |
+| Ragas | <https://docs.ragas.io/> — llms.txt: <https://docs.ragas.io/llms.txt> |
+| DeepEval | <https://deepeval.com/docs/getting-started> — llms.txt: <https://deepeval.com/llms.txt> |
+| Promptfoo | <https://www.promptfoo.dev/docs/> — llms.txt: <https://www.promptfoo.dev/llms.txt> |
+| Inspect AI | <https://inspect.aisi.org.uk/> — llms.txt: <https://inspect.aisi.org.uk/llms.txt> |
+| EvalPlus | <https://github.com/evalplus/evalplus> |
+
+#### observability.md
+
+| Tool | Docs |
+|---|---|
+| Arize Phoenix | <https://arize.com/docs/phoenix> — llms.txt: <https://arize.com/docs/llms.txt> |
+| Langfuse | <https://langfuse.com/docs> — llms.txt: <https://langfuse.com/llms.txt> |
