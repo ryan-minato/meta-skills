@@ -3,15 +3,12 @@ name: meta-python-toolchain
 description: >-
   Disposable meta-skill (delete after the harness is built): supplies
   trusted defaults and authoritative doc URLs for a Python project's
-  toolchain — uv for dependencies (covering one-off PEP 723 scripts,
-  pinned-requirements workflows, and full pyproject projects), Ruff for
-  linting and formatting, ty for type checking, a justfile for tasks,
-  pre-commit for git hooks, and Zensical for documentation — with the
-  established alternatives for each category and the instruction to fetch
-  current install and config details upstream. Use when a harness build
-  must choose or record Python tooling and the user has not specified it.
-  Not for migrating a project off tools it already uses, and not for
-  non-Python projects.
+  toolchain — uv for dependencies, Ruff for linting and formatting, ty
+  for type checking, a justfile for tasks, pre-commit for git hooks, and
+  Zensical for documentation — with the established alternatives for each
+  category. Use when a harness build must choose or record Python tooling
+  and the user has not specified it. Not for migrating a project off
+  tools it already uses, and not for non-Python projects.
 ---
 
 # Python Toolchain Defaults

@@ -5,13 +5,11 @@ description: >-
   trustworthy defaults for a Python project's testing setup — pytest as
   the default framework (unittest and doctest when constraints call for
   them), plugin selection by named need (coverage, mocking, async,
-  parallel, timeouts, randomization, property-based) with doc URLs, and a
-  test-style doctrine: Arrange-Act-Assert, the classical school over the
-  mockist school, real objects over mocks, state verification,
-  parametrized tests, and error paths always tested. Use when a harness
-  build must choose or record how a Python project is tested and the user
-  has not fully specified it. Not for writing the tests themselves, and
-  not for non-Python projects.
+  parallel, timeouts, randomization, property-based) with doc URLs, and
+  an opinionated test-style doctrine (classical school, real objects over
+  mocks). Use when a harness build must choose or record how a Python
+  project is tested and the user has not fully specified it. Not for
+  writing the tests themselves, and not for non-Python projects.
 ---
 
 # Python Testing Conventions
