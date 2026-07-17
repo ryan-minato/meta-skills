@@ -9,5 +9,5 @@ docs. No entry is a recommendation.
 
 | Tool | One line | Docs |
 |---|---|---|
-| Arize Phoenix | open-source LLM tracing and evaluation | <https://arize.com/docs/phoenix> — llms.txt: <https://arize.com/docs/llms.txt> |
+| Arize Phoenix | open-source LLM tracing and evaluation | <https://arize.com/docs/phoenix> — llms.txt: <https://arize.com/docs/phoenix/llms.txt> |
 | Langfuse | open-source LLM engineering platform: traces, evals, prompts | <https://langfuse.com/docs> — llms.txt: <https://langfuse.com/llms.txt> |

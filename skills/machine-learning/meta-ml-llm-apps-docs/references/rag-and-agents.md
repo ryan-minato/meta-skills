@@ -18,7 +18,7 @@ No entry is a recommendation.
 | Semantic Kernel | Microsoft's model-agnostic agent SDK | <https://learn.microsoft.com/en-us/semantic-kernel/> |
 | AutoGen | multi-agent conversation framework | <https://microsoft.github.io/autogen/> |
 | CrewAI | role-based multi-agent teams | <https://docs.crewai.com/> — llms.txt: <https://docs.crewai.com/llms.txt> |
-| PydanticAI | type-safe agent framework from the Pydantic team | <https://pydantic.dev/docs/ai/> — llms.txt: <https://pydantic.dev/llms.txt> |
+| PydanticAI | type-safe agent framework from the Pydantic team | <https://pydantic.dev/docs/ai/> — llms.txt: <https://pydantic.dev/docs/ai/llms.txt> |
 | LiteLLM | one client and proxy over many LLM providers | <https://docs.litellm.ai/> — llms.txt: <https://docs.litellm.ai/llms.txt> |
 | Instructor | structured output from LLMs via Pydantic | <https://python.useinstructor.com/> — llms.txt: <https://python.useinstructor.com/llms.txt> |
 | Guardrails AI | input/output validation for LLM apps | <https://guardrailsai.com/guardrails/docs> |

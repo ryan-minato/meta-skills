@@ -324,7 +324,7 @@ order; each skill's rows land in the same change that adds the skill.
 | Semantic Kernel | <https://learn.microsoft.com/en-us/semantic-kernel/> |
 | AutoGen | <https://microsoft.github.io/autogen/> |
 | CrewAI | <https://docs.crewai.com/> — llms.txt: <https://docs.crewai.com/llms.txt> |
-| PydanticAI | <https://pydantic.dev/docs/ai/> — llms.txt: <https://pydantic.dev/llms.txt> |
+| PydanticAI | <https://pydantic.dev/docs/ai/> — llms.txt: <https://pydantic.dev/docs/ai/llms.txt> |
 | LiteLLM | <https://docs.litellm.ai/> — llms.txt: <https://docs.litellm.ai/llms.txt> |
 | Instructor | <https://python.useinstructor.com/> — llms.txt: <https://python.useinstructor.com/llms.txt> |
 | Guardrails AI | <https://guardrailsai.com/guardrails/docs> |
@@ -372,7 +372,7 @@ order; each skill's rows land in the same change that adds the skill.
 
 | Tool | Docs |
 |---|---|
-| Arize Phoenix | <https://arize.com/docs/phoenix> — llms.txt: <https://arize.com/docs/llms.txt> |
+| Arize Phoenix | <https://arize.com/docs/phoenix> — llms.txt: <https://arize.com/docs/phoenix/llms.txt> |
 | Langfuse | <https://langfuse.com/docs> — llms.txt: <https://langfuse.com/llms.txt> |
 
 ### meta-ml-vision-docs
