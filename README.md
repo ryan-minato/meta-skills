@@ -49,6 +49,7 @@ them in the file tree.
 | [core](skills/core/) | The required set: enough to take any project from no harness to a working one | Per project, before a harness build |
 | [frontend](skills/frontend/) | Design description and visual language for projects with a user-facing frontend | Per project, on top of `core`, only when the target has a visual surface |
 | [python](skills/python/) | Trusted defaults and doc URLs for Python projects: docstring and comment conventions, testing setup, and toolchain choices | Per project, on top of `core`, only when the target is a Python project |
+| [machine-learning](skills/machine-learning/) | Authoritative documentation entry points for ML projects, one skill per domain (frameworks, training, inference, vision, audio, …); information only, never recommendations | Per project, on top of `core`, only when the target trains, finetunes, serves, or builds on ML models |
 
 ## Installation
 
@@ -60,6 +61,7 @@ claude plugin marketplace add ryan-minato/meta-skills
 claude plugin install core@meta-skills --scope project
 claude plugin install frontend@meta-skills --scope project   # only with a visual surface
 claude plugin install python@meta-skills --scope project     # only for Python projects
+claude plugin install machine-learning@meta-skills --scope project  # only for ML projects
 ```
 
 Plugin-managed installs are removed with `claude plugin uninstall`, not by
@@ -72,6 +74,7 @@ discovery to exactly that catalog:
 npx skills add ryan-minato/meta-skills/skills/core
 npx skills add ryan-minato/meta-skills/skills/frontend      # only with a visual surface
 npx skills add ryan-minato/meta-skills/skills/python        # only for Python projects
+npx skills add ryan-minato/meta-skills/skills/machine-learning  # only for ML projects
 npx skills add ryan-minato/meta-skills/skills               # every published skill
 ```
 

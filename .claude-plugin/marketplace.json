@@ -36,6 +36,13 @@
         "./meta-python-toolchain"
       ],
       "strict": false
+    },
+    {
+      "name": "machine-learning",
+      "source": "./skills/machine-learning",
+      "description": "Authoritative documentation entry points for ML projects, one skill per domain; information only, never recommendations. Install on top of core.",
+      "skills": [],
+      "strict": false
     }
   ]
 }

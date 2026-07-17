@@ -37,6 +37,11 @@ catalogs.
   targets: docstring and comment conventions, testing setup, and
   toolchain choices; installed on top of `core`, only for Python
   projects.
+- `machine-learning` — authoritative documentation entry points for ML
+  targets, one skill per project domain (frameworks, training, inference,
+  vision, audio, …), information only, never recommendations; installed
+  on top of `core`, only for projects that train, finetune, serve, or
+  build on ML models.
 
 The validator reconciles this list against the directories under `skills/`
 (check B3), and it defines the legal commit scopes: `feat(core): …` for a
