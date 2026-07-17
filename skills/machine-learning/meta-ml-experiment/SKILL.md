@@ -2,17 +2,14 @@
 name: meta-ml-experiment
 description: >-
   Disposable meta-skill (delete after the harness is built): scaffolds a
-  quick ML experiment repository and declares its opinionated defaults up
-  front — uv-compiled pinned requirements with a recorded torch backend,
-  root-level train and eval entry scripts, Pydantic Settings config, a
-  justfile, Ruff, targeted pytest, Gitleaks, a generated pre-commit
-  config, and a hand-built PyTorch training loop on Hugging Face
-  Accelerate — then writes a concise AGENTS.md depositing the project's
-  outcome-first coding and let-it-crash error rules. Use when the target
-  must validate an idea fast with exactly reproducible re-runs and has
-  little or no harness yet. Not for long-lived training codebases meant
-  to survive upgrades, and not for migrating tooling that already works —
-  existing choices stay.
+  quick ML experiment repository with opinionated defaults — uv-compiled
+  pinned requirements, root-level entry scripts, a hand-built PyTorch
+  training loop on Hugging Face Accelerate — and writes a concise
+  AGENTS.md depositing the outcome-first, let-it-crash coding rules. Use
+  when the target must validate an idea fast with exactly reproducible
+  re-runs and has little or no harness yet. Not for long-lived training
+  codebases meant to survive upgrades, and not for migrating tooling that
+  already works — existing choices stay.
 ---
 
 # Quick ML Experiment Scaffold

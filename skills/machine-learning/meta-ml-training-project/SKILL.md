@@ -2,17 +2,15 @@
 name: meta-ml-training-project
 description: >-
   Disposable meta-skill (delete after the harness is built): scaffolds a
-  maintainable model-training project and declares its opinionated
-  defaults up front — uv with pyproject.toml and hardware-matched torch
-  wheel indexes, Hydra configs, data split into raw, interim, and
-  processed, Ruff, pytest with a manual-only slow marker, Gitleaks, a
-  generated pre-commit config, a justfile, and a hand-built training loop
-  on Hugging Face Accelerate — then writes a directory-map AGENTS.md and
-  a project knowledge base depositing the outcome-first coding and
-  let-it-crash error rules. Use when the target is a train/eval codebase
-  meant to be edited and upgraded over months. Not for one-shot
-  idea-validation experiments, and not for migrating tooling that already
-  works — existing choices stay.
+  maintainable model-training project with opinionated defaults — uv plus
+  pyproject.toml with hardware-matched torch wheel indexes, Hydra
+  configs, a raw/interim/processed data split, a hand-built training loop
+  on Hugging Face Accelerate — and writes a directory-map AGENTS.md plus
+  a knowledge base depositing the outcome-first, let-it-crash coding
+  rules. Use when the target is a train/eval codebase meant to be edited
+  and upgraded over months. Not for one-shot idea-validation experiments,
+  and not for migrating tooling that already works — existing choices
+  stay.
 ---
 
 # Maintainable Training Project Scaffold

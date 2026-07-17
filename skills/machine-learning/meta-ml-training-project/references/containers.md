@@ -61,6 +61,6 @@ AGENTS.md.
 
 ## Assets
 
-- Dev environment → copy [devcontainer.md](../assets/devcontainer.md).
-- Training image and runner → copy
-  [docker-training.md](../assets/docker-training.md).
+- Dev environment → copy the `assets/devcontainer.md` skeleton.
+- Training image and runner → copy the `assets/docker-training.md`
+  skeleton.
