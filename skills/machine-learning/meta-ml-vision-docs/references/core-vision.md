@@ -11,7 +11,7 @@ a recommendation.
 |---|---|---|
 | OpenCV | the general-purpose vision library | <https://docs.opencv.org/> |
 | torchvision | PyTorch's datasets, transforms, and vision models | <https://docs.pytorch.org/vision/> |
-| timm | vision models, pretrained weights, and training components | <https://huggingface.co/docs/timm> |
+| timm | vision models, pretrained weights, and training components | <https://huggingface.co/docs/timm> — llms.txt: <https://huggingface.co/docs/timm/llms.txt> |
 | MMEngine | OpenMMLab's training-loop foundation | <https://mmengine.readthedocs.io/> |
 | MMPreTrain | OpenMMLab pretraining and classification | <https://mmpretrain.readthedocs.io/> |
 | MMDetection | OpenMMLab object detection | <https://mmdetection.readthedocs.io/> |

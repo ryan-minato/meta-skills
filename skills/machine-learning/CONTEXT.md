@@ -121,7 +121,7 @@ order; each skill's rows land in the same change that adds the skill.
 | einops | <https://einops.rocks/> |
 | FlashAttention | <https://github.com/Dao-AILab/flash-attention> |
 | xFormers | <https://facebookresearch.github.io/xformers/> |
-| bitsandbytes | <https://huggingface.co/docs/bitsandbytes> |
+| bitsandbytes | <https://huggingface.co/docs/bitsandbytes> — llms.txt: <https://huggingface.co/docs/bitsandbytes/llms.txt> |
 | NVIDIA Transformer Engine | <https://docs.nvidia.com/deeplearning/transformer-engine/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
 | Liger Kernel | <https://github.com/linkedin/Liger-Kernel> |
 | Numba | <https://numba.readthedocs.io/> |
@@ -158,46 +158,46 @@ order; each skill's rows land in the same change that adds the skill.
 
 | Tool | Docs |
 |---|---|
-| Transformers | <https://huggingface.co/docs/transformers> |
-| Diffusers | <https://huggingface.co/docs/diffusers> |
+| Transformers | <https://huggingface.co/docs/transformers> — llms.txt: <https://huggingface.co/docs/transformers/llms.txt> |
+| Diffusers | <https://huggingface.co/docs/diffusers> — llms.txt: <https://huggingface.co/docs/diffusers/llms.txt> |
 | Sentence Transformers | <https://sbert.net/> |
-| timm | <https://huggingface.co/docs/timm> |
-| Transformers.js | <https://huggingface.co/docs/transformers.js> |
-| Datasets | <https://huggingface.co/docs/datasets> |
+| timm | <https://huggingface.co/docs/timm> — llms.txt: <https://huggingface.co/docs/timm/llms.txt> |
+| Transformers.js | <https://huggingface.co/docs/transformers.js> — llms.txt: <https://huggingface.co/docs/transformers.js/llms.txt> |
+| Datasets | <https://huggingface.co/docs/datasets> — llms.txt: <https://huggingface.co/docs/datasets/llms.txt> |
 | Tokenizers | <https://github.com/huggingface/tokenizers> |
-| Safetensors | <https://huggingface.co/docs/safetensors> |
-| huggingface_hub | <https://huggingface.co/docs/huggingface_hub> |
-| Hugging Face Hub (Xet storage) | <https://huggingface.co/docs/hub> |
+| Safetensors | <https://huggingface.co/docs/safetensors> — llms.txt: <https://huggingface.co/docs/safetensors/llms.txt> |
+| huggingface_hub | <https://huggingface.co/docs/huggingface_hub> — llms.txt: <https://huggingface.co/docs/huggingface_hub/llms.txt> |
+| Hugging Face Hub (Xet storage) | <https://huggingface.co/docs/hub> — llms.txt: <https://huggingface.co/docs/hub/llms.txt> |
 
 #### training-and-optimization.md
 
 | Tool | Docs |
 |---|---|
-| Accelerate | <https://huggingface.co/docs/accelerate> |
-| PEFT | <https://huggingface.co/docs/peft> |
-| TRL | <https://huggingface.co/docs/trl> |
-| AutoTrain | <https://huggingface.co/docs/autotrain> |
-| Kernels | <https://huggingface.co/docs/kernels> |
-| Optimum | <https://huggingface.co/docs/optimum> |
+| Accelerate | <https://huggingface.co/docs/accelerate> — llms.txt: <https://huggingface.co/docs/accelerate/llms.txt> |
+| PEFT | <https://huggingface.co/docs/peft> — llms.txt: <https://huggingface.co/docs/peft/llms.txt> |
+| TRL | <https://huggingface.co/docs/trl> — llms.txt: <https://huggingface.co/docs/trl/llms.txt> |
+| AutoTrain | <https://huggingface.co/docs/autotrain> — llms.txt: <https://huggingface.co/docs/autotrain/llms.txt> |
+| Kernels | <https://huggingface.co/docs/kernels> — llms.txt: <https://huggingface.co/docs/kernels/llms.txt> |
+| Optimum | <https://huggingface.co/docs/optimum> — llms.txt: <https://huggingface.co/docs/optimum/llms.txt> |
 | Evaluate | <https://huggingface.co/docs/evaluate> |
-| LightEval | <https://huggingface.co/docs/lighteval> |
+| LightEval | <https://huggingface.co/docs/lighteval> — llms.txt: <https://huggingface.co/docs/lighteval/llms.txt> |
 
 #### serving-and-apps.md
 
 | Tool | Docs |
 |---|---|
-| Text Generation Inference | <https://huggingface.co/docs/text-generation-inference> |
-| Text Embeddings Inference | <https://huggingface.co/docs/text-embeddings-inference> |
-| Inference Providers | <https://huggingface.co/docs/inference-providers> |
-| Inference Endpoints | <https://huggingface.co/docs/inference-endpoints> |
-| Spaces | <https://huggingface.co/docs/hub/spaces> |
+| Text Generation Inference | <https://huggingface.co/docs/text-generation-inference> — llms.txt: <https://huggingface.co/docs/text-generation-inference/llms.txt> |
+| Text Embeddings Inference | <https://huggingface.co/docs/text-embeddings-inference> — llms.txt: <https://huggingface.co/docs/text-embeddings-inference/llms.txt> |
+| Inference Providers | <https://huggingface.co/docs/inference-providers> — llms.txt: <https://huggingface.co/docs/inference-providers/llms.txt> |
+| Inference Endpoints | <https://huggingface.co/docs/inference-endpoints> — llms.txt: <https://huggingface.co/docs/inference-endpoints/llms.txt> |
+| Spaces | <https://huggingface.co/docs/hub/spaces> — llms.txt: <https://huggingface.co/docs/hub/llms.txt> |
 | Gradio | <https://gradio.app/docs> — llms.txt: <https://gradio.app/llms.txt> |
-| smolagents | <https://huggingface.co/docs/smolagents> |
-| LeRobot | <https://huggingface.co/docs/lerobot> |
+| smolagents | <https://huggingface.co/docs/smolagents> — llms.txt: <https://huggingface.co/docs/smolagents/llms.txt> |
+| LeRobot | <https://huggingface.co/docs/lerobot> — llms.txt: <https://huggingface.co/docs/lerobot/llms.txt> |
 | Argilla | <https://docs.argilla.io/> |
 | Distilabel | <https://distilabel.argilla.io/> |
-| Trackio | <https://huggingface.co/docs/trackio> |
-| Leaderboards | <https://huggingface.co/docs/leaderboards> |
+| Trackio | <https://huggingface.co/docs/trackio> — llms.txt: <https://huggingface.co/docs/trackio/llms.txt> |
+| Leaderboards | <https://huggingface.co/docs/leaderboards> — llms.txt: <https://huggingface.co/docs/leaderboards/llms.txt> |
 
 ### meta-ml-ray-docs
 
@@ -239,7 +239,7 @@ order; each skill's rows land in the same change that adds the skill.
 | NVIDIA Model Optimizer | <https://nvidia.github.io/Model-Optimizer/> |
 | Intel Neural Compressor | <https://intel.github.io/neural-compressor/> |
 | OpenVINO NNCF | <https://github.com/openvinotoolkit/nncf> |
-| bitsandbytes | <https://huggingface.co/docs/bitsandbytes> |
+| bitsandbytes | <https://huggingface.co/docs/bitsandbytes> — llms.txt: <https://huggingface.co/docs/bitsandbytes/llms.txt> |
 | GPTQModel | <https://github.com/ModelCloud/GPTQModel> |
 | AutoAWQ | <https://github.com/casper-hansen/AutoAWQ> |
 | SparseML | <https://github.com/neuralmagic/sparseml> |
@@ -383,7 +383,7 @@ order; each skill's rows land in the same change that adds the skill.
 |---|---|
 | OpenCV | <https://docs.opencv.org/> |
 | torchvision | <https://docs.pytorch.org/vision/> |
-| timm | <https://huggingface.co/docs/timm> |
+| timm | <https://huggingface.co/docs/timm> — llms.txt: <https://huggingface.co/docs/timm/llms.txt> |
 | MMEngine | <https://mmengine.readthedocs.io/> |
 | MMPreTrain | <https://mmpretrain.readthedocs.io/> |
 | MMDetection | <https://mmdetection.readthedocs.io/> |

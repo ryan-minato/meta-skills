@@ -13,7 +13,7 @@ details from the entry point. No entry is a recommendation.
 | NVIDIA Model Optimizer | quantization, distillation, and pruning for NVIDIA deployment | <https://nvidia.github.io/Model-Optimizer/> |
 | Intel Neural Compressor | quantization across Intel hardware | <https://intel.github.io/neural-compressor/> |
 | OpenVINO NNCF | compression for OpenVINO deployment | <https://github.com/openvinotoolkit/nncf> |
-| bitsandbytes | 8-bit/4-bit quantized inference and optimizers | <https://huggingface.co/docs/bitsandbytes> |
+| bitsandbytes | 8-bit/4-bit quantized inference and optimizers | <https://huggingface.co/docs/bitsandbytes> — llms.txt: <https://huggingface.co/docs/bitsandbytes/llms.txt> |
 | GPTQModel | GPTQ post-training quantization for LLMs | <https://github.com/ModelCloud/GPTQModel> |
 | AutoAWQ | AWQ activation-aware quantization for LLMs | <https://github.com/casper-hansen/AutoAWQ> |
 | SparseML | sparsification recipes for inference speedup | <https://github.com/neuralmagic/sparseml> |
