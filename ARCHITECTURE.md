@@ -42,6 +42,11 @@ catalogs.
   vision, audio, …), information only, never recommendations; installed
   on top of `core`, only for projects that train, finetune, serve, or
   build on ML models.
+- `data-science` — authoritative documentation entry points for
+  data-analysis and scientific-computing targets, one skill per project
+  domain (analysis, scale, pipelines, geospatial, numerics, simulation,
+  HPC), information only, never recommendations; installed on top of
+  `core`, only for data or scientific-computing projects.
 
 The validator reconciles this list against the directories under `skills/`
 (check B3), and it defines the legal commit scopes: `feat(core): …` for a

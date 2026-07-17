@@ -50,6 +50,7 @@ them in the file tree.
 | [frontend](skills/frontend/) | Design description and visual language for projects with a user-facing frontend | Per project, on top of `core`, only when the target has a visual surface |
 | [python](skills/python/) | Trusted defaults and doc URLs for Python projects: docstring and comment conventions, testing setup, and toolchain choices | Per project, on top of `core`, only when the target is a Python project |
 | [machine-learning](skills/machine-learning/) | Authoritative documentation entry points for ML projects, one skill per domain (frameworks, training, inference, vision, audio, …); information only, never recommendations | Per project, on top of `core`, only when the target trains, finetunes, serves, or builds on ML models |
+| [data-science](skills/data-science/) | Authoritative documentation entry points for data-analysis and scientific-computing projects, one skill per domain (analysis, scale, pipelines, geospatial, numerics, simulation, HPC); information only, never recommendations | Per project, on top of `core`, only when the target analyzes data or does scientific computing |
 
 ## Installation
 
@@ -62,6 +63,7 @@ claude plugin install core@meta-skills --scope project
 claude plugin install frontend@meta-skills --scope project   # only with a visual surface
 claude plugin install python@meta-skills --scope project     # only for Python projects
 claude plugin install machine-learning@meta-skills --scope project  # only for ML projects
+claude plugin install data-science@meta-skills --scope project      # only for data/scientific projects
 ```
 
 Plugin-managed installs are removed with `claude plugin uninstall`, not by
@@ -75,6 +77,7 @@ npx skills add ryan-minato/meta-skills/skills/core
 npx skills add ryan-minato/meta-skills/skills/frontend      # only with a visual surface
 npx skills add ryan-minato/meta-skills/skills/python        # only for Python projects
 npx skills add ryan-minato/meta-skills/skills/machine-learning  # only for ML projects
+npx skills add ryan-minato/meta-skills/skills/data-science  # only for data/scientific projects
 npx skills add ryan-minato/meta-skills/skills               # every published skill
 ```
 

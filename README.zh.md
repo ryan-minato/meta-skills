@@ -42,6 +42,7 @@ agent 正是靠这个标记重新找到这些技能并删除它们。识别依�
 | [frontend](skills/frontend/) | 面向具有用户可见前端的项目的设计描述与视觉语言 | 按项目安装，在 `core` 之上，仅当目标有视觉界面时 |
 | [python](skills/python/) | 面向 Python 项目的可信默认值与文档 URL：docstring 与注释约定、测试设置、工具链选择 | 按项目安装，在 `core` 之上，仅当目标是 Python 项目时 |
 | [machine-learning](skills/machine-learning/) | 面向 ML 项目的权威文档入口，每个领域一个技能（框架、训练、推理、视觉、音频……）；只提供信息，绝不做推荐 | 按项目安装，在 `core` 之上，仅当目标训练、微调、部署或构建于 ML 模型之上时 |
+| [data-science](skills/data-science/) | 面向数据分析与科学计算项目的权威文档入口，每个领域一个技能（分析、规模化、流水线、地理空间、数值、仿真、HPC）；只提供信息，绝不做推荐 | 按项目安装，在 `core` 之上，仅当目标做数据分析或科学计算时 |
 
 ## 安装
 
@@ -53,6 +54,7 @@ claude plugin install core@meta-skills --scope project
 claude plugin install frontend@meta-skills --scope project   # 仅当项目有视觉界面
 claude plugin install python@meta-skills --scope project     # 仅当是 Python 项目
 claude plugin install machine-learning@meta-skills --scope project  # 仅当是 ML 项目
+claude plugin install data-science@meta-skills --scope project      # 仅当是数据/科学计算项目
 ```
 
 以插件方式安装的技能用 `claude plugin uninstall` 移除，而不是由移除技能删除
@@ -65,6 +67,7 @@ npx skills add ryan-minato/meta-skills/skills/core
 npx skills add ryan-minato/meta-skills/skills/frontend      # 仅当项目有视觉界面
 npx skills add ryan-minato/meta-skills/skills/python        # 仅当是 Python 项目
 npx skills add ryan-minato/meta-skills/skills/machine-learning  # 仅当是 ML 项目
+npx skills add ryan-minato/meta-skills/skills/data-science  # 仅当是数据/科学计算项目
 npx skills add ryan-minato/meta-skills/skills               # 全部已发布技能
 ```
 
