@@ -3,14 +3,14 @@ name: meta-ml-frameworks-docs
 description: >-
   Disposable meta-skill (delete after the harness is built): maps a
   deep-learning project to authoritative documentation entry points —
-  general DL and tensor frameworks (PyTorch, TensorFlow, Keras, JAX, MLX,
-  PaddlePaddle, tinygrad) and the GPU-kernel and compiled-ops libraries
-  beside them — plus the discovery procedure (llms.txt probing, PyPI
-  metadata, official org repos) for tools not listed. Use when a harness
-  build must record where the docs live for a project that depends on a
-  DL or tensor framework or ships custom kernels. Not for choosing
-  between frameworks or recommending one, and not for
-  distributed-training, inference, or data-analysis stacks.
+  general DL and tensor frameworks (PyTorch, TensorFlow, Keras, JAX,
+  MLX, PaddlePaddle, tinygrad) and the GPU-kernel and compiled-ops
+  libraries beside them — plus a discovery procedure for tools not
+  listed. Use when a harness build must record where the docs live for
+  a project that depends on a DL or tensor framework or ships custom
+  kernels. Not for choosing between frameworks or recommending one,
+  and not for distributed-training, inference, or data-analysis
+  stacks.
 ---
 
 # DL Framework & Kernel Documentation Map

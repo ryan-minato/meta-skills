@@ -6,13 +6,12 @@ description: >-
   privacy, adversarial robustness, fairness, and interpretability
   (Opacus, Adversarial Robustness Toolbox, Fairlearn, Presidio, Garak,
   Captum, SHAP) and federated learning (Flower, TensorFlow Federated,
-  NVIDIA FLARE, FATE, OpenFL, SecretFlow) — plus the discovery
-  procedure (llms.txt probing, PyPI metadata, official org repos) for
-  tools not listed. Use when a harness build must record where the docs
-  live for a project that handles differential privacy, adversarial
-  testing, fairness auditing, PII redaction, or federated training. Not
-  for choosing between tools or recommending one, and not for general
-  model evaluation or security outside ML.
+  NVIDIA FLARE, FATE, OpenFL, SecretFlow) — plus a discovery procedure
+  for tools not listed. Use when a harness build must record where the
+  docs live for a project that handles differential privacy,
+  adversarial testing, fairness auditing, PII redaction, or federated
+  training. Not for choosing between tools or recommending one, and
+  not for general model evaluation or security outside ML.
 ---
 
 # Trustworthy & Federated ML Documentation Map

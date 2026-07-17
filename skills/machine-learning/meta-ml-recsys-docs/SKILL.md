@@ -4,13 +4,13 @@ description: >-
   Disposable meta-skill (delete after the harness is built): maps a
   recommender-system project to authoritative documentation entry
   points — ranking and retrieval frameworks (TorchRec, TensorFlow
-  Recommenders, NVIDIA Merlin, RecBole, DeepCTR, implicit, LightFM) and
-  the ANN retrieval beneath them (Faiss, ScaNN) — plus the discovery
-  procedure (llms.txt probing, PyPI metadata, official org repos) for
-  tools not listed. Use when a harness build must record where the docs
-  live for a project that builds recommendation, ranking, or candidate
-  retrieval. Not for choosing between tools or recommending one, and not
-  for general vector databases or LLM retrieval stacks.
+  Recommenders, NVIDIA Merlin, RecBole, DeepCTR, implicit, LightFM)
+  and the ANN retrieval beneath them (Faiss, ScaNN) — plus a discovery
+  procedure for tools not listed. Use when a harness build must record
+  where the docs live for a project that builds recommendation,
+  ranking, or candidate retrieval. Not for choosing between tools or
+  recommending one, and not for general vector databases or LLM
+  retrieval stacks.
 ---
 
 # Recommender Systems Documentation Map

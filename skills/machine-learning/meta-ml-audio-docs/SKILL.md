@@ -4,16 +4,15 @@ description: >-
   Disposable meta-skill (delete after the harness is built): maps a
   speech- or audio-processing project to authoritative documentation
   entry points — speech recognition and speaker processing (Whisper
-  family, SpeechBrain, ESPnet, Kaldi/k2, pyannote), speech synthesis and
-  voice cloning (GPT-SoVITS, CosyVoice, F5-TTS, Piper), voice conversion
-  and source separation (RVC family, Demucs, librosa, torchaudio), and
-  music and generative audio (AudioCraft, Essentia, Magenta) — plus the
-  discovery procedure (llms.txt probing, PyPI metadata, official org
-  repos) for tools not listed. Use when a harness build must record
-  where the docs live for a project that recognizes, synthesizes,
-  converts, separates, or generates speech, sound, or music. Not for
-  choosing between tools or recommending one, and not for non-audio
-  modalities.
+  family, SpeechBrain, ESPnet, Kaldi/k2, pyannote), speech synthesis
+  and voice cloning (GPT-SoVITS, CosyVoice, F5-TTS, Piper), voice
+  conversion and source separation (RVC family, Demucs, librosa,
+  torchaudio), and music and generative audio (AudioCraft, Essentia,
+  Magenta) — plus a discovery procedure for tools not listed. Use when
+  a harness build must record where the docs live for a project that
+  recognizes, synthesizes, converts, separates, or generates speech,
+  sound, or music. Not for choosing between tools or recommending one,
+  and not for non-audio modalities.
 ---
 
 # Speech & Audio Documentation Map

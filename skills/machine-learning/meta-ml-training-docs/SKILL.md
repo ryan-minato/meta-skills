@@ -5,13 +5,12 @@ description: >-
   model-training project to authoritative documentation entry points —
   distributed-training stacks (DeepSpeed, Megatron, PyTorch Lightning,
   NeMo, Colossal-AI, TorchTitan) and finetuning frameworks (torchtune,
-  LLaMA-Factory, Axolotl, Unsloth, OpenRLHF) — plus the discovery
-  procedure (llms.txt probing, PyPI metadata, official org repos) for
-  tools not listed. Use when a harness build must record where the docs
-  live for a project that trains or finetunes models, especially across
-  multiple devices or nodes. Not for choosing between tools or
-  recommending one, and not for base frameworks, the Hugging Face or Ray
-  ecosystems, or inference stacks.
+  LLaMA-Factory, Axolotl, Unsloth, OpenRLHF) — plus a discovery
+  procedure for tools not listed. Use when a harness build must record
+  where the docs live for a project that trains or finetunes models,
+  especially across multiple devices or nodes. Not for choosing
+  between tools or recommending one, and not for base frameworks, the
+  Hugging Face or Ray ecosystems, or inference stacks.
 ---
 
 # Training & Finetuning Documentation Map

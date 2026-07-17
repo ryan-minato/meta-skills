@@ -5,12 +5,11 @@ description: >-
   graph machine-learning project to authoritative documentation entry
   points — graph neural networks (PyTorch Geometric, DGL, TensorFlow
   GNN, cuGraph) and graph analysis and knowledge graphs (NetworkX,
-  igraph, PyKEEN, pgmpy) — plus the discovery procedure (llms.txt
-  probing, PyPI metadata, official org repos) for tools not listed. Use
-  when a harness build must record where the docs live for a project
-  that learns on graphs or builds knowledge graphs. Not for choosing
-  between tools or recommending one, and not for non-graph ML or general
-  network analysis without ML.
+  igraph, PyKEEN, pgmpy) — plus a discovery procedure for tools not
+  listed. Use when a harness build must record where the docs live for
+  a project that learns on graphs or builds knowledge graphs. Not for
+  choosing between tools or recommending one, and not for non-graph ML
+  or general network analysis without ML.
 ---
 
 # Graph ML & Knowledge Graph Documentation Map

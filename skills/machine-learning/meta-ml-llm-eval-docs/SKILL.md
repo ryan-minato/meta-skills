@@ -5,12 +5,11 @@ description: >-
   LLM-evaluation project to authoritative documentation entry points —
   benchmark and evaluation harnesses (lm-evaluation-harness, HELM,
   OpenCompass, VLMEvalKit, Ragas, DeepEval, Promptfoo, Inspect AI,
-  EvalPlus) and LLM observability platforms (Arize Phoenix, Langfuse) —
-  plus the discovery procedure (llms.txt probing, PyPI metadata,
-  official org repos) for tools not listed. Use when a harness build
-  must record where the docs live for a project that benchmarks,
-  evaluates, or traces LLMs and generative models. Not for choosing
-  between tools or recommending one, and not for building LLM
+  EvalPlus) and LLM observability platforms (Arize Phoenix, Langfuse)
+  — plus a discovery procedure for tools not listed. Use when a
+  harness build must record where the docs live for a project that
+  benchmarks, evaluates, or traces LLMs and generative models. Not for
+  choosing between tools or recommending one, and not for building LLM
   applications or training models.
 ---
 

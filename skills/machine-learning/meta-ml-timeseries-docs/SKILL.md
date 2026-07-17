@@ -5,13 +5,12 @@ description: >-
   time-series project to authoritative documentation entry points —
   forecasting and analysis libraries (statsmodels, Nixtla's
   StatsForecast/MLForecast/NeuralForecast, Prophet, sktime, tsfresh)
-  and change-point and anomaly detection (ruptures, PyOD) — plus the
-  discovery procedure (llms.txt probing, PyPI metadata, official org
-  repos) for tools not listed. Use when a harness build must record
-  where the docs live for a project that forecasts, decomposes, or
-  detects anomalies in time series. Not for choosing between tools or
-  recommending one, and not for general tabular ML or statistical
-  analysis outside time series.
+  and change-point and anomaly detection (ruptures, PyOD) — plus a
+  discovery procedure for tools not listed. Use when a harness build
+  must record where the docs live for a project that forecasts,
+  decomposes, or detects anomalies in time series. Not for choosing
+  between tools or recommending one, and not for general tabular ML or
+  statistical analysis outside time series.
 ---
 
 # Time Series Documentation Map

@@ -6,12 +6,12 @@ description: >-
   points — algorithm and training frameworks (Stable-Baselines3,
   TorchRL, CleanRL, Tianshou, Acme, d3rlpy) and environments and
   simulators (Gymnasium, PettingZoo, MuJoCo, Isaac Lab, CARLA, Unity
-  ML-Agents) — plus the discovery procedure (llms.txt probing, PyPI
-  metadata, official org repos) for tools not listed. Use when a harness
-  build must record where the docs live for a project that trains or
-  evaluates RL agents or builds simulation environments. Not for
-  choosing between tools or recommending one, and not for RLHF-style LLM
-  post-training or the Ray ecosystem's RLlib.
+  ML-Agents) — plus a discovery procedure for tools not listed. Use
+  when a harness build must record where the docs live for a project
+  that trains or evaluates RL agents or builds simulation
+  environments. Not for choosing between tools or recommending one,
+  and not for RLHF-style LLM post-training or the Ray ecosystem's
+  RLlib.
 ---
 
 # Reinforcement Learning Documentation Map
