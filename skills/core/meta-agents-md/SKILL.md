@@ -2,9 +2,8 @@
 name: meta-agents-md
 description: >-
   Disposable meta-skill (delete after the harness is built): creates,
-  improves, or edits the project's AGENTS.md entrypoint and its framework
-  pointer files, including offloading long architecture and stack material
-  into an architecture document behind section-locating pointers. Use when
+  improves, or edits the project's AGENTS.md entrypoint, its framework
+  pointer files, and the architecture document they offload to. Use when
   the harness plan or the user calls for writing, restructuring, or
   slimming the agent entrypoint or the architecture document it points to.
   Not for knowledge documents, project skills, or public README-class

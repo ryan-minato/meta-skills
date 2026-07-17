@@ -3,10 +3,8 @@ name: meta-harness-sync
 description: >-
   Disposable meta-skill (delete after the harness is built): plans and
   installs the mechanisms that keep the harness true to the code —
-  bidirectional sync triggers, exactly one mechanism per concern, a
-  periodic entropy-reclamation routine for long-lived projects, and the
-  propose-after-task rule for compromise-mode harnesses. Use when the
-  harness plan calls for keep-current mechanisms, or when harness
+  per-concern sync triggers plus periodic entropy reclamation. Use when
+  the harness plan calls for keep-current mechanisms, or when harness
   documents and the implementation keep drifting apart. Not for
   performing a one-off document fix.
 ---
