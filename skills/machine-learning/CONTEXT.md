@@ -623,3 +623,25 @@ order; each skill's rows land in the same change that adds the skill.
 | tsfresh | <https://tsfresh.readthedocs.io/> |
 | ruptures | <https://centre-borelli.github.io/ruptures-docs/> |
 | PyOD | <https://pyod.readthedocs.io/> |
+
+### meta-ml-graph-docs
+
+#### graph-learning.md
+
+| Tool | Docs |
+|---|---|
+| PyTorch Geometric | <https://pytorch-geometric.readthedocs.io/> |
+| DGL | <https://www.dgl.ai/> |
+| TensorFlow GNN | <https://github.com/tensorflow/gnn> |
+| Jraph | <https://github.com/google-deepmind/jraph> |
+| NVIDIA RAPIDS cuGraph | <https://docs.rapids.ai/api/cugraph/stable/> |
+| Open Graph Benchmark | <https://ogb.stanford.edu/> |
+
+#### graph-analysis-and-kg.md
+
+| Tool | Docs |
+|---|---|
+| NetworkX | <https://networkx.org/> |
+| igraph | <https://python.igraph.org/> |
+| PyKEEN | <https://pykeen.readthedocs.io/> |
+| pgmpy | <https://pgmpy.org/> — llms.txt: <https://pgmpy.org/llms.txt> |
