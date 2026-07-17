@@ -33,3 +33,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 | [meta-ml-llm-eval-docs](meta-ml-llm-eval-docs/) | LLM 基准与评测框架及 LLM 可观测平台的文档入口 |
 | [meta-ml-vision-docs](meta-ml-vision-docs/) | 基础视觉库、检测/分割/跟踪、OCR 与文档智能、3D 视觉与神经渲染的文档入口 |
 | [meta-ml-image-gen-docs](meta-ml-image-gen-docs/) | 图像/视频生成 UI、LoRA 训练器、条件控制适配器与开源视频生成项目的文档入口 |
+| [meta-ml-audio-docs](meta-ml-audio-docs/) | 语音识别与说话人处理、语音合成与声音克隆、声音转换与分离、音乐与生成音频的文档入口 |

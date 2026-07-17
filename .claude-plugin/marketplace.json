@@ -51,7 +51,8 @@
         "./meta-ml-llm-apps-docs",
         "./meta-ml-llm-eval-docs",
         "./meta-ml-vision-docs",
-        "./meta-ml-image-gen-docs"
+        "./meta-ml-image-gen-docs",
+        "./meta-ml-audio-docs"
       ],
       "strict": false
     }

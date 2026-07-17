@@ -457,3 +457,70 @@ order; each skill's rows land in the same change that adds the skill.
 | LyCORIS | <https://github.com/KohakuBlueleaf/LyCORIS> |
 | Open-Sora | <https://github.com/hpcaitech/Open-Sora> |
 | LTX-Video | <https://github.com/Lightricks/LTX-Video> |
+
+### meta-ml-audio-docs
+
+#### speech-recognition.md
+
+| Tool | Docs |
+|---|---|
+| Whisper | <https://github.com/openai/whisper> |
+| faster-whisper | <https://github.com/SYSTRAN/faster-whisper> |
+| whisper.cpp | <https://github.com/ggml-org/whisper.cpp> |
+| NVIDIA NeMo | <https://docs.nvidia.com/nemo-framework/> — llms.txt: <https://docs.nvidia.com/nemo-framework/llms.txt> |
+| SpeechBrain | <https://speechbrain.readthedocs.io/> |
+| ESPnet | <https://espnet.github.io/espnet/> |
+| FunASR | <https://github.com/modelscope/FunASR> |
+| WeNet | <https://github.com/wenet-e2e/wenet> |
+| Kaldi | <https://kaldi-asr.org/doc/> |
+| k2 | <https://k2-fsa.github.io/k2/> |
+| icefall | <https://k2-fsa.github.io/icefall/> |
+| PaddleSpeech | <https://github.com/PaddlePaddle/PaddleSpeech> |
+| sherpa-onnx | <https://k2-fsa.github.io/sherpa/> |
+| pyannote.audio | <https://github.com/pyannote/pyannote-audio> |
+| Silero VAD | <https://github.com/snakers4/silero-vad> |
+| Montreal Forced Aligner | <https://montreal-forced-aligner.readthedocs.io/> |
+
+#### tts-and-voice.md
+
+| Tool | Docs |
+|---|---|
+| GPT-SoVITS | <https://github.com/RVC-Boss/GPT-SoVITS> |
+| CosyVoice | <https://github.com/FunAudioLLM/CosyVoice> |
+| Fish Speech | <https://github.com/fishaudio/fish-speech> |
+| F5-TTS | <https://github.com/SWivid/F5-TTS> |
+| OpenVoice | <https://github.com/myshell-ai/OpenVoice> |
+| Piper | <https://github.com/rhasspy/piper> |
+| StyleTTS2 | <https://github.com/yl4579/StyleTTS2> |
+| Kokoro | <https://github.com/hexgrad/kokoro> |
+| VITS | <https://github.com/jaywalnut310/vits> |
+
+#### voice-conversion-and-separation.md
+
+| Tool | Docs |
+|---|---|
+| Retrieval-based Voice Conversion WebUI | <https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI> |
+| Applio | <https://docs.applio.org/> |
+| Seed-VC | <https://github.com/Plachtaa/seed-vc> |
+| RMVPE | <https://github.com/Dream-High/RMVPE> |
+| ContentVec | <https://github.com/auspicious3000/contentvec> |
+| WORLD | <https://github.com/mmorise/World> |
+| PyWorld | <https://github.com/JeremyCCHsu/Python-Wrapper-for-World-Vocoder> |
+| Demucs | <https://github.com/adefossez/demucs> |
+| Ultimate Vocal Remover | <https://github.com/Anjok07/ultimatevocalremovergui> |
+| librosa | <https://librosa.org/doc/> |
+| torchaudio | <https://docs.pytorch.org/audio/> |
+| Audiomentations | <https://iver56.github.io/audiomentations/> |
+| Spotify Pedalboard | <https://spotify.github.io/pedalboard/> |
+
+#### music-and-audio.md
+
+| Tool | Docs |
+|---|---|
+| Essentia | <https://essentia.upf.edu/> |
+| Meta AudioCraft | <https://github.com/facebookresearch/audiocraft> |
+| EnCodec | <https://github.com/facebookresearch/encodec> |
+| DDSP | <https://github.com/magenta/ddsp> |
+| Magenta | <https://magenta.tensorflow.org/> |
+| pretty_midi | <https://craffel.github.io/pretty-midi/> |
+| Music21 | <https://music21.org/music21docs/> |
