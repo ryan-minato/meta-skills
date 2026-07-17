@@ -374,3 +374,70 @@ order; each skill's rows land in the same change that adds the skill.
 |---|---|
 | Arize Phoenix | <https://arize.com/docs/phoenix> — llms.txt: <https://arize.com/docs/llms.txt> |
 | Langfuse | <https://langfuse.com/docs> — llms.txt: <https://langfuse.com/llms.txt> |
+
+### meta-ml-vision-docs
+
+#### core-vision.md
+
+| Tool | Docs |
+|---|---|
+| OpenCV | <https://docs.opencv.org/> |
+| torchvision | <https://docs.pytorch.org/vision/> |
+| timm | <https://huggingface.co/docs/timm> |
+| MMEngine | <https://mmengine.readthedocs.io/> |
+| MMPreTrain | <https://mmpretrain.readthedocs.io/> |
+| MMDetection | <https://mmdetection.readthedocs.io/> |
+| MMSegmentation | <https://mmsegmentation.readthedocs.io/> |
+| MMPose | <https://mmpose.readthedocs.io/> |
+| MMDetection3D | <https://mmdetection3d.readthedocs.io/> |
+| MMAction2 | <https://mmaction2.readthedocs.io/> |
+| Detectron2 | <https://detectron2.readthedocs.io/> |
+| Ultralytics YOLO | <https://docs.ultralytics.com/> — llms.txt: <https://docs.ultralytics.com/llms.txt> |
+| Albumentations | <https://albumentations.ai/docs/> — llms.txt: <https://albumentations.ai/llms.txt> |
+| Kornia | <https://kornia.readthedocs.io/> |
+| scikit-image | <https://scikit-image.org/> |
+| Pillow | <https://pillow.readthedocs.io/> |
+| NVIDIA DALI | <https://docs.nvidia.com/deeplearning/dali/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| MediaPipe | <https://developers.google.com/edge/mediapipe> |
+
+#### detection-segmentation-tracking.md
+
+| Tool | Docs |
+|---|---|
+| Segment Anything | <https://github.com/facebookresearch/segment-anything> |
+| SAM 2 | <https://github.com/facebookresearch/sam2> |
+| Grounding DINO | <https://github.com/IDEA-Research/GroundingDINO> |
+| RT-DETR | <https://github.com/lyuwenyu/RT-DETR> |
+| ByteTrack | <https://github.com/FoundationVision/ByteTrack> |
+| Deep SORT | <https://github.com/nwojke/deep_sort> |
+| FiftyOne | <https://docs.voxel51.com/> — llms.txt: <https://docs.voxel51.com/llms.txt> |
+| Roboflow Supervision | <https://supervision.roboflow.com/> — llms.txt: <https://supervision.roboflow.com/llms.txt> |
+
+#### ocr-and-document-ai.md
+
+| Tool | Docs |
+|---|---|
+| PaddleOCR | <https://www.paddleocr.ai/> |
+| Tesseract | <https://tesseract-ocr.github.io/> |
+| EasyOCR | <https://github.com/JaidedAI/EasyOCR> |
+| docTR | <https://mindee.github.io/doctr/> |
+| Surya | <https://github.com/datalab-to/surya> |
+| LayoutParser | <https://layout-parser.github.io/> |
+| Unstructured | <https://docs.unstructured.io/> — llms.txt: <https://docs.unstructured.io/llms.txt> |
+| Docling | <https://docling-project.github.io/docling/> |
+| PyMuPDF | <https://pymupdf.readthedocs.io/> |
+| pdfplumber | <https://github.com/jsvine/pdfplumber> |
+
+#### 3d-vision.md
+
+| Tool | Docs |
+|---|---|
+| Open3D | <https://www.open3d.org/docs/> |
+| PyTorch3D | <https://pytorch3d.org/> |
+| NVIDIA Kaolin | <https://kaolin.readthedocs.io/> |
+| Nerfstudio | <https://docs.nerf.studio/> |
+| gsplat | <https://docs.gsplat.studio/> |
+| tiny-cuda-nn | <https://github.com/NVlabs/tiny-cuda-nn> |
+| OpenPCDet | <https://github.com/open-mmlab/OpenPCDet> |
+| Trimesh | <https://trimesh.org/> |
+| PyVista | <https://docs.pyvista.org/> |

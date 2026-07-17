@@ -34,3 +34,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 | [meta-ml-mlops-docs](meta-ml-mlops-docs/) | Documentation entry points for experiment tracking and versioning (MLflow, W&B, DVC) and ML pipelines and monitoring (Kubeflow, Flyte, ZenML, Evidently, Prometheus/Grafana) |
 | [meta-ml-llm-apps-docs](meta-ml-llm-apps-docs/) | Documentation entry points for RAG and agent frameworks, LLM gateways and guardrails, and vector search from local ANN libraries to vector databases |
 | [meta-ml-llm-eval-docs](meta-ml-llm-eval-docs/) | Documentation entry points for LLM benchmark and evaluation harnesses and LLM observability platforms |
+| [meta-ml-vision-docs](meta-ml-vision-docs/) | Documentation entry points for core vision libraries, detection/segmentation/tracking, OCR and document AI, and 3D vision and neural rendering |
