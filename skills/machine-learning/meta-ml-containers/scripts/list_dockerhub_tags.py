@@ -24,6 +24,12 @@ def fetch_json(url: str) -> dict:
     try:
         with urllib.request.urlopen(url, timeout=30) as response:
             return json.load(response)
+    except json.JSONDecodeError:
+        sys.exit(
+            f"Docker Hub returned a non-JSON response for {url}\n"
+            f"The API may have changed or a proxy intercepted the request; "
+            f"browse {BROWSE_URL}<name> instead."
+        )
     except urllib.error.HTTPError as error:
         sys.exit(
             f"Docker Hub returned HTTP {error.code} for {url}\n"
@@ -59,11 +65,18 @@ def main() -> None:
         help="stop after this many matching tags (0 = no limit, default 50)",
     )
     args = parser.parse_args()
+    if args.limit < 0:
+        parser.error("--limit must be >= 0")
+    pattern = None
+    if args.filter:
+        try:
+            pattern = re.compile(args.filter)
+        except re.error as error:
+            parser.error(f"invalid --filter regex: {error}")
 
     repository = (
         args.repository if "/" in args.repository else f"library/{args.repository}"
     )
-    pattern = re.compile(args.filter) if args.filter else None
 
     shown = 0
     for tag in iter_tags(repository):

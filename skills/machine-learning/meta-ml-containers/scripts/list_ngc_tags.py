@@ -28,6 +28,12 @@ def fetch_json(url: str, headers: dict | None = None) -> dict:
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
             return json.load(response)
+    except json.JSONDecodeError:
+        sys.exit(
+            f"nvcr.io returned a non-JSON response for {url}\n"
+            f"The registry may have changed or a proxy intercepted the "
+            f"request; browse {BROWSE_URL} instead."
+        )
     except urllib.error.HTTPError as error:
         sys.exit(
             f"nvcr.io returned HTTP {error.code} for {url}\n"
@@ -62,8 +68,15 @@ def main() -> None:
         help="stop after this many matching tags (0 = no limit, default 50)",
     )
     args = parser.parse_args()
+    if args.limit < 0:
+        parser.error("--limit must be >= 0")
+    pattern = None
+    if args.filter:
+        try:
+            pattern = re.compile(args.filter)
+        except re.error as error:
+            parser.error(f"invalid --filter regex: {error}")
 
-    pattern = re.compile(args.filter) if args.filter else None
     tags = [tag for tag in list_tags(args.image) if not ATTESTATION.match(tag)]
     if pattern:
         tags = [tag for tag in tags if pattern.search(tag)]

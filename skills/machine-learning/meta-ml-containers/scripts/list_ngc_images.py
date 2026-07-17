@@ -31,6 +31,12 @@ def search_page(query: str, page: int) -> dict:
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
             return json.load(response)
+    except json.JSONDecodeError:
+        sys.exit(
+            f"The NGC catalog returned a non-JSON response.\n"
+            f"The unofficial search endpoint may have changed; "
+            f"browse {BROWSE_URL} instead."
+        )
     except urllib.error.HTTPError as error:
         sys.exit(
             f"NGC catalog search returned HTTP {error.code}.\n"
@@ -67,6 +73,8 @@ def main() -> None:
         help="stop after this many images (0 = no limit, default 50)",
     )
     args = parser.parse_args()
+    if args.limit < 0:
+        parser.error("--limit must be >= 0")
 
     shown = 0
     for image in iter_images(args.query):
