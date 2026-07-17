@@ -215,3 +215,14 @@ order; each skill's rows land in the same change that adds the skill.
 | Apache Sedona | <https://sedona.apache.org/> |
 | GraphFrames | <https://graphframes.io/> — llms.txt: <https://graphframes.io/llms.txt> |
 | Ray | <https://docs.ray.io/> — llms.txt: <https://docs.ray.io/llms.txt> |
+
+### meta-ds-pipelines-docs
+
+#### orchestration.md
+
+| Tool | Docs |
+|---|---|
+| Apache Airflow | <https://airflow.apache.org/docs/> |
+| dbt | <https://docs.getdbt.com/> — llms.txt: <https://docs.getdbt.com/llms.txt> |
+| Dagster | <https://docs.dagster.io/> — llms.txt: <https://docs.dagster.io/llms.txt> |
+| Prefect | <https://docs.prefect.io/> — llms.txt: <https://docs.prefect.io/llms.txt> |

@@ -68,7 +68,11 @@
       "name": "data-science",
       "source": "./skills/data-science",
       "description": "Authoritative documentation entry points for data-analysis and scientific-computing projects, one skill per domain; information only, never recommendations. Install on top of core.",
-      "skills": ["./meta-ds-analysis-docs", "./meta-ds-scale-docs"],
+      "skills": [
+        "./meta-ds-analysis-docs",
+        "./meta-ds-scale-docs",
+        "./meta-ds-pipelines-docs"
+      ],
       "strict": false
     }
   ]
