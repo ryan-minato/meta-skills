@@ -73,7 +73,8 @@
         "./meta-ds-scale-docs",
         "./meta-ds-pipelines-docs",
         "./meta-ds-geospatial-docs",
-        "./meta-ds-numerics-docs"
+        "./meta-ds-numerics-docs",
+        "./meta-ds-simulation-docs"
       ],
       "strict": false
     }

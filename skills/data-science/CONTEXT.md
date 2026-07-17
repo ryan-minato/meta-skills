@@ -308,3 +308,65 @@ order; each skill's rows land in the same change that adds the skill.
 | SciMLSensitivity.jl | <https://docs.sciml.ai/SciMLSensitivity/> |
 | Diffrax | <https://docs.kidger.site/diffrax/> |
 | torchdiffeq | <https://github.com/rtqichen/torchdiffeq> |
+
+### meta-ds-simulation-docs
+
+#### optimization-and-solvers.md
+
+| Tool | Docs |
+|---|---|
+| SciPy | <https://docs.scipy.org/doc/scipy/> |
+| NLopt | <https://nlopt.readthedocs.io/> |
+| Ipopt | <https://coin-or.github.io/Ipopt/> |
+| Ceres Solver | <http://ceres-solver.org/> |
+| Optimization.jl | <https://docs.sciml.ai/Optimization/> |
+| CVXPY | <https://www.cvxpy.org/> |
+| Pyomo | <https://pyomo.readthedocs.io/> |
+| JuMP.jl | <https://jump.dev/> |
+| CasADi | <https://web.casadi.org/> |
+| Google OR-Tools | <https://developers.google.com/optimization> |
+| HiGHS | <https://highs.dev/> |
+| OSQP | <https://osqp.org/> |
+| SCS | <https://www.cvxgrp.org/scs/> |
+| Gurobi | <https://docs.gurobi.com/> |
+| CPLEX | <https://www.ibm.com/docs/en/icos> |
+
+#### differential-equations.md
+
+| Tool | Docs |
+|---|---|
+| SUNDIALS | <https://sundials.readthedocs.io/> |
+| DifferentialEquations.jl | <https://docs.sciml.ai/DiffEqDocs/> |
+| Diffrax | <https://docs.kidger.site/diffrax/> |
+| torchdiffeq | <https://github.com/rtqichen/torchdiffeq> |
+| ModelingToolkit.jl | <https://docs.sciml.ai/ModelingToolkit/> |
+| OpenModelica | <https://openmodelica.org/> |
+| Simulink | <https://www.mathworks.com/help/simulink/> |
+
+#### pde-and-fem.md
+
+| Tool | Docs |
+|---|---|
+| FEniCSx | <https://docs.fenicsproject.org/> |
+| Firedrake | <https://www.firedrakeproject.org/> |
+| deal.II | <https://dealii.org/> |
+| MFEM | <https://mfem.org/> |
+| MOOSE Framework | <https://mooseframework.inl.gov/> |
+| OpenFOAM | <https://www.openfoam.com/> |
+| FreeFEM | <https://freefem.org/> |
+| Gmsh | <https://gmsh.info/> |
+| meshio | <https://github.com/nschloe/meshio> |
+| CGAL | <https://www.cgal.org/> |
+| Open CASCADE | <https://dev.opencascade.org/> |
+
+#### scientific-visualization.md
+
+| Tool | Docs |
+|---|---|
+| Matplotlib | <https://matplotlib.org/> |
+| Plotly | <https://plotly.com/python/> — llms.txt: <https://plotly.com/llms.txt> |
+| VTK | <https://vtk.org/> |
+| PyVista | <https://docs.pyvista.org/> |
+| ParaView | <https://www.paraview.org/> |
+| Makie.jl | <https://docs.makie.org/> |
+| HoloViz | <https://holoviz.org/> |
