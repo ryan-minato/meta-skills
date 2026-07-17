@@ -78,8 +78,9 @@ and any change to it is copied to every sibling in the same change
 ## Upstream Registry
 
 Every doc URL the catalog's skills cite — a maintainer snapshot, last
-verified live 2026-07-17. The URL is authoritative: when this table and a tool's docs disagree, the docs
-win and this file updates in the same change. Sites that publish an
+verified live 2026-07-17. The URL is authoritative: when this table and
+a tool's docs disagree, the docs win and this file updates in the same
+change. Sites that publish an
 `llms.txt` plain-text index (agent-preferred; probe `<docs-root>/llms.txt`,
 then `llms-full.txt`) are marked; re-probe the others when refreshing
 this table. PyPI packages install with `pip install <package>` (or the
@@ -125,3 +126,28 @@ order; each skill's rows land in the same change that adds the skill.
 | Liger Kernel | <https://github.com/linkedin/Liger-Kernel> |
 | Numba | <https://numba.readthedocs.io/> |
 | Cython | <https://cython.readthedocs.io/> |
+
+### meta-ml-training-docs
+
+#### distributed-training.md
+
+| Tool | Docs |
+|---|---|
+| PyTorch Distributed | <https://docs.pytorch.org/> |
+| TorchTitan | <https://github.com/pytorch/torchtitan> |
+| DeepSpeed | <https://www.deepspeed.ai/> |
+| Megatron-LM | <https://github.com/NVIDIA/Megatron-LM> |
+| Megatron-Core | <https://docs.nvidia.com/megatron-core/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| PyTorch Lightning | <https://lightning.ai/docs/pytorch/> — llms.txt: <https://lightning.ai/llms.txt> |
+| NVIDIA NeMo Framework | <https://docs.nvidia.com/nemo-framework/> — llms.txt: <https://docs.nvidia.com/nemo-framework/llms.txt> |
+| Colossal-AI | <https://colossalai.org/> |
+
+#### finetuning.md
+
+| Tool | Docs |
+|---|---|
+| torchtune | <https://meta-pytorch.org/torchtune/> |
+| LLaMA-Factory | <https://llamafactory.readthedocs.io/> |
+| Axolotl | <https://docs.axolotl.ai/> |
+| Unsloth | <https://unsloth.ai/docs> — llms.txt: <https://unsloth.ai/docs/llms.txt> |
+| OpenRLHF | <https://github.com/OpenRLHF/OpenRLHF> |
