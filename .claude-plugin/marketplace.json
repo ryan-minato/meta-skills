@@ -59,7 +59,8 @@
         "./meta-ml-timeseries-docs",
         "./meta-ml-graph-docs",
         "./meta-ml-probabilistic-docs",
-        "./meta-ml-trustworthy-docs"
+        "./meta-ml-trustworthy-docs",
+        "./meta-ml-science-docs"
       ],
       "strict": false
     }

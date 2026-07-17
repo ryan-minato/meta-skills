@@ -41,3 +41,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 | [meta-ml-graph-docs](meta-ml-graph-docs/) | 图神经网络及图分析与知识图谱的文档入口 |
 | [meta-ml-probabilistic-docs](meta-ml-probabilistic-docs/) | 概率编程与贝叶斯推断及因果推断的文档入口 |
 | [meta-ml-trustworthy-docs](meta-ml-trustworthy-docs/) | 隐私、对抗鲁棒、公平性与可解释性及联邦学习的文档入口 |
+| [meta-ml-science-docs](meta-ml-science-docs/) | 医疗、生物、化学、分子模拟与物理约束建模中 ML 应用的文档入口 |

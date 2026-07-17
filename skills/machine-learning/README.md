@@ -44,3 +44,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 | [meta-ml-graph-docs](meta-ml-graph-docs/) | Documentation entry points for graph neural networks and for graph analysis and knowledge graphs |
 | [meta-ml-probabilistic-docs](meta-ml-probabilistic-docs/) | Documentation entry points for probabilistic programming and Bayesian inference and for causal inference |
 | [meta-ml-trustworthy-docs](meta-ml-trustworthy-docs/) | Documentation entry points for privacy, adversarial robustness, fairness, and interpretability, and for federated learning |
+| [meta-ml-science-docs](meta-ml-science-docs/) | Documentation entry points for ML in medicine, biology, chemistry, molecular simulation, and physics-informed modeling |

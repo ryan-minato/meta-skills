@@ -703,3 +703,24 @@ order; each skill's rows land in the same change that adds the skill.
 | OpenFL | <https://openfl.readthedocs.io/> |
 | PySyft | <https://github.com/OpenMined/PySyft> |
 | SecretFlow | <https://www.secretflow.org.cn/> |
+
+### meta-ml-science-docs
+
+#### science-ml.md
+
+| Tool | Docs |
+|---|---|
+| MONAI | <https://monai.readthedocs.io/> |
+| TorchIO | <https://docs.torchio.org/> |
+| RDKit | <https://www.rdkit.org/docs/> |
+| DeepChem | <https://deepchem.readthedocs.io/> |
+| Biopython | <https://biopython.org/> |
+| Scanpy | <https://scanpy.scverse.org/> |
+| scvi-tools | <https://docs.scvi-tools.org/> |
+| OpenMM | <https://openmm.org/> |
+| NVIDIA BioNeMo | <https://docs.nvidia.com/bionemo-framework/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| NVIDIA PhysicsNeMo | <https://docs.nvidia.com/physicsnemo/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| DeepXDE | <https://deepxde.readthedocs.io/> |
+| e3nn | <https://docs.e3nn.org/> |
+| ASE | <https://ase-lib.org/> |
+| pymatgen | <https://pymatgen.org/> |
