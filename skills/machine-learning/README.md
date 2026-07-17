@@ -38,3 +38,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 | [meta-ml-image-gen-docs](meta-ml-image-gen-docs/) | Documentation entry points for image/video generation UIs, LoRA trainers, conditioning adapters, and open video-generation projects |
 | [meta-ml-audio-docs](meta-ml-audio-docs/) | Documentation entry points for speech recognition and speakers, speech synthesis and voice cloning, voice conversion and separation, and music and generative audio |
 | [meta-ml-rl-docs](meta-ml-rl-docs/) | Documentation entry points for RL algorithm frameworks and for environments and simulators |
+| [meta-ml-recsys-docs](meta-ml-recsys-docs/) | Documentation entry points for recommendation, ranking, and candidate-retrieval frameworks |

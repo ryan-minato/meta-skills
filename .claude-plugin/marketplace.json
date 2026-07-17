@@ -53,7 +53,8 @@
         "./meta-ml-vision-docs",
         "./meta-ml-image-gen-docs",
         "./meta-ml-audio-docs",
-        "./meta-ml-rl-docs"
+        "./meta-ml-rl-docs",
+        "./meta-ml-recsys-docs"
       ],
       "strict": false
     }

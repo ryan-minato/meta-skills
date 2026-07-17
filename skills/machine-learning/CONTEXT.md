@@ -555,3 +555,21 @@ order; each skill's rows land in the same change that adds the skill.
 | CARLA | <https://carla.readthedocs.io/> |
 | Unity ML-Agents | <https://github.com/Unity-Technologies/ml-agents> |
 | ManiSkill | <https://maniskill.readthedocs.io/> |
+
+### meta-ml-recsys-docs
+
+#### recsys.md
+
+| Tool | Docs |
+|---|---|
+| TorchRec | <https://meta-pytorch.org/torchrec/> |
+| TensorFlow Recommenders | <https://www.tensorflow.org/recommenders> |
+| NVIDIA Merlin | <https://github.com/NVIDIA-Merlin/Merlin> |
+| RecBole | <https://recbole.io/> |
+| DeepCTR | <https://deepctr-doc.readthedocs.io/> |
+| DeepCTR-Torch | <https://deepctr-torch.readthedocs.io/> |
+| Microsoft Recommenders | <https://github.com/recommenders-team/recommenders> |
+| implicit | <https://benfred.github.io/implicit/> |
+| LightFM | <https://github.com/lyst/lightfm> |
+| Faiss | <https://github.com/facebookresearch/faiss> |
+| ScaNN | <https://github.com/google-research/google-research/tree/master/scann> |
