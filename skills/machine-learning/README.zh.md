@@ -29,3 +29,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 | [meta-ml-ray-docs](meta-ml-ray-docs/) | Ray 各库（Core、Data、Train、Tune、Serve、Serve LLM、RLlib）与 KubeRay/Anyscale 集群层的文档入口 |
 | [meta-ml-inference-docs](meta-ml-inference-docs/) | LLM 推理引擎、量化压缩、模型编译与跨平台运行时、模型服务平台的文档入口 |
 | [meta-ml-mlops-docs](meta-ml-mlops-docs/) | 实验跟踪与版本管理（MLflow、W&B、DVC）及 ML 流水线与监控（Kubeflow、Flyte、ZenML、Evidently、Prometheus/Grafana）的文档入口 |
+| [meta-ml-llm-apps-docs](meta-ml-llm-apps-docs/) | RAG 与 Agent 框架、LLM 网关与护栏、从本地 ANN 库到向量数据库的向量检索的文档入口 |

@@ -308,3 +308,46 @@ order; each skill's rows land in the same change that adds the skill.
 | Prometheus | <https://prometheus.io/docs/> |
 | Grafana | <https://grafana.com/docs/> — llms.txt: <https://grafana.com/llms.txt> |
 | OpenTelemetry | <https://opentelemetry.io/docs/> — llms.txt: <https://opentelemetry.io/llms.txt> |
+
+### meta-ml-llm-apps-docs
+
+#### rag-and-agents.md
+
+| Tool | Docs |
+|---|---|
+| LangChain | <https://docs.langchain.com/> — llms.txt: <https://docs.langchain.com/llms.txt> |
+| LangGraph | <https://langchain-ai.github.io/langgraph/> — llms.txt: <https://langchain-ai.github.io/langgraph/llms.txt> |
+| LangSmith | <https://docs.langchain.com/langsmith> — llms.txt: <https://docs.langchain.com/llms.txt> |
+| LlamaIndex | <https://developers.llamaindex.ai/> — llms.txt: <https://developers.llamaindex.ai/llms.txt> |
+| Haystack | <https://docs.haystack.deepset.ai/> — llms.txt: <https://docs.haystack.deepset.ai/llms.txt> |
+| DSPy | <https://dspy.ai/> — llms.txt: <https://dspy.ai/llms.txt> |
+| Semantic Kernel | <https://learn.microsoft.com/en-us/semantic-kernel/> |
+| AutoGen | <https://microsoft.github.io/autogen/> |
+| CrewAI | <https://docs.crewai.com/> — llms.txt: <https://docs.crewai.com/llms.txt> |
+| PydanticAI | <https://pydantic.dev/docs/ai/> — llms.txt: <https://pydantic.dev/llms.txt> |
+| LiteLLM | <https://docs.litellm.ai/> — llms.txt: <https://docs.litellm.ai/llms.txt> |
+| Instructor | <https://python.useinstructor.com/> — llms.txt: <https://python.useinstructor.com/llms.txt> |
+| Guardrails AI | <https://guardrailsai.com/guardrails/docs> |
+| NVIDIA NeMo Guardrails | <https://docs.nvidia.com/nemo/guardrails/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| Model Context Protocol | <https://modelcontextprotocol.io/> — llms.txt: <https://modelcontextprotocol.io/llms.txt> |
+
+#### vector-search.md
+
+| Tool | Docs |
+|---|---|
+| Faiss | <https://github.com/facebookresearch/faiss> |
+| ScaNN | <https://github.com/google-research/google-research/tree/master/scann> |
+| HNSWlib | <https://github.com/nmslib/hnswlib> |
+| Annoy | <https://github.com/spotify/annoy> |
+| USearch | <https://github.com/unum-cloud/usearch> |
+| Milvus | <https://milvus.io/docs> — llms.txt: <https://milvus.io/llms.txt> |
+| Qdrant | <https://qdrant.tech/documentation/> — llms.txt: <https://qdrant.tech/llms.txt> |
+| Weaviate | <https://docs.weaviate.io/> — llms.txt: <https://weaviate.io/llms.txt> |
+| Chroma | <https://docs.trychroma.com/> — llms.txt: <https://docs.trychroma.com/llms.txt> |
+| LanceDB | <https://docs.lancedb.com/> — llms.txt: <https://docs.lancedb.com/llms.txt> |
+| pgvector | <https://github.com/pgvector/pgvector> |
+| Vespa | <https://docs.vespa.ai/> — llms.txt: <https://docs.vespa.ai/llms.txt> |
+| Elasticsearch | <https://www.elastic.co/docs> — llms.txt: <https://www.elastic.co/docs/llms.txt> |
+| OpenSearch | <https://docs.opensearch.org/> |
+| Redis | <https://redis.io/docs/> — llms.txt: <https://redis.io/llms.txt> |
+| Pinecone | <https://docs.pinecone.io/> — llms.txt: <https://docs.pinecone.io/llms.txt> |

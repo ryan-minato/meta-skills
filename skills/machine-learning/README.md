@@ -32,3 +32,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 | [meta-ml-ray-docs](meta-ml-ray-docs/) | Documentation entry points for the Ray libraries (Core, Data, Train, Tune, Serve, Serve LLM, RLlib) and the KubeRay/Anyscale cluster layer |
 | [meta-ml-inference-docs](meta-ml-inference-docs/) | Documentation entry points for LLM inference engines, quantization and compression, model compilers and cross-platform runtimes, and serving platforms |
 | [meta-ml-mlops-docs](meta-ml-mlops-docs/) | Documentation entry points for experiment tracking and versioning (MLflow, W&B, DVC) and ML pipelines and monitoring (Kubeflow, Flyte, ZenML, Evidently, Prometheus/Grafana) |
+| [meta-ml-llm-apps-docs](meta-ml-llm-apps-docs/) | Documentation entry points for RAG and agent frameworks, LLM gateways and guardrails, and vector search from local ANN libraries to vector databases |
