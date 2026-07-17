@@ -7,13 +7,12 @@ description: >-
   MPI, mpi4py, Slurm, HTCondor, Snakemake, Nextflow), GPU and
   multi-node communication (NCCL, RCCL, UCX, PyTorch/JAX distributed),
   and scientific data and parallel I/O (HDF5, NetCDF, Zarr, ADIOS2,
-  Arrow) — plus the discovery procedure (llms.txt probing, PyPI
-  metadata, official org repos) for tools not listed. Use when a
-  harness build must record where the docs live for a project that runs
-  on clusters, communicates across nodes or GPUs, or does parallel I/O.
-  Not for choosing between tools or recommending one, and not for
-  single-machine numerics, cluster analytics engines, or data-pipeline
-  orchestrators.
+  Arrow) — plus a discovery procedure for tools not listed. Use when a
+  harness build must record where the docs live for a project that
+  runs on clusters, communicates across nodes or GPUs, or does
+  parallel I/O. Not for choosing between tools or recommending one,
+  and not for single-machine numerics, cluster analytics engines, or
+  data-pipeline orchestrators.
 ---
 
 # HPC & Parallel Computing Documentation Map

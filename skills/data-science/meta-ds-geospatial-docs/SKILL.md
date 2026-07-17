@@ -5,12 +5,11 @@ description: >-
   geospatial-analysis project to authoritative documentation entry
   points — vector and raster stacks (GeoPandas, Shapely, pyproj, GDAL,
   Rasterio, rioxarray) and spatial engines (DuckDB Spatial, Apache
-  Sedona, cuSpatial) — plus the discovery procedure (llms.txt probing,
-  PyPI metadata, official org repos) for tools not listed. Use when a
-  harness build must record where the docs live for a project that
-  processes geographic vector or raster data. Not for choosing between
-  tools or recommending one, and not for general dataframes,
-  visualization, or remote-sensing ML models.
+  Sedona, cuSpatial) — plus a discovery procedure for tools not
+  listed. Use when a harness build must record where the docs live for
+  a project that processes geographic vector or raster data. Not for
+  choosing between tools or recommending one, and not for general
+  dataframes, visualization, or remote-sensing ML models.
 ---
 
 # Geospatial Analysis Documentation Map
