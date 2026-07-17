@@ -47,6 +47,11 @@ catalogs.
   domain (analysis, scale, pipelines, geospatial, numerics, simulation,
   HPC), information only, never recommendations; installed on top of
   `core`, only for data or scientific-computing projects.
+- `github` — procedure skills for targets hosted on GitHub, one skill
+  per platform concern (collaboration, CI, guardrails, community files,
+  planning and releases), each fetching current platform capabilities
+  live from the GitHub docs rather than prescribing versioned syntax;
+  installed on top of `core`, only for GitHub-hosted projects.
 
 The validator reconciles this list against the directories under `skills/`
 (check B3), and it defines the legal commit scopes: `feat(core): …` for a
