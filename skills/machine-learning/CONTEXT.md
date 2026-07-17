@@ -735,3 +735,28 @@ order; each skill's rows land in the same change that adds the skill.
 | e3nn | <https://docs.e3nn.org/> |
 | ASE | <https://ase-lib.org/> |
 | pymatgen | <https://pymatgen.org/> |
+
+### meta-ml-containers
+
+#### gpu-image-catalog.md
+
+| Source | Docs |
+|---|---|
+| NGC catalog | <https://catalog.ngc.nvidia.com/> |
+| NGC PyTorch container | <https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch> |
+| NVIDIA framework containers (support matrix) | <https://docs.nvidia.com/deeplearning/frameworks/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| pytorch/pytorch (Docker Hub) | <https://hub.docker.com/r/pytorch/pytorch> |
+| nvidia/cuda (Docker Hub) | <https://hub.docker.com/r/nvidia/cuda> |
+| rocm/pytorch (Docker Hub) | <https://hub.docker.com/r/rocm/pytorch> |
+| tensorflow/tensorflow (Docker Hub) | <https://hub.docker.com/r/tensorflow/tensorflow> |
+| ROCm documentation | <https://rocm.docs.amd.com/> |
+
+#### image-discovery.md
+
+| Source | Docs |
+|---|---|
+| NGC catalog | <https://catalog.ngc.nvidia.com/> |
+| NGC CLI | <https://docs.ngc.nvidia.com/cli/> |
+| Docker Hub API | <https://docs.docker.com/reference/api/hub/latest/> |
+| pytorch/pytorch (Docker Hub) | <https://hub.docker.com/r/pytorch/pytorch> |
+| OCI/Docker Registry v2 (distribution) | <https://distribution.github.io/distribution/> |
