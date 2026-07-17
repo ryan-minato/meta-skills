@@ -40,7 +40,7 @@
     {
       "name": "machine-learning",
       "source": "./skills/machine-learning",
-      "description": "Authoritative documentation entry points for ML projects, one skill per domain; information only, never recommendations. Install on top of core.",
+      "description": "Documentation entry points, project scaffolds, and GPU-image discovery for ML projects; -docs skills inform only, the rest declare their opinionated defaults. Install on top of core.",
       "skills": [
         "./meta-ml-frameworks-docs",
         "./meta-ml-training-docs",
@@ -60,7 +60,10 @@
         "./meta-ml-graph-docs",
         "./meta-ml-probabilistic-docs",
         "./meta-ml-trustworthy-docs",
-        "./meta-ml-science-docs"
+        "./meta-ml-science-docs",
+        "./meta-ml-containers",
+        "./meta-ml-experiment",
+        "./meta-ml-training-project"
       ],
       "strict": false
     },

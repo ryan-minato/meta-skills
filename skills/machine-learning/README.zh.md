@@ -2,11 +2,13 @@
 
 [English](README.md)
 
-面向机器学习目标项目的 meta-skill：按项目领域拆分，为 ML 项目正在使用或
-可能需要的框架、库与工具提供权威文档入口，并附带未收录工具的发现流程。
-每个技能只覆盖一个领域，agent 只加载目标所属领域的技能。这些技能只提供
-信息，绝不做推荐。在 `core` 之上按项目安装，仅当目标训练、微调、部署或
-构建于机器学习模型之上时使用——本 catalog 不属于默认安装。
+面向机器学习目标项目的 meta-skill，分两类。`-docs` 技能按项目领域拆分，
+为 ML 项目正在使用或可能需要的框架、库与工具提供权威文档入口，并附带
+未收录工具的发现流程；它们只提供信息，绝不做推荐。无后缀技能负责搭建
+ML 项目的 harness 或枚举线上注册表；它们带有观点默认值，并各自在自己的
+description 中声明。agent 只加载与目标匹配的技能。在 `core` 之上按项目
+安装，仅当目标训练、微调、部署或构建于机器学习模型之上时使用——本
+catalog 不属于默认安装。
 
 这些技能是**一次性的**：harness 建成并验证后，`core` 的移除技能会把它们
 与其余 meta-skill 一并删除。
@@ -42,3 +44,6 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 | [meta-ml-probabilistic-docs](meta-ml-probabilistic-docs/) | 概率编程与贝叶斯推断及因果推断的文档入口 |
 | [meta-ml-trustworthy-docs](meta-ml-trustworthy-docs/) | 隐私、对抗鲁棒、公平性与可解释性及联邦学习的文档入口 |
 | [meta-ml-science-docs](meta-ml-science-docs/) | 医疗、生物、化学、分子模拟与物理约束建模中 ML 应用的文档入口 |
+| [meta-ml-containers](meta-ml-containers/) | 用脚本列出并过滤 NVIDIA NGC 与 Docker Hub 当前可用的 GPU 镜像及 tag，并附各镜像族特点与适用情境指南 |
+| [meta-ml-experiment](meta-ml-experiment/) | 搭建快速 ML 实验仓库（带观点默认值）：uv 编译的锁定依赖、根目录入口脚本、Pydantic Settings 配置、justfile、Ruff/pytest/Gitleaks、Accelerate 训练循环模板与单页 AGENTS.md |
+| [meta-ml-training-project](meta-ml-training-project/) | 搭建可维护的训练/评估项目（带观点默认值）：uv + pyproject 与硬件匹配的 torch 索引、Hydra 配置、raw/interim/processed 数据分层、Accelerate 训练循环模板与目录地图式 AGENTS.md 加知识库 |
