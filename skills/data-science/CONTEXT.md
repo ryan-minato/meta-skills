@@ -370,3 +370,68 @@ order; each skill's rows land in the same change that adds the skill.
 | ParaView | <https://www.paraview.org/> |
 | Makie.jl | <https://docs.makie.org/> |
 | HoloViz | <https://holoviz.org/> |
+
+### meta-ds-hpc-docs
+
+#### mpi-and-scheduling.md
+
+| Tool | Docs |
+|---|---|
+| MPI Forum | <https://www.mpi-forum.org/> |
+| Open MPI | <https://docs.open-mpi.org/> — llms.txt: <https://docs.open-mpi.org/llms.txt> |
+| MPICH | <https://www.mpich.org/> |
+| mpi4py | <https://mpi4py.readthedocs.io/> |
+| MPI.jl | <https://juliaparallel.org/MPI.jl/> |
+| OpenMP | <https://www.openmp.org/> |
+| Dask | <https://docs.dask.org/> — llms.txt: <https://docs.dask.org/llms.txt> |
+| Dask-Jobqueue | <https://jobqueue.dask.org/> |
+| Ray | <https://docs.ray.io/> — llms.txt: <https://docs.ray.io/llms.txt> |
+| Distributed.jl | <https://docs.julialang.org/> |
+| Dagger.jl | <https://juliaparallel.org/Dagger.jl/> |
+| Parsl | <https://parsl.readthedocs.io/> |
+| Snakemake | <https://snakemake.readthedocs.io/> |
+| Nextflow | <https://docs.seqera.io/nextflow> — llms.txt: <https://docs.seqera.io/llms.txt> |
+| Flyte | <https://docs.flyte.org/> — llms.txt: <https://www.union.ai/llms.txt> |
+| Slurm | <https://slurm.schedmd.com/> |
+| OpenPBS | <https://openpbs.org/> |
+| IBM Spectrum LSF | <https://www.ibm.com/docs/en/spectrum-lsf> |
+| HTCondor | <https://htcondor.readthedocs.io/> |
+| Kubernetes | <https://kubernetes.io/docs/> |
+
+#### gpu-communication.md
+
+| Tool | Docs |
+|---|---|
+| NVIDIA NCCL | <https://docs.nvidia.com/deeplearning/nccl/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| AMD RCCL | <https://rocm.docs.amd.com/projects/rccl/> |
+| Intel oneCCL | <https://oneapi-src.github.io/oneCCL/> |
+| Gloo | <https://github.com/pytorch/gloo> |
+| UCX | <https://openucx.org/> |
+| NVSHMEM | <https://docs.nvidia.com/nvshmem/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| libfabric | <https://ofiwg.github.io/libfabric/> |
+| PyTorch Distributed | <https://docs.pytorch.org/> |
+| TensorFlow Distributed | <https://www.tensorflow.org/> |
+| JAX | <https://docs.jax.dev/> |
+| DeepSpeed | <https://www.deepspeed.ai/> |
+| Megatron-LM | <https://github.com/NVIDIA/Megatron-LM> |
+| NVIDIA NeMo Framework | <https://docs.nvidia.com/nemo-framework/> — llms.txt: <https://docs.nvidia.com/nemo-framework/llms.txt> |
+
+#### parallel-io.md
+
+| Tool | Docs |
+|---|---|
+| xarray | <https://docs.xarray.dev/> — llms.txt: <https://docs.xarray.dev/llms.txt> |
+| Zarr | <https://zarr.readthedocs.io/> |
+| Awkward Array | <https://awkward-array.org/> |
+| HDF5 | <https://support.hdfgroup.org/documentation/> |
+| h5py | <https://docs.h5py.org/> |
+| netCDF4 | <https://unidata.github.io/netcdf4-python/> |
+| PnetCDF | <https://parallel-netcdf.github.io/> |
+| ADIOS2 | <https://adios2.readthedocs.io/> |
+| Apache Arrow | <https://arrow.apache.org/docs/> |
+| Apache Parquet | <https://parquet.apache.org/> |
+| Astropy | <https://docs.astropy.org/> |
+| fsspec | <https://filesystem-spec.readthedocs.io/> |
+| s3fs | <https://s3fs.readthedocs.io/> |
+| gcsfs | <https://gcsfs.readthedocs.io/> |
+| kerchunk | <https://fsspec.github.io/kerchunk/> |
