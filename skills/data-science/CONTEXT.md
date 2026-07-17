@@ -242,3 +242,69 @@ order; each skill's rows land in the same change that adds the skill.
 | DuckDB Spatial | <https://duckdb.org/docs/> — llms.txt: <https://duckdb.org/llms.txt> |
 | Apache Sedona | <https://sedona.apache.org/> |
 | NVIDIA RAPIDS cuSpatial | <https://docs.rapids.ai/api/cuspatial/stable/> |
+
+### meta-ds-numerics-docs
+
+#### platforms.md
+
+| Tool | Docs |
+|---|---|
+| SciPy | <https://docs.scipy.org/doc/scipy/> |
+| SymPy | <https://docs.sympy.org/> |
+| Julia | <https://docs.julialang.org/> |
+| Julia SciML | <https://docs.sciml.ai/> |
+| MATLAB | <https://www.mathworks.com/help/matlab/> |
+| Wolfram Language | <https://reference.wolfram.com/language/> — llms.txt: <https://reference.wolfram.com/llms.txt> |
+
+#### numerics-and-math-kernels.md
+
+| Tool | Docs |
+|---|---|
+| NumPy | <https://numpy.org/doc/> |
+| Numba | <https://numba.readthedocs.io/> |
+| Cython | <https://cython.readthedocs.io/> |
+| Eigen | <https://libeigen.gitlab.io/> |
+| Armadillo | <https://arma.sourceforge.net/> |
+| Boost.Math | <https://www.boost.org/doc/libs/release/libs/math/> |
+| GNU Scientific Library | <https://www.gnu.org/software/gsl/> |
+| OpenBLAS | <https://www.openblas.net/> |
+| LAPACK | <https://www.netlib.org/lapack/> |
+| ScaLAPACK | <https://www.netlib.org/scalapack/> |
+| Intel oneMKL | <https://www.intel.com/content/www/us/en/developer/tools/oneapi/onemkl.html> |
+| FFTW | <https://www.fftw.org/> |
+| SuiteSparse | <https://github.com/DrTimothyAldenDavis/SuiteSparse> |
+| CUDA math libraries | <https://docs.nvidia.com/cuda/> — llms.txt: <https://docs.nvidia.com/cuda/llms.txt> |
+| ROCm math libraries | <https://rocm.docs.amd.com/> |
+| PETSc | <https://petsc.org/> |
+| Trilinos | <https://trilinos.github.io/> |
+| hypre | <https://hypre.readthedocs.io/> |
+| SLEPc | <https://slepc.upv.es/> |
+| MUMPS | <https://mumps-solver.org/> |
+| SuperLU | <https://github.com/xiaoyeli/superlu> |
+| ARPACK-NG | <https://github.com/opencollab/arpack-ng> |
+| StaticArrays.jl | <https://juliaarrays.github.io/StaticArrays.jl/> |
+| SpecialFunctions.jl | <https://specialfunctions.juliamath.org/> |
+
+#### compilers-and-autodiff.md
+
+| Tool | Docs |
+|---|---|
+| LLVM | <https://llvm.org/docs/> |
+| MLIR | <https://mlir.llvm.org/> |
+| JAX | <https://docs.jax.dev/> |
+| Triton | <https://triton-lang.org/> |
+| CUDA | <https://docs.nvidia.com/cuda/> — llms.txt: <https://docs.nvidia.com/cuda/llms.txt> |
+| ROCm | <https://rocm.docs.amd.com/> |
+| SYCL | <https://www.khronos.org/sycl/> |
+| Kokkos | <https://kokkos.org/> |
+| OpenMP | <https://www.openmp.org/> |
+| CUDA.jl | <https://cuda.juliagpu.org/> |
+| AMDGPU.jl | <https://amdgpu.juliagpu.org/> |
+| KernelAbstractions.jl | <https://juliagpu.github.io/KernelAbstractions.jl/> |
+| CasADi | <https://web.casadi.org/> |
+| Enzyme | <https://enzyme.mit.edu/> |
+| ForwardDiff.jl | <https://juliadiff.org/ForwardDiff.jl/> |
+| Zygote.jl | <https://fluxml.ai/Zygote.jl/> |
+| SciMLSensitivity.jl | <https://docs.sciml.ai/SciMLSensitivity/> |
+| Diffrax | <https://docs.kidger.site/diffrax/> |
+| torchdiffeq | <https://github.com/rtqichen/torchdiffeq> |

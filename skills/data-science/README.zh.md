@@ -28,3 +28,4 @@ npx skills add ryan-minato/meta-skills/skills/data-science --skill <skill-name>
 | [meta-ds-scale-docs](meta-ds-scale-docs/) | NVIDIA RAPIDS GPU 数据科学、Dask 家族与集群分析引擎（Spark、Flink、Trino、Sedona）的文档入口 |
 | [meta-ds-pipelines-docs](meta-ds-pipelines-docs/) | 工作流编排与分析工程（Airflow、dbt、Dagster、Prefect）的文档入口 |
 | [meta-ds-geospatial-docs](meta-ds-geospatial-docs/) | 地理空间矢量与栅格栈及空间引擎的文档入口 |
+| [meta-ds-numerics-docs](meta-ds-numerics-docs/) | 科学计算平台、数学内核与稀疏求解器、编译器/GPU 工具链与自动微分的文档入口 |
