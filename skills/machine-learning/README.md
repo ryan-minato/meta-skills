@@ -40,3 +40,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 | [meta-ml-rl-docs](meta-ml-rl-docs/) | Documentation entry points for RL algorithm frameworks and for environments and simulators |
 | [meta-ml-recsys-docs](meta-ml-recsys-docs/) | Documentation entry points for recommendation, ranking, and candidate-retrieval frameworks |
 | [meta-ml-tabular-docs](meta-ml-tabular-docs/) | Documentation entry points for traditional ML and gradient boosting, interpretability, and AutoML and hyperparameter optimization |
+| [meta-ml-timeseries-docs](meta-ml-timeseries-docs/) | Documentation entry points for time-series forecasting, feature extraction, and change-point and anomaly detection |

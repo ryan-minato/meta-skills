@@ -55,7 +55,8 @@
         "./meta-ml-audio-docs",
         "./meta-ml-rl-docs",
         "./meta-ml-recsys-docs",
-        "./meta-ml-tabular-docs"
+        "./meta-ml-tabular-docs",
+        "./meta-ml-timeseries-docs"
       ],
       "strict": false
     }

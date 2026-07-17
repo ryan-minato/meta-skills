@@ -606,3 +606,20 @@ order; each skill's rows land in the same change that adds the skill.
 | BoTorch | <https://botorch.org/> |
 | Hyperopt | <https://hyperopt.github.io/hyperopt/> |
 | Microsoft NNI | <https://nni.readthedocs.io/> |
+
+### meta-ml-timeseries-docs
+
+#### time-series.md
+
+| Tool | Docs |
+|---|---|
+| pandas | <https://pandas.pydata.org/docs/> |
+| statsmodels | <https://www.statsmodels.org/> |
+| StatsForecast | <https://nixtlaverse.nixtla.io/statsforecast/> — llms.txt: <https://nixtlaverse.nixtla.io/llms.txt> |
+| MLForecast | <https://github.com/Nixtla/mlforecast> |
+| NeuralForecast | <https://nixtlaverse.nixtla.io/neuralforecast/> — llms.txt: <https://nixtlaverse.nixtla.io/llms.txt> |
+| Prophet | <https://facebook.github.io/prophet/> |
+| sktime | <https://www.sktime.net/> — llms.txt: <https://www.sktime.net/llms.txt> |
+| tsfresh | <https://tsfresh.readthedocs.io/> |
+| ruptures | <https://centre-borelli.github.io/ruptures-docs/> |
+| PyOD | <https://pyod.readthedocs.io/> |
