@@ -198,3 +198,18 @@ order; each skill's rows land in the same change that adds the skill.
 | Distilabel | <https://distilabel.argilla.io/> |
 | Trackio | <https://huggingface.co/docs/trackio> |
 | Leaderboards | <https://huggingface.co/docs/leaderboards> |
+
+### meta-ml-ray-docs
+
+#### ray-libraries.md
+
+| Tool | Docs |
+|---|---|
+| Ray | <https://docs.ray.io/> — llms.txt: <https://docs.ray.io/llms.txt> |
+
+#### kuberay-and-clusters.md
+
+| Tool | Docs |
+|---|---|
+| KubeRay | <https://github.com/ray-project/kuberay> |
+| Anyscale | <https://docs.anyscale.com/> — llms.txt: <https://docs.anyscale.com/llms.txt> |

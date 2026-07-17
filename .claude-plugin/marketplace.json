@@ -44,7 +44,8 @@
       "skills": [
         "./meta-ml-frameworks-docs",
         "./meta-ml-training-docs",
-        "./meta-ml-huggingface-docs"
+        "./meta-ml-huggingface-docs",
+        "./meta-ml-ray-docs"
       ],
       "strict": false
     }
