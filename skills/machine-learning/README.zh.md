@@ -25,3 +25,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 |---|---|
 | [meta-ml-frameworks-docs](meta-ml-frameworks-docs/) | 通用深度学习与张量框架（PyTorch、TensorFlow、Keras、JAX、MLX、PaddlePaddle、tinygrad）及 GPU 内核与编译算子库的文档入口 |
 | [meta-ml-training-docs](meta-ml-training-docs/) | 分布式训练栈（DeepSpeed、Megatron、Lightning、NeMo、Colossal-AI、TorchTitan）与微调框架（torchtune、LLaMA-Factory、Axolotl、Unsloth、OpenRLHF）的文档入口 |
+| [meta-ml-huggingface-docs](meta-ml-huggingface-docs/) | Hugging Face 生态的文档入口：模型与数据库、训练与优化、Hub 侧服务与应用 |

@@ -28,3 +28,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 |---|---|
 | [meta-ml-frameworks-docs](meta-ml-frameworks-docs/) | Documentation entry points for general DL and tensor frameworks (PyTorch, TensorFlow, Keras, JAX, MLX, PaddlePaddle, tinygrad) and GPU-kernel and compiled-ops libraries |
 | [meta-ml-training-docs](meta-ml-training-docs/) | Documentation entry points for distributed-training stacks (DeepSpeed, Megatron, Lightning, NeMo, Colossal-AI, TorchTitan) and finetuning frameworks (torchtune, LLaMA-Factory, Axolotl, Unsloth, OpenRLHF) |
+| [meta-ml-huggingface-docs](meta-ml-huggingface-docs/) | Documentation entry points across the Hugging Face ecosystem: model and data libraries, training and optimization, Hub serving and apps |

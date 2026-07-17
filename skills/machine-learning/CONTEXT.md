@@ -151,3 +151,50 @@ order; each skill's rows land in the same change that adds the skill.
 | Axolotl | <https://docs.axolotl.ai/> |
 | Unsloth | <https://unsloth.ai/docs> — llms.txt: <https://unsloth.ai/docs/llms.txt> |
 | OpenRLHF | <https://github.com/OpenRLHF/OpenRLHF> |
+
+### meta-ml-huggingface-docs
+
+#### core-libraries.md
+
+| Tool | Docs |
+|---|---|
+| Transformers | <https://huggingface.co/docs/transformers> |
+| Diffusers | <https://huggingface.co/docs/diffusers> |
+| Sentence Transformers | <https://sbert.net/> |
+| timm | <https://huggingface.co/docs/timm> |
+| Transformers.js | <https://huggingface.co/docs/transformers.js> |
+| Datasets | <https://huggingface.co/docs/datasets> |
+| Tokenizers | <https://huggingface.co/docs/tokenizers> |
+| Safetensors | <https://huggingface.co/docs/safetensors> |
+| huggingface_hub | <https://huggingface.co/docs/huggingface_hub> |
+| Hugging Face Hub (Xet storage) | <https://huggingface.co/docs/hub> |
+
+#### training-and-optimization.md
+
+| Tool | Docs |
+|---|---|
+| Accelerate | <https://huggingface.co/docs/accelerate> |
+| PEFT | <https://huggingface.co/docs/peft> |
+| TRL | <https://huggingface.co/docs/trl> |
+| AutoTrain | <https://huggingface.co/docs/autotrain> |
+| Kernels | <https://huggingface.co/docs/kernels> |
+| Optimum | <https://huggingface.co/docs/optimum> |
+| Evaluate | <https://huggingface.co/docs/evaluate> |
+| LightEval | <https://huggingface.co/docs/lighteval> |
+
+#### serving-and-apps.md
+
+| Tool | Docs |
+|---|---|
+| Text Generation Inference | <https://huggingface.co/docs/text-generation-inference> |
+| Text Embeddings Inference | <https://huggingface.co/docs/text-embeddings-inference> |
+| Inference Providers | <https://huggingface.co/docs/inference-providers> |
+| Inference Endpoints | <https://huggingface.co/docs/inference-endpoints> |
+| Spaces | <https://huggingface.co/docs/hub/spaces> |
+| Gradio | <https://gradio.app/docs> — llms.txt: <https://gradio.app/llms.txt> |
+| smolagents | <https://huggingface.co/docs/smolagents> |
+| LeRobot | <https://huggingface.co/docs/lerobot> |
+| Argilla | <https://docs.argilla.io/> |
+| Distilabel | <https://distilabel.argilla.io/> |
+| Trackio | <https://huggingface.co/docs/trackio> |
+| Leaderboards | <https://huggingface.co/docs/leaderboards> |
