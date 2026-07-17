@@ -77,8 +77,8 @@ and any change to it is copied to every sibling in the same change
 
 ## Upstream Registry
 
-Every doc URL the catalog's skills cite — a maintainer snapshot. The URL
-is authoritative: when this table and a tool's docs disagree, the docs
+Every doc URL the catalog's skills cite — a maintainer snapshot, last
+verified live 2026-07-17. The URL is authoritative: when this table and a tool's docs disagree, the docs
 win and this file updates in the same change. Sites that publish an
 `llms.txt` plain-text index (agent-preferred; probe `<docs-root>/llms.txt`,
 then `llms-full.txt`) are marked; re-probe the others when refreshing
@@ -88,3 +88,40 @@ skill's reference table, with details always fetched from the doc URL.
 
 Sections mirror the catalog's skills and their reference tables, in
 order; each skill's rows land in the same change that adds the skill.
+
+### meta-ml-frameworks-docs
+
+#### dl-frameworks.md
+
+| Tool | Docs |
+|---|---|
+| PyTorch | <https://docs.pytorch.org/> |
+| TensorFlow | <https://www.tensorflow.org/> |
+| Keras | <https://keras.io/> |
+| KerasHub | <https://keras.io/keras_hub/> |
+| KerasCV | <https://keras.io/keras_cv/> |
+| KerasTuner | <https://keras.io/keras_tuner/> |
+| JAX | <https://docs.jax.dev/> |
+| Flax | <https://flax.readthedocs.io/> |
+| Optax | <https://optax.readthedocs.io/> |
+| Orbax | <https://orbax.readthedocs.io/> |
+| Equinox | <https://docs.kidger.site/equinox/> |
+| MLX | <https://ml-explore.github.io/mlx/> |
+| PaddlePaddle | <https://www.paddlepaddle.org.cn/en> |
+| tinygrad | <https://docs.tinygrad.org/> |
+
+#### kernels-and-ops.md
+
+| Tool | Docs |
+|---|---|
+| NumPy | <https://numpy.org/doc/> |
+| CuPy | <https://docs.cupy.dev/> |
+| Triton | <https://triton-lang.org/> |
+| einops | <https://einops.rocks/> |
+| FlashAttention | <https://github.com/Dao-AILab/flash-attention> |
+| xFormers | <https://facebookresearch.github.io/xformers/> |
+| bitsandbytes | <https://huggingface.co/docs/bitsandbytes> |
+| NVIDIA Transformer Engine | <https://docs.nvidia.com/deeplearning/transformer-engine/> — llms.txt: <https://docs.nvidia.com/llms.txt> |
+| Liger Kernel | <https://github.com/linkedin/Liger-Kernel> |
+| Numba | <https://numba.readthedocs.io/> |
+| Cython | <https://cython.readthedocs.io/> |

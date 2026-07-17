@@ -23,4 +23,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 
 | Skill | 描述 |
 |---|---|
-| 暂无 | |
+| [meta-ml-frameworks-docs](meta-ml-frameworks-docs/) | 通用深度学习与张量框架（PyTorch、TensorFlow、Keras、JAX、MLX、PaddlePaddle、tinygrad）及 GPU 内核与编译算子库的文档入口 |

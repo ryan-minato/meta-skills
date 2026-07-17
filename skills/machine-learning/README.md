@@ -26,4 +26,4 @@ npx skills add ryan-minato/meta-skills/skills/machine-learning --skill <skill-na
 
 | Skill | Description |
 |---|---|
-| none yet | |
+| [meta-ml-frameworks-docs](meta-ml-frameworks-docs/) | Documentation entry points for general DL and tensor frameworks (PyTorch, TensorFlow, Keras, JAX, MLX, PaddlePaddle, tinygrad) and GPU-kernel and compiled-ops libraries |
