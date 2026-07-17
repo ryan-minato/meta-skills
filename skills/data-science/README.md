@@ -28,3 +28,4 @@ npx skills add ryan-minato/meta-skills/skills/data-science --skill <skill-name>
 | Skill | Description |
 |---|---|
 | [meta-ds-analysis-docs](meta-ds-analysis-docs/) | Documentation entry points for numerics and statistics, dataframes and SQL, storage formats, multidimensional data, graph analysis, visualization, data quality, and notebooks |
+| [meta-ds-scale-docs](meta-ds-scale-docs/) | Documentation entry points for NVIDIA RAPIDS GPU data science, the Dask family, and cluster analytics engines (Spark, Flink, Trino, Sedona) |

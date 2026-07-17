@@ -180,3 +180,38 @@ order; each skill's rows land in the same change that adds the skill.
 | JupyterLab | <https://jupyterlab.readthedocs.io/> |
 | Jupyter Server | <https://jupyter-server.readthedocs.io/> |
 | Quarto | <https://quarto.org/> — llms.txt: <https://quarto.org/llms.txt> |
+
+### meta-ds-scale-docs
+
+#### rapids.md
+
+| Tool | Docs |
+|---|---|
+| RAPIDS | <https://docs.rapids.ai/> |
+| cuDF | <https://docs.rapids.ai/api/cudf/stable/> |
+| cuML | <https://docs.rapids.ai/api/cuml/stable/> |
+| cuGraph | <https://docs.rapids.ai/api/cugraph/stable/> |
+| cuSpatial | <https://docs.rapids.ai/api/cuspatial/stable/> |
+| Dask-CUDA | <https://docs.rapids.ai/api/dask-cuda/stable/> |
+| RMM | <https://docs.rapids.ai/api/rmm/stable/> |
+| CuPy | <https://docs.cupy.dev/> |
+
+#### dask.md
+
+| Tool | Docs |
+|---|---|
+| Dask | <https://docs.dask.org/> — llms.txt: <https://docs.dask.org/llms.txt> |
+| Dask Distributed | <https://distributed.dask.org/> |
+| Dask-ML | <https://ml.dask.org/> |
+
+#### cluster-engines.md
+
+| Tool | Docs |
+|---|---|
+| Apache Spark | <https://spark.apache.org/docs/latest/> — llms.txt: <https://spark.apache.org/docs/llms.txt> |
+| PySpark | <https://spark.apache.org/docs/latest/api/python/> — llms.txt: <https://spark.apache.org/docs/llms.txt> |
+| Apache Flink | <https://nightlies.apache.org/flink/flink-docs-stable/> |
+| Trino | <https://trino.io/docs/current/> |
+| Apache Sedona | <https://sedona.apache.org/> |
+| GraphFrames | <https://graphframes.io/> — llms.txt: <https://graphframes.io/llms.txt> |
+| Ray | <https://docs.ray.io/> — llms.txt: <https://docs.ray.io/llms.txt> |

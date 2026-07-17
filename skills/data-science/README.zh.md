@@ -25,3 +25,4 @@ npx skills add ryan-minato/meta-skills/skills/data-science --skill <skill-name>
 | Skill | 描述 |
 |---|---|
 | [meta-ds-analysis-docs](meta-ds-analysis-docs/) | 数值与统计、dataframe 与 SQL、存储格式、多维数据、图分析、可视化、数据质量与 notebook 的文档入口 |
+| [meta-ds-scale-docs](meta-ds-scale-docs/) | NVIDIA RAPIDS GPU 数据科学、Dask 家族与集群分析引擎（Spark、Flink、Trino、Sedona）的文档入口 |
