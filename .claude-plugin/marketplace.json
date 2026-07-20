@@ -81,6 +81,19 @@
         "./meta-ds-hpc-docs"
       ],
       "strict": false
+    },
+    {
+      "name": "github",
+      "source": "./skills/github",
+      "description": "Platform-side conventions for GitHub-hosted projects: collaboration flow and templates, CI gates mirroring local checks, guardrails, community health files, planning and releases — capabilities always fetched live from the GitHub docs. Install on top of core.",
+      "skills": [
+        "./meta-gh-collaboration",
+        "./meta-gh-cicd",
+        "./meta-gh-guardrails",
+        "./meta-gh-community-files",
+        "./meta-gh-planning-release"
+      ],
+      "strict": false
     }
   ]
 }

@@ -51,6 +51,7 @@ them in the file tree.
 | [python](skills/python/) | Trusted defaults and doc URLs for Python projects: docstring and comment conventions, testing setup, and toolchain choices | Per project, on top of `core`, only when the target is a Python project |
 | [machine-learning](skills/machine-learning/) | Documentation entry points for ML projects, one skill per domain (frameworks, training, inference, vision, audio, …) — information only — plus project scaffolds (quick experiment, maintainable training) and GPU-image discovery that declare their opinionated defaults | Per project, on top of `core`, only when the target trains, finetunes, serves, or builds on ML models |
 | [data-science](skills/data-science/) | Authoritative documentation entry points for data-analysis and scientific-computing projects, one skill per domain (analysis, scale, pipelines, geospatial, numerics, simulation, HPC); information only, never recommendations | Per project, on top of `core`, only when the target analyzes data or does scientific computing |
+| [github](skills/github/) | Platform-side conventions for GitHub-hosted projects, one skill per concern: collaboration flow and templates, CI gates that mirror local checks, guardrails (Dependabot, CODEOWNERS, rulesets, scanning), community health files, planning and releases — platform capabilities always fetched live from the GitHub docs | Per project, on top of `core`, only when the target is hosted on GitHub |
 
 ## Installation
 
@@ -64,6 +65,7 @@ claude plugin install frontend@meta-skills --scope project   # only with a visua
 claude plugin install python@meta-skills --scope project     # only for Python projects
 claude plugin install machine-learning@meta-skills --scope project  # only for ML projects
 claude plugin install data-science@meta-skills --scope project      # only for data/scientific projects
+claude plugin install github@meta-skills --scope project            # only for GitHub-hosted projects
 ```
 
 Plugin-managed installs are removed with `claude plugin uninstall`, not by
@@ -78,6 +80,7 @@ npx skills add ryan-minato/meta-skills/skills/frontend      # only with a visual
 npx skills add ryan-minato/meta-skills/skills/python        # only for Python projects
 npx skills add ryan-minato/meta-skills/skills/machine-learning  # only for ML projects
 npx skills add ryan-minato/meta-skills/skills/data-science  # only for data/scientific projects
+npx skills add ryan-minato/meta-skills/skills/github        # only for GitHub-hosted projects
 npx skills add ryan-minato/meta-skills/skills               # every published skill
 ```
 
