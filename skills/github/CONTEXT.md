@@ -138,6 +138,7 @@ in the same change that adds the skill.
 |---|---|
 | GitHub Docs: issues (planning) | <https://docs.github.com/en/issues> |
 | GitHub Docs: repositories (releases) | <https://docs.github.com/en/repositories> |
+| GitHub Docs: actions (release automation) | <https://docs.github.com/en/actions> |
 | SemVer | <https://semver.org/> |
 | CalVer | <https://calver.org/> |
 | Keep a Changelog | <https://keepachangelog.com/> |
