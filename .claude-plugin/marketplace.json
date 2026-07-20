@@ -94,6 +94,19 @@
         "./meta-gh-planning-release"
       ],
       "strict": false
+    },
+    {
+      "name": "gitlab",
+      "source": "./skills/gitlab",
+      "description": "Platform-side conventions for GitLab-hosted projects: collaboration flow and templates, CI gates mirroring local checks, guardrails, community health files, planning and releases — capabilities always fetched live from the GitLab docs, respecting instance version and tier. Install on top of core.",
+      "skills": [
+        "./meta-gl-collaboration",
+        "./meta-gl-cicd",
+        "./meta-gl-guardrails",
+        "./meta-gl-community-files",
+        "./meta-gl-planning-release"
+      ],
+      "strict": false
     }
   ]
 }
