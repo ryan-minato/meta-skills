@@ -3,14 +3,13 @@ name: meta-ml-probabilistic-docs
 description: >-
   Disposable meta-skill (delete after the harness is built): maps a
   probabilistic-modeling project to authoritative documentation entry
-  points — probabilistic programming and Bayesian inference (PyMC,
-  Stan, Pyro, NumPyro, TensorFlow Probability, BlackJAX, ArviZ) and
-  causal inference (DoWhy, causal-learn, EconML, CausalML, DoubleML,
-  Tigramite) — plus a discovery procedure for tools not listed. Use
-  when a harness build must record where the docs live for a project
-  that does Bayesian modeling, MCMC, or causal inference. Not for
-  choosing between tools or recommending one, and not for frequentist
-  statistics or general ML.
+  points — probabilistic programming and Bayesian inference (PyMC, Stan,
+  Pyro, NumPyro, TensorFlow Probability, BlackJAX, ArviZ) and causal
+  inference (DoWhy, causal-learn, EconML, CausalML, DoubleML,
+  Tigramite). Use when a harness build must record where the docs live
+  for a project that does Bayesian modeling, MCMC, or causal inference.
+  Not for choosing between tools or recommending one, and not for
+  frequentist statistics or general ML.
 ---
 
 # Probabilistic & Causal Documentation Map
@@ -36,12 +35,12 @@ option list with URLs and leave the choice to the user.
    inference.
 3. Read [causal-inference.md](references/causal-inference.md) when the
    target estimates causal effects or discovers causal structure.
-4. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-5. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-6. Record each detected tool — name, one-line role, documentation entry
+4. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+5. Record each detected tool — name, one-line role, documentation entry
    point, and its llms.txt when present — wherever the harness keeps
    conventions.
 
@@ -58,3 +57,6 @@ recorded ranks or recommends between tools.
 - The same tool may appear in another domain skill's tables (PyMC and
   ArviZ also serve statistical analysis); record it once per harness,
   not once per skill.
+- Tools this skill does not list are out of scope: record only what its
+  tables cover, and leave finding docs for anything else to the agent —
+  it is not this skill's job.

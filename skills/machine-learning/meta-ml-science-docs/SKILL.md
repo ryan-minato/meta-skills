@@ -6,12 +6,11 @@ description: >-
   entry points — medical imaging (MONAI, TorchIO), chemistry and drug
   discovery (RDKit, DeepChem), biology and omics (Biopython, Scanpy,
   scvi-tools), molecular simulation and materials (OpenMM, ASE,
-  pymatgen), and physics-informed ML (PhysicsNeMo, DeepXDE, e3nn) —
-  plus a discovery procedure for tools not listed. Use when a harness
-  build must record where the docs live for a project applying ML in
-  medicine, biology, chemistry, or the physical sciences. Not for
-  choosing between tools or recommending one, and not for general
-  scientific computing without ML.
+  pymatgen), and physics-informed ML (PhysicsNeMo, DeepXDE, e3nn). Use
+  when a harness build must record where the docs live for a project
+  applying ML in medicine, biology, chemistry, or the physical sciences.
+  Not for choosing between tools or recommending one, and not for
+  general scientific computing without ML.
 ---
 
 # Scientific ML Documentation Map
@@ -34,12 +33,12 @@ option list with URLs and leave the choice to the user.
    configs.
 2. Read [science-ml.md](references/science-ml.md) for the medical,
    biological, chemical, and physics-informed libraries in play.
-3. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-4. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-5. Record each detected tool — name, one-line role, documentation entry
+3. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+4. Record each detected tool — name, one-line role, documentation entry
    point, and its llms.txt when present — wherever the harness keeps
    conventions.
 
@@ -57,3 +56,6 @@ recommends between tools.
   rather than PyPI — fetch the current channel from the entry point.
 - General numerical solvers and PDE frameworks without ML belong to a
   scientific-computing stack, not here.
+- Tools this skill does not list are out of scope: record only what its
+  tables cover, and leave finding docs for anything else to the agent —
+  it is not this skill's job.

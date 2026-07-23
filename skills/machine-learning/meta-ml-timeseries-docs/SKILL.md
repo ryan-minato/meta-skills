@@ -4,13 +4,12 @@ description: >-
   Disposable meta-skill (delete after the harness is built): maps a
   time-series project to authoritative documentation entry points —
   forecasting and analysis libraries (statsmodels, Nixtla's
-  StatsForecast/MLForecast/NeuralForecast, Prophet, sktime, tsfresh)
-  and change-point and anomaly detection (ruptures, PyOD) — plus a
-  discovery procedure for tools not listed. Use when a harness build
-  must record where the docs live for a project that forecasts,
-  decomposes, or detects anomalies in time series. Not for choosing
-  between tools or recommending one, and not for general tabular ML or
-  statistical analysis outside time series.
+  StatsForecast/MLForecast/NeuralForecast, Prophet, sktime, tsfresh) and
+  change-point and anomaly detection (ruptures, PyOD). Use when a
+  harness build must record where the docs live for a project that
+  forecasts, decomposes, or detects anomalies in time series. Not for
+  choosing between tools or recommending one, and not for general
+  tabular ML or statistical analysis outside time series.
 ---
 
 # Time Series Documentation Map
@@ -33,12 +32,12 @@ to the user.
 2. Read [time-series.md](references/time-series.md) for the
    forecasting, feature-extraction, and anomaly-detection libraries in
    play.
-3. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-4. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-5. Record each detected tool — name, one-line role, documentation entry
+3. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+4. Record each detected tool — name, one-line role, documentation entry
    point, and its llms.txt when present — wherever the harness keeps
    conventions.
 
@@ -57,3 +56,6 @@ recommends between tools.
   library's.
 - The same tool may appear in another domain skill's tables
   (statsmodels, PyOD); record it once per harness, not once per skill.
+- Tools this skill does not list are out of scope: record only what its
+  tables cover, and leave finding docs for anything else to the agent —
+  it is not this skill's job.

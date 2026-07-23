@@ -3,12 +3,11 @@ name: meta-ml-image-gen-docs
 description: >-
   Disposable meta-skill (delete after the harness is built): maps an
   image- or video-generation project to authoritative documentation
-  entry points — generation UIs and pipelines (ComfyUI, SD WebUI
-  Forge, InvokeAI), LoRA training (kohya_ss, LyCORIS), conditioning
-  adapters (ControlNet, IP-Adapter), and open video generation
-  (Open-Sora, LTX-Video) — plus a discovery procedure for tools not
-  listed. Use when a harness build must record where the docs live for
-  a project that generates images or video with diffusion-model
+  entry points — generation UIs and pipelines (ComfyUI, SD WebUI Forge,
+  InvokeAI), LoRA training (kohya_ss, LyCORIS), conditioning adapters
+  (ControlNet, IP-Adapter), and open video generation (Open-Sora,
+  LTX-Video). Use when a harness build must record where the docs live
+  for a project that generates images or video with diffusion-model
   tooling. Not for choosing between tools or recommending one, and not
   for discriminative computer vision or the Diffusers library itself.
 ---
@@ -32,12 +31,12 @@ option list with URLs and leave the choice to the user.
    models), and generation dependencies in manifests.
 2. Read [generation-tools.md](references/generation-tools.md) for the
    UIs, trainers, adapters, and video-generation projects in play.
-3. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-4. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-5. Record each detected tool — name, one-line role, documentation entry
+3. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+4. Record each detected tool — name, one-line role, documentation entry
    point, and its llms.txt when present — wherever the harness keeps
    conventions.
 
@@ -56,3 +55,6 @@ recommends between tools.
   its README.
 - The Diffusers library belongs to the Hugging Face ecosystem's own
   documentation map — do not duplicate its entry from here.
+- Tools this skill does not list are out of scope: record only what its
+  tables cover, and leave finding docs for anything else to the agent —
+  it is not this skill's job.

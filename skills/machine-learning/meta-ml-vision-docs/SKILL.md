@@ -2,17 +2,16 @@
 name: meta-ml-vision-docs
 description: >-
   Disposable meta-skill (delete after the harness is built): maps a
-  computer-vision project to authoritative documentation entry points
-  — core vision libraries and pretrained models (OpenCV, torchvision,
+  computer-vision project to authoritative documentation entry points —
+  core vision libraries and pretrained models (OpenCV, torchvision,
   timm, OpenMMLab, Ultralytics), detection/segmentation/tracking (SAM,
-  Grounding DINO, supervision tooling), OCR and document AI
-  (PaddleOCR, Tesseract, Docling, Unstructured), and 3D vision and
-  neural rendering (Open3D, PyTorch3D, Nerfstudio) — plus a discovery
-  procedure for tools not listed. Use when a harness build must record
-  where the docs live for a project that processes images, video,
-  point clouds, or documents as images. Not for choosing between tools
-  or recommending one, and not for image/video generation or
-  non-vision modalities.
+  Grounding DINO, supervision tooling), OCR and document AI (PaddleOCR,
+  Tesseract, Docling, Unstructured), and 3D vision and neural rendering
+  (Open3D, PyTorch3D, Nerfstudio). Use when a harness build must record
+  where the docs live for a project that processes images, video, point
+  clouds, or documents as images. Not for choosing between tools or
+  recommending one, and not for image/video generation or non-vision
+  modalities.
 ---
 
 # Computer Vision Documentation Map
@@ -43,12 +42,12 @@ to the user.
    when the target reads text from images or parses document layouts.
 5. Read [3d-vision.md](references/3d-vision.md) when the target works
    with point clouds, meshes, or neural rendering.
-6. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-7. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-8. Record each detected tool — name, one-line role, documentation entry
+6. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+7. Record each detected tool — name, one-line role, documentation entry
    point, and its llms.txt when present — wherever the harness keeps
    conventions.
 
@@ -67,3 +66,6 @@ between tools.
 - The same tool may appear in another domain skill's tables (timm also
   lives in the Hugging Face map); record it once per harness, not once
   per skill.
+- Tools this skill does not list are out of scope: record only what its
+  tables cover, and leave finding docs for anything else to the agent —
+  it is not this skill's job.

@@ -6,12 +6,10 @@ description: >-
   points — algorithm and training frameworks (Stable-Baselines3,
   TorchRL, CleanRL, Tianshou, Acme, d3rlpy) and environments and
   simulators (Gymnasium, PettingZoo, MuJoCo, Isaac Lab, CARLA, Unity
-  ML-Agents) — plus a discovery procedure for tools not listed. Use
-  when a harness build must record where the docs live for a project
-  that trains or evaluates RL agents or builds simulation
-  environments. Not for choosing between tools or recommending one,
-  and not for RLHF-style LLM post-training or the Ray ecosystem's
-  RLlib.
+  ML-Agents). Use when a harness build must record where the docs live
+  for a project that trains or evaluates RL agents or builds simulation
+  environments. Not for choosing between tools or recommending one, and
+  not for RLHF-style LLM post-training or the Ray ecosystem's RLlib.
 ---
 
 # Reinforcement Learning Documentation Map
@@ -35,12 +33,12 @@ to the user.
    implements or trains RL algorithms.
 3. Read [environments.md](references/environments.md) when the target
    defines, wraps, or runs environments and simulators.
-4. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-5. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-6. Record each detected tool — name, one-line role, documentation entry
+4. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+5. Record each detected tool — name, one-line role, documentation entry
    point, and its llms.txt when present — wherever the harness keeps
    conventions.
 
@@ -58,3 +56,6 @@ ranks or recommends between tools.
   not duplicate its entry from here.
 - Legacy `gym` imports usually mean Gymnasium today — record Gymnasium's
   entry point and note the migration status, without prescribing it.
+- Tools this skill does not list are out of scope: record only what its
+  tables cover, and leave finding docs for anything else to the agent —
+  it is not this skill's job.
