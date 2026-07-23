@@ -39,7 +39,7 @@ format, type) already exist and pass.
    requests, on pushes to the default branch, and on a schedule; which
    are required versus advisory; and a runtime budget for the required
    set.
-5. Copy [workflow-checks.md](assets/workflow-checks.md) to
+5. Copy [checks.yml](assets/checks.yml) to
    `.github/workflows/checks.yml` and rework every line: each job runs
    the project's real local command verbatim, the permissions block is
    minimal and explicit, and third-party actions are referenced the way

@@ -14,7 +14,7 @@ current automatically.
    evolve; never write the file from memory. Note the distinction the
    docs draw between scheduled version updates (needs the committed
    config) and security updates (a repository setting).
-3. Copy [dependabot.md](../assets/dependabot.md) to
+3. Copy [dependabot.yml](../assets/dependabot.yml) to
    `.github/dependabot.yml` and rework it: one update block per detected
    ecosystem, schedule and grouping chosen with the user against the
    fetched schema.

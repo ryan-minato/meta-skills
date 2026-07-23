@@ -48,8 +48,8 @@ working style.
 7. Read [issue-templates.md](references/issue-templates.md) when the
    project will take structured issue reports — bug reports or feature
    requests from more people than the maintainer. It guides copying
-   [issue-form-bug.md](assets/issue-form-bug.md) and
-   [issue-form-feature.md](assets/issue-form-feature.md) into
+   [issue-form-bug.yml](assets/issue-form-bug.yml) and
+   [issue-form-feature.yml](assets/issue-form-feature.yml) into
    `.github/ISSUE_TEMPLATE/`.
 8. Copy [agents-md-collaboration.md](assets/agents-md-collaboration.md)
    into the target's AGENTS.md — as a new section, or merged into the

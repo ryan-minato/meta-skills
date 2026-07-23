@@ -16,8 +16,8 @@ is the simpler branch when the reporters are the team itself.
 
 1. Templates live in `.github/ISSUE_TEMPLATE/`; confirm the currently
    recognized filenames and front-matter fields from the fetched docs.
-2. Copy [issue-form-bug.md](../assets/issue-form-bug.md) and
-   [issue-form-feature.md](../assets/issue-form-feature.md) into that
+2. Copy [issue-form-bug.yml](../assets/issue-form-bug.yml) and
+   [issue-form-feature.yml](../assets/issue-form-feature.yml) into that
    directory under the fetched naming convention, and rework every field
    against what the maintainer actually needs reporters to say — delete
    fields nobody will read.
