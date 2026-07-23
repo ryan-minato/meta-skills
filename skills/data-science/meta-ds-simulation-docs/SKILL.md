@@ -7,12 +7,12 @@ description: >-
   JuMP, Ipopt, OR-Tools, Gurobi), differential equations (SUNDIALS,
   DifferentialEquations.jl, Diffrax), PDE and FEM frameworks (FEniCSx,
   Firedrake, deal.II, MFEM, OpenFOAM, Gmsh), and scientific
-  visualization (VTK, PyVista, ParaView, Makie) — plus a discovery
-  procedure for tools not listed. Use when a harness build must record
-  where the docs live for a project that solves optimization problems,
-  integrates differential equations, or runs PDE/FEM simulations. Not
-  for choosing between tools or recommending one, and not for base
-  numerics, HPC scheduling, or physics-informed ML.
+  visualization (VTK, PyVista, ParaView, Makie). Use when a harness
+  build must record where the docs live for a project that solves
+  optimization problems, integrates differential equations, or runs
+  PDE/FEM simulations. Not for choosing between tools or recommending
+  one, and not for base numerics, HPC scheduling, or physics-informed
+  ML.
 ---
 
 # Simulation & Optimization Documentation Map
@@ -44,14 +44,14 @@ and leave the choice to the user.
 5. Read
    [scientific-visualization.md](references/scientific-visualization.md)
    when the target renders meshes, volumes, or large scientific data.
-6. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-7. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-8. Record each detected tool — name, one-line role, documentation entry
-   point, and its llms.txt when present — wherever the harness keeps
-   conventions.
+6. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+7. Record each detected tool the tables cover — name, one-line role,
+   documentation entry point, and its llms.txt when present — wherever
+   the harness keeps conventions.
 
 Done when: every optimization, differential-equation, PDE, and
 visualization tool the target actually uses has a recorded, live
@@ -68,3 +68,5 @@ between tools.
   point and leave procurement to the user.
 - The underlying sparse solvers (PETSc, Trilinos, MUMPS) belong to the
   numerics stack — record them once per harness, not once per skill.
+- Tools this skill does not list are out of scope — leave finding their
+  docs to the agent; it is not this skill's job.

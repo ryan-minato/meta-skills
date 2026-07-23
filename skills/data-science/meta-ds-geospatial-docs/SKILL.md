@@ -5,11 +5,10 @@ description: >-
   geospatial-analysis project to authoritative documentation entry
   points — vector and raster stacks (GeoPandas, Shapely, pyproj, GDAL,
   Rasterio, rioxarray) and spatial engines (DuckDB Spatial, Apache
-  Sedona, cuSpatial) — plus a discovery procedure for tools not
-  listed. Use when a harness build must record where the docs live for
-  a project that processes geographic vector or raster data. Not for
-  choosing between tools or recommending one, and not for general
-  dataframes, visualization, or remote-sensing ML models.
+  Sedona, cuSpatial). Use when a harness build must record where the
+  docs live for a project that processes geographic vector or raster
+  data. Not for choosing between tools or recommending one, and not for
+  general dataframes, visualization, or remote-sensing ML models.
 ---
 
 # Geospatial Analysis Documentation Map
@@ -31,14 +30,14 @@ and leave the choice to the user.
    GeoTIFF, GeoParquet), and CRS references in code.
 2. Read [geospatial.md](references/geospatial.md) for the vector,
    raster, and spatial-engine libraries in play.
-3. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-4. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-5. Record each detected tool — name, one-line role, documentation entry
-   point, and its llms.txt when present — wherever the harness keeps
-   conventions.
+3. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+4. Record each detected tool the tables cover — name, one-line role,
+   documentation entry point, and its llms.txt when present — wherever
+   the harness keeps conventions.
 
 Done when: every geospatial library the target actually uses has a
 recorded, live documentation entry point, and nothing recorded ranks or
@@ -56,3 +55,5 @@ recommends between tools.
 - The same tool may appear in another domain skill's tables (Rasterio,
   rioxarray, Sedona, cuSpatial); record it once per harness, not once
   per skill.
+- Tools this skill does not list are out of scope — leave finding their
+  docs to the agent; it is not this skill's job.

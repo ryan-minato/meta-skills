@@ -4,10 +4,9 @@ description: >-
   Disposable meta-skill (delete after the harness is built): maps a
   numerical-computing project to authoritative documentation entry
   points — scientific platforms (SciPy, SymPy, Julia SciML, MATLAB,
-  Wolfram), math kernels and sparse solvers (BLAS/LAPACK, FFTW, CUDA
-  and ROCm math libraries, PETSc, Trilinos), and compilers and
-  automatic differentiation (LLVM/MLIR, Numba, JAX, Kokkos, Enzyme,
-  Julia AD) — plus a discovery procedure for tools not listed. Use
+  Wolfram), math kernels and sparse solvers (BLAS/LAPACK, FFTW, CUDA and
+  ROCm math libraries, PETSc, Trilinos), and compilers and automatic
+  differentiation (LLVM/MLIR, Numba, JAX, Kokkos, Enzyme, Julia AD). Use
   when a harness build must record where the docs live for a project
   doing numerical, symbolic, or GPU-accelerated computation. Not for
   choosing between tools or recommending one, and not for dataframe
@@ -41,14 +40,14 @@ option list with URLs and leave the choice to the user.
    [compilers-and-autodiff.md](references/compilers-and-autodiff.md)
    when the target JIT-compiles numerical code, targets GPUs directly,
    or differentiates programs.
-5. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-6. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-7. Record each detected tool — name, one-line role, documentation entry
-   point, and its llms.txt when present — wherever the harness keeps
-   conventions.
+5. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+6. Record each detected tool the tables cover — name, one-line role,
+   documentation entry point, and its llms.txt when present — wherever
+   the harness keeps conventions.
 
 Done when: every numerical library, kernel, and compiler the target
 actually uses has a recorded, live documentation entry point, and
@@ -65,3 +64,5 @@ nothing recorded ranks or recommends between tools.
   in a browser context before replacing it.
 - The same tool may appear in another domain skill's tables (NumPy,
   Numba, PETSc); record it once per harness, not once per skill.
+- Tools this skill does not list are out of scope — leave finding their
+  docs to the agent; it is not this skill's job.

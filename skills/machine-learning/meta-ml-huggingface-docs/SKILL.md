@@ -2,12 +2,11 @@
 name: meta-ml-huggingface-docs
 description: >-
   Disposable meta-skill (delete after the harness is built): maps a
-  Hugging Face-based project to authoritative documentation entry
-  points across the ecosystem — model and data libraries
-  (Transformers, Diffusers, Datasets, Tokenizers), training and
-  optimization (Accelerate, PEFT, TRL, Optimum), and Hub serving and
-  apps (TGI, TEI, Inference Endpoints, Spaces, Gradio, smolagents) —
-  plus a discovery procedure for tools not listed. Use when a harness
+  Hugging Face-based project to authoritative documentation entry points
+  across the ecosystem — model and data libraries (Transformers,
+  Diffusers, Datasets, Tokenizers), training and optimization
+  (Accelerate, PEFT, TRL, Optimum), and Hub serving and apps (TGI, TEI,
+  Inference Endpoints, Spaces, Gradio, smolagents). Use when a harness
   build must record where the docs live for a project that depends on
   any Hugging Face library or loads models from the Hub. Not for
   choosing between tools or recommending one, and not for
@@ -41,14 +40,14 @@ leave the choice to the user.
 4. Read [serving-and-apps.md](references/serving-and-apps.md) when the
    project serves models, hosts demos, builds agents, or produces
    datasets with Hub-side tooling.
-5. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-6. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-7. Record each detected library — name, one-line role, documentation
-   entry point, and its llms.txt when present — wherever the harness
-   keeps conventions.
+5. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+6. Record each detected library the tables cover — name, one-line role,
+   documentation entry point, and its llms.txt when present — wherever
+   the harness keeps conventions.
 
 Done when: every Hugging Face library the target actually uses has a
 recorded, live documentation entry point, and nothing recorded ranks or
@@ -66,3 +65,5 @@ recommends between tools.
   library.
 - The same tool may appear in another domain skill's tables (timm,
   Gradio, bitsandbytes); record it once per harness, not once per skill.
+- Tools this skill does not list are out of scope — leave finding their
+  docs to the agent; it is not this skill's job.

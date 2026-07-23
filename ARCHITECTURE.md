@@ -34,9 +34,9 @@ catalogs.
 - `frontend` — design description and visual language; only for targets
   with a user-facing visual surface, installed on top of `core`.
 - `python` — trusted defaults and authoritative doc URLs for Python
-  targets: docstring and comment conventions, testing setup, and
-  toolchain choices; installed on top of `core`, only for Python
-  projects.
+  targets: docstring and comment conventions, testing setup, toolchain
+  choices, and locating a package's documentation; installed on top of
+  `core`, only for Python projects.
 - `machine-learning` — authoritative documentation entry points for ML
   targets, one skill per project domain (frameworks, training, inference,
   vision, audio, …), information only, never recommendations; installed

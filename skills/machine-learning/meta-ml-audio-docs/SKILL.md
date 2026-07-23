@@ -4,12 +4,11 @@ description: >-
   Disposable meta-skill (delete after the harness is built): maps a
   speech- or audio-processing project to authoritative documentation
   entry points — speech recognition and speaker processing (Whisper
-  family, SpeechBrain, ESPnet, Kaldi/k2, pyannote), speech synthesis
-  and voice cloning (GPT-SoVITS, CosyVoice, F5-TTS, Piper), voice
-  conversion and source separation (RVC family, Demucs, librosa,
-  torchaudio), and music and generative audio (AudioCraft, Essentia,
-  Magenta) — plus a discovery procedure for tools not listed. Use when
-  a harness build must record where the docs live for a project that
+  family, SpeechBrain, ESPnet, Kaldi/k2, pyannote), speech synthesis and
+  voice cloning (GPT-SoVITS, CosyVoice, F5-TTS, Piper), voice conversion
+  and source separation (RVC family, Demucs, librosa, torchaudio), and
+  music and generative audio (AudioCraft, Essentia, Magenta). Use when a
+  harness build must record where the docs live for a project that
   recognizes, synthesizes, converts, separates, or generates speech,
   sound, or music. Not for choosing between tools or recommending one,
   and not for non-audio modalities.
@@ -42,14 +41,14 @@ to the user.
    audio processing and augmentation.
 5. Read [music-and-audio.md](references/music-and-audio.md) when the
    target analyzes or generates music and general audio.
-6. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-7. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-8. Record each detected tool — name, one-line role, documentation entry
-   point, and its llms.txt when present — wherever the harness keeps
-   conventions.
+6. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+7. Record each detected tool the tables cover — name, one-line role,
+   documentation entry point, and its llms.txt when present — wherever
+   the harness keeps conventions.
 
 Done when: every audio tool the target actually uses has a recorded,
 live documentation entry point, and nothing recorded ranks or recommends
@@ -67,3 +66,5 @@ between tools.
 - Multi-domain toolkits (NeMo, ESPnet, SpeechBrain, PaddleSpeech) cover
   recognition and synthesis under one entry point — record it once and
   note both uses.
+- Tools this skill does not list are out of scope — leave finding their
+  docs to the agent; it is not this skill's job.

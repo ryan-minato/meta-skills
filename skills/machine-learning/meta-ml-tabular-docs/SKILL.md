@@ -5,13 +5,12 @@ description: >-
   tabular or classic machine-learning project to authoritative
   documentation entry points — traditional ML and gradient boosting
   (scikit-learn, XGBoost, LightGBM, CatBoost, cuML), interpretability
-  (SHAP, LIME, InterpretML), and AutoML and hyperparameter
-  optimization (Optuna, AutoGluon, FLAML, Ax/BoTorch) — plus a
-  discovery procedure for tools not listed. Use when a harness build
-  must record where the docs live for a project that models tabular
-  data or tunes model hyperparameters. Not for choosing between tools
-  or recommending one, and not for deep learning frameworks,
-  time-series forecasting, or general data analysis.
+  (SHAP, LIME, InterpretML), and AutoML and hyperparameter optimization
+  (Optuna, AutoGluon, FLAML, Ax/BoTorch). Use when a harness build must
+  record where the docs live for a project that models tabular data or
+  tunes model hyperparameters. Not for choosing between tools or
+  recommending one, and not for deep learning frameworks, time-series
+  forecasting, or general data analysis.
 ---
 
 # Tabular ML & AutoML Documentation Map
@@ -37,14 +36,14 @@ to the user.
    predictions.
 3. Read [automl-and-tuning.md](references/automl-and-tuning.md) when
    the target automates model selection or tunes hyperparameters.
-4. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-5. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-6. Record each detected tool — name, one-line role, documentation entry
-   point, and its llms.txt when present — wherever the harness keeps
-   conventions.
+4. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+5. Record each detected tool the tables cover — name, one-line role,
+   documentation entry point, and its llms.txt when present — wherever
+   the harness keeps conventions.
 
 Done when: every tabular-ML and tuning library the target actually uses
 has a recorded, live documentation entry point, and nothing recorded
@@ -61,3 +60,5 @@ ranks or recommends between tools.
 - The same tool may appear in another domain skill's tables
   (scikit-learn, SHAP, PyOD); record it once per harness, not once per
   skill.
+- Tools this skill does not list are out of scope — leave finding their
+  docs to the agent; it is not this skill's job.

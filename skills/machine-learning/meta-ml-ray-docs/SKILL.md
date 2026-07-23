@@ -4,11 +4,11 @@ description: >-
   Disposable meta-skill (delete after the harness is built): maps a
   Ray-based project to authoritative documentation entry points — the
   Ray libraries under one docs root (Core, Data, Train, Tune, Serve,
-  Serve LLM, RLlib) and the cluster layer (KubeRay, Anyscale) — plus a
-  discovery procedure for tools not listed. Use when a harness build
-  must record where the docs live for a project that depends on ray or
-  deploys Ray clusters. Not for choosing between tools or recommending
-  one, and not for non-Ray distributed training or serving stacks.
+  Serve LLM, RLlib) and the cluster layer (KubeRay, Anyscale). Use when
+  a harness build must record where the docs live for a project that
+  depends on ray or deploys Ray clusters. Not for choosing between tools
+  or recommending one, and not for non-Ray distributed training or
+  serving stacks.
 ---
 
 # Ray Ecosystem Documentation Map
@@ -35,14 +35,14 @@ and leave the choice to the user.
 3. Read
    [kuberay-and-clusters.md](references/kuberay-and-clusters.md) when
    the target deploys Ray on Kubernetes or a managed platform.
-4. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-5. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-6. Record each detected component — name, one-line role, documentation
-   entry point, and its llms.txt when present — wherever the harness
-   keeps conventions.
+4. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+5. Record each detected component the tables cover — name, one-line
+   role, documentation entry point, and its llms.txt when present —
+   wherever the harness keeps conventions.
 
 Done when: every Ray component and cluster layer the target actually
 uses has a recorded, live documentation entry point, and nothing
@@ -58,3 +58,5 @@ recorded ranks or recommends between tools.
   component — record the individual libraries the target uses.
 - The same tool may appear in another domain skill's tables; record it
   once per harness, not once per skill.
+- Tools this skill does not list are out of scope — leave finding their
+  docs to the agent; it is not this skill's job.

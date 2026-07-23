@@ -3,10 +3,9 @@ name: meta-ds-pipelines-docs
 description: >-
   Disposable meta-skill (delete after the harness is built): maps a
   data-pipeline project to authoritative documentation entry points —
-  workflow orchestration and analytics engineering (Apache Airflow,
-  dbt, Dagster, Prefect) — plus a discovery procedure for tools not
-  listed. Use when a harness build must record where the docs live for
-  a project that schedules data workflows or builds dbt-style
+  workflow orchestration and analytics engineering (Apache Airflow, dbt,
+  Dagster, Prefect). Use when a harness build must record where the docs
+  live for a project that schedules data workflows or builds dbt-style
   transformation pipelines. Not for choosing between tools or
   recommending one, and not for compute engines, ML pipelines, or
   scientific workflow managers.
@@ -31,14 +30,14 @@ the option list with URLs and leave the choice to the user.
    scheduler deployment configs.
 2. Read [orchestration.md](references/orchestration.md) for the
    orchestrators and transformation frameworks in play.
-3. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-4. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-5. Record each detected tool — name, one-line role, documentation entry
-   point, and its llms.txt when present — wherever the harness keeps
-   conventions.
+3. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+4. Record each detected tool the tables cover — name, one-line role,
+   documentation entry point, and its llms.txt when present — wherever
+   the harness keeps conventions.
 
 Done when: every orchestrator and transformation framework the target
 actually uses has a recorded, live documentation entry point, and
@@ -53,3 +52,5 @@ nothing recorded ranks or recommends between tools.
 - The same orchestrators also run ML pipelines — a project using them
   for model workflows is an ML-operations concern; record the entry
   point once either way.
+- Tools this skill does not list are out of scope — leave finding their
+  docs to the agent; it is not this skill's job.

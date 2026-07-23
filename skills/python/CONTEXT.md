@@ -12,11 +12,12 @@ only.
 `python` holds information skills for Python target projects: trusted
 defaults and authoritative doc URLs the harness-building agent consults
 on demand when deciding documentation conventions, testing setup, and
-toolchain. It installs per project, on top of `core`, and only when the
-target is (predominantly) Python — it is not part of the default install.
-These skills answer "which tool, which style, which default"; the
-harness-build procedure itself belongs to `core` and is never restated
-here.
+toolchain, plus locating where a package's documentation lives. It installs
+per project, on top of `core`, and only when the target is (predominantly)
+Python — it is not part of the default install. These skills answer "which
+tool, which style, which default" — and, for a package no docs map records,
+where its documentation lives; the harness-build procedure itself belongs
+to `core` and is never restated here.
 
 ## Constraints On What May Enter
 
@@ -141,3 +142,11 @@ the others when refreshing this table. PyPI packages install with
 | Material for MkDocs | `pip install mkdocs-material` | <https://squidfunk.github.io/mkdocs-material/> |
 | Sphinx | `pip install sphinx` | <https://www.sphinx-doc.org/> |
 | mkdocstrings | `pip install mkdocstrings` | <https://mkdocstrings.github.io/> |
+
+### Package documentation discovery (nothing to install)
+
+| Doc | URL |
+|---|---|
+| PyPI JSON API (package metadata → homepage and doc URLs) | <https://docs.pypi.org/api/json/> |
+| conda-forge feedstocks (the same links for conda packages) | <https://github.com/conda-forge/> |
+| llms.txt specification (agent-preferred plain-text doc indexes) | <https://llmstxt.org/> |
