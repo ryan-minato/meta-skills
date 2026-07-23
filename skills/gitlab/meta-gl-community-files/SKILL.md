@@ -45,8 +45,13 @@ contributions.
    project's AGENTS.md and task runner already record — it documents
    commands that exist, never aspirations.
 5. SECURITY and SUPPORT: copy [security.md](assets/security.md) and
-   [support.md](assets/support.md) likewise. A code of conduct is
-   adopted, never drafted: fetch the current text of an established
+   [support.md](assets/support.md) likewise — SECURITY names a reporting
+   channel a real person monitors and, where this instance and tier offer
+   private vulnerability reporting (verify live), prefers it so reports
+   never start in a public issue, with confidential issues the common
+   fallback; SUPPORT lists only channels somebody actually answers. A code
+   of conduct is adopted, never drafted: fetch the current text of an
+   established
    covenant (<https://www.contributor-covenant.org/> is the common one)
    and fill in the enforcement contact.
 6. Read [licensing.md](references/licensing.md) when the repository has
