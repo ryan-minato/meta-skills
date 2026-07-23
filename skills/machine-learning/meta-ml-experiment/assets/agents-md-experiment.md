@@ -1,12 +1,3 @@
-# AGENTS.md Skeleton — Quick Experiment
-
-Copy the block below into the target project's `AGENTS.md`, then rework
-it: delete sections that do not apply, replace every angle-bracket
-placeholder with the project's real values, and add what this experiment
-needs that the skeleton lacks. Keep it to one screen — this file is the
-whole harness.
-
-````markdown
 # <project name>
 
 <Two or three sentences: the idea this experiment tests, and the signal
@@ -62,4 +53,3 @@ that will count as success or failure.>
 - <framework docs URL>
 - <Accelerate docs URL>
 - <dataset / paper links>
-````

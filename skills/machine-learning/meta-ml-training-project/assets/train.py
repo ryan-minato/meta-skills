@@ -1,54 +1,25 @@
-# Accelerate Training Loop — Pydantic Settings Variant
-
-Copy the block below into `train.py`, then rework every line against the
-real model and data and delete the guidance comments. Before adapting,
-fetch the current Accelerate API from
-<https://huggingface.co/docs/accelerate> (an llms.txt index is published
-there) — this template owns the structure and the performance seams; the
-docs own today's signatures. Wire the `config.yaml` loading per the
-current Pydantic Settings docs (<https://docs.pydantic.dev/>, llms.txt
-available).
-
-````python
 """Train <model> on <dataset>: one hand-written Accelerate loop."""
 
 from pathlib import Path
 
+import hydra
 import torch
 from accelerate import Accelerator
 from accelerate.utils import set_seed
-from pydantic_settings import BaseSettings
+from omegaconf import DictConfig
 from torch.utils.data import DataLoader
 
 
-class Settings(BaseSettings):
-    """The experiment's knobs — expose only values a run may change."""
-
-    # Load values from config.yaml via a YAML settings source; wire it
-    # per the current Pydantic Settings docs.
-    seed: int = 42
-    epochs: int = <n>
-    batch_size: int = <n>
-    learning_rate: float = <lr>
-    grad_accum_steps: int = 1
-    mixed_precision: str = "bf16"  # "fp16" or "no" where bf16 is unsupported
-    num_workers: int = 4
-    log_every_steps: int = 50
-    checkpoint_every_steps: int = <n>
-    resume_from: str | None = None
-    output_dir: Path = Path("outputs")
-
-
-def build_dataloader(settings: Settings) -> DataLoader:
-    dataset = <build the dataset>
+def build_dataloader(cfg: DictConfig) -> DataLoader:
+    dataset = <build the dataset from cfg.data>
     # The project's one sanctioned try/except lives in the dataset or
     # collate path: skip KNOWN-dirty samples, counting and logging every
     # skip. Everything else crashes.
     return DataLoader(
         dataset,
-        batch_size=settings.batch_size,
+        batch_size=cfg.data.batch_size,
         shuffle=True,
-        num_workers=settings.num_workers,
+        num_workers=cfg.data.num_workers,
         pin_memory=True,
     )
 
@@ -66,19 +37,22 @@ def evaluate(accelerator: Accelerator, model, dataloader) -> dict:
     <compute and return metrics>
 
 
-def main() -> None:
-    settings = Settings()
-    set_seed(settings.seed)
+# config_path resolves relative to this file; run outputs are pinned to
+# outputs/ in the Hydra config, not here.
+@hydra.main(config_path="configs", config_name="config", version_base=None)
+def main(cfg: DictConfig) -> None:
+    set_seed(cfg.seed)
+    output_dir = Path(cfg.output_dir)
 
     accelerator = Accelerator(
-        mixed_precision=settings.mixed_precision,
-        gradient_accumulation_steps=settings.grad_accum_steps,
+        mixed_precision=cfg.mixed_precision,
+        gradient_accumulation_steps=cfg.grad_accum_steps,
     )
 
-    model = <build the model>
-    optimizer = torch.optim.AdamW(model.parameters(), lr=settings.learning_rate)
-    train_loader = build_dataloader(settings)
-    scheduler = <lr scheduler, or None>
+    model = <build the model from cfg.model>
+    optimizer = torch.optim.AdamW(model.parameters(), lr=cfg.optim.learning_rate)
+    train_loader = build_dataloader(cfg)
+    scheduler = <lr scheduler from cfg.optim, or None>
 
     # prepare() is the entire device story: no manual .to(device) anywhere.
     # Multi-GPU comes from launching with `accelerate launch train.py`.
@@ -90,12 +64,12 @@ def main() -> None:
     )
 
     step = 0
-    if settings.resume_from:
-        accelerator.load_state(settings.resume_from)
+    if cfg.resume_from:
+        accelerator.load_state(cfg.resume_from)
         step = <restore the step counter, e.g. from the checkpoint dir name>
 
     model.train()
-    for _epoch in range(settings.epochs):
+    for _epoch in range(cfg.epochs):
         for batch in train_loader:
             # No try/except around the step: a crash points at the bug,
             # wrapping it would only blur the traceback.
@@ -110,21 +84,18 @@ def main() -> None:
                 optimizer.zero_grad()
 
             step += 1
-            if step % settings.log_every_steps == 0:
+            if step % cfg.log_every_steps == 0:
                 log_metrics(accelerator, step, {"loss": loss.item()})
-            if step % settings.checkpoint_every_steps == 0:
-                accelerator.save_state(
-                    settings.output_dir / "checkpoints" / f"step_{step}"
-                )
+            if step % cfg.checkpoint_every_steps == 0:
+                accelerator.save_state(output_dir / "checkpoints" / f"step_{step}")
 
         log_metrics(accelerator, step, evaluate(accelerator, model, <eval loader>))
 
     # Final artifact: the unwrapped weights, loadable without Accelerate.
     accelerator.wait_for_everyone()
     unwrapped = accelerator.unwrap_model(model)
-    accelerator.save(unwrapped.state_dict(), settings.output_dir / "model.pt")
+    accelerator.save(unwrapped.state_dict(), output_dir / "model.pt")
 
 
 if __name__ == "__main__":
     main()
-````

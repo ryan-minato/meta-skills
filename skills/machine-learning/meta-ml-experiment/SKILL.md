@@ -49,11 +49,14 @@ problems); and every default below yields to an existing working choice.
    [shared-module.md](references/shared-module.md) when two entry
    scripts need the same code.
 5. Training loop: when the experiment trains a PyTorch model, copy
-   [train-loop-accelerate.md](assets/train-loop-accelerate.md) into
-   `train.py` — fetch the current Accelerate API from its docs first,
-   then rework every line against the real model and data.
-6. Commands: copy [justfile.md](assets/justfile.md) and rework the
-   recipes so a stranger can run `just setup && just train`.
+   [the Accelerate loop skeleton](assets/train.py) into `train.py` —
+   fetch the current Accelerate API from its docs first, then rework
+   every line against the real model and data, wiring `config.yaml`
+   loading per the current Pydantic Settings docs
+   (<https://docs.pydantic.dev/>).
+6. Commands: copy [the justfile skeleton](assets/justfile) and rework the
+   recipes so a stranger can run `just setup && just train`; set the torch
+   backend, and drop `--torch-backend` for non-torch projects.
 7. Checks: Ruff as both linter and formatter; pytest only where a custom
    component has a contract worth protecting, anything expensive behind
    the manual-only `slow` marker; Gitleaks for secret scanning. Generate
@@ -64,8 +67,8 @@ problems); and every default below yields to an existing working choice.
 8. Containers only on request: read
    [containers.md](references/containers.md) when the user asks for a
    containerized dev environment or server training; it guides copying
-   [devcontainer.md](assets/devcontainer.md) or
-   [docker-training.md](assets/docker-training.md).
+   [devcontainer.json](assets/devcontainer.json) or the
+   [Dockerfile](assets/Dockerfile) and [compose.yaml](assets/compose.yaml).
 9. Deposit: copy [agents-md-experiment.md](assets/agents-md-experiment.md)
    to the project's `AGENTS.md` and rework every section — this file is
    what future agents keep after this skill is deleted.

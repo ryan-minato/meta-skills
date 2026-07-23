@@ -40,8 +40,10 @@ problems); and every default below yields to an existing working choice.
    torch or any hardware-bound dependency — plain `uv add torch` fetches
    the wrong wheel on CUDA/ROCm machines.
 4. Copy the tool tables from
-   [pyproject-tool-config.md](assets/pyproject-tool-config.md) into
-   `pyproject.toml` and rework them against the project.
+   [pyproject-tool-config.toml](assets/pyproject-tool-config.toml) into
+   `pyproject.toml` and rework them against the project: drop the
+   per-file-ignores for directories it does not have yet, and verify the
+   rule codes against the current Ruff docs.
 5. Layout: a package named after the repository at the root (no `src/`
    layout); one entry script per workflow at the root (`train.py`,
    `eval.py`); `configs/` for the Hydra tree; `data/raw/` (immutable
@@ -54,10 +56,11 @@ problems); and every default below yields to an existing working choice.
    restructuring `configs/` — expose anticipatorily what planned
    experiments will vary, but values only, never class paths.
 7. Training loop: when no working loop exists, copy
-   [train-loop-accelerate.md](assets/train-loop-accelerate.md) into
-   `train.py` — fetch the current Accelerate API from its docs first,
-   then rework every line against the real model and data.
-8. Commands and checks: copy [justfile.md](assets/justfile.md) and
+   [the Accelerate loop skeleton](assets/train.py) into `train.py` —
+   fetch the current Accelerate API from its docs first, then rework
+   every line against the real model and data, confirming the
+   `@hydra.main` wiring against the current Hydra docs.
+8. Commands and checks: copy [the justfile skeleton](assets/justfile) and
    rework it; Ruff as linter and formatter; pytest guarding custom
    components' contracts only, expensive tests behind the manual-only
    `slow` marker; Gitleaks for secrets. Generate `.pre-commit-config.yaml`
@@ -66,8 +69,8 @@ problems); and every default below yields to an existing working choice.
 9. Containers only on request: read
    [containers.md](references/containers.md) when the user asks for a
    containerized dev environment or server training; it guides copying
-   [devcontainer.md](assets/devcontainer.md) or
-   [docker-training.md](assets/docker-training.md).
+   [devcontainer.json](assets/devcontainer.json) or the
+   [Dockerfile](assets/Dockerfile) and [compose.yaml](assets/compose.yaml).
 10. Deposit: copy
     [agents-md-training-project.md](assets/agents-md-training-project.md)
     to the project's `AGENTS.md`, rework the directory map against
