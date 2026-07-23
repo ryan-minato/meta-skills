@@ -33,8 +33,9 @@ targets.
   syntax (`.gitlab-ci.yml` keywords, template mechanics, CODEOWNERS
   grammar), pinned tool versions, or feature availability in prose.
   Details are always fetched live through the shared
-  `docs-navigation.md` procedure; skeleton assets sketch shape only and
-  say so. A hard-coded CI keyword list or schema fragment presented as
+  `docs-navigation.md` procedure; skeleton assets sketch shape only, and
+  the SKILL.md that copies one says so — the asset itself stays a bare
+  resource. A hard-coded CI keyword list or schema fragment presented as
   authoritative is a bug.
 - **Doc-root fidelity.** The recorded entry points are the docs root and
   its llms.txt index; GitLab docs paths churn, so topic URLs live only
@@ -59,10 +60,9 @@ targets.
   changelogs, and releases (including pipeline jobs that cut releases)
   to `meta-gl-planning-release`. A skill that grows across a boundary is
   split, not grown.
-- **Registry completeness.** Every URL any skill cites — in SKILL.md,
-  references, and assets alike — appears in this file's Upstream
-  Registry, in the section mirroring its skill. A URL in a skill but not
-  the registry is a bug.
+- **Registry completeness.** Every URL any skill cites — in SKILL.md and
+  references — appears in this file's Upstream Registry, in the section
+  mirroring its skill. A URL in a skill but not the registry is a bug.
 - **Sibling-catalog overlap is intentional.** Platform-neutral specs
   (Conventional Commits, SemVer, CalVer, Keep a Changelog, Contributor
   Covenant, Choose a License) are recorded independently in both
