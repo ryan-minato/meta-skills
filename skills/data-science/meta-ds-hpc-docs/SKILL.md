@@ -1,17 +1,16 @@
 ---
 name: meta-ds-hpc-docs
 description: >-
-  Disposable meta-skill (delete after the harness is built): maps an
-  HPC or multi-node computing project to authoritative documentation
-  entry points — MPI, workflow managers, and cluster schedulers (Open
-  MPI, mpi4py, Slurm, HTCondor, Snakemake, Nextflow), GPU and
-  multi-node communication (NCCL, RCCL, UCX, PyTorch/JAX distributed),
-  and scientific data and parallel I/O (HDF5, NetCDF, Zarr, ADIOS2,
-  Arrow) — plus a discovery procedure for tools not listed. Use when a
-  harness build must record where the docs live for a project that
-  runs on clusters, communicates across nodes or GPUs, or does
-  parallel I/O. Not for choosing between tools or recommending one,
-  and not for single-machine numerics, cluster analytics engines, or
+  Disposable meta-skill (delete after the harness is built): maps an HPC
+  or multi-node computing project to authoritative documentation entry
+  points — MPI, workflow managers, and cluster schedulers (Open MPI,
+  mpi4py, Slurm, HTCondor, Snakemake, Nextflow), GPU and multi-node
+  communication (NCCL, RCCL, UCX, PyTorch/JAX distributed), and
+  scientific data and parallel I/O (HDF5, NetCDF, Zarr, ADIOS2, Arrow).
+  Use when a harness build must record where the docs live for a project
+  that runs on clusters, communicates across nodes or GPUs, or does
+  parallel I/O. Not for choosing between tools or recommending one, and
+  not for single-machine numerics, cluster analytics engines, or
   data-pipeline orchestrators.
 ---
 
@@ -42,12 +41,12 @@ option list with URLs and leave the choice to the user.
    distributed backends.
 4. Read [parallel-io.md](references/parallel-io.md) when the target
    reads or writes scientific data in parallel or from object storage.
-5. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-6. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-7. Record each detected tool — name, one-line role, documentation entry
+5. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+6. Record each detected tool — name, one-line role, documentation entry
    point, and its llms.txt when present — wherever the harness keeps
    conventions.
 
@@ -68,3 +67,6 @@ point, and nothing recorded ranks or recommends between tools.
 - The same tool may appear in another domain skill's tables (Dask, Ray,
   xarray, Arrow, fsspec); record it once per harness, not once per
   skill.
+- Tools this skill does not list are out of scope: record only what its
+  tables cover, and leave finding docs for anything else to the agent —
+  it is not this skill's job.

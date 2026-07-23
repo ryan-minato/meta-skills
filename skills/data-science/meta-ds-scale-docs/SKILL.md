@@ -5,12 +5,11 @@ description: >-
   scaled data-processing project to authoritative documentation entry
   points — GPU data science (NVIDIA RAPIDS: cuDF, cuML, cuGraph,
   Dask-CUDA), the Dask distributed-computing family, and cluster
-  analytics engines (Apache Spark, Flink, Trino, Sedona) — plus a
-  discovery procedure for tools not listed. Use when a harness build
-  must record where the docs live for a project that accelerates data
-  processing on GPUs or scales it across a cluster. Not for choosing
-  between tools or recommending one, and not for single-machine
-  analysis, orchestration schedulers, or model training.
+  analytics engines (Apache Spark, Flink, Trino, Sedona). Use when a
+  harness build must record where the docs live for a project that
+  accelerates data processing on GPUs or scales it across a cluster. Not
+  for choosing between tools or recommending one, and not for
+  single-machine analysis, orchestration schedulers, or model training.
 ---
 
 # Scaled Data Processing Documentation Map
@@ -36,12 +35,12 @@ record the option list with URLs and leave the choice to the user.
    Python with Dask.
 4. Read [cluster-engines.md](references/cluster-engines.md) when the
    target runs SQL or dataflow jobs on a cluster engine.
-5. For every entry point about to be recorded, probe
-   `<docs-root>/llms.txt` (then `llms-full.txt`) and prefer the
-   plain-text index when present.
-6. For tools the tables miss, or any URL that no longer resolves, follow
-   [doc-discovery.md](references/doc-discovery.md).
-7. Record each detected tool — name, one-line role, documentation entry
+5. For every entry point about to be recorded, prefer an agent-oriented
+   rendition: a page's `.md` source, then `<docs-root>/llms.txt` (a
+   compact index). Fall back to `llms-full.txt` only when neither
+   exists, and never read it whole — it is the whole site as one
+   file; search it programmatically.
+6. Record each detected tool — name, one-line role, documentation entry
    point, and its llms.txt when present — wherever the harness keeps
    conventions.
 
@@ -61,3 +60,6 @@ nothing recorded ranks or recommends between tools.
 - The same tool may appear in another domain skill's tables (Dask also
   serves HPC scheduling); record it once per harness, not once per
   skill.
+- Tools this skill does not list are out of scope: record only what its
+  tables cover, and leave finding docs for anything else to the agent —
+  it is not this skill's job.

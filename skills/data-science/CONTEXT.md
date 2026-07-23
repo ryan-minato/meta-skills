@@ -61,19 +61,15 @@ ships with the marker pre-filled. The marker's exact bytes and YAML form
 are defined in the contract; copy them from there, never from rendered
 documentation. Skill names use the `meta-ds-<domain>-docs` pattern — the
 `-docs` suffix reserves the domain name for future scaffolding or
-recommendation skills. Every skill carries `references/doc-discovery.md`,
-byte-identical across the catalog (and across `machine-learning`); the
-canonical copy is
-`skills/machine-learning/meta-ml-frameworks-docs/references/doc-discovery.md`,
-and any change to it is copied to every sibling in the same change
-(`sha256sum` across the copies is the review check).
+recommendation skills. A skill maps only the tools its tables list;
+discovering docs for a package it does not cover is out of scope — the
+agent reaches for a dedicated discovery skill on its own, so no skill here
+carries or depends on that procedure.
 
 ## References
 
 - llms.txt specification (agent-preferred plain-text doc indexes) —
   <https://llmstxt.org/>
-- PyPI JSON API (package metadata → project homepage and doc URLs) —
-  <https://docs.pypi.org/api/json/>
 - Agent Skills specification — reachable through the `agentskills` MCP
   server.
 
@@ -83,8 +79,10 @@ Every doc URL the catalog's skills cite — a maintainer snapshot, last
 verified live 2026-07-17. The URL is authoritative: when this table and
 a tool's docs disagree, the docs win and this file updates in the same
 change. Sites that publish an `llms.txt` plain-text index
-(agent-preferred; probe `<docs-root>/llms.txt`, then `llms-full.txt`)
-are marked; re-probe the others when refreshing this table. PyPI
+(agent-preferred: fetch a page's `.md` source or the `llms.txt` index
+rather than HTML; `llms-full.txt` is a whole-site dump to search
+programmatically, never read whole) are marked; re-probe the others when
+refreshing this table. PyPI
 packages install with `pip install <package>` (or the project's own
 manager); non-PyPI tools carry an install pointer in their skill's
 reference table, with details always fetched from the doc URL.
