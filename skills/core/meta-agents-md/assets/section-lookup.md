@@ -1,10 +1,3 @@
-# Section Lookup Block
-
-Copy the block below into the target project's `AGENTS.md` when the
-harness plan marks a weak or local model target. Adapt the example file
-names to files that exist in the project.
-
-````markdown
 ## Reading Long Documents
 
 Do not read a long document end to end. Locate the section, then read only
@@ -26,4 +19,3 @@ its lines:
 Pointers in this file quote target headings byte-exactly in inline code,
 so step 1 can be narrowed to an exact match, for example
 `grep -n '^## Tech Stack' ARCHITECTURE.md`.
-````

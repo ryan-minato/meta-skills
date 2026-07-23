@@ -1,14 +1,3 @@
-# Knowledge-Authoring Skill Skeleton
-
-The durable form of the authoring rules, for projects that use skills.
-Copy the block into a new skill directory in the project's skill root
-(directory name = the `name` field), then rework it: fill the chosen
-location and structure, adjust the style rules to anything the team added,
-and delete this file's guidance. This skill stays after the meta-skills
-are removed — its description must never begin with the marker those
-disposable skills carry.
-
-````markdown
 ---
 name: knowledge-authoring
 description: >-
@@ -38,4 +27,3 @@ Rules for this project's knowledge base at `<knowledge location>`.
 
 Done when: the document reads correctly on its own, its when-to-read row
 exists, and no duplicate of its facts remains elsewhere.
-````

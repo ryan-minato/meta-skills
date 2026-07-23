@@ -41,7 +41,8 @@ somewhere else.
    - facts about a dependency, system, or domain →
      [reference-doc.md](assets/reference-doc.md)
    - ongoing work with a goal and next steps →
-     [plan-doc.md](assets/plan-doc.md)
+     [plan-doc.md](assets/plan-doc.md) (absolute dates only — "next week"
+     is unreadable a month later)
    - a decision that binds future work →
      [decision-doc.md](assets/decision-doc.md)
    - an index, when the backend is external or documents number more than
@@ -76,3 +77,6 @@ project in agent-reachable form.
   access path does not exist in practice.
 - Seeding from a type asset without reworking it leaves template prose in
   the knowledge base — worse than no document.
+- The kb-authoring skill skeleton builds a durable project skill that
+  outlives the removed meta-skills; its `description` must never begin with
+  the disposal marker those meta-skills carry.

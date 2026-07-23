@@ -1,13 +1,3 @@
-# Skill-Authoring Skill Skeleton
-
-The durable form of the project's skill-authoring rules, for projects
-whose mechanism family is skills. Copy the block into a new skill
-directory, fill the placeholders with the conventions this project settled
-on, and delete this guidance. It stays after the meta-skills are removed —
-its description must never begin with the marker those disposable skills
-carry.
-
-````markdown
 ---
 name: skill-authoring
 description: >-
@@ -42,4 +32,3 @@ stable facts go in the knowledge base; one-off context goes nowhere.
 
 Done when: the skill loads on its trigger, every line is current, and
 its update trigger is stated.
-````

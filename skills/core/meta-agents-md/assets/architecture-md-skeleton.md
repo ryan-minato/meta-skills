@@ -1,14 +1,3 @@
-# Architecture Document Skeleton
-
-Copy the block below into the target project's `ARCHITECTURE.md`, then
-rework it: keep only the sections this project actually offloads from its
-entrypoint (no empty stubs), replace placeholders with real content, and
-write human-readable prose — this is a public-convention file, not an
-agent-terse one. Each `##` heading is a pointer target: entrypoint pointers
-reproduce it byte-exactly, so renaming a heading means updating every
-pointer to it in the same change.
-
-````markdown
 # Architecture
 
 <One paragraph: what this system is, for a reader seeing it first. Note
@@ -36,4 +25,3 @@ request path, data pipeline, build/release — whichever apply.>
 
 <Recorded design decisions that still bind: the decision, the reason, and
 what would trigger revisiting it.>
-````

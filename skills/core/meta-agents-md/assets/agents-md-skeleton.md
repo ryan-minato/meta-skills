@@ -1,12 +1,3 @@
-# AGENTS.md Skeleton
-
-Copy the block below into the target project's `AGENTS.md`, then rework it:
-delete sections that do not apply, replace every angle-bracket placeholder
-with the project's real values, add what this project needs that the
-skeleton lacks, and convert backticked file mentions into links once the
-files exist. Keep it near 100 lines.
-
-````markdown
 # <project name>
 
 <Two or three sentences: what this project is and what agents are expected
@@ -47,4 +38,3 @@ heading in inline code, byte-exact, hashes included.>
 
 - <what agents must never do without asking>
 - <files or directories agents must not touch>
-````

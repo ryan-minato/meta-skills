@@ -50,9 +50,12 @@ Every mechanism is bidirectional:
    Copy the asset, then rework it: real documents, real artifacts, real
    triggers; delete the guidance.
 4. If the evolution mode is compromise, install the propose-after-task
-   rule from [proposal-rule.md](assets/proposal-rule.md) in the family's
-   form: after a task the agent may propose harness changes, the user
-   decides, and the default is not adopting.
+   rule in the family's form: after a task the agent may propose harness
+   changes, the user decides, and the default is not adopting. Copy the
+   [entrypoint form](assets/proposal-entrypoint.md) for the entrypoint
+   family, or the [skill-family form](assets/proposal-skill.md) — added to
+   each sync skill built from the sync-skill skeleton, or to the
+   reclamation skill if that is the only durable harness skill.
 5. If the project is long-lived, read
    [periodic-reclamation.md](references/periodic-reclamation.md) and
    install the routine in the family's form —
@@ -78,3 +81,6 @@ projects have a periodic reclamation routine.
 - A self-evolving harness without thick automated checks is drift by
   design; refuse to install that combination without the checks planned
   first.
+- The sync-skill and reclamation-skill skeletons build durable skills that
+  outlive the removed meta-skills; their `description` must never begin
+  with the disposal marker those meta-skills carry.
