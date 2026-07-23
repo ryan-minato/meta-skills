@@ -45,9 +45,9 @@ leave the choice to the user.
    compact index). Fall back to `llms-full.txt` only when neither
    exists, and never read it whole — it is the whole site as one
    file; search it programmatically.
-6. Record each detected library — name, one-line role, documentation
-   entry point, and its llms.txt when present — wherever the harness
-   keeps conventions.
+6. Record each detected library the tables cover — name, one-line role,
+   documentation entry point, and its llms.txt when present — wherever
+   the harness keeps conventions.
 
 Done when: every Hugging Face library the target actually uses has a
 recorded, live documentation entry point, and nothing recorded ranks or
@@ -65,6 +65,5 @@ recommends between tools.
   library.
 - The same tool may appear in another domain skill's tables (timm,
   Gradio, bitsandbytes); record it once per harness, not once per skill.
-- Tools this skill does not list are out of scope: record only what its
-  tables cover, and leave finding docs for anything else to the agent —
-  it is not this skill's job.
+- Tools this skill does not list are out of scope — leave finding their
+  docs to the agent; it is not this skill's job.

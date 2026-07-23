@@ -36,9 +36,9 @@ to the user.
    compact index). Fall back to `llms-full.txt` only when neither
    exists, and never read it whole — it is the whole site as one
    file; search it programmatically.
-4. Record each detected tool — name, one-line role, documentation entry
-   point, and its llms.txt when present — wherever the harness keeps
-   conventions.
+4. Record each detected tool the tables cover — name, one-line role,
+   documentation entry point, and its llms.txt when present — wherever
+   the harness keeps conventions.
 
 Done when: every recommender framework the target actually uses has a
 recorded, live documentation entry point, and nothing recorded ranks or
@@ -52,6 +52,5 @@ recommends between tools.
   user's decision.
 - Faiss and ScaNN also appear in LLM retrieval stacks — record them once
   per harness, not once per skill.
-- Tools this skill does not list are out of scope: record only what its
-  tables cover, and leave finding docs for anything else to the agent —
-  it is not this skill's job.
+- Tools this skill does not list are out of scope — leave finding their
+  docs to the agent; it is not this skill's job.
