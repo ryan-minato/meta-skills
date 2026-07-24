@@ -125,8 +125,9 @@ are resolved; fast checks pass; and the user approves the scaffold.
 
 - A branch name such as `main` or `latest` is not an immutable data or model
   identity. Record a revision, version ID, ETag plus checksum, or equivalent.
-- A passing secret scanner does not prove a diff is free of PII. Read the
-  staged content before committing; if sensitive content reached history,
-  stop and report it rather than hiding it in a later commit.
+- A passing secret scanner does not prove a diff is free of PII. Review small
+  staged diffs directly; route larger diffs through an appropriate programmatic
+  scan and record its result. If sensitive content reached history, stop and
+  report it rather than hiding it in a later commit.
 - Do not copy a template unchanged. A remaining placeholder is an unmade
   project decision.
