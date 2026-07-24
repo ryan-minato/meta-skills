@@ -1,15 +1,12 @@
 ---
 name: meta-ml-experiment
 description: >-
-  Disposable meta-skill (delete after the harness is built): scaffolds a
-  quick ML experiment repository with opinionated defaults — uv-compiled
-  pinned requirements, root-level entry scripts, a hand-built PyTorch
-  training loop on Hugging Face Accelerate — and writes a concise
-  AGENTS.md depositing the outcome-first, let-it-crash coding rules. Use
-  when the target must validate an idea fast with exactly reproducible
-  re-runs and has little or no harness yet. Not for long-lived training
-  codebases meant to survive upgrades, and not for migrating tooling that
-  already works — existing choices stay.
+  Disposable meta-skill (delete after the harness is built): scaffolds an
+  opinionated, reproducible repository for a short-lived ML experiment. Use
+  when an empty or early project must test one model idea quickly, run train/eval
+  workflows, and reproduce the result on stated hardware. Not for a training
+  codebase expected to evolve over months or for replacing working tooling;
+  preserves existing choices.
 ---
 
 # Quick ML Experiment Scaffold

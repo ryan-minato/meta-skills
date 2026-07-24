@@ -2,11 +2,12 @@
 name: meta-ds-project
 description: >-
   Disposable meta-skill (delete after the harness is built): scaffolds an
-  opinionated, reproducible Python data-science project. Use when creating
-  or hardening a new or early data-science repository that acquires, processes,
-  analyzes, or produces data with immutable inputs and local, S3, or Hugging
-  Face storage. Not for mature migrations, model training, or notebook-only
-  one-off exploration.
+  opinionated, reproducible Python data-science project and its agent harness.
+  Use when creating or hardening an empty or early repository that ingests
+  datasets; validates, cleans, transforms, joins, or aggregates data; performs
+  reproducible exploratory or production analysis; or publishes data products
+  across local, S3, or Hugging Face storage. Not for notebook-only exploration,
+  mature migrations, or model training; preserves working choices.
 compatibility: Requires uv and Python 3.11+ for the bundled validator.
 ---
 
