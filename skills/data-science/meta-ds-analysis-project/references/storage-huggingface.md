@@ -31,5 +31,5 @@ branch only when the provider supplies no versioned repository.
 
 | Tool | Docs |
 |---|---|
-| Hugging Face Hub client | <https://huggingface.co/docs/huggingface_hub> |
-| Datasets | <https://huggingface.co/docs/datasets> |
+| Hugging Face Hub client | <https://huggingface.co/docs/huggingface_hub/llms.txt> |
+| Datasets | <https://huggingface.co/docs/datasets/llms.txt> |

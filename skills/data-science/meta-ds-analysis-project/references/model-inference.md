@@ -24,6 +24,6 @@ training project instead.
 
 | Tool | Docs |
 |---|---|
-| Transformers | <https://huggingface.co/docs/transformers> |
+| Transformers | <https://huggingface.co/docs/transformers/llms.txt> |
 | vLLM | <https://docs.vllm.ai/> |
-| Hugging Face Hub client | <https://huggingface.co/docs/huggingface_hub> |
+| Hugging Face Hub client | <https://huggingface.co/docs/huggingface_hub/llms.txt> |

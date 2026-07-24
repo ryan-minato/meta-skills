@@ -70,29 +70,36 @@ a migration mandate.
    - Read
      [model-reimplementation.md](references/model-reimplementation.md)
      only when a model comes from an unstable experimental repository.
-5. Model configuration per source and product, not with one global storage
+5. Before recording or updating a documentation URL, first check whether a
+   configured documentation MCP exposes the component's official docs. If not,
+   test the official `llms.txt` endpoint and prefer it when available; use
+   regular official docs only as the fallback. Record the MCP server/tool or
+   selected URL in `REFERENCES.md`. Use `llms-full.txt` only for scoped
+   retrieval, never as a file to load wholesale.
+6. Model configuration per source and product, not with one global storage
    switch. Keep adjustable non-secrets in `config/project.toml`; load TOML
    plus environment overrides with Pydantic Settings. Put credentials only
    in ignored `.env`; track only safe names and examples in `.env.example`.
-6. Make every workflow observable with Loguru. Bind run, workflow, and step
+7. Make every workflow observable with Loguru. Bind run, workflow, and step
    context; log identities, counts, timing, and failure state at useful
    levels. Never log credentials, full environments, PII, or raw records.
    Follow the current Loguru guidance for process-safe aggregation.
-7. Generate `.pre-commit-config.yaml` from current upstream documentation,
+8. Generate `.pre-commit-config.yaml` from current upstream documentation,
    pin every hook revision, and install it through `just setup`. Use Ruff
    for lint and format, pytest for fast targeted tests, and Gitleaks for
    automated secret detection. Add no type checker and no coverage target.
-8. Test only custom reusable logic whose mistakes would corrupt a result:
+9. Test only custom reusable logic whose mistakes would corrupt a result:
    transformations, invariants, boundary/error cases, and reimplemented
    model behavior. Do not test notebooks, declarative configuration,
    third-party libraries, or trivial workflow glue. Keep large-data, GPU,
    and model-equivalence tests manual under `slow`.
-9. Deposit the Git rules in `AGENTS.md`: atomic commits, actual staged-diff
-   review for secrets and PII before every commit, full checks before push,
-   and no hook bypass. Try uncertain ideas in disposable worktrees; compare
-   them with the same checks, remove them after the decision, then implement
-   the selected approach on the formal branch in the canonical worktree.
-10. Run
+10. Deposit the Git rules in `AGENTS.md`: atomic commits, direct review of
+    small staged diffs, programmatic sensitivity scanning with a recorded
+    result for larger diffs, full checks before push, and no hook bypass. Try
+    uncertain ideas in disposable worktrees; compare them with the same
+    checks, remove them after the decision, then implement the selected
+    approach on the formal branch in the canonical worktree.
+11. Run
     [validate_scaffold.py](scripts/validate_scaffold.py) with
     `uv run scripts/validate_scaffold.py --project-root <target>`. Fix every
     issue, run the target's `just check`, inspect the generated harness with

@@ -57,9 +57,10 @@ Delete rows for absent optional paths.
 ## Git safety
 
 - Make small, reversible, atomic commits at meaningful checkpoints.
-- Before every commit, run `just safe-to-commit` and read the staged diff for
-  credentials, PII, private contact or financial data, restricted source
-  samples, and local paths.
+- Before every commit, run `just safe-to-commit`. Review a small staged diff
+  directly; for a larger diff, use programmatic secret/PII scanning and record
+  its result. Check credentials, PII, private contact or financial data,
+  restricted source samples, and local paths.
 - Treat sensitive content committed to history as leaked: stop and report it.
   A later deletion does not erase history.
 - Run `just safe-to-push` before pushing. Never bypass hooks.

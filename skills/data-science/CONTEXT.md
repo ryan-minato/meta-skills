@@ -432,7 +432,24 @@ order; each skill's rows land in the same change that adds the skill.
 
 ### meta-ds-analysis-project
 
-New entry points below were verified live 2026-07-24.
+New entry points below were verified live 2026-07-24. Agent-oriented official
+endpoints were checked first; documentation MCP availability is runtime-specific
+and must be rechecked in the target environment.
+
+#### assets/base/knowledge-references.md
+
+| Tool | Docs |
+|---|---|
+| uv | <https://docs.astral.sh/uv/llms.txt> |
+| Ruff | <https://docs.astral.sh/ruff/llms.txt> |
+| pytest | <https://docs.pytest.org/> |
+| Pydantic Settings | <https://pydantic.dev/llms.txt> |
+| Just | <https://just.systems/man/en/> |
+| pre-commit | <https://pre-commit.com/> |
+| EditorConfig | <https://editorconfig.org/> |
+| Loguru | <https://loguru.readthedocs.io/> |
+| Gitleaks | <https://github.com/gitleaks/gitleaks> |
+| Jupyter | <https://docs.jupyter.org/> |
 
 #### storage-local.md
 
@@ -453,27 +470,27 @@ New entry points below were verified live 2026-07-24.
 
 | Tool | Docs |
 |---|---|
-| Hugging Face Hub client | <https://huggingface.co/docs/huggingface_hub> |
-| Datasets | <https://huggingface.co/docs/datasets> |
+| Hugging Face Hub client | <https://huggingface.co/docs/huggingface_hub/llms.txt> |
+| Datasets | <https://huggingface.co/docs/datasets/llms.txt> |
 
 #### compute-structured.md
 
 | Tool | Docs |
 |---|---|
 | Polars | <https://docs.pola.rs/> |
-| Dask | <https://docs.dask.org/> — llms.txt: <https://docs.dask.org/llms.txt> |
+| Dask | <https://docs.dask.org/en/stable/llms.txt> |
 
 #### compute-multimedia.md
 
 | Tool | Docs |
 |---|---|
-| Ray Data | <https://docs.ray.io/> — llms.txt: <https://docs.ray.io/llms.txt> |
-| Datasets | <https://huggingface.co/docs/datasets> |
+| Ray Data | <https://docs.ray.io/en/latest/llms.txt> |
+| Datasets | <https://huggingface.co/docs/datasets/llms.txt> |
 
 #### model-inference.md
 
 | Tool | Docs |
 |---|---|
-| Transformers | <https://huggingface.co/docs/transformers> |
+| Transformers | <https://huggingface.co/docs/transformers/llms.txt> |
 | vLLM | <https://docs.vllm.ai/> |
-| Hugging Face Hub client | <https://huggingface.co/docs/huggingface_hub> |
+| Hugging Face Hub client | <https://huggingface.co/docs/huggingface_hub/llms.txt> |

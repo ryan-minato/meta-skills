@@ -24,4 +24,4 @@ product. Do not repeat the engine's own tests.
 | Tool | Docs |
 |---|---|
 | Polars | <https://docs.pola.rs/> |
-| Dask | <https://docs.dask.org/> |
+| Dask | <https://docs.dask.org/en/stable/llms.txt> |

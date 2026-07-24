@@ -23,5 +23,5 @@ Log counts and failures without logging raw media or sensitive metadata.
 
 | Tool | Docs |
 |---|---|
-| Ray Data | <https://docs.ray.io/> |
-| Datasets | <https://huggingface.co/docs/datasets> |
+| Ray Data | <https://docs.ray.io/en/latest/llms.txt> |
+| Datasets | <https://huggingface.co/docs/datasets/llms.txt> |

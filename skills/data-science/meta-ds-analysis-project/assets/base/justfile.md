@@ -27,7 +27,7 @@ check:
 report:
     __REPORT_COMMAND__
 
-# Automated checks do not replace reading `git diff --cached`.
+# Review small staged diffs directly; record programmatic sensitivity scans for larger ones.
 safe-to-commit: check
     uv run pre-commit run --all-files
     git diff --cached --check
