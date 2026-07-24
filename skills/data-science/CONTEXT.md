@@ -12,7 +12,7 @@ directories only.
 `data-science` holds skills for data-analysis and scientific-computing
 target projects. Domain-split `-docs` skills provide authoritative
 documentation entry points; separate project skills scaffold opinionated
-analysis repositories and declare their defaults in their descriptions. A
+data-science repositories and declare their defaults in their descriptions. A
 harness-building agent loads only the matching domains or project builder.
 The catalog installs per project, on top of `core`, and only when the target
 analyzes data, runs data pipelines, or does numerical and scientific
@@ -430,7 +430,7 @@ order; each skill's rows land in the same change that adds the skill.
 | gcsfs | <https://gcsfs.readthedocs.io/> |
 | kerchunk | <https://fsspec.github.io/kerchunk/> |
 
-### meta-ds-analysis-project
+### meta-ds-project
 
 New entry points below were verified live 2026-07-24. Agent-oriented official
 endpoints were checked first; documentation MCP availability is runtime-specific
