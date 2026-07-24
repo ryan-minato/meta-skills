@@ -1,17 +1,18 @@
 ---
-name: meta-ds-analysis-project
+name: meta-ds-project
 description: >-
   Disposable meta-skill (delete after the harness is built): scaffolds an
-  opinionated, reproducible Python data-analysis project. Use when creating
-  or hardening a new or early analysis repository with immutable inputs and
-  local, S3, or Hugging Face storage. Not for mature migrations, model
-  training, or notebook-only one-off exploration.
+  opinionated, reproducible Python data-science project. Use when creating
+  or hardening a new or early data-science repository that acquires, processes,
+  analyzes, or produces data with immutable inputs and local, S3, or Hugging
+  Face storage. Not for mature migrations, model training, or notebook-only
+  one-off exploration.
 compatibility: Requires uv and Python 3.11+ for the bundled validator.
 ---
 
-# Reproducible Data-Analysis Project
+# Reproducible Data-Science Project
 
-Build a Python analysis repository whose inputs are immutable, whose
+Build a Python data-science repository whose inputs are immutable, whose
 production work runs from `src/`, and whose lockfile, configuration, source
 identities, model revisions, and provenance make every product reproducible.
 Keep existing working choices in an early repository; this is a scaffold, not
@@ -26,7 +27,7 @@ a migration mandate.
    working `pyproject.toml`. Commit `uv.lock`. Put reusable logic in
    `src/<package>/`, thin launch modules in `src/<package>/workflows/`,
    source acquisition code in `src/<package>/sources/`, exploratory work in
-   `notebooks/`, focused tests in `tests/`, and the paired analysis in
+   `notebooks/`, focused tests in `tests/`, and the paired report in
    `report/`.
 3. Copy and rework every base asset; replace every `__UPPER_CASE__`
    placeholder and delete inapplicable rows:
@@ -123,7 +124,7 @@ are resolved; fast checks pass; and the user approves the scaffold.
 - A run records source identities, resolved non-secret configuration, Git
   commit, `uv.lock` digest, model revision, random seeds, step state, and
   timing.
-- Analysis projects consume models; training, finetuning, optimizers,
+- Data-science projects may consume models; training, finetuning, optimizers,
   training loaders, and checkpoint management belong in another project.
 - DVC, MLflow, LakeFS, containers, CI, and external orchestrators are
   opt-in, never scaffold defaults.

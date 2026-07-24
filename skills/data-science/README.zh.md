@@ -29,4 +29,4 @@ npx skills add ryan-minato/meta-skills/skills/data-science --skill <skill-name>
 | [meta-ds-numerics-docs](meta-ds-numerics-docs/) | 科学计算平台、数学内核与稀疏求解器、编译器/GPU 工具链与自动微分的文档入口 |
 | [meta-ds-simulation-docs](meta-ds-simulation-docs/) | 数值优化与求解器、微分方程、PDE/FEM 框架与科学可视化的文档入口 |
 | [meta-ds-hpc-docs](meta-ds-hpc-docs/) | MPI/工作流管理器/调度器、GPU 与多机通信、科学数据与并行 I/O 的文档入口 |
-| [meta-ds-analysis-project](meta-ds-analysis-project/) | 带观点的可复现 Python 分析项目脚手架，包含不可变源数据、存储分支、可观测工作流与 agent 知识库 |
+| [meta-ds-project](meta-ds-project/) | 带观点的可复现 Python 数据科学项目脚手架，包含不可变源数据、存储分支、可观测工作流与 agent 知识库 |
