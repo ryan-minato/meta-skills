@@ -3,14 +3,12 @@
 [中文](README.zh.md)
 
 Meta-skills for data-analysis and scientific-computing target projects:
-authoritative documentation entry points, split by project domain, for
-the libraries, engines, and tools such a project uses or is likely to
-need — plus the discovery procedure for anything not listed. Each skill
-covers one domain, so an agent loads only the domains the target
-belongs to. These skills inform; they never recommend. Install on top
-of `core`, per project, and only when the target analyzes data, runs
-data pipelines, or does numerical and scientific computing — this
-catalog is not part of the default install.
+authoritative documentation entry points split by project domain, plus
+opinionated project scaffolds that declare their defaults explicitly.
+Agents load only the domains or builder the target needs. Install on top of
+`core`, per project, and only when the target analyzes data, runs data
+pipelines, or does numerical and scientific computing — this catalog is not
+part of the default install.
 
 These skills are **disposable**: once the harness is built and verified,
 the `core` removal skill deletes them together with the rest.
@@ -34,3 +32,4 @@ npx skills add ryan-minato/meta-skills/skills/data-science --skill <skill-name>
 | [meta-ds-numerics-docs](meta-ds-numerics-docs/) | Documentation entry points for scientific platforms, math kernels and sparse solvers, and compilers, GPU toolchains, and automatic differentiation |
 | [meta-ds-simulation-docs](meta-ds-simulation-docs/) | Documentation entry points for optimization and solvers, differential equations, PDE/FEM frameworks, and scientific visualization |
 | [meta-ds-hpc-docs](meta-ds-hpc-docs/) | Documentation entry points for MPI, workflow managers, and schedulers, GPU and multi-node communication, and scientific data and parallel I/O |
+| [meta-ds-analysis-project](meta-ds-analysis-project/) | Opinionated reproducible Python analysis-project scaffold with immutable source data, storage branches, observable workflows, and an agent knowledge base |
