@@ -123,8 +123,6 @@ are resolved; fast checks pass; and the user approves the scaffold.
 
 ## Gotchas
 
-- `data/` is the raw boundary; an extra `raw/` level weakens the source-based
-  layout and is a scaffold defect.
 - A branch name such as `main` or `latest` is not an immutable data or model
   identity. Record a revision, version ID, ETag plus checksum, or equivalent.
 - A passing secret scanner does not prove a diff is free of PII. Read the
