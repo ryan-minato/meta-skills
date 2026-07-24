@@ -119,9 +119,11 @@ trigger fires — not before.
   skill therefore carries `metadata.internal: true` (check M6 enforces both
   directions), and install instructions always use `skills/…` subpath
   sources, never the bare repository.
-- `.claude-plugin/marketplace.json` is also the live catalog-description
-  source for `core/meta-skill-discovery`; its explicit skill paths drive the
-  skills CLI's grouped listing. Inventory edits must validate both consumers.
+- `.claude-plugin/marketplace.json` is also the live catalog-description and
+  explicit skill-path source for `core/meta-skill-discovery`; its bundled
+  script reads that manifest and the named SKILL.md files from one repository
+  snapshot. The skills CLI grouped listing remains a separate installer
+  compatibility check. Inventory edits must validate all consumers.
 - This harness is a public reference implementation of the thing it sells,
   which creates pressure to over-build it as a showcase. It is thin on
   purpose: one validator, a thin justfile, a one-file marketplace manifest.

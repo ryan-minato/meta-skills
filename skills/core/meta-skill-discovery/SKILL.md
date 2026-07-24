@@ -6,7 +6,7 @@ description: >-
   by catalog, and explains project or global installation. Use when choosing,
   locating, or installing these meta-skills, or when another meta-skill names
   a required catalog/skill. Not for discovering skills from other sources.
-compatibility: Requires network access; installation requires the skills CLI or Claude Code.
+compatibility: Requires Python 3.11+ and network access; installation requires the skills CLI or Claude Code.
 ---
 
 # Meta-Skill Discovery
@@ -17,28 +17,35 @@ third-party inventory.
 
 ## Workflow
 
-1. Fetch the live marketplace manifest from
-   `https://raw.githubusercontent.com/ryan-minato/meta-skills/main/.claude-plugin/marketplace.json`.
-   Read each plugin's `name` and `description` as the catalog inventory.
-2. If the user supplied a catalog, require an exact manifest name. On an
-   unknown name, show the valid catalogs and stop.
-3. Ask before running a command that downloads or executes the skills CLI.
-   With approval, list without installing:
+1. Run the bundled [discovery script](scripts/discover.py). It downloads one
+   live repository snapshot, reads only the marketplace inventory and its
+   explicitly listed skills, and emits compact JSON without installing
+   anything:
 
    ```bash
-   npx skills add ryan-minato/meta-skills --list
-   npx skills add ryan-minato/meta-skills/skills/<catalog> --list
+   python3 scripts/discover.py
    ```
 
-   Use the first form for every catalog, grouped by marketplace catalog, and
-   the second for a catalog filter.
-4. Present catalog, skill name, and description. Remove the common disposable
-   marker from descriptions for readability, but do not otherwise rewrite
-   them. If either live source fails, report which source failed and do not
-   guess from memory.
-5. When another meta-skill names a dependency, resolve the exact
-   `catalog/skill`, confirm it appears in the live result, and show the user
-   what is missing before discussing installation.
+2. Filter only through the script. Use `--full` when the complete marker-free
+   description is needed:
+
+   ```bash
+   python3 scripts/discover.py --catalog <catalog> --full
+   python3 scripts/discover.py --skill <catalog>/<skill> --full
+   ```
+
+   An unknown catalog or skill reports the valid choices and returns no
+   guessed result.
+3. For every complete description in one run, add `--full --output <path>`;
+   read the JSON file and remove it after presenting the result. The default
+   output stays below common tool-output limits by returning deterministic
+   skill summaries.
+4. Present the catalog name and description plus each requested skill name
+   and summary or full description. If the script fails, report its reason
+   and do not substitute memory, a cached inventory, or another registry.
+5. When another meta-skill names a dependency, query its exact
+   `catalog/skill`, confirm the script returned it, and show what is missing
+   before discussing installation.
 
 Done when: every result came from the live repository, the requested filter
 was applied exactly, and any missing or failed lookup was reported.
@@ -88,5 +95,6 @@ matching scope. Skills CLI global installs must be removed with
 - Never search for or install a dependency outside
   `ryan-minato/meta-skills`; another meta-skill may depend only on this
   repository's catalog/skill identifiers.
-- Listing is read-only, but `npx` may download executable code. Obtain
-  approval before running it.
+- Discovery reads one live repository archive in memory and never extracts or
+  caches it. Do not replace the bundled script with ad hoc repository or
+  registry searches.
