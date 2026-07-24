@@ -2,12 +2,10 @@
 
 [English](README.md)
 
-面向数据分析与科学计算目标项目的 meta-skill：按项目领域拆分，为此类项目
-正在使用或可能需要的库、引擎与工具提供权威文档入口，并附带未收录工具的
-发现流程。每个技能只覆盖一个领域，agent 只加载目标所属领域的技能。这些
-技能只提供信息，绝不做推荐。在 `core` 之上按项目安装，仅当目标做数据
-分析、运行数据流水线或进行数值与科学计算时使用——本 catalog 不属于默认
-安装。
+面向数据分析与科学计算目标项目的 meta-skill：既包括按项目领域拆分的权威
+文档入口，也包括明确声明其默认值的、带观点的项目脚手架。agent 只加载目标
+所需的领域或构建器。在 `core` 之上按项目安装，仅当目标做数据分析、运行
+数据流水线或进行数值与科学计算时使用——本 catalog 不属于默认安装。
 
 这些技能是**一次性的**：harness 建成并验证后，`core` 的移除技能会把
 它们与其余 meta-skill 一并删除。
@@ -31,3 +29,4 @@ npx skills add ryan-minato/meta-skills/skills/data-science --skill <skill-name>
 | [meta-ds-numerics-docs](meta-ds-numerics-docs/) | 科学计算平台、数学内核与稀疏求解器、编译器/GPU 工具链与自动微分的文档入口 |
 | [meta-ds-simulation-docs](meta-ds-simulation-docs/) | 数值优化与求解器、微分方程、PDE/FEM 框架与科学可视化的文档入口 |
 | [meta-ds-hpc-docs](meta-ds-hpc-docs/) | MPI/工作流管理器/调度器、GPU 与多机通信、科学数据与并行 I/O 的文档入口 |
+| [meta-ds-analysis-project](meta-ds-analysis-project/) | 带观点的可复现 Python 分析项目脚手架，包含不可变源数据、存储分支、可观测工作流与 agent 知识库 |

@@ -71,7 +71,7 @@
     {
       "name": "data-science",
       "source": "./skills/data-science",
-      "description": "Authoritative documentation entry points for data-analysis and scientific-computing projects, one skill per domain; information only, never recommendations. Install on top of core.",
+      "description": "Documentation entry points for data-analysis and scientific-computing domains, plus opinionated project scaffolds that declare their defaults. Install on top of core.",
       "skills": [
         "./meta-ds-analysis-docs",
         "./meta-ds-scale-docs",
@@ -79,7 +79,8 @@
         "./meta-ds-geospatial-docs",
         "./meta-ds-numerics-docs",
         "./meta-ds-simulation-docs",
-        "./meta-ds-hpc-docs"
+        "./meta-ds-hpc-docs",
+        "./meta-ds-analysis-project"
       ],
       "strict": false
     },

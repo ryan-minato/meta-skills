@@ -9,17 +9,14 @@ directories only.
 
 ## Goal
 
-`data-science` holds information skills for data-analysis and
-scientific-computing target projects: authoritative documentation entry
-points for the libraries, engines, and tools such a project uses or is
-likely to need, plus the discovery procedure for anything not listed. A
-harness-building agent detects which domains the target belongs to
-(from manifests, imports, and configs), loads only the matching skills,
-and records where the docs live. It installs per project, on top of
-`core`, and only when the target analyzes data, runs data pipelines, or
-does numerical and scientific computing — it is not part of the default
-install. Recommendations and guidance are future, separate skills in
-this catalog; the skills here only inform.
+`data-science` holds skills for data-analysis and scientific-computing
+target projects. Domain-split `-docs` skills provide authoritative
+documentation entry points; separate project skills scaffold opinionated
+analysis repositories and declare their defaults in their descriptions. A
+harness-building agent loads only the matching domains or project builder.
+The catalog installs per project, on top of `core`, and only when the target
+analyzes data, runs data pipelines, or does numerical and scientific
+computing — it is not part of the default install.
 
 ## Constraints On What May Enter
 
@@ -29,12 +26,11 @@ this catalog; the skills here only inform.
   and ML-specific tooling belong in `machine-learning`.
 - **Disposable only.** The marker admission test applies unchanged: if a
   skill should not carry it, it does not belong in this repository.
-- **Information, not recommendation.** Unlike `python`, which records
-  trusted defaults, no skill in this catalog may record a default, a
-  ranking, or a "prefer X". Skills report what exists and where its docs
-  live; every choice between tools stays with the user. A future
-  recommendation skill that breaks this rule must say so in its own
-  description, not hide inside a docs skill.
+- **Docs inform; project skills may choose.** A `-docs` skill records what
+  exists and where its docs live, never a default, ranking, or "prefer X".
+  An opinionated scaffold or recommendation skill may choose defaults only
+  when its description says so and its body preserves existing working
+  choices.
 - **One domain per skill.** A skill's boundary is a project domain with
   a detectable trigger (dependencies, imports, config files), so an
   agent loads exactly the domains the target belongs to. Finer splits
@@ -59,12 +55,12 @@ Start from the authoring skill's template
 (`.agents/skills/meta-skill-authoring/assets/skill-template.md`), which
 ships with the marker pre-filled. The marker's exact bytes and YAML form
 are defined in the contract; copy them from there, never from rendered
-documentation. Skill names use the `meta-ds-<domain>-docs` pattern — the
-`-docs` suffix reserves the domain name for future scaffolding or
-recommendation skills. A skill maps only the tools its tables list;
-discovering docs for a package it does not cover is out of scope — the
-agent reaches for a dedicated discovery skill on its own, so no skill here
-carries or depends on that procedure.
+documentation. Documentation skill names use the
+`meta-ds-<domain>-docs` pattern; project builders use
+`meta-ds-<domain>-project`. A documentation skill maps only the tools its
+tables list; discovering docs for a package it does not cover is out of
+scope — the agent reaches for a dedicated discovery skill on its own, so no
+skill here carries or depends on that procedure.
 
 ## References
 
@@ -433,3 +429,68 @@ order; each skill's rows land in the same change that adds the skill.
 | s3fs | <https://s3fs.readthedocs.io/> |
 | gcsfs | <https://gcsfs.readthedocs.io/> |
 | kerchunk | <https://fsspec.github.io/kerchunk/> |
+
+### meta-ds-analysis-project
+
+New entry points below were verified live 2026-07-24. Agent-oriented official
+endpoints were checked first; documentation MCP availability is runtime-specific
+and must be rechecked in the target environment.
+
+#### assets/base/knowledge-references.md
+
+| Tool | Docs |
+|---|---|
+| uv | <https://docs.astral.sh/uv/llms.txt> |
+| Ruff | <https://docs.astral.sh/ruff/llms.txt> |
+| pytest | <https://docs.pytest.org/> |
+| Pydantic Settings | <https://pydantic.dev/llms.txt> |
+| Just | <https://just.systems/man/en/> |
+| pre-commit | <https://pre-commit.com/> |
+| EditorConfig | <https://editorconfig.org/> |
+| Loguru | <https://loguru.readthedocs.io/> |
+| Gitleaks | <https://github.com/gitleaks/gitleaks> |
+| Jupyter | <https://docs.jupyter.org/> |
+
+#### storage-local.md
+
+| Tool | Docs |
+|---|---|
+| Python | <https://docs.python.org/3/> |
+| fsspec | <https://filesystem-spec.readthedocs.io/> |
+
+#### storage-s3.md
+
+| Tool | Docs |
+|---|---|
+| Amazon S3 | <https://docs.aws.amazon.com/s3/> |
+| fsspec | <https://filesystem-spec.readthedocs.io/> |
+| s3fs | <https://s3fs.readthedocs.io/> |
+
+#### storage-huggingface.md
+
+| Tool | Docs |
+|---|---|
+| Hugging Face Hub client | <https://huggingface.co/docs/huggingface_hub/llms.txt> |
+| Datasets | <https://huggingface.co/docs/datasets/llms.txt> |
+
+#### compute-structured.md
+
+| Tool | Docs |
+|---|---|
+| Polars | <https://docs.pola.rs/> |
+| Dask | <https://docs.dask.org/en/stable/llms.txt> |
+
+#### compute-multimedia.md
+
+| Tool | Docs |
+|---|---|
+| Ray Data | <https://docs.ray.io/en/latest/llms.txt> |
+| Datasets | <https://huggingface.co/docs/datasets/llms.txt> |
+
+#### model-inference.md
+
+| Tool | Docs |
+|---|---|
+| Transformers | <https://huggingface.co/docs/transformers/llms.txt> |
+| vLLM | <https://docs.vllm.ai/> |
+| Hugging Face Hub client | <https://huggingface.co/docs/huggingface_hub/llms.txt> |
