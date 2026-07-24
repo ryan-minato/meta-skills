@@ -15,9 +15,23 @@ data.
    as speculative alternatives.
 
 Keep transformations as functions in `src/<package>/processing/`. Test
-project-owned joins, filters, aggregations, schema invariants, boundary
-conditions, and error paths where a plausible mistake would corrupt a
-product. Do not repeat the engine's own tests.
+project-owned parsers, normalizations, filters, deduplication, joins,
+aggregations, schema invariants, boundary conditions, and error paths where a
+plausible mistake would corrupt a product. Do not repeat the engine's own
+tests.
+
+For each source, make the input schema, key, nullability, accepted value
+domain, and schema version explicit before cleaning. Cleaning stages must
+return accepted records and identifiable rejected records separately; attach a
+stable rejection reason and publish the latter only to the declared quarantine
+product. A critical contract failure stops the workflow before a downstream
+product is published.
+
+For integration, document source-to-source key mappings, key normalization,
+join type, expected cardinality, and unmatched-record policy. Test duplicate
+keys, missing keys, key-format changes, nulls, one-to-many expansion, and
+unmatched records using representative small fixtures. A violated documented
+cardinality or integration invariant is critical and blocks publication.
 
 ## Documentation entry points
 

@@ -11,6 +11,14 @@ setup:
 download-data *args:
     uv run python -m {{package}}.workflows.download___SOURCE_NAME__ {{args}}
 
+# Replace with source-profile workflows that record contract evidence.
+profile-data *args:
+    uv run python -m {{package}}.workflows.profile___SOURCE_NAME__ {{args}}
+
+# Replace with critical contract and integration quality gates.
+validate-data *args:
+    uv run python -m {{package}}.workflows.validate___PRODUCT_NAME__ {{args}}
+
 # Replace with the ordered production workflow entries.
 pipeline *args:
     uv run python -m {{package}}.workflows.__PIPELINE_STEP__ {{args}}

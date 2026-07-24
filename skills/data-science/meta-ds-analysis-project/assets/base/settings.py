@@ -10,6 +10,7 @@ from pydantic_settings import (
 )
 
 Backend = Literal["local", "s3", "huggingface"]
+ProductStage = Literal["profile", "clean", "integrate", "final", "quarantine"]
 
 
 class SourceSettings(BaseModel):
@@ -19,12 +20,22 @@ class SourceSettings(BaseModel):
     version: str | None = None
     etag: str | None = None
     checksum: str | None = None
+    schema_version: str
 
 
 class ProductSettings(BaseModel):
     name: str
     backend: Backend
     uri: str
+    stage: ProductStage
+    inputs: list[str] = Field(min_length=1)
+    schema_version: str
+
+
+class QualitySettings(BaseModel):
+    critical_rules: list[str] = Field(min_length=1)
+    row_rejection_policy: Literal["quarantine"]
+    quarantine_product: str
 
 
 class LoggingSettings(BaseModel):
@@ -49,6 +60,7 @@ class Settings(BaseSettings):
     random_seed: int = 0
     sources: list[SourceSettings] = Field(min_length=1)
     products: list[ProductSettings] = Field(min_length=1)
+    quality: QualitySettings
     logging: LoggingSettings = LoggingSettings()
     model: ModelSettings | None = None
 

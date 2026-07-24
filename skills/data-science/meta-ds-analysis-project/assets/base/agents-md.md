@@ -6,14 +6,15 @@ __PROJECT_PURPOSE__
 
 | Path | Holds | Rule |
 |---|---|---|
-| `src/__PACKAGE_NAME__/` | production analysis code | reusable logic lives here |
-| `src/__PACKAGE_NAME__/workflows/` | thin workflow entries | run through Just |
+| `src/__PACKAGE_NAME__/` | production data-product code | reusable logic lives here |
+| `src/__PACKAGE_NAME__/processing/` | contracts, quality checks, transformations, and joins | no hidden storage choices |
+| `src/__PACKAGE_NAME__/workflows/` | thin stage workflow entries | run through Just |
 | `src/__PACKAGE_NAME__/sources/` | source acquisition logic | only download workflows write original data |
 | `notebooks/` | one-off exploration and visualization | import `src`; never own production logic |
 | `config/project.toml` | adjustable non-secret configuration | validated by Pydantic Settings |
 | `data/<source>/` | local original inputs, when used | immutable; no `raw/` layer |
 | `output/` | local derived products, when used | never an input source |
-| `report/` | paired Markdown or PDF analysis | update with product changes |
+| `report/` | paired Markdown or PDF product report | update with product changes |
 | `.agents/knowledge/` | project facts for agents | keep the when-to-read table current |
 
 Delete rows for absent optional paths.
@@ -24,6 +25,8 @@ Delete rows for absent optional paths.
 |---|---|
 | `just setup` | sync dependencies and install hooks |
 | `just download-data` | acquire configured source versions |
+| `just profile-data` | profile sources and record contract evidence |
+| `just validate-data` | run data-quality gates before publication |
 | `just pipeline` | run production steps |
 | `just test` | run fast, focused tests |
 | `just check` | Ruff checks plus fast tests |
@@ -42,7 +45,7 @@ Delete rows for absent optional paths.
 - Ruff is the linter and formatter. There is no type checker.
 - Tests protect custom, reusable, error-prone logic. There is no coverage
   target and no tests for notebooks, trivial glue, or third-party behavior.
-- Analysis code may use models for inference; training belongs elsewhere.
+- Data-product code may use models for inference; training belongs elsewhere.
 
 ## Data and products
 
@@ -52,7 +55,12 @@ Delete rows for absent optional paths.
 - Only download workflows may publish a new local source path. They verify
   identity, publish atomically, and refuse overwrite.
 - Every product records source identities, resolved non-secret configuration,
-  Git commit, lockfile digest, model revision, seeds, step state, and timing.
+  declared inputs, schema version, rule results, accepted/rejected counts,
+  publication decision, Git commit, lockfile digest, model revision, seeds,
+  step state, and timing.
+- Critical contract or integration failures block publication. Identifiable
+  row-level rejects go only to the declared quarantine product with a reason;
+  never silently discard them.
 
 ## Git safety
 

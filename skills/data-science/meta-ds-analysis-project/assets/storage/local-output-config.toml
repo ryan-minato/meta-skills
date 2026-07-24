@@ -2,3 +2,6 @@
 name = "__PRODUCT_NAME__"
 backend = "local"
 uri = "output/__STEP_OR_FINAL__"
+stage = "__STAGE__"
+inputs = ["__INPUT_SOURCE_OR_PRODUCT__"]
+schema_version = "__SCHEMA_VERSION__"

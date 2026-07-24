@@ -32,4 +32,4 @@ npx skills add ryan-minato/meta-skills/skills/data-science --skill <skill-name>
 | [meta-ds-numerics-docs](meta-ds-numerics-docs/) | Documentation entry points for scientific platforms, math kernels and sparse solvers, and compilers, GPU toolchains, and automatic differentiation |
 | [meta-ds-simulation-docs](meta-ds-simulation-docs/) | Documentation entry points for optimization and solvers, differential equations, PDE/FEM frameworks, and scientific visualization |
 | [meta-ds-hpc-docs](meta-ds-hpc-docs/) | Documentation entry points for MPI, workflow managers, and schedulers, GPU and multi-node communication, and scientific data and parallel I/O |
-| [meta-ds-analysis-project](meta-ds-analysis-project/) | Opinionated reproducible Python analysis-project scaffold with immutable source data, storage branches, observable workflows, and an agent knowledge base |
+| [meta-ds-analysis-project](meta-ds-analysis-project/) | Opinionated reproducible Python batch data-product scaffold and incremental-delivery workflow: immutable source data, profiling and quality gates, cleaning, integration, quarantine, published products, provenance, and an agent knowledge base |

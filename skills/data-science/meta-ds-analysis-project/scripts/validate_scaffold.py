@@ -8,6 +8,7 @@ import argparse
 import json
 import re
 import sys
+import tempfile
 import tomllib
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -20,6 +21,8 @@ BACKENDS = {"local", "s3", "huggingface"}
 REQUIRED_RECIPES = {
     "setup",
     "download-data",
+    "profile-data",
+    "validate-data",
     "pipeline",
     "test",
     "check",
@@ -27,6 +30,7 @@ REQUIRED_RECIPES = {
     "safe-to-commit",
     "safe-to-push",
 }
+PRODUCT_STAGES = {"profile", "clean", "integrate", "final", "quarantine"}
 REQUIRED_PATHS = (
     "AGENTS.md",
     "ARCHITECTURE.md",
@@ -298,6 +302,191 @@ def source_module_name(name: str) -> str:
     return re.sub(r"[^a-zA-Z0-9_]", "_", name).lower()
 
 
+def check_data_product_contract(config: dict[str, Any], issues: list[Issue]) -> None:
+    sources = config.get("sources")
+    products = config.get("products")
+    if not isinstance(sources, list) or not isinstance(products, list):
+        return
+
+    source_names = {
+        entry.get("name")
+        for entry in sources
+        if isinstance(entry, dict) and isinstance(entry.get("name"), str)
+    }
+    product_names = {
+        entry.get("name")
+        for entry in products
+        if isinstance(entry, dict) and isinstance(entry.get("name"), str)
+    }
+    if len(product_names) != len(
+        [entry for entry in products if isinstance(entry, dict) and entry.get("name")]
+    ):
+        add(
+            issues,
+            "config.product-name",
+            "config/project.toml",
+            "Product names must be unique so lineage is unambiguous.",
+        )
+    stages: set[str] = set()
+    dependencies: dict[str, list[str]] = {}
+    for index, product in enumerate(products):
+        path = f"config/project.toml:product[{index}]"
+        if not isinstance(product, dict) or not isinstance(product.get("name"), str):
+            continue
+        name = product["name"]
+        stage = product.get("stage")
+        if stage not in PRODUCT_STAGES:
+            add(
+                issues,
+                "config.product-stage",
+                path,
+                "Each product needs a stage: profile, clean, integrate, final, or quarantine.",
+            )
+        else:
+            stages.add(stage)
+        schema_version = product.get("schema_version")
+        if not isinstance(schema_version, str) or not schema_version.strip():
+            add(
+                issues,
+                "config.product-schema-version",
+                path,
+                "Each product needs a non-empty schema_version.",
+            )
+        inputs = product.get("inputs")
+        if (
+            not isinstance(inputs, list)
+            or not inputs
+            or not all(isinstance(value, str) and value.strip() for value in inputs)
+        ):
+            add(
+                issues,
+                "config.product-inputs",
+                path,
+                "Each product needs a non-empty inputs list of source or product names.",
+            )
+            continue
+        unknown = sorted(set(inputs) - source_names - product_names)
+        if unknown:
+            add(
+                issues,
+                "config.product-input",
+                path,
+                f"Product inputs are not declared sources or products: {', '.join(unknown)}.",
+            )
+        if name in inputs:
+            add(
+                issues,
+                "config.product-self-dependency",
+                path,
+                "A product cannot list itself as an input.",
+            )
+        if stage in {"final", "quarantine"} and not any(
+            value in product_names for value in inputs
+        ):
+            add(
+                issues,
+                "config.product-stage-input",
+                path,
+                f"A {stage!r} product must consume an earlier governed product.",
+            )
+        dependencies[name] = [value for value in inputs if value in product_names]
+
+    for index, source in enumerate(sources):
+        if not isinstance(source, dict):
+            continue
+        schema_version = source.get("schema_version")
+        if not isinstance(schema_version, str) or not schema_version.strip():
+            add(
+                issues,
+                "config.source-schema-version",
+                f"config/project.toml:source[{index}]",
+                "Each source needs a non-empty schema_version.",
+            )
+
+    for stage in ("profile", "clean", "final", "quarantine"):
+        if stage not in stages:
+            add(
+                issues,
+                "config.product-stage-required",
+                "config/project.toml",
+                f"A batch data-product pipeline needs a {stage!r} product stage.",
+            )
+    if len(source_names) > 1 and "integrate" not in stages:
+        add(
+            issues,
+            "config.product-integration-stage",
+            "config/project.toml",
+            "Multiple sources require a documented 'integrate' product stage.",
+        )
+
+    visiting: set[str] = set()
+    visited: set[str] = set()
+
+    def visit(name: str) -> None:
+        if name in visited:
+            return
+        if name in visiting:
+            add(
+                issues,
+                "config.product-cycle",
+                "config/project.toml",
+                "Product dependencies must be acyclic.",
+            )
+            return
+        visiting.add(name)
+        for dependency in dependencies.get(name, []):
+            visit(dependency)
+        visiting.remove(name)
+        visited.add(name)
+
+    for name in dependencies:
+        visit(name)
+
+    quality = config.get("quality")
+    if not isinstance(quality, dict):
+        add(
+            issues,
+            "config.quality",
+            "config/project.toml",
+            "Define [quality] with critical rules and the quarantine policy.",
+        )
+        return
+    critical_rules = quality.get("critical_rules")
+    if (
+        not isinstance(critical_rules, list)
+        or not critical_rules
+        or not all(isinstance(rule, str) and rule.strip() for rule in critical_rules)
+    ):
+        add(
+            issues,
+            "config.quality-critical-rules",
+            "config/project.toml:quality",
+            "quality.critical_rules must list the contract or integration rules that block publication.",
+        )
+    if quality.get("row_rejection_policy") != "quarantine":
+        add(
+            issues,
+            "config.quality-rejection-policy",
+            "config/project.toml:quality",
+            "quality.row_rejection_policy must be 'quarantine'; never silently discard rejected rows.",
+        )
+    quarantine_product = quality.get("quarantine_product")
+    matching_quarantine = [
+        product
+        for product in products
+        if isinstance(product, dict)
+        and product.get("name") == quarantine_product
+        and product.get("stage") == "quarantine"
+    ]
+    if not matching_quarantine:
+        add(
+            issues,
+            "config.quality-quarantine-product",
+            "config/project.toml:quality",
+            "quality.quarantine_product must name a declared quarantine-stage product.",
+        )
+
+
 def check_storage(root: Path, config: dict[str, Any], issues: list[Issue]) -> None:
     sources = config.get("sources")
     products = config.get("products")
@@ -393,6 +582,22 @@ def check_storage(root: Path, config: dict[str, Any], issues: list[Issue]) -> No
                     local_sources.append(entry)
             elif backend == "local":
                 local_products.append(entry)
+                stage = entry.get("stage")
+                uri = str(entry.get("uri", "")).rstrip("/")
+                if stage == "final" and not uri.startswith("output/final"):
+                    add(
+                        issues,
+                        "storage.local-final-product",
+                        path,
+                        "A local final product must live under output/final/.",
+                    )
+                if stage == "quarantine" and not uri.startswith("output/quarantine"):
+                    add(
+                        issues,
+                        "storage.local-quarantine-product",
+                        path,
+                        "A local quarantine product must live under output/quarantine/.",
+                    )
             if kind == "product" and str(entry["uri"]).rstrip("/").startswith("data/"):
                 add(
                     issues,
@@ -459,7 +664,12 @@ def check_storage(root: Path, config: dict[str, Any], issues: list[Issue]) -> No
                 "Pipeline does not show snapshot and verify calls to data_guard. Wire both around production steps.",
             )
     if local_products:
-        for relative in ("output", "output/_provenance"):
+        for relative in (
+            "output",
+            "output/final",
+            "output/quarantine",
+            "output/_provenance",
+        ):
             if not (root / relative).is_dir():
                 add(
                     issues,
@@ -467,6 +677,7 @@ def check_storage(root: Path, config: dict[str, Any], issues: list[Issue]) -> No
                     relative,
                     "Local products require output/ and output/_provenance/.",
                 )
+    check_data_product_contract(config, issues)
 
 
 def check_model(root: Path, config: dict[str, Any], issues: list[Issue]) -> None:
@@ -619,7 +830,7 @@ def render(root: Path, issues: list[Issue], output_format: str) -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        description="Validate a generated reproducible data-analysis scaffold.",
+        description="Validate a generated reproducible batch data-product scaffold.",
         epilog=(
             "Example: uv run scripts/validate_scaffold.py "
             "--project-root /path/to/project --format json"
@@ -628,7 +839,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--project-root",
         type=Path,
-        required=True,
+        required=False,
         help="Root of the generated target project",
     )
     parser.add_argument(
@@ -637,12 +848,146 @@ def build_parser() -> argparse.ArgumentParser:
         default="text",
         help="Output format (default: text)",
     )
+    parser.add_argument(
+        "--self-test",
+        action="store_true",
+        help="Run built-in data-product contract fixtures.",
+    )
     return parser
+
+
+def self_test() -> None:
+    valid = {
+        "sources": [
+            {
+                "name": "source",
+                "backend": "local",
+                "uri": "data/source",
+                "schema_version": "v1",
+            }
+        ],
+        "products": [
+            {
+                "name": "profile",
+                "stage": "profile",
+                "inputs": ["source"],
+                "schema_version": "v1",
+            },
+            {
+                "name": "clean",
+                "stage": "clean",
+                "inputs": ["source"],
+                "schema_version": "v1",
+            },
+            {
+                "name": "quarantine",
+                "stage": "quarantine",
+                "inputs": ["clean"],
+                "schema_version": "v1",
+            },
+            {
+                "name": "final",
+                "stage": "final",
+                "inputs": ["clean"],
+                "schema_version": "v1",
+            },
+        ],
+        "quality": {
+            "critical_rules": ["primary_key_unique"],
+            "row_rejection_policy": "quarantine",
+            "quarantine_product": "quarantine",
+        },
+    }
+    issues: list[Issue] = []
+    check_data_product_contract(valid, issues)
+    assert not issues, issues
+
+    with tempfile.TemporaryDirectory() as temporary:
+        root = Path(temporary)
+        for relative in (
+            "notebooks",
+            "tests",
+            "report",
+            "data/source",
+            "output/final",
+            "output/quarantine",
+            "output/_provenance",
+            "src/package/sources",
+            "src/package/workflows",
+            ".agents/knowledge",
+            "config",
+        ):
+            (root / relative).mkdir(parents=True, exist_ok=True)
+
+        def write(relative: str, content: str) -> None:
+            (root / relative).write_text(content, encoding="utf-8")
+
+        for relative, content in {
+            "AGENTS.md": "ARCHITECTURE.md .agents/knowledge/PROJECT.md .agents/knowledge/DATA.md .agents/knowledge/REFERENCES.md\n",
+            "ARCHITECTURE.md": "# Architecture\n",
+            "uv.lock": "",
+            ".editorconfig": "root = true\n",
+            ".env.example": "TOKEN=example\n",
+            ".pre-commit-config.yaml": "# ruff pytest gitleaks\n",
+            ".gitignore": ".env\ndata/\noutput/\nmodel/\n",
+            "report/report.md": "# Report\n",
+            ".agents/knowledge/PROJECT.md": "# Project\n",
+            ".agents/knowledge/DATA.md": "# Data\n",
+            ".agents/knowledge/REFERENCES.md": "# References\n",
+            "src/package/__init__.py": "",
+            "src/package/settings.py": "from pydantic_settings import BaseSettings\nTomlConfigSettingsSource = object\nENV = '.env'\n",
+            "src/package/sources/source.py": "def acquire() -> None:\n    pass\n",
+            "src/package/data_guard.py": "def snapshot() -> None:\n    pass\ndef verify() -> None:\n    pass\n",
+            "src/package/workflows/download_source.py": "from loguru import logger\n# data_guard snapshot verify\n",
+            "src/package/workflows/pipeline.py": "from loguru import logger\n",
+            "pyproject.toml": "[project]\nname = 'fixture'\ndependencies = ['loguru', 'pydantic-settings']\n\n[build-system]\nbuild-backend = 'setuptools.build_meta'\n\n[dependency-groups]\ndev = ['pytest', 'ruff', 'pre-commit']\n\n[tool.ruff]\n\n[tool.pytest.ini_options]\n",
+            "justfile": "setup:\n    @true\ndownload-data:\n    @true\nprofile-data:\n    @true\nvalidate-data:\n    @true\npipeline:\n    @true\ntest:\n    @true\ncheck:\n    @true\nreport:\n    @true\nsafe-to-commit:\n    @true\nsafe-to-push:\n    @true\n",
+            "config/project.toml": "project_name = 'fixture'\n\n[[sources]]\nname = 'source'\nbackend = 'local'\nuri = 'data/source'\nversion = 'v1'\nschema_version = 'v1'\n\n[[products]]\nname = 'profile'\nbackend = 'local'\nuri = 'output/profile'\nstage = 'profile'\ninputs = ['source']\nschema_version = 'v1'\n\n[[products]]\nname = 'clean'\nbackend = 'local'\nuri = 'output/clean'\nstage = 'clean'\ninputs = ['source']\nschema_version = 'v1'\n\n[[products]]\nname = 'quarantine'\nbackend = 'local'\nuri = 'output/quarantine/rejected'\nstage = 'quarantine'\ninputs = ['clean']\nschema_version = 'v1'\n\n[[products]]\nname = 'final'\nbackend = 'local'\nuri = 'output/final/product'\nstage = 'final'\ninputs = ['clean']\nschema_version = 'v1'\n\n[quality]\ncritical_rules = ['primary_key_unique']\nrow_rejection_policy = 'quarantine'\nquarantine_product = 'quarantine'\n",
+        }.items():
+            write(relative, content)
+        fixture_issues = validate(root)
+        assert not fixture_issues, fixture_issues
+        write("justfile", "setup:\n    @true\n")
+        command_issues: list[Issue] = []
+        check_commands_and_hooks(root, command_issues)
+        assert any(issue.code == "just.recipe" for issue in command_issues)
+
+    invalid = json.loads(json.dumps(valid))
+    invalid["products"] = invalid["products"][:-1]
+    invalid["quality"]["critical_rules"] = []
+    invalid["quality"]["row_rejection_policy"] = "warn"
+    invalid["quality"]["quarantine_product"] = "missing"
+    invalid_issues: list[Issue] = []
+    check_data_product_contract(invalid, invalid_issues)
+    codes = {issue.code for issue in invalid_issues}
+    expected = {
+        "config.product-stage-required",
+        "config.quality-critical-rules",
+        "config.quality-rejection-policy",
+        "config.quality-quarantine-product",
+    }
+    assert expected <= codes, codes
+
+    lineage_invalid = json.loads(json.dumps(valid))
+    lineage_invalid["products"][-1]["inputs"] = ["undeclared"]
+    lineage_issues: list[Issue] = []
+    check_data_product_contract(lineage_invalid, lineage_issues)
+    assert any(issue.code == "config.product-input" for issue in lineage_issues)
 
 
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
+    if args.self_test:
+        try:
+            self_test()
+        except AssertionError as error:
+            print(f"validate_scaffold self-test failed: {error}", file=sys.stderr)
+            return 2
+        print("validate_scaffold self-test: OK")
+        return 0
+    if args.project_root is None:
+        parser.error("--project-root is required unless --self-test is used")
     root = args.project_root.resolve()
     try:
         issues = validate(root)
