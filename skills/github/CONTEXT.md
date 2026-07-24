@@ -33,7 +33,8 @@ only when the target's origin remote is GitHub (visible in
   CODEOWNERS grammar), pinned tool or action versions, or feature
   availability in prose. Details are always fetched live through the
   shared `docs-navigation.md` procedure; skeleton assets sketch shape
-  only and say so. A hard-coded action version or schema fragment
+  only, and the SKILL.md that copies one says so — the asset itself stays
+  a bare resource. A hard-coded action version or schema fragment
   presented as authoritative is a bug.
 - **Doc-root fidelity.** Recorded entry points are the docs root and the
   `/en/<product>` roots; deep guide pages are navigation results, never
@@ -50,10 +51,9 @@ only when the target's origin remote is GitHub (visible in
   and releases (including workflows that cut releases) to
   `meta-gh-planning-release`. A skill that grows across a boundary is
   split, not grown.
-- **Registry completeness.** Every URL any skill cites — in SKILL.md,
-  references, and assets alike — appears in this file's Upstream
-  Registry, in the section mirroring its skill. A URL in a skill but not
-  the registry is a bug.
+- **Registry completeness.** Every URL any skill cites — in SKILL.md and
+  references — appears in this file's Upstream Registry, in the section
+  mirroring its skill. A URL in a skill but not the registry is a bug.
 - **Sibling-catalog overlap is intentional.** Platform-neutral specs
   (Conventional Commits, SemVer, CalVer, Keep a Changelog, Contributor
   Covenant, Choose a License) are recorded independently in both

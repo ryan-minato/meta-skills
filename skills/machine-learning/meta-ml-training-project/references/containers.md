@@ -61,6 +61,8 @@ AGENTS.md.
 
 ## Assets
 
-- Dev environment → copy the `assets/devcontainer.md` skeleton.
-- Training image and runner → copy the `assets/docker-training.md`
-  skeleton.
+- Dev environment → copy `assets/devcontainer.json` to
+  `.devcontainer/devcontainer.json`.
+- Training image and runner → copy `assets/Dockerfile` and
+  `assets/compose.yaml` to the project root, and add `docker-build` /
+  `docker-train` recipes to the justfile in the same change.

@@ -34,8 +34,11 @@ metadata:
    - Assume the target project's conventions; never mention this
      repository's files, commands, or workflow.
    - Keep every relative link inside the skill directory. Push long material
-     into `references/` behind a precise load condition; put copyable
-     skeletons in `assets/`.
+     into `references/` behind a precise load condition. Put copyable
+     material in `assets/` as the raw file the target copies — bare code
+     with its real extension, or the raw document — never an `.md` wrapper
+     around a fenced block, and never carrying copy instructions or
+     adaptation notes; that how-to belongs in SKILL.md or `references/`.
    - Never assume another meta-skill is installed. To build on one, instruct
      the user to install it.
    - Any template the skill copies into the target's harness must NOT carry

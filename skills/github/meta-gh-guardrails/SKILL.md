@@ -40,10 +40,10 @@ say who is responsible for which part of the code.
    needs update automation and scanning first.
 4. Read [dependency-automation.md](references/dependency-automation.md)
    when the project has dependency manifests the user wants kept current
-   automatically. It guides copying [dependabot.md](assets/dependabot.md)
+   automatically. It guides copying [dependabot.yml](assets/dependabot.yml)
    to `.github/dependabot.yml` and agreeing how update PRs get handled.
 5. When review routing is wanted, copy
-   [codeowners.md](assets/codeowners.md) to `CODEOWNERS` and rework it:
+   [the CODEOWNERS skeleton](assets/CODEOWNERS) to `CODEOWNERS` and rework it:
    every line names a real path and a real owner, against syntax fetched
    this session.
 6. Read [rulesets.md](references/rulesets.md) when the user wants merges

@@ -1,12 +1,3 @@
-# CONTRIBUTING Skeleton
-
-Copy the block below to `CONTRIBUTING.md`, then rework every line
-against what the project's AGENTS.md and task runner already record —
-this document tells outsiders the same truth insiders follow, so every
-command in it must exist and pass today. Delete sections that do not
-apply.
-
-```markdown
 # Contributing
 
 ## Before you start
@@ -34,4 +25,3 @@ where a public document exists.>
 
 <What happens after opening a merge request: who reviews, expected
 response time, what approval requires.>
-```

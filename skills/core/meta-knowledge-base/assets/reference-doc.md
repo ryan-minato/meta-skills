@@ -1,9 +1,3 @@
-# Reference Document Skeleton
-
-For facts about a dependency, system, or domain. Copy the block, rework it
-against the real subject, and delete every placeholder.
-
-````markdown
 # <subject>
 
 Read when <the task condition that makes these facts matter>.
@@ -21,4 +15,3 @@ Read when <the task condition that makes these facts matter>.
 ## Sources
 
 - <where these facts were established; date if they can age>
-````

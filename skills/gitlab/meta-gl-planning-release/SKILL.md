@@ -48,8 +48,10 @@ who can say how the team actually tracks work.
    (<https://semver.org/> or <https://calver.org/>) — plus the tag
    format and who bumps the version where.
 6. Changelog policy, one source only: a hand-maintained file — copy
-   [changelog.md](assets/changelog.md) to `CHANGELOG.md` — or the
-   platform's changelog generation from commit trailers, configured
+   [changelog.md](assets/changelog.md) to `CHANGELOG.md`, backfilling at
+   least the latest release so it starts truthful and following the
+   current Keep a Changelog format from <https://keepachangelog.com/> —
+   or the platform's changelog generation from commit trailers, configured
    against mechanics fetched live this session. Never both.
 7. Read [release-automation.md](references/release-automation.md) when
    releases should be cut by automation rather than by hand.

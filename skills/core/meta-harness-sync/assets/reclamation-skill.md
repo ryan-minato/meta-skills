@@ -1,12 +1,3 @@
-# Reclamation Skill Skeleton
-
-The skill-family form of the periodic entropy-reclamation routine. Copy
-the block into a new skill directory, set the real anchor and locations,
-and delete this guidance. It stays after the meta-skills are removed — its
-description must never begin with the marker those disposable skills
-carry.
-
-````markdown
 ---
 name: harness-reclamation
 description: >-
@@ -41,4 +32,3 @@ date above.
 
 Done when: every finding has an applied or reported disposition and the
 run date is current.
-````

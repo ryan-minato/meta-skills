@@ -1,10 +1,3 @@
-# Reclamation Section
-
-The entrypoint-family form of the periodic entropy-reclamation routine.
-Copy the block into the entrypoint or a knowledge document it points to;
-set the real anchor and keep the run date absolute.
-
-````markdown
 ## Periodic Harness Reclamation
 
 At <anchor event / cadence>, sweep the harness for entropy. Last run:
@@ -20,4 +13,3 @@ At <anchor event / cadence>, sweep the harness for entropy. Last run:
 
 Every finding gets a disposition in the same run — update, reconnect,
 merge, thin, or delete — and the run date above is updated.
-````

@@ -778,13 +778,12 @@ order; each skill's rows land in the same change that adds the skill.
 | Docker Compose | <https://docs.docker.com/compose/> |
 | Dev Container spec | <https://containers.dev/> |
 
-#### assets (train-loop-accelerate.md, devcontainer.md)
+#### SKILL.md
 
 | Tool | Docs |
 |---|---|
 | Hugging Face Accelerate | <https://huggingface.co/docs/accelerate> — llms.txt: <https://huggingface.co/docs/accelerate/llms.txt> |
 | Pydantic (Settings) | <https://docs.pydantic.dev/> — llms.txt: <https://docs.pydantic.dev/llms.txt> |
-| Dev Container spec | <https://containers.dev/> |
 
 ### meta-ml-training-project
 
@@ -814,10 +813,9 @@ order; each skill's rows land in the same change that adds the skill.
 | Docker Compose | <https://docs.docker.com/compose/> |
 | Dev Container spec | <https://containers.dev/> |
 
-#### assets (train-loop-accelerate.md, devcontainer.md)
+#### SKILL.md
 
 | Tool | Docs |
 |---|---|
 | Hugging Face Accelerate | <https://huggingface.co/docs/accelerate> — llms.txt: <https://huggingface.co/docs/accelerate/llms.txt> |
 | Hydra | <https://hydra.cc/> |
-| Dev Container spec | <https://containers.dev/> |

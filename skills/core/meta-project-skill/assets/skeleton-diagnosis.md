@@ -1,10 +1,3 @@
-# Diagnosis Skill Skeleton
-
-For symptom-to-cause branching: debugging, triage, incident response. Copy
-the block into a new skill directory, then rework it around the failures
-this project actually has.
-
-````markdown
 ---
 name: <diagnose-x>
 description: >-
@@ -40,4 +33,3 @@ team.>
 
 Update this skill when a new failure mode recurs or a listed cause is
 fixed for good.
-````

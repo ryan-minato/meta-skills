@@ -1,11 +1,3 @@
-# Justfile Skeleton — Training Project
-
-Copy the block below into the target project's `justfile`, then rework
-it: keep one `train`/`eval` pair per real entry script and delete
-recipes for workflows the project lacks. Container recipes are added
-only through the containers branch, not by default.
-
-````just
 # Create the dev environment from the committed lockfile.
 setup:
     uv sync
@@ -30,4 +22,3 @@ test:
 # GPU/long tests; run by hand, never from hooks or CI.
 test-slow:
     uv run pytest -m slow
-````

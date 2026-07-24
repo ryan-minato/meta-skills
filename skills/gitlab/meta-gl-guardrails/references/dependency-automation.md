@@ -23,7 +23,7 @@ scans, but it ships no first-party update bot.
    for GitLab; fetch its current GitLab-platform setup from its own docs
    — hosted app versus self-hosted runner differs by instance, and the
    config schema evolves.
-2. Copy [renovate.md](../assets/renovate.md) to the config filename the
+2. Copy [renovate.json](../assets/renovate.json) to the config filename the
    fetched docs prescribe, and rework it: one rule set per detected
    ecosystem, cadence and grouping chosen with the user.
 3. Agree the handling policy before the first MR arrives: who merges
