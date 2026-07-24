@@ -106,7 +106,7 @@ are resolved; fast checks pass; and the user approves the scaffold.
 ## Invariants
 
 - Local `data/` contains original inputs only, directly under
-  `data/<source>/`; never create `data/raw/` or put derived data there.
+  `data/<source>/`.
 - Only download workflows may write local source data. They download to a
   temporary sibling, verify identity, atomically publish a new path, and
   refuse overwrite. New upstream versions get new paths.
