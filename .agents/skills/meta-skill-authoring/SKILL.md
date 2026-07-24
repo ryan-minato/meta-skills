@@ -30,6 +30,10 @@ metadata:
    - `description` keeps the marker first, then what the skill does, "Use
      when …", and optionally "Not for …". At most 1024 chars — every char
      loads into every target session, so keep the trigger tight.
+   - When the skill has non-core dependencies, set the string metadata key
+     `meta-skills.dependencies` to their space-separated
+     `catalog/meta-skill` identifiers. Omit core dependencies and omit the
+     key when none remain.
 3. Body rules — write for the target-project agent:
    - Assume the target project's conventions; never mention this
      repository's files, commands, or workflow.
@@ -39,8 +43,14 @@ metadata:
      with its real extension, or the raw document — never an `.md` wrapper
      around a fenced block, and never carrying copy instructions or
      adaptation notes; that how-to belongs in SKILL.md or `references/`.
-   - Never assume another meta-skill is installed. To build on one, instruct
-     the user to install it.
+   - Assume `core` is installed, and no other skill. Catalog installation is
+     recommended but never proves a sibling is present. Put every non-core
+     dependency — including a same-catalog dependency — in both metadata and
+     a `## Meta-skill Dependencies` section. Name its purpose and direct the
+     agent to `core/meta-skill-discovery` for live lookup and installation
+     guidance; never duplicate installation commands.
+   - Dependencies may name only published skills in this repository. Do not
+     hide a dependency in ordinary prose or depend on an external skill.
    - Any template the skill copies into the target's harness must NOT carry
      the marker — it has to survive the cleanup (the destination test).
 4. Run `just check-skill skills/<catalog>/<name>` and fix what it names —
@@ -55,5 +65,7 @@ metadata:
   skill instead.
 - Never set `metadata.internal` on a published skill: skill installers
   honor it by hiding the skill from installs (check M6 blocks it).
+- Keep dependency metadata and the body section identical; check M7 validates
+  the repository targets, portable fallback, and centralized install path.
 - Renaming a skill means renaming the directory and the `name` field
   together, then running the sync-catalog skill for the README tables.

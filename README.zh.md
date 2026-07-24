@@ -13,7 +13,7 @@ harness 指一切对 agent 可见、并帮助 agent 达成你预期的东西：a
 ## 工作方式
 
 1. **安装** —— 把 `core` 目录装进项目的技能目录（例如 `./.agents/skills/`），
-   再按技术栈补充所需的主题目录。
+   随后优先按目录安装符合技术栈的主题技能；同时仍支持单技能安装。
 2. **提出需求** —— 把项目的需求与规范交给 agent，请它搭建 harness。
 3. **搭建** —— agent 调用这些 meta-skill，它们承载着最佳实践。
 4. **移除** —— harness 建成并验证后，agent 依据标记找到所有 meta-skill 并全部
@@ -38,7 +38,7 @@ agent 正是靠这个标记重新找到这些技能并删除它们。识别依�
 
 | 目录 | 内容 | 安装范围 |
 |---|---|---|
-| [core](skills/core/) | 必装集合：足以让任何项目从没有 harness 到拥有可用的 harness | 按项目安装，在搭建 harness 之前 |
+| [core](skills/core/) | 必装集合：足以让任何项目从没有 harness 到拥有可用的 harness，包括实时发现目录/技能与集中安装指引 | 按项目安装，在搭建 harness 之前 |
 | [frontend](skills/frontend/) | 面向具有用户可见前端的项目的设计描述与视觉语言 | 按项目安装，在 `core` 之上，仅当目标有视觉界面时 |
 | [python](skills/python/) | 面向 Python 项目的可信默认值与文档 URL：docstring 与注释约定、测试设置、工具链选择 | 按项目安装，在 `core` 之上，仅当目标是 Python 项目时 |
 | [machine-learning](skills/machine-learning/) | 面向 ML 项目的文档入口，每个领域一个技能（框架、训练、推理、视觉、音频……）——只提供信息——另有项目脚手架（快速实验、可维护训练）与 GPU 镜像发现技能，各自声明其观点默认值 | 按项目安装，在 `core` 之上，仅当目标训练、微调、部署或构建于 ML 模型之上时 |
@@ -46,7 +46,14 @@ agent 正是靠这个标记重新找到这些技能并删除它们。识别依�
 | [github](skills/github/) | 面向托管在 GitHub 上的项目的平台侧约定，每个关注点一个技能：协作流程与模板、镜像本地检查的 CI 质量门、护栏（Dependabot、CODEOWNERS、rulesets、扫描）、社区健康文件、规划与发布——平台能力一律从 GitHub 文档现场获取 | 按项目安装，在 `core` 之上，仅当目标托管在 GitHub 上时 |
 | [gitlab](skills/gitlab/) | 面向托管在 GitLab 上的项目的平台侧约定，镜像 `github` catalog 的五个关注点（协作、CI、护栏、社区文件、规划与发布），并尊重实例的版本与 tier——平台能力一律从 GitLab 文档现场获取 | 按项目安装，在 `core` 之上，仅当目标托管在 GitLab（gitlab.com 或自管实例）上时 |
 
+按目录安装只是推荐方式，并非技能存在性的保证：只有 `core` 可以假设已安装。每个技能
+都会显式列出所有非 core 依赖，并引导 agent 使用 `meta-skill-discovery` 查询当前
+清单与安装方法。
+
 ## 安装
+
+使用 `meta-skill-discovery` 实时筛选目录和技能、选择单个技能，并了解项目级或全局
+scope。下列命令展示推荐的项目级目录安装方式。
 
 作为 Claude Code 插件安装——每个目录（catalog）就是本仓库市场中的一个插件：
 
@@ -77,9 +84,9 @@ npx skills add ryan-minato/meta-skills/skills/gitlab        # 仅当托管在 Gi
 npx skills add ryan-minato/meta-skills/skills               # 全部已发布技能
 ```
 
-也可以把技能目录（`skills/<catalog>/<skill>/`）直接复制进项目的技能目录。请
-**按项目安装**，不要全局安装：它们是为单个项目的单次任务准备的脚手架，全局安装
-会跟着你进入已经拥有 harness 的项目。
+也可以把技能目录（`skills/<catalog>/<skill>/`）直接复制进项目的技能目录。项目级
+scope 是默认值与推荐方式：这些技能只为单个项目的一次任务搭建脚手架。明确需要时也
+支持全局安装，但一次性技能会因此进入所有项目，完成后必须在对应的全局 scope 清理。
 
 ## 相关项目
 

@@ -47,7 +47,7 @@ ship to targets. The project map lives in [ARCHITECTURE.md](ARCHITECTURE.md).
 | `just setup` | install hooks and the commit template; once after cloning |
 | `just check` | every gate — run it before proposing changes |
 | `just validate-repo` | repository structure: catalogs, docs, contract |
-| `just check-skill <path>` | one skill: structure, SKILL.md, links |
+| `just check-skill <path>` | one skill: structure, SKILL.md, dependencies, links |
 | `just check-skills` | every published and internal skill |
 | `just validate` | both validators (fast iteration) |
 | `just fmt` | format and autofix the validator scripts |
@@ -76,16 +76,17 @@ starting tracked work. Agents never merge.
 | Situation | Read |
 |---|---|
 | Repo layout, quality gates, why a mechanism is absent, proposing tooling | [ARCHITECTURE.md](ARCHITECTURE.md) |
-| Authoring, reviewing, renaming, or removing anything under `skills/`; touching the marker | [meta-skill-contract.md](.agents/knowledge/meta-skill-contract.md) |
+| Authoring, reviewing, renaming, removing, or declaring dependencies for anything under `skills/`; touching the marker | [meta-skill-contract.md](.agents/knowledge/meta-skill-contract.md) |
 | Working inside a specific catalog | that catalog's `CONTEXT.md` |
 | Agent Skills spec facts (frontmatter fields, limits) | the `agentskills` MCP server |
 
 ## Keeping The Harness Current
 
 Sync is owned by skills, one per concern: `sync-catalog` (a catalog or
-published skill is added, renamed, or removed), `sync-contract` (the marker
-or its rules change), and `sync-translation` (a `README.md` changed). Invoke
-the one whose trigger fired; their procedures are not duplicated here.
+published skill is added, renamed, or removed, including the live discovery
+sources), `sync-contract` (the marker or its rules change), and
+`sync-translation` (a `README.md` changed). Invoke the one whose trigger
+fired; their procedures are not duplicated here.
 
 For the concerns no skill owns: a justfile recipe change updates the
 Validation table above and the gates table in `ARCHITECTURE.md`; a layout

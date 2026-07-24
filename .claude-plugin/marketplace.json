@@ -8,8 +8,9 @@
     {
       "name": "core",
       "source": "./skills/core",
-      "description": "The required set: enough to take any project from no harness to a working one, including the removal skill.",
+      "description": "The required set: enough to take any project from no harness to a working one, including live skill discovery, installation guidance, and removal.",
       "skills": [
+        "./meta-skill-discovery",
         "./meta-harness-plan",
         "./meta-agents-md",
         "./meta-knowledge-base",
