@@ -1,10 +1,3 @@
-# Procedure Skill Skeleton
-
-For ordered, fragile operations: build, release, migrate, deploy. Copy the
-block into a new skill directory (directory name = the `name` field), then
-rework every line against the real procedure.
-
-````markdown
 ---
 name: <verb-object, e.g. release-app>
 description: >-
@@ -38,4 +31,3 @@ Done when: <the end-to-end observable completion criterion>.
 
 Update this skill in the same change that alters <the commands, paths, or
 sequence above>.
-````

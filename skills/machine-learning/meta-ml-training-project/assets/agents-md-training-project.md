@@ -1,12 +1,3 @@
-# AGENTS.md Skeleton — Training Project
-
-Copy the block below into the target project's `AGENTS.md`, then rework
-it: make the directory map match reality, replace every angle-bracket
-placeholder, create the knowledge-base files with real initial content,
-and delete rows that do not apply. Keep it near 100 lines — detail lives
-in the knowledge base, not here.
-
-````markdown
 # <project name>
 
 <Two or three sentences: what gets trained and evaluated here, and what
@@ -79,4 +70,3 @@ new decision lands in `docs/decisions.md`.
 - Never edit `data/raw/`; never commit `data/` or `outputs/`.
 - Never wire slow tests into hooks or CI.
 - <anything else agents must not do without asking>
-````

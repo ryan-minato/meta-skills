@@ -1,9 +1,3 @@
-# Plan Document Skeleton
-
-For ongoing work with a goal and next steps. Copy the block, rework it, and
-use absolute dates only — "next week" is unreadable a month later.
-
-````markdown
 # Plan: <the outcome>
 
 Read when working on <the effort this plan tracks>. Status as of
@@ -26,4 +20,3 @@ Read when working on <the effort this plan tracks>. Status as of
 ## Blocked / Open
 
 - <blocker or open question; who or what resolves it>
-````

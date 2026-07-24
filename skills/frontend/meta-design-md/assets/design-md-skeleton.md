@@ -1,13 +1,3 @@
-# DESIGN.md Skeleton
-
-Copy the block below into the project's `DESIGN.md`, then rework it:
-replace every angle-bracket placeholder with values derived from the
-project's real design sources, delete sections (and their token groups)
-the design does not need, and keep the remaining sections in this order.
-Tokens are normative; the prose carries the design — write it, don't stub
-it.
-
-````markdown
 ---
 version: alpha
 name: <design system name>
@@ -78,4 +68,3 @@ alternative.>
 
 - Do <the rule that protects the design>
 - Don't <the pitfall that keeps recurring>
-````

@@ -1,10 +1,3 @@
-# AGENTS.md Section: Planning and Releases
-
-Copy the block below into the target's AGENTS.md — as a new section, or
-merged into the existing structure — then rework every line against what
-was actually decided and delete anything this project did not decide.
-
-```markdown
 ## Planning
 
 - Labels: <label — meaning; one line each. A label without a recorded
@@ -24,4 +17,3 @@ was actually decided and delete anything this project did not decide.
   1. <step — exact command or action>
   2. <step>
   3. <step>
-```

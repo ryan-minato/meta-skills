@@ -45,7 +45,7 @@ checks (test, lint, format, type) already exist and pass.
 5. Agree the gate design with the user: which checks run on merge
    requests, on the default branch, and on a schedule; which are
    blocking; and a runtime budget for the blocking set.
-6. Copy [gitlab-ci.md](assets/gitlab-ci.md) to `.gitlab-ci.yml` and
+6. Copy [gitlab-ci.yml](assets/gitlab-ci.yml) to `.gitlab-ci.yml` and
    rework every line: each job runs the project's real local command
    verbatim, `rules:` express the agreed triggers, and image choices
    match the project's toolchain.

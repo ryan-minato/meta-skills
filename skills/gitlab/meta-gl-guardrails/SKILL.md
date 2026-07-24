@@ -47,7 +47,7 @@ code.
    automatically — detection (the platform's dependency scanning) and
    updating (a third-party bot) are separate decisions there.
 5. When review routing is wanted, copy
-   [codeowners.md](assets/codeowners.md) to `CODEOWNERS` and rework it:
+   [the CODEOWNERS skeleton](assets/CODEOWNERS) to `CODEOWNERS` and rework it:
    every line names a real path and a real owner, against syntax located
    live through the llms.txt index. Whether CODEOWNERS can *require*
    approvals is tier-gated — verify before promising it.

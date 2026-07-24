@@ -35,6 +35,10 @@ meta-skills afterwards.
 - **Assets carry no marker.** A template a skill copies into the target's
   harness must survive the cleanup; apply the contract's destination test to
   every file, not just `SKILL.md`.
+- **Assets are raw resources.** An `assets/` file is exactly the file the
+  target copies — bare code with its real extension, or the raw document —
+  never an `.md` wrapper around a fenced block, and never carrying copy or
+  adaptation prose. That how-to lives in `SKILL.md` or `references/`.
 
 ## Authoring
 

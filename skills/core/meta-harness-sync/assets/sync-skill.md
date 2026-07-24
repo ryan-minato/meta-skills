@@ -1,12 +1,3 @@
-# Sync Skill Skeleton
-
-One durable sync skill per concern, for the skill family. Copy the block
-into a new skill directory, then rework it: the real document, the real
-artifacts, the real triggering changes. It stays after the meta-skills are
-removed — its description must never begin with the marker those
-disposable skills carry.
-
-````markdown
 ---
 name: sync-<document>
 description: >-
@@ -36,4 +27,3 @@ prompted the edit:
 
 Done when: the document says nothing the code contradicts, and the
 inspection list above ran clean.
-````

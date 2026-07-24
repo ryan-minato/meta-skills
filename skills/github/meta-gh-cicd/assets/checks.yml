@@ -1,12 +1,3 @@
-# Checks Workflow Skeleton
-
-Copy the block below to `.github/workflows/checks.yml`, then rework
-every line: each job runs the project's real local command verbatim, and
-every trigger, permission, runner label, and action reference is
-validated against the Actions docs fetched this session — this skeleton
-sketches the shape and is not authoritative.
-
-```yaml
 name: checks
 
 on:
@@ -28,4 +19,3 @@ jobs:
       - uses: <checkout action, referenced per currently documented practice>
       - <toolchain setup this project needs>
       - run: <the project's local check command, verbatim>
-```

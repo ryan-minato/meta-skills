@@ -1,11 +1,3 @@
-# AGENTS.md Section: Collaboration
-
-Copy the block below into the target's AGENTS.md — as a new section, or
-merged into the existing structure — then rework every line against the
-conventions actually agreed and delete anything this project did not
-decide.
-
-```markdown
 ## Collaboration
 
 - Commits: <format — spec name and version if one was adopted; allowed
@@ -22,4 +14,3 @@ decide.
 - Issues: <when an issue is required before starting work>; bug reports
   and feature requests use the templates under
   `.gitlab/issue_templates/`.
-```

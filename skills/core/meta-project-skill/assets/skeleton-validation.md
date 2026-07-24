@@ -1,10 +1,3 @@
-# Validation Skill Skeleton
-
-For checks with pass criteria: audits, pre-merge gates, compliance
-reviews. Copy the block into a new skill directory, then rework the checks
-to the ones this project enforces.
-
-````markdown
 ---
 name: <check-x>
 description: >-
@@ -38,4 +31,3 @@ cause and proposed fix.
 
 Update this skill in the same change that adds, removes, or reworks any
 check above.
-````
