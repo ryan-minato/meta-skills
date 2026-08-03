@@ -21,6 +21,6 @@ npx skills add ryan-minato/meta-skills/skills/python --skill <skill-name>
 | Skill | 描述 |
 |---|---|
 | [meta-python-docstyle](meta-python-docstyle/) | docstring 风格（默认 Google；覆盖 NumPy 与 reST）、按对象类型的 docstring 完整度、自文档化代码的注释哲学、标注注释策略的默认值，附上游文档 URL |
-| [meta-python-pypi-docs](meta-python-pypi-docs/) | 从 PyPI/conda 元数据定位包的权威文档入口，优先选择面向 agent 的 `.md` 或 `llms.txt` 版本，用于任何文档映射尚未记录的包 |
+| [meta-python-pypi-lookup](meta-python-pypi-lookup/) | 从 PyPI/conda 元数据定位包的权威文档入口，优先选择面向 agent 的 `.md` 或 `llms.txt` 版本，用于任何文档映射尚未记录的包 |
 | [meta-python-testing](meta-python-testing/) | 测试框架（pytest）、按明确需要选择插件、测试风格信条的默认值：Arrange-Act-Assert、经典派、真实对象优先于 mock、状态验证、错误路径必测 |
 | [meta-python-toolchain](meta-python-toolchain/) | 依赖管理（uv）、lint 与格式化（Ruff）、类型检查（ty）、任务运行（just）、git 钩子（pre-commit）、文档生成（Zensical）的默认值与文档 URL，附成熟替代选项 |

@@ -33,7 +33,7 @@
       "description": "Trusted defaults and doc URLs for Python targets: docstring and comment conventions, testing setup, toolchain choices, and locating a package's documentation. Install on top of core.",
       "skills": [
         "./meta-python-docstyle",
-        "./meta-python-pypi-docs",
+        "./meta-python-pypi-lookup",
         "./meta-python-testing",
         "./meta-python-toolchain"
       ],
