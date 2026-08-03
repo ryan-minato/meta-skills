@@ -16,6 +16,7 @@
         "./meta-knowledge-base",
         "./meta-project-skill",
         "./meta-harness-sync",
+        "./meta-docs-map",
         "./meta-disposal"
       ],
       "strict": false
@@ -33,7 +34,7 @@
       "description": "Trusted defaults and doc URLs for Python targets: docstring and comment conventions, testing setup, toolchain choices, and locating a package's documentation. Install on top of core.",
       "skills": [
         "./meta-python-docstyle",
-        "./meta-python-pypi-docs",
+        "./meta-python-pypi-lookup",
         "./meta-python-testing",
         "./meta-python-toolchain"
       ],
@@ -42,27 +43,8 @@
     {
       "name": "machine-learning",
       "source": "./skills/machine-learning",
-      "description": "Documentation entry points, project scaffolds, and GPU-image discovery for ML projects; -docs skills inform only, the rest declare their opinionated defaults. Install on top of core.",
+      "description": "Opinionated project scaffolds and GPU-image discovery for ML projects, each declaring its defaults; documentation entry points live in the published docs index consumed by core's docs-map skill. Install on top of core.",
       "skills": [
-        "./meta-ml-frameworks-docs",
-        "./meta-ml-training-docs",
-        "./meta-ml-huggingface-docs",
-        "./meta-ml-ray-docs",
-        "./meta-ml-inference-docs",
-        "./meta-ml-mlops-docs",
-        "./meta-ml-llm-apps-docs",
-        "./meta-ml-llm-eval-docs",
-        "./meta-ml-vision-docs",
-        "./meta-ml-image-gen-docs",
-        "./meta-ml-audio-docs",
-        "./meta-ml-rl-docs",
-        "./meta-ml-recsys-docs",
-        "./meta-ml-tabular-docs",
-        "./meta-ml-timeseries-docs",
-        "./meta-ml-graph-docs",
-        "./meta-ml-probabilistic-docs",
-        "./meta-ml-trustworthy-docs",
-        "./meta-ml-science-docs",
         "./meta-ml-containers",
         "./meta-ml-experiment",
         "./meta-ml-training-project"
@@ -72,17 +54,8 @@
     {
       "name": "data-science",
       "source": "./skills/data-science",
-      "description": "Documentation entry points for data-science and scientific-computing domains, plus opinionated project scaffolds that declare their defaults. Install on top of core.",
-      "skills": [
-        "./meta-ds-analysis-docs",
-        "./meta-ds-scale-docs",
-        "./meta-ds-pipelines-docs",
-        "./meta-ds-geospatial-docs",
-        "./meta-ds-numerics-docs",
-        "./meta-ds-simulation-docs",
-        "./meta-ds-hpc-docs",
-        "./meta-ds-project"
-      ],
+      "description": "Opinionated project scaffolds for data-science targets that declare their defaults; documentation entry points live in the published docs index consumed by core's docs-map skill. Install on top of core.",
+      "skills": ["./meta-ds-project"],
       "strict": false
     },
     {

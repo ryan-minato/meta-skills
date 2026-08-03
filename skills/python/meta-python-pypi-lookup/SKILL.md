@@ -1,5 +1,5 @@
 ---
-name: meta-python-pypi-docs
+name: meta-python-pypi-lookup
 description: >-
   Disposable meta-skill (delete after the harness is built): locates the
   authoritative documentation entry point for a Python package from durable

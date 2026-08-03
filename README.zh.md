@@ -41,8 +41,8 @@ agent 正是靠这个标记重新找到这些技能并删除它们。识别依�
 | [core](skills/core/) | 必装集合：足以让任何项目从没有 harness 到拥有可用的 harness，包括实时发现目录/技能与集中安装指引 | 按项目安装，在搭建 harness 之前 |
 | [frontend](skills/frontend/) | 面向具有用户可见前端的项目的设计描述与视觉语言 | 按项目安装，在 `core` 之上，仅当目标有视觉界面时 |
 | [python](skills/python/) | 面向 Python 项目的可信默认值与文档 URL：docstring 与注释约定、测试设置、工具链选择 | 按项目安装，在 `core` 之上，仅当目标是 Python 项目时 |
-| [machine-learning](skills/machine-learning/) | 面向 ML 项目的文档入口，每个领域一个技能（框架、训练、推理、视觉、音频……）——只提供信息——另有项目脚手架（快速实验、可维护训练）与 GPU 镜像发现技能，各自声明其观点默认值 | 按项目安装，在 `core` 之上，仅当目标训练、微调、部署或构建于 ML 模型之上时 |
-| [data-science](skills/data-science/) | 面向数据分析与科学计算领域的文档入口——只提供信息——另有明确声明其默认值的带观点项目脚手架 | 按项目安装，在 `core` 之上，仅当目标做数据分析或科学计算时 |
+| [machine-learning](skills/machine-learning/) | 面向 ML 项目的项目脚手架（快速实验、可维护训练）与 GPU 镜像发现技能，各自声明其观点默认值；文档入口位于已发布的 docs 索引 | 按项目安装，在 `core` 之上，仅当目标训练、微调、部署或构建于 ML 模型之上时 |
+| [data-science](skills/data-science/) | 面向数据分析与科学计算目标、明确声明其默认值的带观点项目脚手架；文档入口位于已发布的 docs 索引 | 按项目安装，在 `core` 之上，仅当目标做数据分析或科学计算时 |
 | [github](skills/github/) | 面向托管在 GitHub 上的项目的平台侧约定，每个关注点一个技能：协作流程与模板、镜像本地检查的 CI 质量门、护栏（Dependabot、CODEOWNERS、rulesets、扫描）、社区健康文件、规划与发布——平台能力一律从 GitHub 文档现场获取 | 按项目安装，在 `core` 之上，仅当目标托管在 GitHub 上时 |
 | [gitlab](skills/gitlab/) | 面向托管在 GitLab 上的项目的平台侧约定，镜像 `github` catalog 的五个关注点（协作、CI、护栏、社区文件、规划与发布），并尊重实例的版本与 tier——平台能力一律从 GitLab 文档现场获取 | 按项目安装，在 `core` 之上，仅当目标托管在 GitLab（gitlab.com 或自管实例）上时 |
 
