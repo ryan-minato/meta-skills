@@ -40,9 +40,9 @@ catalogs.
   targets: docstring and comment conventions, testing setup, toolchain
   choices, and locating a package's documentation; installed on top of
   `core`, only for Python projects.
-- `machine-learning` — authoritative documentation entry points for ML
-  targets, one skill per project domain (frameworks, training, inference,
-  vision, audio, …), information only, never recommendations; installed
+- `machine-learning` — opinionated project scaffolds and GPU-image
+  discovery for ML targets, each declaring its defaults; documentation
+  entry points for ML domains live in the published docs index; installed
   on top of `core`, only for projects that train, finetune, serve, or
   build on ML models.
 - `data-science` — opinionated project scaffolds for data-analysis and
