@@ -16,6 +16,7 @@
         "./meta-knowledge-base",
         "./meta-project-skill",
         "./meta-harness-sync",
+        "./meta-docs-map",
         "./meta-disposal"
       ],
       "strict": false
