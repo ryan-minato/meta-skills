@@ -15,8 +15,8 @@ themselves.
 ## How It Works
 
 1. **Install** the `core` catalog into your project's skill directory (for
-   example `./.agents/skills/`), plus any topic catalogs that fit your
-   stack.
+   example `./.agents/skills/`), then preferably install the topic catalogs
+   that fit your stack. Single-skill installs remain supported.
 2. **Ask** — hand your project's requirements and conventions to an agent
    and ask it to build a harness.
 3. **Build** — the agent invokes the meta-skills, which encode the
@@ -46,7 +46,7 @@ them in the file tree.
 
 | Catalog | Contents | Install scope |
 |---|---|---|
-| [core](skills/core/) | The required set: enough to take any project from no harness to a working one | Per project, before a harness build |
+| [core](skills/core/) | The required set: enough to take any project from no harness to a working one, including live catalog/skill discovery and centralized installation guidance | Per project, before a harness build |
 | [frontend](skills/frontend/) | Design description and visual language for projects with a user-facing frontend | Per project, on top of `core`, only when the target has a visual surface |
 | [python](skills/python/) | Trusted defaults and doc URLs for Python projects: docstring and comment conventions, testing setup, toolchain choices, and locating a package's documentation | Per project, on top of `core`, only when the target is a Python project |
 | [machine-learning](skills/machine-learning/) | Documentation entry points for ML projects, one skill per domain (frameworks, training, inference, vision, audio, …) — information only — plus project scaffolds (quick experiment, maintainable training) and GPU-image discovery that declare their opinionated defaults | Per project, on top of `core`, only when the target trains, finetunes, serves, or builds on ML models |
@@ -54,7 +54,16 @@ them in the file tree.
 | [github](skills/github/) | Platform-side conventions for GitHub-hosted projects, one skill per concern: collaboration flow and templates, CI gates that mirror local checks, guardrails (Dependabot, CODEOWNERS, rulesets, scanning), community health files, planning and releases — platform capabilities always fetched live from the GitHub docs | Per project, on top of `core`, only when the target is hosted on GitHub |
 | [gitlab](skills/gitlab/) | Platform-side conventions for GitLab-hosted projects, mirroring the `github` catalog's five concerns (collaboration, CI, guardrails, community files, planning and releases) while respecting the instance's version and tier — platform capabilities always fetched live from the GitLab docs | Per project, on top of `core`, only when the target is hosted on GitLab (gitlab.com or self-managed) |
 
+Catalog installation is the recommendation, not an availability guarantee:
+only `core` may be assumed present. A skill names every non-core dependency
+explicitly and directs the agent to `meta-skill-discovery` for the current
+inventory and installation guidance.
+
 ## Installation
+
+Use `meta-skill-discovery` for live catalog and skill filtering, single-skill
+selection, and project or global scope guidance. The commands below show the
+recommended project-scoped catalog installs.
 
 As Claude Code plugins — each catalog is one plugin in this repository's
 marketplace:
@@ -88,9 +97,10 @@ npx skills add ryan-minato/meta-skills/skills               # every published sk
 ```
 
 Or copy skill directories (`skills/<catalog>/<skill>/`) straight into your
-project's skill directory. Install these **per project**, not globally:
-they are scaffolding for one job in one project, and a global install would
-follow you into projects that already have a harness.
+project's skill directory. Project scope is the default and recommendation:
+these skills scaffold one job in one project. Global installation is supported
+when deliberately requested, but it exposes the disposable skills to every
+project and requires matching global cleanup afterward.
 
 ## Related
 

@@ -9,15 +9,16 @@ Usage: check_skill.py PATH [PATH...] | --all
 `--all` discovers published skills (skills/<catalog>/<skill>/) and this
 repository's own skills (.agents/skills/<skill>/). A skill is *published*
 when it lives under skills/; published skills must carry the marker and be
-fully self-contained, while internal skills must not carry the marker and
-may link outside their root.
+file-isolated with repository-only dependencies, while internal skills must
+not carry the marker and may link outside their root.
 
 Check IDs (each has a self-test fixture proving it fires):
 
     S1-S3  structure (warnings): non-canonical entries, READMEs,
            unreferenced files under references/ and scripts/
-    M1-M6  SKILL.md content (errors; M4 warns near the description cap;
-           M6 gates the `metadata.internal` flag skill installers honor)
+    M1-M7  SKILL.md content (errors; M4 warns near the description cap;
+           M6 gates the `metadata.internal` flag skill installers honor;
+           M7 enforces repository-only non-core skill dependencies)
     L1     markdown links (errors): must resolve; published skills' links
            must not escape the skill root. Inline-code mentions are not
            links and are not checked.
@@ -55,6 +56,17 @@ REFERENCED_DIRS = ("references", "scripts")
 REPO_ONLY_TOKENS = ("README.zh", "validate_repo", "check_skill", "meta-skill-contract")
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 LINK_RE = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
+DEPENDENCY_KEY = "meta-skills.dependencies"
+DEPENDENCY_HEADING = "## Meta-skill Dependencies"
+DISCOVERY_ID = "core/meta-skill-discovery"
+SOURCE_ID_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*/meta-[a-z0-9]+(?:-[a-z0-9]+)*$")
+DEPENDENCY_BULLET_RE = re.compile(r"(?m)^-\s+`([^`]+)`(?:\s|$)")
+INSTALL_COMMAND_RE = re.compile(
+    r"(?:npx(?:\s+-y)?\s+skills(?:@latest)?\s+add\s+"
+    r"ryan-minato/meta-skills|"
+    r"claude\s+plugin\s+(?:marketplace\s+add\s+ryan-minato/meta-skills|"
+    r"install\s+\S+@meta-skills))"
+)
 
 
 @dataclass
@@ -124,6 +136,119 @@ def skill_mentions(text: str) -> set[str]:
             mentions.add(span)
             mentions.update(span.split())
     return mentions
+
+
+def dependency_section(text: str) -> tuple[str | None, int]:
+    """Return the dependency section body and the number of such headings."""
+    headings = list(re.finditer(rf"(?m)^{re.escape(DEPENDENCY_HEADING)}\s*$", text))
+    if not headings:
+        return None, 0
+    start = headings[0].end()
+    next_heading = re.search(r"(?m)^##\s+", text[start:])
+    end = start + next_heading.start() if next_heading else len(text)
+    return text[start:end], len(headings)
+
+
+def check_dependencies(
+    skill: Path,
+    rel_base: Path,
+    data: dict,
+    text: str,
+) -> list[Issue]:
+    """M7: repository-only non-core dependencies and centralized installs."""
+    issues: list[Issue] = []
+    rel = str((skill / "SKILL.md").relative_to(rel_base))
+    metadata = data.get("metadata")
+    raw = metadata.get(DEPENDENCY_KEY) if isinstance(metadata, dict) else None
+    has_key = isinstance(metadata, dict) and DEPENDENCY_KEY in metadata
+    section, heading_count = dependency_section(text)
+
+    def error(message: str, path: str = rel) -> None:
+        issues.append(Issue("M7", "error", path, message))
+
+    if has_key and (not isinstance(raw, str) or not raw.strip()):
+        error(
+            f"`metadata.{DEPENDENCY_KEY}` must be a non-empty, space-separated "
+            "string of `catalog/meta-skill` identifiers. Remove the key when "
+            "the skill has no non-core dependencies."
+        )
+        metadata_ids: list[str] = []
+    else:
+        metadata_ids = raw.split() if isinstance(raw, str) else []
+
+    if len(metadata_ids) != len(set(metadata_ids)):
+        error(
+            f"`metadata.{DEPENDENCY_KEY}` repeats an identifier. List each "
+            "non-core dependency exactly once."
+        )
+
+    source_catalog = skill.parent.name
+    source_id = f"{source_catalog}/{skill.name}"
+    for dependency in metadata_ids:
+        if not SOURCE_ID_RE.fullmatch(dependency):
+            error(
+                f"dependency `{dependency}` is not a canonical "
+                "`catalog/meta-skill` identifier."
+            )
+            continue
+        catalog, name = dependency.split("/", 1)
+        if catalog == "core":
+            error(
+                f"dependency `{dependency}` names core, which is implicit. "
+                "Remove core dependencies from metadata and the body section."
+            )
+        if dependency == source_id:
+            error(f"dependency `{dependency}` points to the skill itself.")
+        if not (rel_base / "skills" / catalog / name).is_dir():
+            error(
+                f"dependency `{dependency}` is not a published skill in this "
+                "repository. Fix the identifier or remove the dependency; "
+                "external-skill dependencies are forbidden."
+            )
+
+    if heading_count > 1:
+        error(f"`{DEPENDENCY_HEADING}` appears more than once.")
+    if has_key and section is None:
+        error(
+            f"`metadata.{DEPENDENCY_KEY}` exists but `{DEPENDENCY_HEADING}` "
+            "is missing. Add the portable body fallback."
+        )
+    if not has_key and section is not None:
+        error(
+            f"`{DEPENDENCY_HEADING}` exists without "
+            f"`metadata.{DEPENDENCY_KEY}`. Add matching metadata or remove "
+            "the section."
+        )
+    if section is not None:
+        body_ids = DEPENDENCY_BULLET_RE.findall(section)
+        if len(body_ids) != len(set(body_ids)):
+            error(
+                f"`{DEPENDENCY_HEADING}` repeats an identifier. List each "
+                "dependency exactly once."
+            )
+        if set(body_ids) != set(metadata_ids):
+            error(
+                f"`metadata.{DEPENDENCY_KEY}` and `{DEPENDENCY_HEADING}` must "
+                "name exactly the same dependencies."
+            )
+        if DISCOVERY_ID not in section:
+            error(
+                f"`{DEPENDENCY_HEADING}` must direct the agent to "
+                f"`{DISCOVERY_ID}` for live lookup and installation guidance."
+            )
+
+    if source_id != DISCOVERY_ID:
+        for md_file in sorted(skill.rglob("*.md")):
+            md_text = md_file.read_text(encoding="utf-8")
+            if INSTALL_COMMAND_RE.search(md_text):
+                error(
+                    "contains a repository installation command outside "
+                    f"`{DISCOVERY_ID}`. Name the dependency only and direct "
+                    "the agent to the discovery skill.",
+                    str(md_file.relative_to(rel_base)),
+                )
+
+    return issues
 
 
 def check_structure(skill: Path, rel_base: Path) -> list[Issue]:
@@ -196,7 +321,7 @@ def check_structure(skill: Path, rel_base: Path) -> list[Issue]:
 
 
 def check_skill_md(skill: Path, rel_base: Path, published: bool) -> list[Issue]:
-    """M1-M6: frontmatter, name, marker, size, portability, internal flag."""
+    """M1-M7: frontmatter, identity, portability, flags, dependencies."""
     issues: list[Issue] = []
     skill_md = skill / "SKILL.md"
     rel = str(skill_md.relative_to(rel_base))
@@ -213,6 +338,7 @@ def check_skill_md(skill: Path, rel_base: Path, published: bool) -> list[Issue]:
         )
         return issues
     data, err = read_frontmatter(skill_md)
+    text = skill_md.read_text(encoding="utf-8")
     name = data.get("name") if data else None
     description = data.get("description") if data else None
     if err or not isinstance(name, str) or not isinstance(description, str):
@@ -294,9 +420,9 @@ def check_skill_md(skill: Path, rel_base: Path, published: bool) -> list[Issue]:
         )
     if published:
         for md_file in sorted(skill.rglob("*.md")):
-            text = md_file.read_text(encoding="utf-8")
+            md_text = md_file.read_text(encoding="utf-8")
             for token in REPO_ONLY_TOKENS:
-                if token in text:
+                if token in md_text:
                     issues.append(
                         Issue(
                             "M5",
@@ -336,6 +462,8 @@ def check_skill_md(skill: Path, rel_base: Path, published: bool) -> list[Issue]:
                 "Add the flag to the frontmatter.",
             )
         )
+    if published:
+        issues += check_dependencies(skill, rel_base, data, text)
     return issues
 
 
@@ -449,6 +577,8 @@ BASE_FIXTURE: dict[str, str] = {
 
 PUBLISHED = "skills/core/meta-good"
 INTERNAL = ".agents/skills/helper"
+DEPENDENT = "skills/python/meta-dependent"
+TARGET = "skills/python/meta-helper"
 
 
 def _with(edits: dict[str, str | None]) -> dict[str, str]:
@@ -467,6 +597,40 @@ NO_REFS_SKILL = VALID_SKILL.replace(
     "`scripts/run.sh` when needed.",
     "A valid body running `scripts/run.sh` when needed.",
 )
+
+VALID_TARGET = VALID_SKILL.replace("meta-good", "meta-helper").replace(
+    "# Meta Good", "# Meta Helper"
+)
+
+VALID_DEPENDENT = f"""---
+name: meta-dependent
+description: >-
+  {MARKER} Scaffolds a dependent example. Use when testing dependencies.
+metadata:
+  {DEPENDENCY_KEY}: "python/meta-helper"
+---
+
+# Meta Dependent
+
+Build the dependent example.
+
+## Meta-skill Dependencies
+
+- `python/meta-helper` — supplies the required helper.
+
+Use `core/meta-skill-discovery` to verify the live target and learn how to
+install it before continuing.
+"""
+
+
+def _dependent_fixture(skill_text: str, target: str = TARGET) -> dict[str, str]:
+    return _with(
+        {
+            f"{DEPENDENT}/SKILL.md": skill_text,
+            f"{target}/SKILL.md": VALID_TARGET,
+        }
+    )
+
 
 # (check id, severity, expected issue path, skill dir, fixture). Pinning the
 # path keeps a fixture from passing by firing its check on an unrelated
@@ -708,6 +872,118 @@ SELF_TEST_CASES: list[tuple[str, str, str, str, dict[str, str]]] = [
             }
         ),
     ),
+    (
+        "M7",
+        "error",
+        f"{DEPENDENT}/SKILL.md",
+        DEPENDENT,
+        _dependent_fixture(
+            VALID_DEPENDENT.replace(
+                f'{DEPENDENCY_KEY}: "python/meta-helper"',
+                f"{DEPENDENCY_KEY}:\n    - python/meta-helper",
+            )
+        ),
+    ),
+    (
+        "M7",
+        "error",
+        f"{DEPENDENT}/SKILL.md",
+        DEPENDENT,
+        _dependent_fixture(
+            VALID_DEPENDENT.replace("python/meta-helper", "outside/helper")
+        ),
+    ),
+    (
+        "M7",
+        "error",
+        f"{DEPENDENT}/SKILL.md",
+        DEPENDENT,
+        _dependent_fixture(
+            VALID_DEPENDENT.replace("python/meta-helper", "ghost/meta-helper")
+        ),
+    ),
+    (
+        "M7",
+        "error",
+        f"{DEPENDENT}/SKILL.md",
+        DEPENDENT,
+        _dependent_fixture(
+            VALID_DEPENDENT.replace("python/meta-helper", "python/meta-missing")
+        ),
+    ),
+    (
+        "M7",
+        "error",
+        f"{DEPENDENT}/SKILL.md",
+        DEPENDENT,
+        _dependent_fixture(
+            VALID_DEPENDENT.replace("python/meta-helper", "core/meta-good")
+        ),
+    ),
+    (
+        "M7",
+        "error",
+        f"{DEPENDENT}/SKILL.md",
+        DEPENDENT,
+        _dependent_fixture(
+            VALID_DEPENDENT.replace("python/meta-helper", "python/meta-dependent")
+        ),
+    ),
+    (
+        "M7",
+        "error",
+        f"{DEPENDENT}/SKILL.md",
+        DEPENDENT,
+        _dependent_fixture(
+            VALID_DEPENDENT.replace(
+                "\n## Meta-skill Dependencies\n"
+                "\n- `python/meta-helper` — supplies the required helper.\n"
+                "\nUse `core/meta-skill-discovery` to verify the live target and "
+                "learn how to\ninstall it before continuing.\n",
+                "\n",
+            )
+        ),
+    ),
+    (
+        "M7",
+        "error",
+        f"{DEPENDENT}/SKILL.md",
+        DEPENDENT,
+        _dependent_fixture(
+            VALID_DEPENDENT.replace(
+                "`python/meta-helper` — supplies the required helper.",
+                "`data-science/meta-helper` — supplies the required helper.",
+            )
+        ),
+    ),
+    (
+        "M7",
+        "error",
+        f"{DEPENDENT}/SKILL.md",
+        DEPENDENT,
+        _dependent_fixture(
+            VALID_DEPENDENT.replace(
+                "Use `core/meta-skill-discovery` to verify the live target "
+                "and learn how to\ninstall it before continuing.",
+                "Verify the target before continuing.",
+            )
+        ),
+    ),
+    (
+        "M7",
+        "error",
+        f"{PUBLISHED}/SKILL.md",
+        PUBLISHED,
+        _with(
+            {
+                f"{PUBLISHED}/SKILL.md": VALID_SKILL.replace(
+                    "when needed.",
+                    "when needed.\n\n"
+                    "npx skills add ryan-minato/meta-skills/skills/python",
+                )
+            }
+        ),
+    ),
 ]
 
 
@@ -728,6 +1004,41 @@ def run_self_test(verbose: bool) -> bool:
             if unexpected:
                 ok = False
                 print(f"self-test: the valid fixture `{skill_rel}` raised issues:")
+                for issue in unexpected:
+                    print(f"  {issue}")
+        valid_dependency_cases = (
+            ("same-catalog", _dependent_fixture(VALID_DEPENDENT)),
+            (
+                "cross-catalog",
+                _dependent_fixture(
+                    VALID_DEPENDENT.replace(
+                        "python/meta-helper", "data-science/meta-helper"
+                    ),
+                    "skills/data-science/meta-helper",
+                ),
+            ),
+            # The M5 sweep over every *.md must not leak another file's body
+            # into M7: a dependent skill with references would otherwise have
+            # its dependency section looked up in the wrong file.
+            (
+                "with-references",
+                _dependent_fixture(
+                    VALID_DEPENDENT.replace(
+                        "Build the dependent example.",
+                        "Build the dependent example from\n"
+                        "[notes](references/notes.md).",
+                    )
+                )
+                | {f"{DEPENDENT}/references/notes.md": "notes\n"},
+            ),
+        )
+        for label, fixture in valid_dependency_cases:
+            case_root = Path(tmp) / f"valid-{label}"
+            materialize(fixture, case_root)
+            unexpected = check_skill(case_root / DEPENDENT, case_root)
+            if unexpected:
+                ok = False
+                print(f"self-test: valid {label} dependency raised issues:")
                 for issue in unexpected:
                     print(f"  {issue}")
         # Discovery must cover a real `.claude/skills` directory (installers
@@ -773,7 +1084,7 @@ def run_self_test(verbose: bool) -> bool:
     if ok and verbose:
         print(
             f"self-test: all {len(SELF_TEST_CASES)} negative fixtures fire; "
-            "both valid fixtures pass"
+            "base and valid-dependency fixtures pass"
         )
     return ok
 

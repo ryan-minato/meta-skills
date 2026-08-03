@@ -44,10 +44,11 @@ computing — it is not part of the default install.
 - **Registry completeness.** Every URL any reference cites appears in
   this file's Upstream Registry, in the section mirroring its reference
   table. A URL in a skill but not the registry is a bug.
-- **Sibling-catalog overlap is intentional.** Tools shared with
+- **Sibling-catalog overlap is allowed.** Tools shared with
   `machine-learning` (NumPy, scikit-learn, statsmodels, Dask, CUDA
-  toolchains, …) are recorded independently in both catalogs, because
-  skills are self-contained and never reference the sibling catalog.
+  toolchains, …) may be recorded independently when that keeps a skill
+  coherent. Reuse is also allowed through the repository dependency
+  contract; catalog co-membership never implies installation.
 
 ## Authoring
 

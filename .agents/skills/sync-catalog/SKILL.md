@@ -34,7 +34,13 @@ The directories under `skills/` are the truth; every listing follows them.
    `npx -y @anthropic-ai/claude-code@latest plugin validate .` (or
    `claude plugin validate .`), and
    `npx -y skills@latest add <repo-root-path> --list` — the listing must
-   show one group header per catalog and exactly the published skills.
+   show one group header per catalog and exactly the published skills. This
+   is the installer compatibility check. Then run the discovery script at
+   `skills/core/meta-skill-discovery/scripts/discover.py` with
+   `--repo-root <repo-root-path>`, and repeat with
+   `--catalog <affected-catalog> --full`; these script results are the live
+   discovery consumer. Verify every catalog name and description, the
+   all-catalog result, and the affected filter.
 5. Mirror every README change into its `README.zh.md`; the sync-translation
    skill owns that procedure.
 6. Run `just validate`; checks B1–B3 and C1 confirm the alignment.
@@ -48,9 +54,10 @@ The directories under `skills/` are the truth; every listing follows them.
   have (dropping the field loads zero skills), and the skills-CLI
   installer can only group the listing by catalog when each skill path is
   listed explicitly — a bare `["./"]` collapses it to an ungrouped flat
-  list. A skill added or removed without its manifest edit silently
-  disappears from (or lingers in) the plugin. Re-check after any manifest
-  edit with `plugin details` and the `skills add … --list` run from
-  step 4.
+  list. The discovery script independently reads the same explicit paths
+  from the manifest. A skill added or removed without its manifest edit
+  silently disappears from (or lingers in) both consumers. Re-check after
+  any manifest edit with `plugin details`, the `skills add … --list` run,
+  and the discovery-script runs from step 4.
 - Catalog depth is exactly two — never nest catalogs. The target-side
   disposal procedure assumes `<skill-root>/<name>/SKILL.md`.

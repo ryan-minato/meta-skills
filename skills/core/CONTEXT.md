@@ -8,11 +8,11 @@ catalog READMEs ship to targets — installers copy skill directories only.
 
 ## Goal
 
-`core` is the required set. A user installs every `core` skill before asking
-an agent to build a target project's harness, then adds topic catalogs as
-the project needs them. Together, `core` must be enough to take any project
-from no harness to a working one — including the skill that removes all the
-meta-skills afterwards.
+`core` is the required set. A user installs `core` before asking an agent to
+build a target project's harness, then adds topic catalogs as the project
+needs them. Together, `core` must be enough to take any project from no
+harness to a working one — including live discovery of this repository's
+skills and the skill that removes all the meta-skills afterwards.
 
 ## Constraints On What May Enter
 
@@ -29,9 +29,10 @@ meta-skills afterwards.
   pollutes all of them simultaneously.
 - **Cheap to carry.** Keep `SKILL.md` bodies short; push long material into
   `references/` behind precise load conditions.
-- **Self-contained.** No relative link may escape the skill root, and no
-  skill may assume a sibling is installed — to build on one, instruct the
-  user to install it.
+- **Core-only assumption.** No relative link may escape the skill root.
+  Published skills may assume core is installed, but a catalog install never
+  proves a non-core sibling is present; the repository dependency contract
+  governs every non-core dependency.
 - **Assets carry no marker.** A template a skill copies into the target's
   harness must survive the cleanup; apply the contract's destination test to
   every file, not just `SKILL.md`.

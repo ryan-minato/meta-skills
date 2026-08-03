@@ -30,7 +30,8 @@ catalogs.
 ## Catalogs
 
 - `core` — required for every harness build; useful regardless of the
-  target's stack.
+  target's stack, including live discovery of this repository's catalogs and
+  skills plus centralized project/global installation guidance.
 - `frontend` — design description and visual language; only for targets
   with a user-facing visual surface, installed on top of `core`.
 - `python` — trusted defaults and authoritative doc URLs for Python
@@ -68,13 +69,20 @@ adding or removing a skill edits the manifest in the same change).
 Adding, renaming, or removing a catalog is the `sync-catalog` skill's
 procedure, which owns the marketplace manifest too.
 
+`core` is the only availability assumption a published skill may make.
+Installing by catalog is recommended, but no skill may infer that a non-core
+sibling is present. Every non-core dependency, including a same-catalog one,
+is declared as a repository `catalog/meta-skill` identifier in both metadata
+and the body; check M7 rejects missing, external, core, or self targets and
+keeps installation commands centralized in `core/meta-skill-discovery`.
+
 ## Quality Gates
 
 | Gate | Runs | Covers |
 |---|---|---|
 | pre-commit registry | `just check`, every commit, CI `checks` job | hygiene, ruff, gitleaks on the working tree, both validators |
 | `scripts/validate_repo.py` | inside the registry; `just validate-repo` alone | B1–B3 catalogs, C1–C3 docs/links/translations, D1–D3 marker contract |
-| `scripts/check_skill.py` | inside the registry; `just check-skill <path>`, `just check-skills` | one skill: S1–S3 structure (warnings), M1–M6 SKILL.md content, L1 links; errors block, warnings advise |
+| `scripts/check_skill.py` | inside the registry; `just check-skill <path>`, `just check-skills` | one skill: S1–S3 structure (warnings), M1–M7 SKILL.md content and repository-only dependencies, L1 links; errors block, warnings advise |
 | validator self-tests | first, on every run of either validator | that all checks fire — the catalogs may be empty, so with zero subjects a green run would otherwise prove nothing |
 | CI `secrets` job | pull requests and pushes to main | full-history gitleaks with the same repository ruleset |
 
@@ -111,6 +119,11 @@ trigger fires — not before.
   skill therefore carries `metadata.internal: true` (check M6 enforces both
   directions), and install instructions always use `skills/…` subpath
   sources, never the bare repository.
+- `.claude-plugin/marketplace.json` is also the live catalog-description and
+  explicit skill-path source for `core/meta-skill-discovery`; its bundled
+  script reads that manifest and the named SKILL.md files from one repository
+  snapshot. The skills CLI grouped listing remains a separate installer
+  compatibility check. Inventory edits must validate all consumers.
 - This harness is a public reference implementation of the thing it sells,
   which creates pressure to over-build it as a showcase. It is thin on
   purpose: one validator, a thin justfile, a one-file marketplace manifest.

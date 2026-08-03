@@ -54,11 +54,11 @@ only when the target's origin remote is GitHub (visible in
 - **Registry completeness.** Every URL any skill cites — in SKILL.md and
   references — appears in this file's Upstream Registry, in the section
   mirroring its skill. A URL in a skill but not the registry is a bug.
-- **Sibling-catalog overlap is intentional.** Platform-neutral specs
+- **Sibling-catalog overlap is allowed.** Platform-neutral specs
   (Conventional Commits, SemVer, CalVer, Keep a Changelog, Contributor
-  Covenant, Choose a License) are recorded independently in both
-  `github` and `gitlab`, because skills are self-contained and never
-  reference the sibling catalog.
+  Covenant, Choose a License) may be recorded independently when that keeps a
+  skill coherent. Reuse is also allowed through the repository dependency
+  contract; catalog co-membership never implies installation.
 
 ## Authoring
 

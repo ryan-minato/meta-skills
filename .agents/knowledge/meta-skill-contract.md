@@ -14,16 +14,47 @@ the target agent never sees this repository. Consequences:
   bilingual READMEs, no Linear workflow, no `just check` inside a published
   skill's instructions (the skill validator rejects repo-only names, check
   M5).
-- **Self-containment.** Installed skills lose everything outside their own
-  directory. No relative link may escape the skill root (check L1), no
-  README may sit in a skill root (check S2), and no skill may assume another
-  skill is installed — to build on one, instruct the user to install it.
+- **File isolation.** Installed skills lose every file outside their own
+  directory. No relative link may escape the skill root (check L1), and no
+  README may sit in a skill root (check S2).
+- **Repository-only composition.** A skill may assume the `core` catalog is
+  installed, and nothing else. Catalog installation is recommended but does
+  not prove that a sibling skill is present. Every non-core dependency,
+  including one in the same catalog, follows the dependency contract below;
+  external-skill dependencies are forbidden.
 - Catalog-level files (`CONTEXT.md` and the README pair) are never loaded
   in a target: skill-directory installers copy skill directories only, and
   the marketplace plugins ship the catalog directory but load only its
   `<name>/SKILL.md` directories. Write them for this repository's
   maintainers regardless — but never put anything there a target must act
   on, because nothing will read it.
+
+## Skill Dependencies
+
+Only dependencies on published skills in this repository are valid. A skill
+with one or more non-core dependencies declares them twice:
+
+```yaml
+metadata:
+  meta-skills.dependencies: "catalog/meta-skill catalog/meta-other-skill"
+```
+
+The metadata value is a space-separated string of source identifiers. Each
+identifier names an existing `skills/<catalog>/<skill>/` directory; core
+dependencies are implicit and must not be listed.
+
+The same identifiers appear in a `## Meta-skill Dependencies` section in the
+skill body, one backticked identifier per bullet with its purpose. The section
+also instructs the target agent to use `core/meta-skill-discovery` to verify
+the live target and learn how to install it. It never embeds an installation
+command: centralizing commands prevents stale or unsafe copies from spreading
+through the catalog. Omit both the metadata key and the section when there is
+no non-core dependency.
+
+The metadata is machine-checkable; the body is the portable fallback for
+frameworks that ignore custom metadata. They must name the same set. A
+dependency hidden in ordinary prose violates the contract even if its target
+happens to be installed.
 
 ## The Marker
 

@@ -56,10 +56,11 @@ install.
   and scaffolding skills alike — appears in this file's Upstream
   Registry, in the section mirroring its reference table. A URL in a
   skill but not the registry is a bug.
-- **Sibling-catalog overlap is intentional.** Tools shared with
-  `data-science` (NumPy, scikit-learn, statsmodels, Dask, Faiss, …) are
-  recorded independently in both catalogs, because skills are
-  self-contained and never reference the sibling catalog.
+- **Sibling-catalog overlap is allowed.** Tools shared with `data-science`
+  (NumPy, scikit-learn, statsmodels, Dask, Faiss, …) may be recorded
+  independently when that keeps a skill coherent. Reuse is also allowed
+  through the repository dependency contract; catalog co-membership never
+  implies installation.
 
 ## Authoring
 
