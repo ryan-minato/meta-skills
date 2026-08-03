@@ -26,7 +26,9 @@ skill, is [meta-skill-contract.md](.agents/knowledge/meta-skill-contract.md).
 ## Layout
 
 `skills/<catalog>/<skill>/SKILL.md` is the product; only skill directories
-ship to targets. The project map lives in [ARCHITECTURE.md](ARCHITECTURE.md).
+ship to targets. `docs/` holds agent-facing doc pages published raw to
+GitHub Pages for on-demand fetching. The project map lives in
+[ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Conventions
 
@@ -50,6 +52,7 @@ ship to targets. The project map lives in [ARCHITECTURE.md](ARCHITECTURE.md).
 | `just check-skill <path>` | one skill: structure, SKILL.md, dependencies, links |
 | `just check-skills` | every published and internal skill |
 | `just validate` | both validators (fast iteration) |
+| `just docs-build` | build the docs site + llms.txt into `_site/` (CI deploys; never committed) |
 | `just fmt` | format and autofix the validator scripts |
 
 Both validators self-test on every run, and their messages say what failed,
@@ -77,6 +80,7 @@ starting tracked work. Agents never merge.
 |---|---|
 | Repo layout, quality gates, why a mechanism is absent, proposing tooling | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | Authoring, reviewing, renaming, removing, or declaring dependencies for anything under `skills/`; touching the marker | [meta-skill-contract.md](.agents/knowledge/meta-skill-contract.md) |
+| Adding, editing, renaming, or removing a `docs/` page | [docs-contract.md](.agents/knowledge/docs-contract.md) |
 | Working inside a specific catalog | that catalog's `CONTEXT.md` |
 | Agent Skills spec facts (frontmatter fields, limits) | the `agentskills` MCP server |
 
@@ -92,7 +96,9 @@ For the concerns no skill owns: a justfile recipe change updates the
 Validation table above and the gates table in `ARCHITECTURE.md`; a layout
 change updates `ARCHITECTURE.md`'s map; a new or changed validator check
 ships its self-test fixture in the same change; a changed team workflow
-decision updates the `tracked-change-workflow` skill.
+decision updates the `tracked-change-workflow` skill. A `docs/` page change
+needs no sync step — the site and llms.txt are generated in CI from
+`docs/`; renaming a page follows the docs contract's rename rule.
 
 ## Environment
 
