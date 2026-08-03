@@ -420,9 +420,9 @@ def check_skill_md(skill: Path, rel_base: Path, published: bool) -> list[Issue]:
         )
     if published:
         for md_file in sorted(skill.rglob("*.md")):
-            text = md_file.read_text(encoding="utf-8")
+            md_text = md_file.read_text(encoding="utf-8")
             for token in REPO_ONLY_TOKENS:
-                if token in text:
+                if token in md_text:
                     issues.append(
                         Issue(
                             "M5",
@@ -1007,18 +1007,34 @@ def run_self_test(verbose: bool) -> bool:
                 for issue in unexpected:
                     print(f"  {issue}")
         valid_dependency_cases = (
-            ("same-catalog", VALID_DEPENDENT, TARGET),
+            ("same-catalog", _dependent_fixture(VALID_DEPENDENT)),
             (
                 "cross-catalog",
-                VALID_DEPENDENT.replace(
-                    "python/meta-helper", "data-science/meta-helper"
+                _dependent_fixture(
+                    VALID_DEPENDENT.replace(
+                        "python/meta-helper", "data-science/meta-helper"
+                    ),
+                    "skills/data-science/meta-helper",
                 ),
-                "skills/data-science/meta-helper",
+            ),
+            # The M5 sweep over every *.md must not leak another file's body
+            # into M7: a dependent skill with references would otherwise have
+            # its dependency section looked up in the wrong file.
+            (
+                "with-references",
+                _dependent_fixture(
+                    VALID_DEPENDENT.replace(
+                        "Build the dependent example.",
+                        "Build the dependent example from\n"
+                        "[notes](references/notes.md).",
+                    )
+                )
+                | {f"{DEPENDENT}/references/notes.md": "notes\n"},
             ),
         )
-        for label, skill_text, target in valid_dependency_cases:
+        for label, fixture in valid_dependency_cases:
             case_root = Path(tmp) / f"valid-{label}"
-            materialize(_dependent_fixture(skill_text, target), case_root)
+            materialize(fixture, case_root)
             unexpected = check_skill(case_root / DEPENDENT, case_root)
             if unexpected:
                 ok = False
@@ -1068,7 +1084,7 @@ def run_self_test(verbose: bool) -> bool:
     if ok and verbose:
         print(
             f"self-test: all {len(SELF_TEST_CASES)} negative fixtures fire; "
-            "base and same/cross-catalog dependency fixtures pass"
+            "base and valid-dependency fixtures pass"
         )
     return ok
 

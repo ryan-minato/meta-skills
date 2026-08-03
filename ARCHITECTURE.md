@@ -72,9 +72,9 @@ procedure, which owns the marketplace manifest too.
 `core` is the only availability assumption a published skill may make.
 Installing by catalog is recommended, but no skill may infer that a non-core
 sibling is present. Every non-core dependency, including a same-catalog one,
-is declared as a repository `catalog/skill` identifier in both metadata and
-the body; check M7 rejects missing, external, core, or self targets and keeps
-installation commands centralized in `core/meta-skill-discovery`.
+is declared as a repository `catalog/meta-skill` identifier in both metadata
+and the body; check M7 rejects missing, external, core, or self targets and
+keeps installation commands centralized in `core/meta-skill-discovery`.
 
 ## Quality Gates
 
