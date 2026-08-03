@@ -17,8 +17,10 @@ README.md / README.zh.md   <- public front door (English authoritative)
 .claude/skills             <- symlink to ../.agents/skills for Claude Code
 skills/<catalog>/          <- published catalogs: CONTEXT.md + README pair
 skills/<catalog>/<skill>/  <- a published skill: SKILL.md [+ references/ scripts/ assets/]
+docs/                      <- agent-facing doc pages, published raw to GitHub Pages
 scripts/validate_repo.py   <- repository validator: catalogs, docs, contract
 scripts/check_skill.py     <- per-skill validator: structure, SKILL.md, links
+scripts/build_docs.py      <- docs site + llms.txt generator (output never committed)
 justfile                   <- command surface (thin wrappers over pre-commit)
 ```
 
@@ -81,10 +83,11 @@ keeps installation commands centralized in `core/meta-skill-discovery`.
 | Gate | Runs | Covers |
 |---|---|---|
 | pre-commit registry | `just check`, every commit, CI `checks` job | hygiene, ruff, gitleaks on the working tree, both validators |
-| `scripts/validate_repo.py` | inside the registry; `just validate-repo` alone | B1–B3 catalogs, C1–C3 docs/links/translations, D1–D3 marker contract |
+| `scripts/validate_repo.py` | inside the registry; `just validate-repo` alone | B1–B3 catalogs, C1–C3 docs/links/translations, D1–D3 marker contract, E1–E3 docs pages |
 | `scripts/check_skill.py` | inside the registry; `just check-skill <path>`, `just check-skills` | one skill: S1–S3 structure (warnings), M1–M7 SKILL.md content and repository-only dependencies, L1 links; errors block, warnings advise |
 | validator self-tests | first, on every run of either validator | that all checks fire — the catalogs may be empty, so with zero subjects a green run would otherwise prove nothing |
 | CI `secrets` job | pull requests and pushes to main | full-history gitleaks with the same repository ruleset |
+| CI `pages` workflow | pushes to main touching `docs/` or the builder | validate_repo gate, then build and deploy the docs site and llms.txt to GitHub Pages |
 
 Check logic lives once, in `.pre-commit-config.yaml`; `just check` and CI
 run the identical registry, so local and CI gates cannot drift.
@@ -102,6 +105,8 @@ trigger fires — not before.
 | Marketplace ↔ catalog validator check | built as a sync-catalog step first; add the check (with its self-test fixture) if manifest drift recurs in review |
 | Unit tests for the validator | its logic outgrows the fixture self-test |
 | L3+ autonomy (self-maintenance, persistent memory) | explicit user request only |
+| Docs tag-vocabulary allowlist (E-check) | tags sprawl beyond the contract's vocabulary until llms.txt sections stop being useful groupings |
+| Docs page-URL reference check | a `docs/` page rename breaks a skill's embedded page URL more than once; until then the contract's grep-before-rename rule is the cheaper gate |
 
 ## Gotchas
 
@@ -124,6 +129,13 @@ trigger fires — not before.
   script reads that manifest and the named SKILL.md files from one repository
   snapshot. The skills CLI grouped listing remains a separate installer
   compatibility check. Inventory edits must validate all consumers.
+- `_site/` is the generated docs site: gitignored and excluded from the
+  repository validator's markdown scan. It is a build artifact — never
+  commit it, and never "fix" the exclusion.
+- `docs/` holds English-only agent-facing pages, not repository
+  documentation: check E3 blocks READMEs there, so the bilingual-README
+  convention (C1) never applies inside `docs/`. Authoring rules live in
+  the docs contract under `.agents/knowledge/`.
 - This harness is a public reference implementation of the thing it sells,
   which creates pressure to over-build it as a showcase. It is thin on
   purpose: one validator, a thin justfile, a one-file marketplace manifest.

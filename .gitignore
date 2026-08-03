@@ -223,3 +223,6 @@ devcontainer-lock.json
 
 ### Skills ###
 skills-lock.json
+
+### Docs site ###
+/_site/

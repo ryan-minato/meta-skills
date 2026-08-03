@@ -13,6 +13,8 @@ self-test fixture proving it fires):
     C1-C3  repository docs: translation pairs, root docs and their links,
            knowledge reachability
     D1-D3  marker-contract integrity
+    E1-E3  published docs pages: frontmatter schema, link containment,
+           directory hygiene
 
 The self-test runs first on every invocation because the published catalogs
 may be empty: with zero subjects several checks pass vacuously and could
@@ -42,10 +44,15 @@ NEAR_MISS = "Disposable meta-skill ("
 FENCE_TAG = "text meta-skill-marker"
 TEMPLATE_PATH = ".agents/skills/meta-skill-authoring/assets/skill-template.md"
 KNOWLEDGE_DIR = ".agents/knowledge"
+DOCS_DIR = "docs"
+SITE_DIR = "_site"
 ROOT_DOCS = ("AGENTS.md", "ARCHITECTURE.md", "README.md", "README.zh.md")
 CATALOG_FILES = ("CONTEXT.md", "README.md", "README.zh.md")
 LINK_RE = re.compile(r"\[[^\]]*\]\(([^)\s]+)\)")
 CATALOG_ENTRY_RE = re.compile(r"^- `([a-z0-9][a-z0-9-]*)`", re.MULTILINE)
+KEBAB_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
+# `pages` would collide with the llms.txt lead section heading.
+RESERVED_TAGS = frozenset({"pages"})
 
 
 @dataclass
@@ -114,7 +121,13 @@ def tagged_fences(text: str) -> list[str]:
 
 
 def markdown_files(root: Path) -> list[Path]:
-    return [p for p in root.rglob("*.md") if ".git" not in p.parts]
+    # _site/ is the generated docs site (never committed); scanning build
+    # output would double-fire C1/D1 on copies of the sources.
+    return [
+        p
+        for p in root.rglob("*.md")
+        if ".git" not in p.parts and SITE_DIR not in p.parts
+    ]
 
 
 def listed_catalogs(doc_name: str, text: str) -> set[str]:
@@ -357,8 +370,164 @@ def check_contract(root: Path) -> list[Issue]:
     return issues
 
 
+def check_docs_pages(root: Path) -> list[Issue]:
+    """E1-E3: published docs pages — frontmatter, links, directory hygiene."""
+    issues: list[Issue] = []
+    docs_dir = root / DOCS_DIR
+    if not docs_dir.is_dir():
+        return issues
+    titles: dict[str, str] = {}
+    for entry in sorted(docs_dir.iterdir()):
+        rel = str(entry.relative_to(root))
+        if entry.is_dir():
+            issues.append(
+                Issue(
+                    "E3",
+                    rel,
+                    "docs/ holds a flat set of published pages; a "
+                    "subdirectory would change the public URL surface and "
+                    "the site builder does not descend into it. Move its "
+                    "contents up into docs/ or out of it.",
+                )
+            )
+            continue
+        if entry.suffix != ".md" or not KEBAB_RE.match(entry.stem):
+            issues.append(
+                Issue(
+                    "E3",
+                    rel,
+                    "docs/ pages are published verbatim and the filename is "
+                    "the public URL slug, so only kebab-case `.md` files "
+                    "belong here — READMEs and other repository files do "
+                    "not (a README would also demand a Chinese mirror the "
+                    "published site never serves). Rename or move it.",
+                )
+            )
+            continue
+        data, error = read_frontmatter(entry)
+        if error:
+            issues.append(
+                Issue(
+                    "E1",
+                    rel,
+                    f"{error}. The llms.txt index is generated from each "
+                    "page's title, description, and tags; a page without "
+                    "them is invisible to fetching agents. Add the "
+                    "frontmatter block.",
+                )
+            )
+            continue
+        for field in ("title", "description"):
+            value = data.get(field)
+            if not isinstance(value, str) or not value.strip():
+                issues.append(
+                    Issue(
+                        "E1",
+                        rel,
+                        f"frontmatter `{field}` must be a nonempty string. "
+                        "The llms.txt index lists every page by title and "
+                        "description; an empty one publishes a blank entry "
+                        "agents cannot select on. Fill it in.",
+                    )
+                )
+        title = data.get("title")
+        if isinstance(title, str) and title.strip():
+            if title in titles:
+                issues.append(
+                    Issue(
+                        "E3",
+                        rel,
+                        f"duplicate page title `{title}` (also used by "
+                        f"{titles[title]}). llms.txt links pages by title; "
+                        "two identical titles are indistinguishable to a "
+                        "selecting agent. Retitle one of them.",
+                    )
+                )
+            else:
+                titles[title] = rel
+        tags = data.get("tags")
+        if (
+            not isinstance(tags, list)
+            or not tags
+            or not all(isinstance(t, str) for t in tags)
+        ):
+            issues.append(
+                Issue(
+                    "E1",
+                    rel,
+                    "frontmatter `tags` must be a nonempty list of strings. "
+                    "Tags drive the llms.txt tag sections agents use to "
+                    "select pages; an untagged page appears in no section. "
+                    "Add tags (the docs contract lists the vocabulary).",
+                )
+            )
+        else:
+            for tag in tags:
+                if not KEBAB_RE.match(tag):
+                    issues.append(
+                        Issue(
+                            "E1",
+                            rel,
+                            f"tag `{tag}` is not kebab-case. Tags become "
+                            "llms.txt section headings and must be stable "
+                            "machine-matchable slugs. Rename it (lowercase, "
+                            "digits, single hyphens).",
+                        )
+                    )
+                elif tag in RESERVED_TAGS:
+                    issues.append(
+                        Issue(
+                            "E1",
+                            rel,
+                            f"tag `{tag}` is reserved: it collides with the "
+                            "llms.txt lead section heading, making the tag "
+                            "section ambiguous. Pick another tag.",
+                        )
+                    )
+            if len(set(tags)) != len(tags):
+                issues.append(
+                    Issue(
+                        "E1",
+                        rel,
+                        "frontmatter `tags` contains duplicates, which "
+                        "would list the page twice in one llms.txt section. "
+                        "Deduplicate the list.",
+                    )
+                )
+        for target in markdown_links(entry.read_text(encoding="utf-8")):
+            resolved = (entry.parent / target).resolve()
+            if not (entry.parent / target).exists():
+                issues.append(
+                    Issue(
+                        "E2",
+                        rel,
+                        f"link `{target}` does not resolve. Only docs/ is "
+                        "published, so every local link must point at a "
+                        "sibling page; a broken one 404s for every fetching "
+                        "agent. Fix the path or remove the link.",
+                    )
+                )
+            elif not resolved.is_relative_to(docs_dir.resolve()):
+                issues.append(
+                    Issue(
+                        "E2",
+                        rel,
+                        f"link `{target}` escapes docs/. The published site "
+                        "serves docs/ alone, so this link 404s on the site "
+                        "even though it resolves in the repository. Inline "
+                        "the content or link a sibling page instead.",
+                    )
+                )
+    return issues
+
+
 def run_checks(root: Path) -> list[Issue]:
-    return check_catalogs(root) + check_repo_docs(root) + check_contract(root)
+    return (
+        check_catalogs(root)
+        + check_repo_docs(root)
+        + check_contract(root)
+        + check_docs_pages(root)
+    )
 
 
 # --- self-test ---------------------------------------------------------------
@@ -403,6 +572,18 @@ BASE_FIXTURE: dict[str, str] = {
     "skills/core/README.zh.md": "# core\n",
     "skills/core/meta-good/SKILL.md": VALID_SKILL,
     "skills/core/meta-good/references/notes.md": "notes\n",
+    "docs/example-tooling.md": (
+        "---\ntitle: Example Tooling\n"
+        "description: Example tools and where their docs live.\n"
+        "tags: [data-science, tooling]\n---\n\n# Example Tooling\n\n"
+        "Related pages: [Other Page](other-page.md).\n\n"
+        "| Tool | One line | Docs |\n|---|---|---|\n"
+        "| Example | an example tool | <https://example.org/docs/> |\n"
+    ),
+    "docs/other-page.md": (
+        "---\ntitle: Other Page\ndescription: A second valid page.\n"
+        "tags: [machine-learning]\n---\n\n# Other Page\n\nBody.\n"
+    ),
     TEMPLATE_PATH: (
         f'---\nname: meta-template\ndescription: "{MARKER} X. Use when Y."\n---\n\nBody.\n'
     ),
@@ -550,6 +731,83 @@ SELF_TEST_CASES: list[tuple[str, str, dict[str, str]]] = [
         ),
     ),
     ("D3", TEMPLATE_PATH, _with({TEMPLATE_PATH: None})),
+    (
+        "E1",
+        "docs/other-page.md",
+        _with(
+            {
+                "docs/other-page.md": (
+                    "---\ntitle: Other Page\ntags: [machine-learning]\n---\n\nBody.\n"
+                )
+            }
+        ),
+    ),
+    (
+        "E1",
+        "docs/other-page.md",
+        _with(
+            {
+                "docs/other-page.md": (
+                    "---\ntitle: Other Page\ndescription: A page.\n"
+                    'tags: ["Data Science"]\n---\n\nBody.\n'
+                )
+            }
+        ),
+    ),
+    (
+        "E1",
+        "docs/other-page.md",
+        _with(
+            {
+                "docs/other-page.md": (
+                    "---\ntitle: Other Page\ndescription: A page.\n"
+                    "tags: [pages]\n---\n\nBody.\n"
+                )
+            }
+        ),
+    ),
+    (
+        "E2",
+        "docs/other-page.md",
+        _with(
+            {
+                "docs/other-page.md": (
+                    "---\ntitle: Other Page\ndescription: A page.\n"
+                    "tags: [machine-learning]\n---\n\n"
+                    "A [broken link](missing-page.md).\n"
+                )
+            }
+        ),
+    ),
+    # The target resolves inside the repository but outside docs/ — on the
+    # published site, which serves docs/ alone, it would 404.
+    (
+        "E2",
+        "docs/other-page.md",
+        _with(
+            {
+                "docs/other-page.md": (
+                    "---\ntitle: Other Page\ndescription: A page.\n"
+                    "tags: [machine-learning]\n---\n\n"
+                    "An [escaping link](../AGENTS.md).\n"
+                )
+            }
+        ),
+    ),
+    ("E3", "docs/README.md", _with({"docs/README.md": "# Docs\n"})),
+    ("E3", "docs/nested", _with({"docs/nested/page.md": "nested\n"})),
+    (
+        "E3",
+        "docs/other-page.md",
+        _with(
+            {
+                "docs/other-page.md": (
+                    "---\ntitle: Example Tooling\ndescription: A page.\n"
+                    "tags: [machine-learning]\n---\n\nBody.\n"
+                )
+            }
+        ),
+    ),
 ]
 
 
