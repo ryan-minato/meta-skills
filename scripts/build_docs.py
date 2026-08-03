@@ -23,6 +23,7 @@ Exit codes: 0 built, 1 unreadable page (fix via `just validate-repo`).
 from __future__ import annotations
 
 import argparse
+import html
 import shutil
 import sys
 from dataclasses import dataclass
@@ -79,7 +80,8 @@ def render_llms_txt(pages: list[Page], base_url: str) -> str:
 
 def render_index_html(pages: list[Page], base_url: str) -> str:
     items = "\n".join(
-        f'      <li><a href="{p.name}">{p.title}</a> — {p.description}</li>'
+        f'      <li><a href="{p.name}">{html.escape(p.title)}</a>'
+        f" — {html.escape(p.description)}</li>"
         for p in pages
     )
     return f"""<!doctype html>
