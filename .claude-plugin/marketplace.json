@@ -73,17 +73,8 @@
     {
       "name": "data-science",
       "source": "./skills/data-science",
-      "description": "Documentation entry points for data-science and scientific-computing domains, plus opinionated project scaffolds that declare their defaults. Install on top of core.",
-      "skills": [
-        "./meta-ds-analysis-docs",
-        "./meta-ds-scale-docs",
-        "./meta-ds-pipelines-docs",
-        "./meta-ds-geospatial-docs",
-        "./meta-ds-numerics-docs",
-        "./meta-ds-simulation-docs",
-        "./meta-ds-hpc-docs",
-        "./meta-ds-project"
-      ],
+      "description": "Opinionated project scaffolds for data-science targets that declare their defaults; documentation entry points live in the published docs index consumed by core's docs-map skill. Install on top of core.",
+      "skills": ["./meta-ds-project"],
       "strict": false
     },
     {

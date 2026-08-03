@@ -45,10 +45,11 @@ catalogs.
   vision, audio, …), information only, never recommendations; installed
   on top of `core`, only for projects that train, finetune, serve, or
   build on ML models.
-- `data-science` — documentation entry points for data-analysis and
-  scientific-computing domains (information only), plus opinionated project
-  scaffolds that declare their defaults; installed on top of `core`, only
-  for data or scientific-computing projects.
+- `data-science` — opinionated project scaffolds for data-analysis and
+  scientific-computing targets that declare their defaults; documentation
+  entry points for these domains live in the published docs index;
+  installed on top of `core`, only for data or scientific-computing
+  projects.
 - `github` — procedure skills for targets hosted on GitHub, one skill
   per platform concern (collaboration, CI, guardrails, community files,
   planning and releases), each fetching current platform capabilities
